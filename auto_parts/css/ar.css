@@ -1,0 +1,219 @@
+body {
+    text-align: right;
+    direction: rtl;
+}
+
+
+.input-fille i {
+    left: 22px;
+}
+
+
+.input-sub-regester i {
+    left: 15px;
+}
+  
+.small-img {
+    left: 0px;
+}
+
+.caption {
+    right: 70px;
+}
+  
+  
+.end-page a{
+    text-align: left;
+}
+.madia ul li a::after {
+    left: 0px;
+    right: -1px;
+  }
+  
+
+  
+.input_newsletter i {
+    right: 8px;
+}
+
+.input_newsletter button {
+    left: 0px;
+}
+  
+
+.input_newsletter input {
+    padding-right: 40px;
+    padding-left: 170px;
+}
+
+.newsletter h2 img {
+    right: 0px;
+    left: 166px;
+}
+  
+
+.text-services-index img {
+    left: 17px;
+}
+
+.title h2  img{
+  right: 0px;
+}
+
+
+.ctm-btn::after {
+    left: 0px;
+  }
+
+.text-about-index h2 img{
+    right: 0px;
+}
+
+.img_aboutus_index .img-small {
+    left: 24%;
+}
+
+.sub_services_index .col-lg-4:nth-of-type(3) .sub_services_index_main {
+    text-align: left;
+}
+.sub_services_index .col-lg-4:nth-of-type(3) .sub_services_index_main .sub_services_index-text  {
+    text-align: center;
+}
+.sub_services_index .col-lg-4:nth-of-type(3) .arrow-sub_services_index 
+{
+    right: -40px;
+}
+
+
+.arrow-sub_services_index {
+    left: -40px;
+}
+  
+.textright {
+    text-align: right;
+  }
+  
+.img_services_index{
+text-align: left;
+
+}
+.img_services_index img {
+text-align: left;
+
+}
+.dots_svg {
+    left: -38px;
+}
+  
+.text_header a::after {
+    left: 0px;
+}
+
+
+@media only screen and (max-width: 1200px) {
+
+    .title h2 {
+        padding: 30px 30px 0px 0px;
+    }
+}
+
+
+@media only screen and (max-width: 998px) {
+    .img_aboutus_index .img-small {
+        left: 15%;
+    
+    }
+    .text-about-index h2 {
+        padding: 6px 25px 0px 0px;
+    }
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+      .element ul li {
+
+        text-align: center;
+      }
+
+   
+   
+      .times {
+        left: 60px;
+     
+    } 
+
+
+.img_aboutus_index .img-small {
+    left: 11%;
+}
+.title h2 img {
+    left: 0px;
+    right: -163px;
+}
+.text-services-index img {
+ 
+    left: 17px;
+}
+
+
+
+.title h2 img {
+    right: -65px;
+}
+
+
+.end-page a {
+    text-align: center;
+}
+.sub_services_index .col-lg-4:nth-of-type(3) .sub_services_index_main .sub_services_index-text {
+    text-align: center;
+}
+
+}
+
+
+@media only screen and (max-width: 576px) {
+
+    .dots_svg {
+        left: 0px;
+    }
+    
+
+    .text-about-index h2 img {
+        left: 95px;
+    
+    }
+
+
+    
+    .newsletter h2 img {
+        left: 117px;
+    }
+  
+
+    .times {
+        left: 22px;
+        
+    }
+    .small-img {
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0px;
+        margin: auto;
+        right: 0px;
+    }
+  
+    
+
+    .caption {
+        right: 24px;
+    }
+
+    .btn-contectus {
+        text-align: center;
+    }
+    
+}
+    

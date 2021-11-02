@@ -1,0 +1,144 @@
+body {
+  text-align: left;
+  direction: ltr;
+}
+
+
+.language {
+  text-align: right;
+}
+
+
+
+.sub-slider_index p {
+  right:auto;
+  left: -75px;
+
+}
+
+
+.owl-next::before {
+  right: 0px;
+  left: -20px;
+
+}
+
+.btn_about_index {
+  text-align: right;
+}
+
+
+
+.link_footer p a {
+  right: 0px;
+  left: auto;
+}
+
+
+
+.element_footer ul li {
+  border-left:none;
+  border-right: 1px solid #fff;
+  padding-right: 30px;
+}
+.btn_show{
+  text-align: right;
+}
+
+
+.sub_contectus_index a {
+  left: auto;
+  right: 25px;
+}
+
+
+
+.text_business_index h2 i {
+  left: auto;
+  right: 2px;
+}
+
+
+
+
+.img_business_index::before{
+  left: auto;
+  right: 0px;
+}
+
+
+.sub_img_business_index:hover:after {
+  left: auto;
+  right: 120%;
+}
+
+
+
+.sub_img_business_index:after {
+  left: auto;
+  right: -75px;
+}
+
+
+
+.text_aboutus_index::after {
+  left: auto;
+  right: 18px;
+}
+
+
+
+.img_aboutus_index::before {
+  left: 12px;
+  right: auto;
+}
+  
+.title h2::after {
+  left: -13px;
+  right: 68px;
+}
+
+
+
+button.owl-next {
+  left: 0px;
+  right: auto;
+}
+
+
+
+.slider_index  .owl-prev::before {
+  left: -20px;
+  right: 0px;
+}
+
+.owl-next::after {
+  right: auto;
+  left: 29px;
+}
+
+.slider_index  .owl-prev::after {
+  left: 29px;
+  right: auto;
+}
+
+.slider_index  .owl-prev {
+  left:auto ;
+  right: 74px;
+}
+
+
+
+.sub-slider_index a {
+  right: -82px;
+  left: auto;
+  transform: translateX(103%);
+}
+
+
+
+.sub-slider_index p {
+
+  transform: translateX(-103%);
+
+}
