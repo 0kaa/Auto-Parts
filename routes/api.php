@@ -31,7 +31,11 @@ Route::namespace('Api\Auth')->group(function () {
 
 Route::namespace('Api')->group(function () {
 
-    Route::get('activites','ApiActivitesController@index');
-    Route::get('activitiy/{id}','ApiActivitesController@show');
+    // Activities
+    Route::get('activities', 'ApiActivitiesController@index');
+    Route::get('activity/{id}', 'ApiActivitiesController@show');
 
+    // Products
+    Route::get('products', 'ApiProductController@index');
+    Route::post('product/create', 'ApiProductController@create');
 });

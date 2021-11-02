@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Resources\Api\ActivityResource;
 use App\Models\ActivityType;
 
-class ApiActivitesController extends Controller
+class ApiActivitiesController extends Controller
 {
 
     use ApiResponseTrait;
