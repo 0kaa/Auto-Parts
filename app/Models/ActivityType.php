@@ -21,8 +21,8 @@ class ActivityType extends Model
         return $this->{'name_' . App::getLocale()};
     }  // end of get name
 
-    public function user()
+    public function store()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class)->where('type', 'owner_store');
     }
 }

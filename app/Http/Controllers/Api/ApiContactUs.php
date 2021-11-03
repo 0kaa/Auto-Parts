@@ -2,28 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Repositories\UserRepositoryInterface;
-use App\Repositories\ProductRepositoryInterface;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
-use App\Http\Resources\Api\ProductResource;
-use App\Http\Resources\Api\StoreResource;
+use App\Http\Controllers\Controller;
+use App\Repositories\ContactUsRepositoryInterface;
+use Illuminate\Http\Request;
 
-class ApiProductController extends Controller
+class ApiContactUs extends Controller
 {
 
     use ApiResponseTrait;
-    protected $userRepository;
-    protected $ProductRepository;
+    protected $contactUsRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository, ProductRepositoryInterface $productRepository)
+
+    public function __construct(ContactUsRepositoryInterface $contactUsRepository)
     {
-
-        $this->userRepository  = $userRepository;
-        $this->productRepository  = $productRepository;
+        $this->contactUsRepository  = $contactUsRepository;
     }
-
 
     /**
      * Display a listing of the resource.
@@ -31,7 +25,9 @@ class ApiProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { }
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,19 +36,13 @@ class ApiProductController extends Controller
      */
     public function create(Request $request)
     {
-        $validator = validator()->make($request->all(), [
-            'name' => 'required|string|max:255',
-            'price' => 'required|integer',
-            'description' => 'required|string',
-        ]);
+        $name = $request->get('name');
+        $email = $request->get('email');
+        $message = $request->get('message');
 
-        if ($validator->fails()) {
-            return $this->ApiResponse(null, $validator->errors(), 422);
-        }
+        $form = $this->contactUsRepository->create(['name' => $name, 'email' => $email, 'message' => $message]);
 
-        $product = $this->productRepository->create($request->all());
-
-        return $this->ApiResponse($product, 'Retrive Data success', 200);
+        return $this->ApiResponse($form, null, 200);
     }
 
     /**
@@ -109,16 +99,5 @@ class ApiProductController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function getStoreProducts($id)
-    {
-        $store = $this->userRepository->findOne($id);
-
-        $products  = new StoreResource($store);
-
-        if ($store) {
-            return $this->ApiResponse($products, null, 200);
-        }
     }
 }

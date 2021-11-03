@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ActivityResource extends JsonResource
+class StoresResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,12 @@ class ActivityResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name_ar' => $this->name_ar,
-            'name_en' => $this->name_en,
-            'type' => $this->type,
             'image' => $this->image,
-            'created_at' => $this->created_at->format('Y-m-d'),
-            'stores' => StoresResource::collection($this->store),
+            'name' => $this->name,
+            // 'badge' => $this->badge,
+            'rating' => $this->rating,            
+            'address' => $this->address,
+            'activity_type' => $this->activity_name->select('name_ar','name_en','id')->find($this->activity_type_id),
         ];
     }
 }

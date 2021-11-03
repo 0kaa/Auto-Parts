@@ -11,6 +11,7 @@ use App\Http\Requests\Api\RegisterRequest;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Resources\Api\UserResource;
 
 class ApiAuthController extends Controller
 {
@@ -35,7 +36,7 @@ class ApiAuthController extends Controller
             $token = $user->createToken('tokens')->plainTextToken;
         }
 
-        return $this->ApiResponse(['token' => $token], 'test message', 200);
+        return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], 'test message', 200);
     }
 
     public function register(Request $request)
@@ -58,12 +59,13 @@ class ApiAuthController extends Controller
 
         $token = $user->createToken('tokens')->plainTextToken;
 
-        return $this->ApiResponse(compact('user','token'), 'test message', 200);
+        return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], 'test message', 200);
     }
 
     public function get_user()
     {
         $user = auth()->user();
         return $this->ApiResponse(['user' => $user], 'test message', 200);
+        return $this->ApiResponse(['user' => new UserResource($user)], 'test message', 200);
     }
 }

@@ -19,8 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email','phone','image','address','verification_code','approved','type','email_verified_at','name_company','name_owner_company','national_identity','date','file','ibn',
-        'city','is_company_facility_agent','is_company_facility_authorized_distributor','other_branches','activity_type_id','region_id','company_sector_id',
+        'email', 'phone', 'image', 'address', 'verification_code', 'approved', 'type', 'email_verified_at', 'name_company', 'name_owner_company', 'national_identity', 'date', 'file', 'ibn',
+        'city', 'is_company_facility_agent', 'is_company_facility_authorized_distributor', 'other_branches', 'activity_type_id', 'region_id', 'company_sector_id',
         'password',
     ];
 
@@ -47,7 +47,15 @@ class User extends Authenticatable
     {
 
         return $this->hasMany(BranchesCompanyUser::class);
-
     }  // end of get name 
 
+    
+    public function products()
+    {        
+        return $this->hasMany(Product::class, 'seller_id', 'id');
+    }
+
+    public function activity_name() {
+        return $this->hasOne(ActivityType::class, 'id', 'activity_type_id');
+    }
 }

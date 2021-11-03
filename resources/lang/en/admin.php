@@ -45,6 +45,7 @@ return [
     'created_at'=>'date created at',
     'time'=>'time',
     'link_facebook' => 'Facebook',
+    'link_website' => 'Website',
     'link_twitter' => 'Twitter',
     'link_instagram' => 'Instagram',
     'link_snapchat' => 'Snapchat',

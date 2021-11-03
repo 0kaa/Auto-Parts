@@ -46,6 +46,7 @@ return [
     'created_at' => 'تاريخ الإنشاء',
     'time' => 'الوقت',
     'link_facebook' => 'فيس بوك',
+    'link_website' => 'الموقع',
     'link_twitter' => 'تويتر',
     'link_instagram' => 'انستجرام',
     'link_snapchat' => 'سناب شات',

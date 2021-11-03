@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
             $snapchat  = $settingrepository->getwhere(['key' => 'snapchat'])->first();
             $facebook  = $settingrepository->getwhere(['key' => 'facebook'])->first();
             $twitter   = $settingrepository->getwhere(['key' => 'twitter'])->first();
+            $website   = $settingrepository->getwhere(['key' => 'website'])->first();
 
             view()->share([
 
@@ -38,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
                 'snapchat'   => $snapchat,
                 'facebook'   => $facebook,
                 'twitter'    => $twitter,
+                'website'    => $website,
 
             ]);  // end of view share
 

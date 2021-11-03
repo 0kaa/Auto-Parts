@@ -8,7 +8,6 @@ use App\Repositories\ActivityTypeRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Resources\Api\ActivityResource;
-use App\Models\ActivityType;
 
 class ApiActivitiesController extends Controller
 {
@@ -34,7 +33,7 @@ class ApiActivitiesController extends Controller
     {
         $activities_type = $this->activityTypeRepository->getAll();
 
-        return $this->ApiResponse(['activites' => $activities_type], 'Retrive Data success', 200);
+        return $this->ApiResponse(ActivityResource::collection($activities_type), null, 200);
     }
 
     /**
@@ -66,9 +65,9 @@ class ApiActivitiesController extends Controller
      */
     public function show($id)
     {
-        $activities_type =  $this->activityTypeRepository->findOne($id);        
+        $activities_type =  $this->activityTypeRepository->findOne($id);
 
-        return $this->ApiResponse(new ActivityResource($activities_type), 'test', 200);
+        return $this->ApiResponse(new ActivityResource($activities_type), null, 200);
     }
 
     /**

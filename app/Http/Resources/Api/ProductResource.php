@@ -3,8 +3,10 @@
 namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ProductResource extends JsonResource
+
+class ProductResource extends ResourceCollection
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +17,32 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'price' => $this->price,
-            'description' => $this->description,
-            'seller_id' => UserResource::collection($this->seller_id),
+
+
+            'data' => $this->collection->transform(function ($product) {
+                return [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'description' => $product->description,
+                ];
+            }),
+
+            "links" => [
+                "prev" => $this->previousPageUrl(),
+                "next" => $this->nextPageUrl(),
+            ],
+
+            "meta" => [
+                "current_page" => $this->currentPage(),
+                "from" => $this->firstItem(),
+                "to" => $this->lastItem(),
+                "last_page" => $this->lastPage(), // not For Simple
+                "per_page" => $this->perPage(),
+                'count' => $this->count(), //count of items at current page
+                "total" => $this->total() // not For Simple
+            ]
+
 
         ];
     }

@@ -2,28 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Repositories\UserRepositoryInterface;
-use App\Repositories\ProductRepositoryInterface;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
-use App\Http\Resources\Api\ProductResource;
-use App\Http\Resources\Api\StoreResource;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\StoresResource;
+use App\Repositories\UserRepositoryInterface;
+use Illuminate\Http\Request;
 
-class ApiProductController extends Controller
+class ApiStoreController extends Controller
 {
 
     use ApiResponseTrait;
     protected $userRepository;
-    protected $ProductRepository;
-
-    public function __construct(UserRepositoryInterface $userRepository, ProductRepositoryInterface $productRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
 
         $this->userRepository  = $userRepository;
-        $this->productRepository  = $productRepository;
     }
-
 
     /**
      * Display a listing of the resource.
@@ -31,28 +25,18 @@ class ApiProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { }
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $validator = validator()->make($request->all(), [
-            'name' => 'required|string|max:255',
-            'price' => 'required|integer',
-            'description' => 'required|string',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->ApiResponse(null, $validator->errors(), 422);
-        }
-
-        $product = $this->productRepository->create($request->all());
-
-        return $this->ApiResponse($product, 'Retrive Data success', 200);
+        //
     }
 
     /**
@@ -111,14 +95,12 @@ class ApiProductController extends Controller
         //
     }
 
-    public function getStoreProducts($id)
+    public function getStoresList()
     {
-        $store = $this->userRepository->findOne($id);
+        $stores = $this->userRepository->getWhere([['type', 'owner_store']]);
 
-        $products  = new StoreResource($store);
-
-        if ($store) {
-            return $this->ApiResponse($products, null, 200);
+        if ($stores) {
+            return $this->ApiResponse(StoresResource::collection($stores), null, 200);
         }
     }
 }

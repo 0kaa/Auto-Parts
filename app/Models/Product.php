@@ -19,8 +19,7 @@ class Product extends Model
         'id',
         'name',
         'price',
-        'description',
-        'seller_id',
+        'description',        
     ];
 
     /**
@@ -30,8 +29,8 @@ class Product extends Model
      */
     protected $hidden = [];
 
-    public function seller_id()
+    public function seller()
     {
-        return $this->hasMany(User::class,'seller_id','id');
+        return $this->belongsTo(User::class, 'seller_id', 'id');
     }
 }

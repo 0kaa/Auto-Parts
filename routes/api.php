@@ -29,13 +29,25 @@ Route::namespace('Api\Auth')->group(function () {
 });
 
 
-Route::namespace('Api')->group(function () {
+Route::namespace('Api')->middleware('lang')->group(function () {
 
     // Activities
     Route::get('activities', 'ApiActivitiesController@index');
     Route::get('activity/{id}', 'ApiActivitiesController@show');
 
-    // Products
-    Route::get('products', 'ApiProductController@index');
+    // Products    
     Route::post('product/create', 'ApiProductController@create');
+    Route::get('store/products/{id}', 'ApiProductController@getStoreProducts');
+
+    // Stores List
+    Route::get('stores', 'ApiStoreController@getStoresList');
+
+    // Contact us form
+    Route::post('contactus', 'ApiContactUs@create');
+
+    // Static Pages
+    Route::get('static-page/{slug}', 'ApiStaticPages@getStaticPage');
+
+    // Faqs
+    Route::get('faqs', 'ApiFaqsController@index');
 });

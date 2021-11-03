@@ -2,28 +2,24 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Repositories\UserRepositoryInterface;
-use App\Repositories\ProductRepositoryInterface;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
-use App\Http\Resources\Api\ProductResource;
-use App\Http\Resources\Api\StoreResource;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\StaticPagesResource;
+use App\Repositories\StaticPageRepositoryInterface;
+use Illuminate\Http\Request;
 
-class ApiProductController extends Controller
+
+class ApiStaticPages extends Controller
 {
 
     use ApiResponseTrait;
-    protected $userRepository;
-    protected $ProductRepository;
+    protected $staticPageRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository, ProductRepositoryInterface $productRepository)
+    public function __construct(StaticPageRepositoryInterface $staticPageRepository)
     {
 
-        $this->userRepository  = $userRepository;
-        $this->productRepository  = $productRepository;
+        $this->staticPageRepository  = $staticPageRepository;
     }
-
 
     /**
      * Display a listing of the resource.
@@ -31,28 +27,18 @@ class ApiProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { }
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $validator = validator()->make($request->all(), [
-            'name' => 'required|string|max:255',
-            'price' => 'required|integer',
-            'description' => 'required|string',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->ApiResponse(null, $validator->errors(), 422);
-        }
-
-        $product = $this->productRepository->create($request->all());
-
-        return $this->ApiResponse($product, 'Retrive Data success', 200);
+        //
     }
 
     /**
@@ -111,14 +97,9 @@ class ApiProductController extends Controller
         //
     }
 
-    public function getStoreProducts($id)
+    public function getStaticPage($slug)
     {
-        $store = $this->userRepository->findOne($id);
-
-        $products  = new StoreResource($store);
-
-        if ($store) {
-            return $this->ApiResponse($products, null, 200);
-        }
+        $data = new StaticPagesResource($this->staticPageRepository->getWhere(['slug' => $slug])->first());
+        return $this->ApiResponse($data, null, 200);
     }
 }

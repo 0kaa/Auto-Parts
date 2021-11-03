@@ -43,6 +43,8 @@ Route::middleware(['admin','Localization'])->name('admin.')->group(function() {
     Route::resource('sliders-services', 'SliderServiceController');
 
     Route::resource('news-letter', 'NewsLetterController');
+    
+    Route::resource('faqs', 'FaqsController');
 
     Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
