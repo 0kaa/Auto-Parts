@@ -34,6 +34,25 @@
             </li>
             {{--end users--}}
 
+            {{--faqs--}}
+            <li class="nav-item {{areActiveRoutes(['admin.faqs.index','admin.faqs.create','admin.faqs.edit' ])}}">
+                <a href="#">
+                    <i data-feather='circle'></i>
+                    <span class="menu-title" data-i18n="Faqs">@lang('admin.faqs')</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item {{ isActiveRoute('admin.faqs.index')  }}"><a href="{{route('admin.faqs.index')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="Faqs">@lang('admin.faqs')</span></a>
+                    </li>
+                    <li class="nav-item {{ isActiveRoute('admin.faqs.create')  }}"><a href="{{route('admin.faqs.create')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="Faqs">@lang('admin.add_new', ['field' => __('local.faqs')])</span></a>
+                    </li>
+                </ul>
+            </li>
+            {{--end faqs--}}
+
             {{--activities type--}}
             <li class="nav-item {{areActiveRoutes(['admin.activities-types.index','admin.activities-types.create','admin.activities-types.edit' ])}}">
                 <a href="#">

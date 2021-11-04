@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\ProductRepositoryInterface;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
+use App\Http\Resources\Api\ProductDetailResource;
 use App\Http\Resources\Api\ProductResource;
+use App\Http\Resources\Api\RatingResource;
 use App\Http\Resources\Api\StoreResource;
 
 class ApiProductController extends Controller
@@ -74,7 +76,8 @@ class ApiProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = $this->productRepository->findOne($id)->first();
+        return $this->ApiResponse(new ProductDetailResource($product), null, 200);
     }
 
     /**
@@ -120,5 +123,20 @@ class ApiProductController extends Controller
         if ($store) {
             return $this->ApiResponse($products, null, 200);
         }
+    }
+
+    public function createProductRating($id, Request $request)
+    {
+        $product = $this->productRepository->findOne($id);
+
+        $product->ratings()->create([
+            'user_id' => auth()->user()->id,
+            'rating' => $request->get('rating'),
+            'comment' => $request->get('comment')
+        ]);
+
+        $this->productRepository->update(['rating' => $product->ratings()->avg('rating')], $id);
+
+        return $this->ApiResponse(['rating_avg' => $product->ratings()->avg('rating')], trans('local.login_error'), 200);
     }
 }

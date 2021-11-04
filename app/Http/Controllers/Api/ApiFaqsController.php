@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Repositories\FaqsRepositoryInterface;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\FaqsResource;
 
 class ApiFaqsController extends Controller
 {
@@ -31,7 +32,7 @@ class ApiFaqsController extends Controller
     {
         $faqs = $this->faqsRepository->getAll();
         if ($faqs) {
-            return $this->ApiResponse($faqs, 'Retrive Data success', 200);
+            return $this->ApiResponse(new FaqsResource($faqs), 'Retrive Data success', 200);
         }
     }
 }

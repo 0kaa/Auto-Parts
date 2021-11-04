@@ -31,23 +31,35 @@ Route::namespace('Api\Auth')->group(function () {
 
 Route::namespace('Api')->middleware('lang')->group(function () {
 
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('rating/product/{id}',       'ApiProductController@createProductRating'); // Create Rating to product     
+    });
+
     // Activities
-    Route::get('activities', 'ApiActivitiesController@index');
-    Route::get('activity/{id}', 'ApiActivitiesController@show');
+    Route::get('activities',            'ApiActivitiesController@index');
+    Route::get('activity/{id}',         'ApiActivitiesController@show');
 
     // Products    
-    Route::post('product/create', 'ApiProductController@create');
-    Route::get('store/products/{id}', 'ApiProductController@getStoreProducts');
+    Route::post('product/create',       'ApiProductController@create');
+    // Route::post('rating/product',       'ApiProductController@createProductRating'); // Create Rating to product
+    Route::get('products/store/{id}',   'ApiProductController@getStoreProducts');
+    Route::get('product/{id}',          'ApiProductController@show');
+    Route::get('ratings/product/{id}',  'ApiProductController@getProductRatings');
 
     // Stores List
-    Route::get('stores', 'ApiStoreController@getStoresList');
+    Route::get('stores',                'ApiStoreController@getStoresList');
 
     // Contact us form
-    Route::post('contactus', 'ApiContactUs@create');
+    Route::post('contactus',            'ApiContactUs@create');
 
     // Static Pages
-    Route::get('static-page/{slug}', 'ApiStaticPages@getStaticPage');
+    Route::get('static-page/{slug}',    'ApiStaticPages@getStaticPage');
 
     // Faqs
-    Route::get('faqs', 'ApiFaqsController@index');
+    Route::get('faqs',                  'ApiFaqsController@index');
+
+    // Rating
+
+
+
 });

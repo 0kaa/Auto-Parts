@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('address')->nullable();
+            $table->float('rating', 5, 1)->nullable();
             $table->string('verification_code')->nullable();
             $table->integer('approved')->default(0);
             $table->enum('type',array('admin','user','owner_store','workshop'));

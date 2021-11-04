@@ -35,7 +35,7 @@ class UserResource extends JsonResource
             "is_company_facility_agent" => $this->is_company_facility_agent,
             "is_company_facility_authorized_distributor" => $this->is_company_facility_authorized_distributor,
             "other_branches" => $this->other_branches,
-            "created_at" => $this->created_at->format('Y-m-d'),
+            // "created_at" => $this->created_at->format('Y-m-d'),
             "activity_type_id" => $this->activity_type_id,
             "region_id" => $this->region_id,
             "company_sector_id" => $this->company_sector_id,

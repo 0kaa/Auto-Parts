@@ -40,14 +40,14 @@
                         </div>
 
 
-                        <form class="needs-validation" novalidate="" method="post" id="update-faqs-form">
+                        <form class="needs-validation" novalidate="" method="post" id="{{isset($faqs)?'update-faqs-form':'create-faqs-form'}}">
                             @csrf()
                             
                             <div class="form-group">
 
                                 <label class="form-label" for="question_ar"> <span class="tx-danger">*</span>
                                     @lang('admin.question_ar')</label>
-                                <input type="text" id="question_ar" class="form-control" name="question_ar" placeholder=" @lang('admin.question_ar')" value="{{$faqs->question_ar}}"
+                                <input type="text" id="question_ar" class="form-control" name="question_ar" placeholder=" @lang('admin.question_ar')" value="{{isset($faqs)?$faqs->question_ar:''}}"
                                        aria-label=" @lang('admin.question_ar')" aria-describedby="basic-addon-name" required="">
                                 <div class="alert alert-danger mg-t-20" role="alert">
                                     <div class="d-flex align-items-center justify-content-start">
@@ -62,7 +62,7 @@
 
                                 <label class="form-label" for="question_en"> <span class="tx-danger">*</span>
                                     @lang('admin.question_en')</label>
-                                <input type="text" id="question_en" class="form-control" name="question_en" placeholder=" @lang('admin.question_en')" value="{{$faqs->question_en}}"
+                                <input type="text" id="question_en" class="form-control" name="question_en" placeholder=" @lang('admin.question_en')" value="{{isset($faqs)?$faqs->question_en:''}}"
                                        aria-label=" @lang('admin.question_en')" aria-describedby="basic-addon-name" required="">
                                 <div class="alert alert-danger mg-t-20" role="alert">
                                     <div class="d-flex align-items-center justify-content-start">
@@ -77,7 +77,7 @@
 
                                 <label class="form-label" for="answer_en"> <span class="tx-danger">*</span>
                                     @lang('admin.answer_en')</label>
-                                <input type="text" id="answer_en" class="form-control" name="answer_en" placeholder=" @lang('admin.answer_en')" value="{{$faqs->answer_en}}"
+                                <input type="text" id="answer_en" class="form-control" name="answer_en" placeholder=" @lang('admin.answer_en')" value="{{isset($faqs)?$faqs->answer_en:''}}"
                                        aria-label=" @lang('admin.answer_en')" aria-describedby="basic-addon-name" required="">
                                 <div class="alert alert-danger mg-t-20" role="alert">
                                     <div class="d-flex align-items-center justify-content-start">
@@ -91,7 +91,7 @@
 
                                 <label class="form-label" for="answer_ar"> <span class="tx-danger">*</span>
                                     @lang('admin.answer_ar')</label>
-                                <input type="text" id="answer_ar" class="form-control" name="answer_ar" placeholder=" @lang('admin.answer_ar')" value="{{$faqs->answer_ar}}"
+                                <input type="text" id="answer_ar" class="form-control" name="answer_ar" placeholder=" @lang('admin.answer_ar')" value="{{isset($faqs)?$faqs->answer_ar:''}}"
                                        aria-label=" @lang('admin.answer_ar')" aria-describedby="basic-addon-name" required="">
                                 <div class="alert alert-danger mg-t-20" role="alert">
                                     <div class="d-flex align-items-center justify-content-start">

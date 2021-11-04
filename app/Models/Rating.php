@@ -4,10 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Rating;
 
-class Product extends Model
+class Rating extends Model
 {
     use HasFactory;
 
@@ -18,9 +16,10 @@ class Product extends Model
      */
     protected $fillable = [
         'id',
-        'name',
-        'price',
-        'description',
+        'rating',
+        'comment',
+        'product_id',
+        'user_id',
     ];
 
 
@@ -32,12 +31,13 @@ class Product extends Model
      */
     protected $hidden = [];
 
-    public function seller()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'seller_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id')->select('id', 'name','image');
     }
-    public function ratings()
+
+    public function rateable()
     {
-        return $this->morphMany(Rating::class, 'rateable');
+        return $this->morphTo();
     }
 }

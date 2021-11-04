@@ -109,5 +109,5 @@ return[
     'delete_branches' => 'delete branch',
     'resned_code_success' => 'Verification code has been successfully sent back',
     'settings' => 'Settings',
-
+    'faqs' => 'الاسألة الشائعة',
 ];

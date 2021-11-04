@@ -26,6 +26,19 @@ class FaqsController extends Controller
         return view('admin.faqs.index', compact('faqs'));
     }
 
+    public function create()
+    {
+        return view('admin.faqs.create');
+    }
+
+    public function store(Request $request)
+    {
+
+
+        $this->faqsRepository->create($request->except('_method'));
+        return  response()->json(['success' => trans('admin.added_success', ['field' => __('local.faqs')]), 200]);
+    }
+
     public function edit($id)
     {
         $faqs = $this->faqsRepository->findWhere([['id', $id]]);
@@ -36,7 +49,6 @@ class FaqsController extends Controller
     {
 
         $this->faqsRepository->update($request->except('_method'), $id);
-        return  response()->json(['success' => trans('admin.updated_success', ['field' => __('local.company-sectors')]), 200]);
-        
+        return  response()->json(['success' => trans('admin.updated_success', ['field' => __('local.faqs')]), 200]);
     }
 }

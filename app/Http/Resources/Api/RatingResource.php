@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StoresResource extends JsonResource
+class RatingResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,10 @@ class StoresResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => $this->image,
-            'name' => $this->name,
-            // 'badge' => $this->badge,
             'rating' => $this->rating,
-            'address' => $this->address,
-            'activity_type' => $this->activity_name->select('name_ar', 'name_en', 'id')->find($this->activity_type_id),
+            'comment' => $this->comment,
+            'user_name' => $this->user,
+            "created_at" => $this->created_at->diffForHumans(),
         ];
     }
 }

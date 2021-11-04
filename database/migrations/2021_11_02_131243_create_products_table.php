@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->integer('price');
             $table->longText('description');
+            $table->float('rating', 5, 1);
             // $table->json('features');
             // $table->longText('Specifications');
             // $table->longText('model_year');

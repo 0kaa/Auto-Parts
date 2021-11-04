@@ -49,13 +49,21 @@ class User extends Authenticatable
         return $this->hasMany(BranchesCompanyUser::class);
     }  // end of get name 
 
-    
+
     public function products()
-    {        
+    {
         return $this->hasMany(Product::class, 'seller_id', 'id');
     }
 
-    public function activity_name() {
+    public function activity_name()
+    {
         return $this->hasOne(ActivityType::class, 'id', 'activity_type_id');
+    }
+
+  
+
+    public function ratings()
+    {
+        return $this->morphMany(Rating::class, 'rateable');
     }
 }

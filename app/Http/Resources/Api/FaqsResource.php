@@ -14,6 +14,13 @@ class FaqsResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'question_ar' => $this->question_ar,
+            'question_en' => $this->question_en,
+            'answer_ar' => $this->answer_ar,
+            'answer_en' => $this->answer_en,
+            'created_at' => $this->created_at->format('Y-m-d')
+        ];
     }
 }
