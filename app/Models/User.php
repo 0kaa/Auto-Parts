@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email', 'phone', 'image', 'address', 'verification_code', 'approved', 'type', 'email_verified_at', 'name_company', 'name_owner_company', 'national_identity', 'date', 'file', 'ibn',
+        'email', 'phone', 'image', 'address', 'verification_code', 'approved', 'email_verified_at', 'name_company', 'name_owner_company', 'national_identity', 'date', 'file', 'ibn',
         'city', 'is_company_facility_agent', 'is_company_facility_authorized_distributor', 'other_branches', 'activity_type_id', 'region_id', 'company_sector_id',
         'password',
     ];
@@ -60,7 +62,7 @@ class User extends Authenticatable
         return $this->hasOne(ActivityType::class, 'id', 'activity_type_id');
     }
 
-  
+
 
     public function ratings()
     {

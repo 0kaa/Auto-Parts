@@ -21,7 +21,7 @@ class StoresResource extends JsonResource
             // 'badge' => $this->badge,
             'rating' => $this->rating,
             'address' => $this->address,
-            'activity_type' => $this->activity_name->select('name_ar', 'name_en', 'id')->find($this->activity_type_id),
+            'activity_type' => $this->activity_name ? $this->activity_name->select('name_ar', 'name_en', 'id')->find($this->activity_type_id) : null,
         ];
     }
 }

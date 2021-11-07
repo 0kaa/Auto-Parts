@@ -10,6 +10,12 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     protected $model;
 
+    public function user_role($role)
+    {
+
+        return $this->model->role($role)->get();
+    }
+
     /**
      * insert new model to database
      * @params $data => array of columns names and its values
@@ -60,7 +66,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      */
     public function whereHas($relation, array $data, array $data2 = [], $orderBy = ['column' => 'id', 'dir' => 'Asc'])
     {
-        return $this->model->whereHas($relation, function($q) use($data){
+        return $this->model->whereHas($relation, function ($q) use ($data) {
             $q->where($data);
         })->where($data2)->orderBy($orderBy['column'], $orderBy['dir'])->get();
     }
@@ -69,30 +75,30 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * retrieve all the row for the given model with relation and a conditional relation
      * @params OPTIONAL $orderBy with the column name && dir
      */
-    public function whereHasWith(array $with, $relation, array $data, array $data2 = [],array $data3=[],array $data4=[], $orderBy = ['column' => 'id', 'dir' => 'Asc'])
+    public function whereHasWith(array $with, $relation, array $data, array $data2 = [], array $data3 = [], array $data4 = [], $orderBy = ['column' => 'id', 'dir' => 'Asc'])
     {
-        return $this->model->with($with)->whereHas($relation, function($q) use($data){
+        return $this->model->with($with)->whereHas($relation, function ($q) use ($data) {
             $q->where($data);
         })->where($data2)->orwhere($data3)->orwhere($data4)->orderBy($orderBy['column'], $orderBy['dir'])->get();
     }
 
     public function whereHasWithUpdate(array $with, $relation, array $data, array $data2 = [], array $data_update)
     {
-        return $this->model->with($with)->whereHas($relation, function($q) use($data){
+        return $this->model->with($with)->whereHas($relation, function ($q) use ($data) {
             $q->where($data);
         })->where($data2)->update($data_update);
     }
 
-    public function whereHasWithPaginate(array $with, $relation, array $data, array $data2 = [], $orderBy = ['column' => 'id', 'dir' => 'Asc'],$num_paginate=10)
+    public function whereHasWithPaginate(array $with, $relation, array $data, array $data2 = [], $orderBy = ['column' => 'id', 'dir' => 'Asc'], $num_paginate = 10)
     {
-        return $this->model->with($with)->whereHas($relation, function($q) use($data){
+        return $this->model->with($with)->whereHas($relation, function ($q) use ($data) {
             $q->where($data);
         })->where($data2)->orderBy($orderBy['column'], $orderBy['dir'])->paginate($num_paginate);
     }
 
     public function whereHasWithFirst(array $with, $relation, array $data, array $data2 = [], $orderBy = ['column' => 'id', 'dir' => 'Asc'])
     {
-        return $this->model->with($with)->whereHas($relation, function($q) use($data){
+        return $this->model->with($with)->whereHas($relation, function ($q) use ($data) {
             $q->where($data);
         })->where($data2)->orderBy($orderBy['column'], $orderBy['dir'])->first();
     }
@@ -135,7 +141,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $this->model->where($data)->orderBy($orderBy['column'], $orderBy['dir'])->get();
     }
 
-    public function getWhereDate($column, $date, $data = [], $symbol='=', $orderBy = ['column' => 'id', 'dir' => 'DESC'])
+    public function getWhereDate($column, $date, $data = [], $symbol = '=', $orderBy = ['column' => 'id', 'dir' => 'DESC'])
     {
         return $this->model->where($data)->whereDate($column, $symbol, $date)->orderBy($orderBy['column'], $orderBy['dir'])->get();
     }
@@ -258,7 +264,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * retrieve one row for the given model with where condition
      * @params $data => array of where conditions
      */
-    public function findWhere(array $data,$data2='*', $orderBy = ['column' => 'id', 'dir' => 'DESC'])
+    public function findWhere(array $data, $data2 = '*', $orderBy = ['column' => 'id', 'dir' => 'DESC'])
     {
         return $this->model->select($data2)->where($data)->orderBy($orderBy['column'], $orderBy['dir'])->first();
     }
@@ -291,9 +297,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $this->model->with($with)->where($data)->orderBy($orderBy['column'], $orderBy['dir'])->get();
     }
 
-    public function getWhereIn( $col,array $data,array $data2=[], $orderBy = ['column' => 'id', 'dir' => 'DESC'])
+    public function getWhereIn($col, array $data, array $data2 = [], $orderBy = ['column' => 'id', 'dir' => 'DESC'])
     {
-        return $this->model->where($data2)->whereIn($col,$data)->orderBy($orderBy['column'], $orderBy['dir'])->get();
+        return $this->model->where($data2)->whereIn($col, $data)->orderBy($orderBy['column'], $orderBy['dir'])->get();
     }
 
     /**
@@ -321,7 +327,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @params $id => the row id to be retrieved
      * @params $data =>array of permissions to be assigned
      */
-    public function givePermissions($id, array $permissions){
+    public function givePermissions($id, array $permissions)
+    {
 
         $user = $this->model->find($id);
 
@@ -333,7 +340,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @params $id => the row id to be retrieved
      * @params $data =>array of permissions to be deleted
      */
-    public function deletePermissions($id, array $permissions){
+    public function deletePermissions($id, array $permissions)
+    {
 
         $user = $this->model->find($id);
 
@@ -345,7 +353,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @params $id => the row id to be retrieved
      * @params $data =>array of permissions to be updated
      */
-    public function updatePermissions($id, array $permissions){
+    public function updatePermissions($id, array $permissions)
+    {
 
         $user = $this->model->find($id);
 
@@ -356,96 +365,93 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param array $columns
      * @return Collection
      */
-    public function search(array $where = ['id', '>', 0],array $columns, $searchQuery ,$orderBy = ['column' => 'id', 'dir' => 'DESC'])
+    public function search(array $where = ['id', '>', 0], array $columns, $searchQuery, $orderBy = ['column' => 'id', 'dir' => 'DESC'])
     {
 
         $whereArr = [];
         $orWhereArr = [];
         $i = 0;
-        foreach ($columns as $column){
-            if($i == 0){
-                array_push($whereArr , $where);
-                array_push($whereArr , [$column, 'LIKE', '%'.$searchQuery.'%']);
-            }else{
-                array_push($orWhereArr , $where);
-                array_push($orWhereArr , [$column, 'LIKE', '%'.$searchQuery.'%']);
+        foreach ($columns as $column) {
+            if ($i == 0) {
+                array_push($whereArr, $where);
+                array_push($whereArr, [$column, 'LIKE', '%' . $searchQuery . '%']);
+            } else {
+                array_push($orWhereArr, $where);
+                array_push($orWhereArr, [$column, 'LIKE', '%' . $searchQuery . '%']);
             }
             $i++;
         }
 
 
-        if(count($whereArr) > 0){
+        if (count($whereArr) > 0) {
             $result = $this->model->where($whereArr)->orderBy($orderBy['column'], $orderBy['dir'])->get();
         }
 
-        if(count($orWhereArr) > 0){
+        if (count($orWhereArr) > 0) {
             $result = $this->model->where($whereArr)->orWhere($orWhereArr)->orderBy($orderBy['column'], $orderBy['dir'])->get();
         }
 
         return $result;
-
     }
 
-    public function searchWith(array $with, array $where = ['id', '>', 0],array $columns, $searchQuery ,$orderBy = ['column' => 'id', 'dir' => 'DESC'])
+    public function searchWith(array $with, array $where = ['id', '>', 0], array $columns, $searchQuery, $orderBy = ['column' => 'id', 'dir' => 'DESC'])
     {
 
         $whereArr = [];
         $orWhereArr = [];
         $i = 0;
-        foreach ($columns as $column){
-            if($i == 0){
-                array_push($whereArr , $where);
-                array_push($whereArr , [$column, 'LIKE', '%'.$searchQuery.'%']);
-            }else{
-                array_push($orWhereArr , $where);
-                array_push($orWhereArr , [$column, 'LIKE', '%'.$searchQuery.'%']);
+        foreach ($columns as $column) {
+            if ($i == 0) {
+                array_push($whereArr, $where);
+                array_push($whereArr, [$column, 'LIKE', '%' . $searchQuery . '%']);
+            } else {
+                array_push($orWhereArr, $where);
+                array_push($orWhereArr, [$column, 'LIKE', '%' . $searchQuery . '%']);
             }
             $i++;
         }
 
 
-        if(count($whereArr) > 0){
+        if (count($whereArr) > 0) {
             $result = $this->model->with($with)->where($whereArr)->orderBy($orderBy['column'], $orderBy['dir'])->get();
         }
 
-        if(count($orWhereArr) > 0){
+        if (count($orWhereArr) > 0) {
             $result = $this->model->with($with)->where($whereArr)->orWhere($orWhereArr)->orderBy($orderBy['column'], $orderBy['dir'])->get();
         }
 
         return $result;
-
     }
-    public function searchWithWhereHas(array $with, array $where = ['id', '>', 0],array $columns, $searchQuery ,$relation_arr,$var,$arr_data,$orderBy = ['column' => 'id', 'dir' => 'DESC'])
+    public function searchWithWhereHas(array $with, array $where = ['id', '>', 0], array $columns, $searchQuery, $relation_arr, $var, $arr_data, $orderBy = ['column' => 'id', 'dir' => 'DESC'])
     {
 
         $whereArr = [];
         $orWhereArr = [];
         $i = 0;
-        foreach ($columns as $column){
-            if($i == 0){
-                array_push($whereArr , $where);
-                array_push($whereArr , [$column, 'LIKE', '%'.$searchQuery.'%']);
-            }else{
-                array_push($orWhereArr , $where);
-                array_push($orWhereArr , [$column, 'LIKE', '%'.$searchQuery.'%']);
+        foreach ($columns as $column) {
+            if ($i == 0) {
+                array_push($whereArr, $where);
+                array_push($whereArr, [$column, 'LIKE', '%' . $searchQuery . '%']);
+            } else {
+                array_push($orWhereArr, $where);
+                array_push($orWhereArr, [$column, 'LIKE', '%' . $searchQuery . '%']);
             }
             $i++;
         }
 
 
-        if(count($whereArr) > 0){
-            $result = $this->model->whereHas($relation_arr,function ($q)use ($var,$arr_data){
+        if (count($whereArr) > 0) {
+            $result = $this->model->whereHas($relation_arr, function ($q) use ($var, $arr_data) {
                 $q->where($arr_data);
             })->with($with)->where($whereArr)->orderBy($orderBy['column'], $orderBy['dir'])->get();
         }
 
-        if(count($orWhereArr) > 0){
-            $result = $this->model->whereHas($relation_arr,function ($q)use ($var,$arr_data){
+        if (count($orWhereArr) > 0) {
+            $result = $this->model->whereHas($relation_arr, function ($q) use ($var, $arr_data) {
                 $q->where($arr_data);
             })->with($with)->where($whereArr)->orWhere($orWhereArr)->orderBy($orderBy['column'], $orderBy['dir'])->get();
         }
 
         return $result;
-
     }
 }

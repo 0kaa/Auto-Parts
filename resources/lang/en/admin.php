@@ -51,7 +51,7 @@ return [
     'link_snapchat' => 'Snapchat',
     'content_ar' => 'content arabic',
     'content_en' => 'content english',
-    'faqs' => 'الاسألة الشائعة',
+    'faqs' => 'Faqs',
     'question_ar' => 'Question Arabic',
     'question_en' => 'Question English',
     'answer_ar' => 'Answer Arabic',

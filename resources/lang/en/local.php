@@ -109,5 +109,8 @@ return[
     'delete_branches' => 'delete branch',
     'resned_code_success' => 'Verification code has been successfully sent back',
     'settings' => 'Settings',
-    'faqs' => 'الاسألة الشائعة',
+    'faqs' => 'Faqs',
+    'rating_done' => 'The product has been rated successfully',
+    'rating_before' => 'You have already rated this product',
+    'no_product_found' => 'Not found product with this ID'
 ];

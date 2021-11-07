@@ -23,6 +23,6 @@ class ActivityType extends Model
 
     public function store()
     {
-        return $this->hasMany(User::class)->where('type', 'owner_store');
+        return $this->hasMany(User::class)->role('owner_store');
     }
 }

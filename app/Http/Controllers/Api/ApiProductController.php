@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\ProductRepositoryInterface;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
+use App\Http\Requests\Api\CreateProductRequest;
 use App\Http\Resources\Api\ProductDetailResource;
 use App\Http\Resources\Api\ProductResource;
 use App\Http\Resources\Api\RatingResource;
 use App\Http\Resources\Api\StoreResource;
+use Illuminate\Support\Facades\DB;
 
 class ApiProductController extends Controller
 {
@@ -40,19 +42,15 @@ class ApiProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(CreateProductRequest $request)
     {
-        $validator = validator()->make($request->all(), [
-            'name' => 'required|string|max:255',
-            'price' => 'required|integer',
-            'description' => 'required|string',
+
+        $product = $this->productRepository->create([
+            'name' => $request->get('name'),
+            'price' => $request->get('price'),
+            'description' => $request->get('description'),
+            'seller_id' => auth()->user()->id
         ]);
-
-        if ($validator->fails()) {
-            return $this->ApiResponse(null, $validator->errors(), 422);
-        }
-
-        $product = $this->productRepository->create($request->all());
 
         return $this->ApiResponse($product, 'Retrive Data success', 200);
     }
@@ -76,7 +74,10 @@ class ApiProductController extends Controller
      */
     public function show($id)
     {
-        $product = $this->productRepository->findOne($id)->first();
+        $product = $this->productRepository->findOne($id);
+        if (empty($product)) {
+            return $this->ApiResponse(null, trans('local.no_product_found'), 422);
+        }
         return $this->ApiResponse(new ProductDetailResource($product), null, 200);
     }
 
@@ -120,23 +121,40 @@ class ApiProductController extends Controller
 
         $products  = new StoreResource($store);
 
-        if ($store) {
-            return $this->ApiResponse($products, null, 200);
+        if (empty($store)) {
+            return $this->ApiResponse(null, trans('local.no_product_found'), 200);
         }
+
+        return $this->ApiResponse($products, null, 200);
     }
 
     public function createProductRating($id, Request $request)
     {
         $product = $this->productRepository->findOne($id);
+        $user = auth()->user();
+        $check_product_rate = $product->ratings->contains('user_id', $user->id);
 
-        $product->ratings()->create([
-            'user_id' => auth()->user()->id,
-            'rating' => $request->get('rating'),
-            'comment' => $request->get('comment')
-        ]);
+        if (!$check_product_rate) {
+            $product->ratings()->create([
+                'user_id' => auth()->user()->id,
+                'rating' => $request->get('rating'),
+                'comment' => $request->get('comment')
+            ]);
 
-        $this->productRepository->update(['rating' => $product->ratings()->avg('rating')], $id);
+            return $this->ApiResponse(null, trans('local.rating_done'), 200);
 
-        return $this->ApiResponse(['rating_avg' => $product->ratings()->avg('rating')], trans('local.login_error'), 200);
+        } else {
+            $update_rating =  $product->ratings()->where([
+                'user_id' => auth()->user()->id,
+                'rateable_id' => $product->id,
+            ])->first();
+
+            $update_rating->update([
+                'user_id' => auth()->user()->id,
+                'rating' => $request->get('rating'),
+                'comment' => $request->get('comment')
+            ]);
+            return $this->ApiResponse(null, trans('local.update_rating'), 200);
+        }
     }
 }

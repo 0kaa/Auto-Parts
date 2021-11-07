@@ -17,17 +17,16 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->guest())
-        {
-            return redirect()->back()->with('error','يجب ان تقوم بتسجيل الدخول أولا  .');
-        }
-        elseif(Auth::user()->type=='admin' ) {
+        // if (Auth::guard($guard)->guest()) {
+        //     return redirect()->back()->with('error', 'يجب ان تقوم بتسجيل الدخول أولا  .');
 
+        // } 
+        if (auth()->user() && auth()->user()->hasRole('admin')) {
 
             return $next($request);
+        } else {
+            return redirect()->back()->with('error', 'يجب ان تقوم بتسجيل الدخول أولا  .');
         }
         abort(403);
-
-
     }
 }

@@ -21,6 +21,20 @@ class Product extends Model
         'name',
         'price',
         'description',
+        'features',
+        'details',
+        'seller_id',
+    ];
+
+    protected $casts = [
+        'features' => 'array',
+        'details' => 'array',
+    ];
+
+    public static $rules = [
+        'name' => 'required',
+        'price' => 'required',
+        'description' => 'required',
     ];
 
 
@@ -34,8 +48,10 @@ class Product extends Model
 
     public function seller()
     {
-        return $this->belongsTo(User::class, 'seller_id', 'id');
+        return $this->belongsTo(User::class, 'seller_id', 'id')->role('owner_store');;
     }
+
+
     public function ratings()
     {
         return $this->morphMany(Rating::class, 'rateable');

@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->float('rating', 5, 1)->nullable();
             $table->string('verification_code')->nullable();
             $table->integer('approved')->default(0);
-            $table->enum('type',array('admin','user','owner_store','workshop'));
+            // $table->enum('type',array('admin','user','owner_store','workshop'));
             $table->timestamp('email_verified_at')->nullable();
             $table->string('image')->nullable();
             $table->string('password');
