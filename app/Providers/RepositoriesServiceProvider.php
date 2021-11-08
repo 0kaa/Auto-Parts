@@ -19,6 +19,7 @@ use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Eloquent\ProductRepository;
 use App\Repositories\Eloquent\FaqsRepository;
 use App\Repositories\Eloquent\RatingRepository;
+use App\Repositories\Eloquent\FavouriteRepository;
 
 use App\Repositories\RegionRepositoryInterface;
 use App\Repositories\ContactUsRepositoryInterface;
@@ -30,6 +31,7 @@ use App\Repositories\UserRepositoryInterface;
 use App\Repositories\ProductRepositoryInterface;
 use App\Repositories\FaqsRepositoryInterface;
 use App\Repositories\RatingRepositoryInterface;
+use App\Repositories\FavouriteRepositoryInterface;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -48,6 +50,7 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(FaqsRepositoryInterface::class, FaqsRepository::class);
         $this->app->bind(RatingRepositoryInterface::class, RatingRepository::class);
+        $this->app->bind(FavouriteRepositoryInterface::class, FavouriteRepository::class);
         $this->app->bind(StaticPageRepositoryInterface::class, StaticPageRepository::class);
         $this->app->bind(ActivityTypeRepositoryInterface::class, ActivityTypeRepository::class);
         $this->app->bind(RegionRepositoryInterface::class, RegionRepository::class);
@@ -56,7 +59,6 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(SliderServiceRepositoryInterface::class, SliderServiceRepository::class);
         $this->app->bind(ContactUsRepositoryInterface::class, ContactUsRepository::class);
         $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
-
     }
 
     /**

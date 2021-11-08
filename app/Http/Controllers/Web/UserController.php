@@ -49,8 +49,7 @@ class UserController extends Controller
         $attribute = $request->except('password' , 'confirm_password');
 
         $attribute['verification_code'] = rand(1111,9999);
-        $attribute['approved'] = 0;
-        $attribute['type'] = 'user';
+        $attribute['approved'] = 0;        
         $attribute['image'] = 'users/avatar.png';
         $attribute['password'] = bcrypt($request->password);
 

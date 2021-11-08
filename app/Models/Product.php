@@ -51,9 +51,13 @@ class Product extends Model
         return $this->belongsTo(User::class, 'seller_id', 'id')->role('owner_store');;
     }
 
-
     public function ratings()
     {
         return $this->morphMany(Rating::class, 'rateable');
+    }
+
+    public function favourite()
+    {
+        return $this->morphMany(Favourite::class, 'favouriteable');
     }
 }

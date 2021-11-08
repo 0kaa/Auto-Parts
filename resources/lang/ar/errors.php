@@ -54,4 +54,5 @@ return [
         'string' => 'The :attribute must be at least :min characters.',
         'array' => 'لم تقم بإدخال :attribute.',
     ],
+    'favourite' => 'لا يمكنك اضافة غير المتاجر الي المفضلة',
 ];

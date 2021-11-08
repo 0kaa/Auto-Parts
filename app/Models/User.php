@@ -62,10 +62,18 @@ class User extends Authenticatable
         return $this->hasOne(ActivityType::class, 'id', 'activity_type_id');
     }
 
-
-
     public function ratings()
     {
         return $this->morphMany(Rating::class, 'rateable');
+    }
+
+    public function favourite()
+    {
+        return $this->morphMany(Favourite::class, 'favouriteable');
+    }
+
+    public function user_favourites()
+    {
+        return $this->hasMany(Favourite::class, 'user_id', 'id');
     }
 }

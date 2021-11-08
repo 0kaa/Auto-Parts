@@ -51,4 +51,5 @@ return [
         'string' => 'The :attribute must be at least :min characters.',
         'array' => 'The :attribute must have at least :min items.',
     ],
+    'favourite' => 'You can only add stores to favourites',
 ];

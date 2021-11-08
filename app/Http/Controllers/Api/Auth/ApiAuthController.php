@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Validation\Validator;
-use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Requests\web\RegisterRequest;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -34,21 +34,33 @@ class ApiAuthController extends Controller
         if ($user && Hash::check($request->password, $user->password)) {
 
             $token = $user->createToken('tokens')->plainTextToken;
+        } else {
+            return $this->ApiResponse(null, trans('admin.login_error'), 404);
         }
 
         return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], 'test message', 200);
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
 
-        $user = $this->usersRepository->create($request->all());
+        $attribute = $request->except('password', 'confirm_password');
 
-        $token = $user->createToken('tokens')->plainTextToken;
+        $attribute['password'] = bcrypt($request->password);
 
-        $user->assignRole('owner_store');
+        $user = $this->usersRepository->create($attribute);
 
-        return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], 'test message', 200);
+        if ($user) {
+
+            $token = $user->createToken('tokens')->plainTextToken;
+
+            $user->assignRole('user');
+
+            return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], null, 200);
+        } else {
+
+            return $this->ApiResponse(null, trans('local.successfully.registered'), 404);
+        }
     }
 
     public function get_user()

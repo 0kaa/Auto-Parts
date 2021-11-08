@@ -35,3 +35,6 @@ class CreateProductRequest extends MasterApiRequest
         return Product::$rules;
     }
 }
+
+
+// function return random number

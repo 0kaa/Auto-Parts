@@ -22,7 +22,6 @@ Route::namespace('Api\Auth')->group(function () {
 
     // Auth Middleware -> [ Loggedin ]
     Route::middleware('auth:sanctum')->group(function () {
-
         Route::get('get_user', 'ApiAuthController@get_user'); // Get User Data By token        
 
     });
@@ -31,36 +30,26 @@ Route::namespace('Api\Auth')->group(function () {
 
 Route::namespace('Api')->middleware('lang')->group(function () {
 
-    Route::group(['middleware' => ['auth:sanctum', 'role:user']], function () {
-        Route::post('rating/product/{id}', 'ApiProductController@createProductRating');
-    });
-
-    Route::group(['middleware' => ['auth:sanctum', 'role:owner_store']], function () {
-        Route::post('product/create',       'ApiProductController@create');
-    });
-
-    // Activities
     Route::get('activities',            'ApiActivitiesController@index');
     Route::get('activity/{id}',         'ApiActivitiesController@show');
-
     Route::get('products/store/{id}',   'ApiProductController@getStoreProducts');
     Route::get('product/{id}',          'ApiProductController@show');
     Route::get('ratings/product/{id}',  'ApiProductController@getProductRatings');
-
-    // Stores List
     Route::get('stores',                'ApiStoreController@getStoresList');
-
-    // Contact us form
     Route::post('contactus',            'ApiContactUs@create');
-
-    // Static Pages
     Route::get('static-page/{slug}',    'ApiStaticPages@getStaticPage');
-
-    // Faqs
     Route::get('faqs',                  'ApiFaqsController@index');
 
-    // Rating
+    // User
+    Route::group(['middleware' => ['auth:sanctum', 'role:user']], function () {
+        Route::post('rating/product/{id}',  'ApiProductController@createProductRating');
+        Route::get('my-favourites',        'ApiFavourtiesController@index');
+        Route::post('product/favourties/create/{id}', 'ApiFavourtiesController@createProductFavourtie');
+        Route::post('store/favourties/create/{id}', 'ApiFavourtiesController@createStoreFavourtie');
+    });
 
-
-
+    // Owner Store
+    Route::group(['middleware' => ['auth:sanctum', 'role:owner_store']], function () {
+        Route::post('product/create',       'ApiProductController@create');
+    });
 });
