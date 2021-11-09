@@ -20,18 +20,17 @@ class UserController extends Controller
     protected $regionrepository;
     protected $comapnyrepository;
 
-    public function __construct(UserRepositoryInterface $userrepository,
-                                ActivityTypeRepositoryInterface $activityrepository,
-                                RegionRepositoryInterface $regionrepository,
-                                CompanySectorRepositoryInterface $comapnyrepository
-    )
-    {
+    public function __construct(
+        UserRepositoryInterface $userrepository,
+        ActivityTypeRepositoryInterface $activityrepository,
+        RegionRepositoryInterface $regionrepository,
+        CompanySectorRepositoryInterface $comapnyrepository
+    ) {
 
         $this->userrepository     = $userrepository;
         $this->activityrepository = $activityrepository;
         $this->regionrepository   = $regionrepository;
         $this->comapnyrepository  = $comapnyrepository;
-
     } // end of construct
 
     public function register()
@@ -39,92 +38,74 @@ class UserController extends Controller
 
         $activities_types =  $this->activityrepository->getAll();
 
-        return view('website.register' , compact('activities_types'));
-
+        return view('website.register', compact('activities_types'));
     } // end of register
 
     public function registerStore(RegisterRequest $request)
     {
 
-        $attribute = $request->except('password' , 'confirm_password');
+        $attribute = $request->except('password', 'confirm_password');
 
-        $attribute['verification_code'] = rand(1111,9999);
-        $attribute['approved'] = 0;        
+        $attribute['verification_code'] = rand(1111, 9999);
+        $attribute['approved'] = 0;
         $attribute['image'] = 'users/avatar.png';
         $attribute['password'] = bcrypt($request->password);
 
         $user = $this->userrepository->create($attribute);
 
-        if($user)
-        {
+        if ($user) {
+            $user->assignRole('owner_store');
+            return response()->json(['data' => 1, 'user_id' => $user->id, 'phone' => $user->phone]);
+        } else {
 
-            return response()->json(['data' => 1 , 'user_id' => $user->id , 'phone' => $user->phone]);
-
-        } else 
-        {
-
-            return response()->json(['data' => 0 , 'error' =>  trans('local.error_register')]);
-
+            return response()->json(['data' => 0, 'error' =>  trans('local.error_register')]);
         }
-
     }  // end of register store
 
     public function companyStore(CompanyRequest $request)
     {
 
         // dd($request->all());
-        
-        $attribute = $request->except('file' , 'addressarray' , 'phonearray' , 'areaarray' , 'cityarray');
+
+        $attribute = $request->except('file', 'addressarray', 'phonearray', 'areaarray', 'cityarray');
 
         $user = $this->userrepository->findOne($request->user_id);
 
         // uploade one file
-        if($request->has('file'))
-        {
+        if ($request->has('file')) {
 
             // Upload new file
             $attribute['file'] = $request->file('file')->store('company');
-        
         } // end of has image   
-                
+
         $userUpdate = $user->update($attribute);
 
-        if($userUpdate)
-        {
-            if($request->addressarray)
-            {
-                foreach(explode(',',$request->addressarray) as $key=>$address)
-                {
-                    
+        if ($userUpdate) {
+            if ($request->addressarray) {
+                foreach (explode(',', $request->addressarray) as $key => $address) {
+
                     $user->branches()->create([
                         'address'   => $address,
-                        'city'      => explode(',',$request->cityarray)[$key],
-                        'region_id' => explode(',',$request->areaarray)[$key],
-                        'phone'     => explode(',',$request->phonearray)[$key],
+                        'city'      => explode(',', $request->cityarray)[$key],
+                        'region_id' => explode(',', $request->areaarray)[$key],
+                        'phone'     => explode(',', $request->phonearray)[$key],
                     ]);
-
                 }
-
             }
-            
+
             return response()->json(['data' => 1]);
+        } else {
 
-        } else 
-        {
-
-            return response()->json(['data' => 0 , 'error' => trans('local.error_comapny')]);
-
+            return response()->json(['data' => 0, 'error' => trans('local.error_comapny')]);
         }
-
     }  // end of company store
 
     public function activeStore(ActiveCodeRequest $request)
     {
 
-        $code = $this->userrepository->getWhere([['verification_code' , $request->code] , ['phone' , $request->phone_active]])->first();
-        
-        if($code)
-        {
+        $code = $this->userrepository->getWhere([['verification_code', $request->code], ['phone', $request->phone_active]])->first();
+
+        if ($code) {
 
             $code->update([
 
@@ -134,14 +115,10 @@ class UserController extends Controller
             ]);
 
             return response()->json(['data' => 1]);
+        } else {
 
-        } else 
-        {
-
-            return response()->json(['data' => 0 , 'error' => trans('local.error_code')]);
-
+            return response()->json(['data' => 0, 'error' => trans('local.error_code')]);
         }
-
     }  // end of active store
 
     public function getActivitiesType(Request $request)
@@ -151,8 +128,7 @@ class UserController extends Controller
         $areas = $this->regionrepository->getAll();
         $comapnies = $this->comapnyrepository->getAll();
 
-        return view('website.get_activity_type' , compact('activities_type' , 'areas' , 'comapnies'))->render();
-
+        return view('website.get_activity_type', compact('activities_type', 'areas', 'comapnies'))->render();
     }  // end of get activate
 
     public function getBranches(Request $request)
@@ -161,7 +137,6 @@ class UserController extends Controller
         $areas = $this->regionrepository->getAll();
 
         return response()->json(['data' => $areas]);
-
     }  // end of get getBranches
 
     public function resendCode(Request $request)
@@ -169,16 +144,15 @@ class UserController extends Controller
 
         $user = $this->userrepository->getWhere(['phone' => $request->phone])->first();
 
-        $code = rand(1111,9999);
+        $code = rand(1111, 9999);
 
         $user->update([
             'verification_code' => $code
         ]);
 
         return response()->json(['success' => trans('local.resned_code_success')]);
-
     }  // end of resendCode
-    
-    
+
+
 
 }

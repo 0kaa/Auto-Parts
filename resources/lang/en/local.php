@@ -111,7 +111,7 @@ return [
     'settings' => 'Settings',
     'faqs' => 'Faqs',
     'rating_done' => 'The product has been rated successfully',
-    'rating_before' => 'You have already rated this product',
+    'update_rating' => 'The product rating has been updated',
     'no_product_found' => 'Not found product with this ID',
     'favourite_added' => 'Added to Favourites',
     'favourite_removed' => 'Removed from Favourites',

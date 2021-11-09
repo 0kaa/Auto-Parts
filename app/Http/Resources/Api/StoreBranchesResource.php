@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StoresResource extends JsonResource
+class StoreBranchesResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,11 +17,11 @@ class StoresResource extends JsonResource
         return [
             'id' => $this->id,
             'image' => $this->image,
-            'name' => $this->name,
-            // 'badge' => $this->badge,
-            'rating' => $this->ratings()->avg('rating'),
-            'address' => $this->address,
-            'activity_type' => $this->activity_name ? $this->activity_name->find($this->activity_type_id)->name : null,
+            'is_company_facility_agent' => $this->is_company_facility_agent,
+            'is_company_facility_authorized_distributor' => $this->is_company_facility_authorized_distributor,
+            'other_branches' => $this->other_branches,
+            'company_sector_id' => $this->company_sector_id,
+            'branches' => BranchResource::collection($this->branches)
         ];
     }
 }

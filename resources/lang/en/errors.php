@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
 
 
@@ -52,4 +52,6 @@ return [
         'array' => 'The :attribute must have at least :min items.',
     ],
     'favourite' => 'You can only add stores to favourites',
+    'user_not_found' => 'This user not founded'
+
 ];

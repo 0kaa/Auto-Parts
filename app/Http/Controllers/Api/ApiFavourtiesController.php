@@ -58,6 +58,11 @@ class ApiFavourtiesController extends Controller
 
         $favourites_products = $this->productRepository->findOne($id);
 
+        if (!$favourites_products) {
+            return $this->ApiResponse(null, trans('local.no_product_found'), 404);
+        }
+
+
         $check_product_favourite = $favourites_products->favourite->contains('user_id', $user_id);
 
         if (!$check_product_favourite) {
@@ -82,6 +87,10 @@ class ApiFavourtiesController extends Controller
         $user_id = auth()->user()->id;
 
         $favourites_stores = $this->userRepository->findOne($id);
+
+        if (!$favourites_stores) {
+            return $this->ApiResponse(null, trans('errors.user_not_found'), 404);
+        }
 
         $check_product_favourite = $favourites_stores->favourite->contains('user_id', $user_id);
 

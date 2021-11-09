@@ -17,7 +17,7 @@ class StoreResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'products' => new ProductResource($this->products()->paginate(1))
+            'products' => new ProductPaginationResource($this->products()->paginate(10))
         ];
     }
 }

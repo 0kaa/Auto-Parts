@@ -10,6 +10,7 @@ use App\Repositories\Eloquent\ActivityTypeRepository;
 use App\Repositories\Eloquent\BaseRepository;
 use App\Repositories\Eloquent\CompanySectorRepository;
 use App\Repositories\Eloquent\RegionRepository;
+use App\Repositories\Eloquent\CityRepository;
 use App\Repositories\Eloquent\SettingRepository;
 use App\Repositories\Eloquent\SliderServiceRepository;
 use App\Repositories\Eloquent\ContactUsRepository;
@@ -22,6 +23,7 @@ use App\Repositories\Eloquent\RatingRepository;
 use App\Repositories\Eloquent\FavouriteRepository;
 
 use App\Repositories\RegionRepositoryInterface;
+use App\Repositories\CityRepositoryInterface;
 use App\Repositories\ContactUsRepositoryInterface;
 use App\Repositories\SliderServiceRepositoryInterface;
 use App\Repositories\StaticPageRepositoryInterface;
@@ -54,6 +56,7 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(StaticPageRepositoryInterface::class, StaticPageRepository::class);
         $this->app->bind(ActivityTypeRepositoryInterface::class, ActivityTypeRepository::class);
         $this->app->bind(RegionRepositoryInterface::class, RegionRepository::class);
+        $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
         $this->app->bind(CompanySectorRepositoryInterface::class, CompanySectorRepository::class);
         $this->app->bind(SubscribeRepositoryInterface::class, SubscribeRepository::class);
         $this->app->bind(SliderServiceRepositoryInterface::class, SliderServiceRepository::class);

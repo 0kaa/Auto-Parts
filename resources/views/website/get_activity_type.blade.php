@@ -150,7 +150,7 @@
 
 
             <div class="input-sub-regester">
-                <input type="date" class="form-control" name="birth_day_enterprise" placeholder="{{ __('local.birth_day_enterprise') }}">
+                <input type="date" class="form-control" id="birth_day_enterprise" name="birth_day_enterprise" placeholder="{{ __('local.birth_day_enterprise') }}">
             </div>
 
             <div class="input-fille">

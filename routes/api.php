@@ -36,20 +36,29 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     Route::get('product/{id}',          'ApiProductController@show');
     Route::get('ratings/product/{id}',  'ApiProductController@getProductRatings');
     Route::get('stores',                'ApiStoreController@getStoresList');
-    Route::post('contactus',            'ApiContactUs@create');
     Route::get('static-page/{slug}',    'ApiStaticPages@getStaticPage');
     Route::get('faqs',                  'ApiFaqsController@index');
+    Route::post('contactus',            'ApiContactUs@create');
+
 
     // User
     Route::group(['middleware' => ['auth:sanctum', 'role:user']], function () {
-        Route::post('rating/product/{id}',  'ApiProductController@createProductRating');
-        Route::get('my-favourites',        'ApiFavourtiesController@index');
-        Route::post('product/favourties/create/{id}', 'ApiFavourtiesController@createProductFavourtie');
-        Route::post('store/favourties/create/{id}', 'ApiFavourtiesController@createStoreFavourtie');
+        Route::post('rating/product/{id}',              'ApiProductController@createProductRating');
+        Route::get('my-favourites',                     'ApiFavourtiesController@index');
+        Route::post('product/favourties/create/{id}',   'ApiFavourtiesController@createProductFavourtie');
+        Route::post('store/favourties/create/{id}',     'ApiFavourtiesController@createStoreFavourtie');
     });
+
+    // User | Store Account data
+    Route::group(['middleware' => ['auth:sanctum', 'role:owner_store|user']], function () {
+        Route::resource('/my-account',                  'ApiAccountController');
+    });
+
 
     // Owner Store
     Route::group(['middleware' => ['auth:sanctum', 'role:owner_store']], function () {
-        Route::post('product/create',       'ApiProductController@create');
+        Route::post('product/create',                   'ApiProductController@create');
+        Route::resource('/my-company',                  'ApiCompanyController');
+        Route::resource('/my-branches',                 'ApiBranchesController');
     });
 });

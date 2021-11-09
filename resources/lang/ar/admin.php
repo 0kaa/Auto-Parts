@@ -26,7 +26,7 @@ return [
     'add_properties_new' => 'الصوره',
     'added_success' => 'تمت إضافة  :field بنجاح',
     'edit' => 'تعديل',
-    'updated_success' => 'تم تعديل بيانات   :field بنجاح',
+    'updated_success' => 'تم تعديل بيانات بنجاح',
     'common_edit' => 'تعديل :field',
     'close' => 'إغلاق',
     'delete' => 'حذف',

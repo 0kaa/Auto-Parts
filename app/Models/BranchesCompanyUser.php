@@ -9,6 +9,11 @@ class BranchesCompanyUser extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','city' , 'region_id' , 'phone' , 'address'];
+    protected $fillable = ['user_id', 'city', 'region_id', 'phone', 'address'];
 
+
+    public function region()
+    {
+        return $this->hasOne(Region::class, 'id', 'region_id');
+    }
 }

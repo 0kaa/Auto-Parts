@@ -22,7 +22,7 @@ return [
     'image' => 'image',
     'added_success' => 'New :field is added successfully ',
     'edit' => 'Edit',
-    'updated_success' => 'Data of  :field updated successfully',
+    'updated_success' => 'Data updated successfully',
     'common_edit' => 'Edit :field',
     'close' => 'Close',
     'delete' => 'Delete',
