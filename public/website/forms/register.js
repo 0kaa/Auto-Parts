@@ -327,11 +327,12 @@ $(document).ready(function(){
                 formData.append('date'                                       , birth_day_enterprise.val());
                 formData.append('file'                                       , image_commerical[0]);
                 formData.append('ibn'                                        , number_eban.val());
-                formData.append('city'                                       , city_id.val());
+                // formData.append('city'                                       , city_id.val());
                 formData.append('is_company_facility_agent'                  , is_company_facility_agent.val());
                 formData.append('is_company_facility_authorized_distributor' , is_company_facility_authorized_distributor.val());
                 formData.append('company_sector_id'                          , company_sector_id.val());
                 formData.append('region_id'                                  , region_id.val());
+                formData.append ('city_id'                                   , city_id.val());
                 formData.append('other_branches'                             , add_other_branches.val());
                 formData.append('activity_type_id'                           , get_type.val());
         

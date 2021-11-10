@@ -22,10 +22,13 @@ class ProductDetailResource extends JsonResource
             'rating' => $this->rating,
             'comments_count' => count($this->ratings),
             'seller_id' => $this->seller->id,
-            'seller_name' => $this->seller->name,
+            'seller_name' => $this->seller->name_owner_compamny,
             'seller_rating' => $this->seller->rating,
             'seller_image' => $this->seller->image,
-            'ratings' => RatingResource::collection($this->ratings)
+            'store_name' => $this->seller->name_company,
+            'features' => $this->features,
+            'details' => $this->details,
+            'ratings' => RatingResource::collection($this->ratings),
         ];
     }
 }

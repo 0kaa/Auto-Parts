@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App;
 
 class City extends Model
 {
@@ -11,7 +12,7 @@ class City extends Model
 
     protected $table = 'cities';
 
-    protected $fillable = ['name_ar', 'name_en'];
+    protected $fillable = ['id', 'name_ar', 'name_en'];
 
     public function getNameAttribute()
     {

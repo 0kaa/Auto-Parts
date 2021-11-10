@@ -14,11 +14,9 @@ class FavouriteResource extends JsonResource
      */
     public function toArray($request)
     {
-        // dd($this->user);
         return [
             'stores' => StoresResource::collection($this->users),
             'products' => ProductResource::collection($this->products),
-            // 'products' => ProductResource::collection(Product::whereIn('id', $products_favourites->pluck('favouriteable_id')->toArray())->get()),
         ];
     }
 }

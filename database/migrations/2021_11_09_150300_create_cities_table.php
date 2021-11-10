@@ -14,7 +14,7 @@ class CreateCitiesTable extends Migration
     public function up()
     {
         Schema::create('cities', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
             $table->string('name_ar');
             $table->string('name_en');
             $table->timestamps();
@@ -22,7 +22,7 @@ class CreateCitiesTable extends Migration
 
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('city_id')->nullable();
-            $table->foreign('city_id')->references('id')->on('city')
+            $table->foreign('city_id')->references('id')->on('cities')
                 ->onDelete('cascade');
         });
     }

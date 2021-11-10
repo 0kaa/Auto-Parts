@@ -20,6 +20,7 @@ class Product extends Model
         'id',
         'name',
         'price',
+        'image',
         'description',
         'features',
         'details',
@@ -34,7 +35,6 @@ class Product extends Model
     public static $rules = [
         'name' => 'required',
         'price' => 'required',
-        'description' => 'required',
     ];
 
 

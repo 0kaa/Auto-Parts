@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\ChangePasswordRequest;
 use App\Http\Resources\Api\UserResource;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ApiAccountController extends Controller
 {
@@ -39,5 +41,21 @@ class ApiAccountController extends Controller
         ]);
 
         return $this->ApiResponse(new UserResource($user), trans('admin.updated_success'), 200);
+    }
+
+    public function change_password(ChangePasswordRequest $request)
+    {
+        $user = auth()->user();
+
+        $user_password = $user->password;
+
+        if (Hash::check($request->password, $user_password)) {
+            $new_password = bcrypt($request->new_password);
+            $user->update(['password' => $new_password]);
+
+            return $this->ApiResponse('null', trans('admin.updated_success'), 200);
+        } else {
+            return $this->ApiResponse('null', trans('admin.password_required'), 404);
+        }
     }
 }

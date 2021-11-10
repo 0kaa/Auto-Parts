@@ -37,6 +37,7 @@ return [
     'image_commercial_register' => 'صورة السجل التجاري ',
     'ibn' => 'رقم الإيبان ( الحساب البنكي ) غير إجباري*',
     'regions' => 'المناطق',
+    'cities' => 'المدن',
     'region' => 'منطقة',
     'city' => 'مدينة',
     'is_company_facility_agent' => ' هل المنشأة وكيل لأحد الشركات ؟',

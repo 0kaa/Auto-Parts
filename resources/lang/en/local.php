@@ -35,6 +35,7 @@ return [
     'image_commercial_register' => 'image commercial register ',
     'ibn' => 'IBAN number (bank account) is not required*',
     'regions' => 'regions',
+    'cities' => 'cities',
     'region' => 'region',
     'city' => 'city',
     'is_company_facility_agent' => 'Is the facility an agent for a company?',

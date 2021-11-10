@@ -20,8 +20,8 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
-            'description' => $this->description,
-            'rating' => $this->ratings()->avg('rating')
+            'image' => $this->image,
+            'rating' => $this->ratings()->avg('rating') ? $this->ratings()->avg('rating') : 0
         ];
     }
 }

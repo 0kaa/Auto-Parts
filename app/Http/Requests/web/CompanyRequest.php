@@ -41,12 +41,12 @@ class CompanyRequest extends FormRequest
                 'date'                                       => 'required',
                 'file'                                       => 'required|mimes:jpg,png,jpeg,gif',
                 'ibn'                                        => 'required',
-                'city'                                       => 'required',
                 'is_company_facility_agent'                  => 'required',
                 'is_company_facility_authorized_distributor' => 'required',
                 'company_sector_id'                          => 'required',
                 'other_branches'                             => 'required',
                 'region_id'                                  => 'required',
+                'city_id'                                    => 'required',
                 'activity_type_id'                           => 'required',
     
             ];

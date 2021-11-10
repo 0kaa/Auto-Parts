@@ -93,6 +93,26 @@
             </li>
             {{--end regions--}}
 
+
+            {{--cities--}}
+            <li class="nav-item {{areActiveRoutes(['admin.cities.index','admin.cities.create','admin.cities.edit' ])}}">
+                <a href="#">
+                    <i data-feather='circle'></i>
+                    <span class="menu-title" data-i18n="User">@lang('local.cities')</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item {{ isActiveRoute('admin.cities.index')  }}"><a href="{{route('admin.cities.index')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('local.cities')</span></a>
+                    </li>
+                    <li class="nav-item {{ isActiveRoute('admin.cities.create')  }}"><a href="{{route('admin.cities.create')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('admin.add_new', ['field' => __('local.city')])</span></a>
+                    </li>
+                </ul>
+            </li>
+            {{--end cities--}}
+
             {{--company_sector--}}
             <li class="nav-item {{areActiveRoutes(['admin.company-sectors.index','admin.company-sectors.create','admin.company-sectors.edit' ])}}">
                 <a href="#">

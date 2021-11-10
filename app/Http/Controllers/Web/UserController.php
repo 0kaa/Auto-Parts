@@ -9,6 +9,7 @@ use App\Http\Requests\Web\RegisterRequest;
 use App\Repositories\ActivityTypeRepositoryInterface;
 use App\Repositories\CompanySectorRepositoryInterface;
 use App\Repositories\RegionRepositoryInterface;
+use App\Repositories\CityRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -24,12 +25,14 @@ class UserController extends Controller
         UserRepositoryInterface $userrepository,
         ActivityTypeRepositoryInterface $activityrepository,
         RegionRepositoryInterface $regionrepository,
+        CityRepositoryInterface $cityrepository,
         CompanySectorRepositoryInterface $comapnyrepository
     ) {
 
         $this->userrepository     = $userrepository;
         $this->activityrepository = $activityrepository;
         $this->regionrepository   = $regionrepository;
+        $this->cityrepository     = $cityrepository;
         $this->comapnyrepository  = $comapnyrepository;
     } // end of construct
 
@@ -86,7 +89,7 @@ class UserController extends Controller
 
                     $user->branches()->create([
                         'address'   => $address,
-                        'city'      => explode(',', $request->cityarray)[$key],
+                        'city_id'   => explode(',', $request->cityarray)[$key],
                         'region_id' => explode(',', $request->areaarray)[$key],
                         'phone'     => explode(',', $request->phonearray)[$key],
                     ]);
@@ -123,20 +126,21 @@ class UserController extends Controller
 
     public function getActivitiesType(Request $request)
     {
-        $activities_type =  $this->activityrepository->getWhere(['type' => $request->type])->first();
+        $activities_type    = $this->activityrepository->getWhere(['type' => $request->type])->first();
+        $areas              = $this->regionrepository->getAll();
+        $cities             = $this->cityrepository->getAll();
+        $comapnies          = $this->comapnyrepository->getAll();
 
-        $areas = $this->regionrepository->getAll();
-        $comapnies = $this->comapnyrepository->getAll();
-
-        return view('website.get_activity_type', compact('activities_type', 'areas', 'comapnies'))->render();
+        return view('website.get_activity_type', compact('activities_type', 'areas', 'cities', 'comapnies'))->render();
     }  // end of get activate
 
     public function getBranches(Request $request)
     {
 
-        $areas = $this->regionrepository->getAll();
+        $areas              = $this->regionrepository->getAll();
+        $cities             = $this->cityrepository->getAll();
 
-        return response()->json(['data' => $areas]);
+        return response()->json(['areas' => $areas, 'cities' => $cities]);
     }  // end of get getBranches
 
     public function resendCode(Request $request)

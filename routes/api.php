@@ -41,9 +41,16 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     Route::post('contactus',            'ApiContactUs@create');
 
 
+    // Auth Required
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::put('/change-password',              'ApiAccountController@change_password');
+    });
+
+
     // User
     Route::group(['middleware' => ['auth:sanctum', 'role:user']], function () {
-        Route::post('rating/product/{id}',              'ApiProductController@createProductRating');
+        Route::post('rating/product/{id}',              'ApiRatingController@createProductRating');
+        Route::post('rating/store/{id}',                'ApiRatingController@createStoreRating');
         Route::get('my-favourites',                     'ApiFavourtiesController@index');
         Route::post('product/favourties/create/{id}',   'ApiFavourtiesController@createProductFavourtie');
         Route::post('store/favourties/create/{id}',     'ApiFavourtiesController@createStoreFavourtie');

@@ -9,10 +9,7 @@ use App\Repositories\ProductRepositoryInterface;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Requests\Api\CreateProductRequest;
 use App\Http\Resources\Api\ProductDetailResource;
-use App\Http\Resources\Api\ProductResource;
-use App\Http\Resources\Api\RatingResource;
 use App\Http\Resources\Api\StoreResource;
-use Illuminate\Support\Facades\DB;
 
 class ApiProductController extends Controller
 {
@@ -38,9 +35,11 @@ class ApiProductController extends Controller
     {
 
         $product = $this->productRepository->create([
-            'name' => $request->get('name'),
-            'price' => $request->get('price'),
-            'description' => $request->get('description'),
+            'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'features' => $request->features,
+            'details' => $request->details,
             'seller_id' => auth()->user()->id
         ]);
 
@@ -76,33 +75,5 @@ class ApiProductController extends Controller
         return $this->ApiResponse($products, null, 200);
     }
 
-    public function createProductRating($id, Request $request)
-    {
-        $product = $this->productRepository->findOne($id);
-        
-        $user = auth()->user();
-        $check_product_rate = $product->ratings->contains('user_id', $user->id);
-
-        if (!$check_product_rate) {
-            $product->ratings()->create([
-                'user_id' => auth()->user()->id,
-                'rating' => $request->get('rating'),
-                'comment' => $request->get('comment')
-            ]);
-
-            return $this->ApiResponse(null, trans('local.rating_done'), 200);
-        } else {
-            $update_rating =  $product->ratings()->where([
-                'user_id' => auth()->user()->id,
-                'rateable_id' => $product->id,
-            ])->first();
-
-            $update_rating->update([
-                'user_id' => auth()->user()->id,
-                'rating' => $request->get('rating'),
-                'comment' => $request->get('comment')
-            ]);
-            return $this->ApiResponse(null, trans('local.update_rating'), 200);
-        }
-    }
+  
 }

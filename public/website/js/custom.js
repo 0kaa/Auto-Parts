@@ -267,8 +267,7 @@ $(document).on('click' , '.click-plus' , function(){
         url: action,
         data: {},
         dataType: 'json',
-        success: function(result) {
-
+        success: function(result) {   
           var append = `<div class="remove-this"> <div class="add-divs">
                           <div class="click-add-res click-minus">
                           <span>-</span>
@@ -281,7 +280,7 @@ $(document).on('click' , '.click-plus' , function(){
                         <div class="input-sub-regester">
                             <select class="form-select form-control array_area" name="area_${i}" aria-label="Default select example" required>
                                 <option selected value=""> ${area}</option>`;
-                                result.data.forEach(option => {
+                                result.areas.forEach(option => {
 
                                   append += `<option value="${option.id}">${lang == 'ar' ? option.name_ar : option.name_en}</option>`;
 
@@ -289,10 +288,18 @@ $(document).on('click' , '.click-plus' , function(){
       
                         append += `</select> 
                         </div>
-                        
-                        
+                                              
+
                         <div class="input-sub-regester">
-                            <input type="text" name="city_${i}" class="form-control array_city" placeholder="${city}" required>
+                        <select class="form-select form-control array_city" name="city_${i}" aria-label="Default select example" required>
+                            <option selected value=""> ${city}</option>`;
+                            result.cities.forEach(option => {
+
+                              append += `<option value="${option.id}">${lang == 'ar' ? option.name_ar : option.name_en}</option>`;
+
+                            });
+  
+                        append += `</select> 
                         </div>
       
       

@@ -40,7 +40,7 @@ class ApiBranchesController extends Controller
             foreach (json_decode($request->branches) as $branch) {
                 $user->branches()->create([
                     'address'   => $branch->address,
-                    'city'      => $branch->city,
+                    'city'      => $branch->city_id,
                     'region_id' => $branch->region_id,
                     'phone'     => $branch->phone,
                 ]);

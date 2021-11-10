@@ -18,11 +18,12 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->integer('price');
             $table->longText('description');
-            $table->timestamps();
+            $table->string('image');
             $table->unsignedBigInteger('seller_id');
             $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
             $table->json('features')->nullable();
             $table->json('details')->nullable();
+            $table->timestamps();
         });
     }
 

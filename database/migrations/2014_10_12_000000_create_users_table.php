@@ -31,7 +31,6 @@ class CreateUsersTable extends Migration
             $table->date('date')->nullable();
             $table->string('file')->nullable();
             $table->string('ibn')->nullable();
-            $table->string('city')->nullable();
             $table->enum('is_company_facility_agent',array('yes','no'))->nullable();  // هل المنشأة وكيل لأحد الشركات ؟
             $table->enum('is_company_facility_authorized_distributor',array('yes','no'))->nullable();   // هل المنشأة موزع معتمد ؟
             $table->enum('other_branches',array('yes','no'))->nullable();   //  هل يوجد لديك فروع أخرىد ؟

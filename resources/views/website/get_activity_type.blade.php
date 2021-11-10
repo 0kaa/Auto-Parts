@@ -49,8 +49,21 @@
             </div>
 
             <div class="input-sub-regester">
-                <input type="text" class="form-control" name="city_id" id="city_id" placeholder="{{ __('local.city') }}">
+                <select class="form-select form-control" name="city_id" id="city_id" aria-label="Default select example" required>
+                    <option selected value="">{{ __('local.city') }} </option>
+
+                    @foreach($cities as $city)
+
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+
+                    @endforeach
+
+                </select> 
             </div>
+
+            {{-- <div class="input-sub-regester">
+                <input type="text" class="form-control" name="city_id" id="city_id" placeholder="{{ __('local.city') }}">
+            </div> --}}
 
 
         
@@ -94,7 +107,8 @@
             </div>
 
             <div id="append_branches">
-            <div class="remove-this hidden-item" hidden><div class="sub-more-input">
+            <div class="remove-this hidden-item" hidden>
+                <div class="sub-more-input">
                   <div class="input-sub-regester">
                       <select class="form-select form-control array_area" name="area_0" aria-label="Default select example" required>
                           <option selected value=""> {{ __('local.area') }}</option>
@@ -106,12 +120,19 @@
                                 @endforeach
                       </select> 
                   </div>
-                  
-                  
-                  <div class="input-sub-regester">
-                      <input type="text" name="city_0" class="form-control array_city" placeholder="{{ __('local.city') }}" required>
-                  </div>
 
+                  <div class="input-sub-regester">
+                      <select class="form-select form-control array_city" name="city_0" aria-label="Default select example" required>
+                          <option selected value=""> {{ __('local.city') }}</option>
+
+                                @foreach($cities as $city)
+
+                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+
+                                @endforeach
+                      </select> 
+                  </div>
+                  
 
                   <div class="input-sub-regester">
                       <input type="tel" name="phone_0" class="form-control array_phone" placeholder="{{ __('local.phone') }}" required>
@@ -120,7 +141,7 @@
                       <input type="text" name="address_details_0" class="form-control array_address_details" placeholder="{{ __('local.address_details') }}" required>
                   </div>
 
-              </div>             
+                </div>             
               </div>  
             </div>
    
@@ -183,8 +204,17 @@
                 </select> 
             </div>
 
-            <div class="input-sub-regester">
-                <input type="text" class="form-control" name="city_id" placeholder="{{ __('local.city') }}">
+           <div class="input-sub-regester">
+                <select class="form-select form-control" name="city_id" aria-label="Default select example" required>
+                    <option selected value="">{{ __('local.city') }} </option>
+
+                    @foreach($cities as $city)
+
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+
+                    @endforeach
+
+                </select> 
             </div>
 
 
@@ -228,10 +258,19 @@
                       </select> 
                   </div>
                   
-                  
                   <div class="input-sub-regester">
-                      <input type="text" name="city_0" class="form-control" placeholder="{{ __('local.city') }}" required>
-                  </div>
+                    <select class="form-select form-control" name="city_0" aria-label="Default select example" required>
+                        <option selected value=""> {{ __('local.city') }}</option>
+
+                              @foreach($cities as $city)
+
+                                  <option value="{{ $city->id }}">{{ $city->name }}</option>
+
+                              @endforeach
+                    </select> 
+                </div>
+                  
+       
 
 
                   <div class="input-sub-regester">
