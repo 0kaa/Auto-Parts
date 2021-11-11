@@ -48,4 +48,5 @@ class ApiActivitiesController extends Controller
 
         return $this->ApiResponse(new ActivityResource($activities_type), null, 200);
     }
+    
 }

@@ -21,7 +21,7 @@ class ActivityTypeSeeder extends Seeder
             'name_en'=>'new spare parts',
             'type'=>1,
             'num_pieces'=>1234,
-            'image'=>'images/1.png'
+            'image'=>'images/1.png',
         ],[
             'name_ar'=>'قطع غيار تشليح',
             'name_en'=>'repair spare parts',

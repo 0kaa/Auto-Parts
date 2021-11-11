@@ -75,5 +75,5 @@ class ApiProductController extends Controller
         return $this->ApiResponse($products, null, 200);
     }
 
-  
+    
 }

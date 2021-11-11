@@ -20,6 +20,7 @@ class CreateActivitiesTypeTable extends Migration
             $table->string('type')->nullable();
             $table->integer('num_pieces');
             $table->string('image');
+            $table->integer('parent_id')->nullable();
             $table->timestamps();
         });
 

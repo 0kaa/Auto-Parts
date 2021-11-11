@@ -25,4 +25,8 @@ class ActivityType extends Model
     {
         return $this->hasMany(User::class)->role('owner_store');
     }
+    public function parents()
+    {
+        return $this->hasMany(self::class,'parent_id','id');
+    }
 }
