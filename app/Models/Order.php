@@ -12,12 +12,11 @@ class Order extends Model
     protected $fillable = [
         'id',
         'order_status',
-        'orderable_type',
-        'orderable_id',
-        'order_total',
+        'order_address',
+        'grand_total',
         'order_date',
         'order_time',
-        'order_note',
+        'seller_id',
         'user_id',
     ];
 
@@ -26,8 +25,13 @@ class Order extends Model
         return $this->belongsTo(User::class, 'user_id', 'id')->select('id', 'name', 'image');
     }
 
-    public function orderable()
+    public function seller()
     {
-        return $this->morphTo();
+        return $this->belongsTo(User::class, 'seller_id', 'id');
+    }
+
+    public function order_items()
+    {
+        return $this->hasMany(OrderItem::class, 'order_id', 'id');
     }
 }

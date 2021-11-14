@@ -22,15 +22,17 @@ class CreateOrdersTable extends Migration
             $table->string('order_time');
             $table->string('order_address');
 
-            // Details
+            // Relationship
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('store_id')->nullable();
-            $table->foreign('store_id')->references('id')->on('users')->onDelete('cascade');
-
+            $table->unsignedBigInteger('seller_id')->nullable();
+            $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
+            
+            
             // Total Amount
             $table->string('grand_total');
+
             $table->timestamps();
         });
     }

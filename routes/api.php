@@ -54,11 +54,13 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::get('my-favourites',                     'ApiFavourtiesController@index');
         Route::post('product/favourties/create/{id}',   'ApiFavourtiesController@createProductFavourtie');
         Route::post('store/favourties/create/{id}',     'ApiFavourtiesController@createStoreFavourtie');
+        Route::post('new-order',                        'ApiOrderController@CreateOrder');
     });
 
     // User | Store Account data
     Route::group(['middleware' => ['auth:sanctum', 'role:owner_store|user']], function () {
         Route::resource('/my-account',                  'ApiAccountController');
+        Route::get('my-orders',                         'ApiOrderController@myOrders');
     });
 
 
