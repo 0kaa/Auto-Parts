@@ -69,5 +69,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('product/create',                   'ApiProductController@create');
         Route::resource('/my-company',                  'ApiCompanyController');
         Route::resource('/my-branches',                 'ApiBranchesController');
+        Route::put('order/update-status',               'ApiOrderController@updateOrderStatus');
+        Route::get('my-orders/filter',                  'ApiOrderController@filterOrders');
     });
 });

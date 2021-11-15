@@ -14,8 +14,6 @@ class Order extends Model
         'order_status',
         'order_address',
         'grand_total',
-        'order_date',
-        'order_time',
         'seller_id',
         'user_id',
     ];

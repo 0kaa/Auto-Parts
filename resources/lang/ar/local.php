@@ -126,4 +126,13 @@ return [
     'no_product_found' => 'ID لم يتم العثور على منتج بهذا',
     'favourite_added' => 'تم الاضافة الي المحفوظات',
     'favourite_removed' => 'تم الحذف من المحفوظات',
+    'order_done' => 'تم تقديم الطلب بنجاح',
+    'order_not_done' => 'لم يتم تقديم الطلب',
+    'order_not_found' => 'لم يتم العثور على طلب بهذا الرقم',
+    'order_updated' => 'تم تحديث الطلب بنجاح',
+    'order_not_updated' => 'لم يتم تحديث الطلب',
+    'order_deleted' => 'تم حذف الطلب بنجاح',
+    'order_not_deleted' => 'لم يتم حذف الطلب',
+    'order_not_found' => 'لم يتم العثور على طلب بهذا الرقم',
+    'order_status_updated' => 'تم تحديث حالة الطلب بنجاح',
 ];

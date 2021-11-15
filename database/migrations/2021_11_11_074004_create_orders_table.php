@@ -18,8 +18,6 @@ class CreateOrdersTable extends Migration
             $table->enum('order_status', ['pending', 'accepted', 'processing', 'completed', 'cancelled'])->defailt('pending');
 
             // DateTime
-            $table->string('order_date');
-            $table->string('order_time');
             $table->string('order_address');
 
             // Relationship

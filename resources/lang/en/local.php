@@ -116,4 +116,15 @@ return [
     'no_product_found' => 'Not found product with this ID',
     'favourite_added' => 'Added to Favourites',
     'favourite_removed' => 'Removed from Favourites',
+    'order_done' => 'The order has been successfully placed',
+
+    'order_not_done' => 'The order has not been placed',
+    'order_not_found' => 'The order has not been found',
+    'order_updated' => 'The order has been updated',
+    'order_not_updated' => 'The order has not been updated',
+    'order_deleted' => 'The order has been deleted',
+    'order_not_deleted' => 'The order has not been deleted',
+    'order_not_found' => 'The order has not been found',
+    'order_status_updated' => 'The order status has been updated',
+
 ];
