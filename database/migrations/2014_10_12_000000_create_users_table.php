@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('image')->nullable();
             $table->string('password');
+            $table->boolean('is_notify')->default(true);
 //            data company
             $table->string('name_company')->nullable();
             $table->string('name_owner_company')->nullable();

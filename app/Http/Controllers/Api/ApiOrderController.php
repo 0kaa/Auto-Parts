@@ -6,10 +6,12 @@ use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\UpdateOrderStatus;
 use App\Http\Resources\Api\OrderResource;
+use App\Repositories\NotificationRepositoryInterface;
 use App\Repositories\ProductRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\OrderRepositoryInterface;
 use App\Repositories\OrderItemRepositoryInterface;
+use App\Services\Notify;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -20,18 +22,21 @@ class ApiOrderController extends Controller
     protected $productRepository;
     protected $orderRepository;
     protected $orderItemRepository;
+    protected $notificationRepository;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
         ProductRepositoryInterface $productRepository,
         OrderRepositoryInterface $orderRepository,
-        OrderItemRepositoryInterface $orderItemRepository
+        OrderItemRepositoryInterface $orderItemRepository,
+        NotificationRepositoryInterface $notificationRepository
     ) {
 
-        $this->userRepository  = $userRepository;
-        $this->productRepository  = $productRepository;
-        $this->orderRepository  = $orderRepository;
-        $this->orderItemRepository  = $orderItemRepository;
+        $this->userRepository           = $userRepository;
+        $this->productRepository        = $productRepository;
+        $this->orderRepository          = $orderRepository;
+        $this->orderItemRepository      = $orderItemRepository;
+        $this->notificationRepository   = $notificationRepository;
     }
 
 
@@ -108,29 +113,55 @@ class ApiOrderController extends Controller
 
     public function CreateOrder(Request $request)
     {
-        $user_id = auth()->user()->id;
-        $grand_total = 0;
-        foreach ($request->products as $product) {
-            $grand_total += $product['price'] * $product['quantity'];
-        }
+        try {
+            $user = auth()->user();
+            $grand_total = 0;
 
-        $order = $this->orderRepository->create([
-            'user_id' => $user_id,
-            'seller_id' => $request->seller_id,
-            'order_address' => $request->order_address,
-            'grand_total' => $grand_total,
-            'order_status' => 'pending',
-        ]);
+            foreach ($request->products as $product) {
+                $grand_total += $product['price'] * $product['quantity'];
+            }
 
-        foreach ($request->products as $product) {
-            $this->orderItemRepository->create([
-                'order_id' => $order->id,
-                'product_id' => $product['id'],
-                'quantity' => $product['quantity'],
-                'price' => $product['price'],
+            $order = $this->orderRepository->create([
+                'user_id' => $user->id,
+                'seller_id' => $request->seller_id,
+                'order_address' => $request->order_address,
+                'grand_total' => $grand_total,
+                'order_status' => 'pending',
             ]);
-        }
 
-        return $this->ApiResponse(null, trans('local.order_done'), 200);
+            foreach ($request->products as $product) {
+                $this->orderItemRepository->create([
+                    'order_id' => $order->id,
+                    'product_id' => $product['id'],
+                    'quantity' => $product['quantity'],
+                    'price' => $product['price'],
+                ]);
+            }
+
+            $notification = $this->notificationRepository->create([
+                'user_id'       => $request->seller_id,
+                'type'          => 'order',
+                'model_id'      => $order->id,
+                'message_en'    => 'You have a new order',
+                'message_ar'    => 'لديك طلب جديد',
+            ]);
+
+            Notify::NotifyMob($notification->message_ar, $notification->message_en, $request->seller_id, null, $data = null);
+
+            return $this->ApiResponse(null, trans('local.order_done'), 200);
+        } catch (\Exception $e) {
+            return $this->ApiResponse(null, $e->getMessage(), 400);
+        }
+    }
+
+    public function getOrder($id)
+    {
+        $order = $this->orderRepository->findOne($id);
+
+        if ($order && $order->seller_id == auth()->user()->id) {
+            return $this->ApiResponse(new OrderResource($order), null, 200);
+        } else {
+            return $this->ApiResponse(null, null, 404);
+        }
     }
 }

@@ -30,6 +30,24 @@ class ApiAuthController extends Controller
 
         $user = $this->usersRepository->getWhere([['email', $request->email]])->first();
 
+        $user_device_id = $user->devices->where([
+            [
+                'device_id' => $request->device_id
+            ],
+            [
+                'platform_type' => $request->platform_type
+            ]
+        ])->first();
+
+        if (!$user_device_id) {
+            $user->devices()->create([
+                'device_id'         => $request->device_id,
+                'platform_type'     => $request->platform_type,
+                'firebase_token'    => $request->firebase_token,
+                'user_id'           => $user->id,
+            ]);
+        }
+
 
         if ($user && Hash::check($request->password, $user->password)) {
 
@@ -51,6 +69,13 @@ class ApiAuthController extends Controller
         $user = $this->usersRepository->create($attribute);
 
         if ($user) {
+
+            $user->devices()->create([
+                'device_id'         => $request->device_id,
+                'platform_type'     => $request->platform_type,
+                'firebase_token'    => $request->firebase_token,
+                'user_id'           => $user->id,
+            ]);
 
             $token = $user->createToken('tokens')->plainTextToken;
 

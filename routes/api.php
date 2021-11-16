@@ -44,6 +44,8 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     // Auth Required
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('/change-password',              'ApiAccountController@change_password');
+        // Notifications
+        Route::get('notifications',                 'ApiNotificationsController@index');
     });
 
 
@@ -55,6 +57,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('product/favourties/create/{id}',   'ApiFavourtiesController@createProductFavourtie');
         Route::post('store/favourties/create/{id}',     'ApiFavourtiesController@createStoreFavourtie');
         Route::post('new-order',                        'ApiOrderController@CreateOrder');
+        Route::get('search',                            'ApiSearchController@search');
     });
 
     // User | Store Account data
@@ -71,5 +74,8 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::resource('/my-branches',                 'ApiBranchesController');
         Route::put('order/update-status',               'ApiOrderController@updateOrderStatus');
         Route::get('my-orders/filter',                  'ApiOrderController@filterOrders');
+
+        // get order by id
+        Route::get('order/{id}',                         'ApiOrderController@getOrder');
     });
 });

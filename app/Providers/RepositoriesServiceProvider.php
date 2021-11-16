@@ -21,10 +21,12 @@ use App\Repositories\Eloquent\ProductRepository;
 use App\Repositories\Eloquent\FaqsRepository;
 use App\Repositories\Eloquent\RatingRepository;
 use App\Repositories\Eloquent\FavouriteRepository;
+use App\Repositories\Eloquent\NotificationRepository;
 use App\Repositories\Eloquent\OrderRepository;
 use App\Repositories\Eloquent\OrderItemRepository;
 
 use App\Repositories\RegionRepositoryInterface;
+use App\Repositories\NotificationRepositoryInterface;
 use App\Repositories\CityRepositoryInterface;
 use App\Repositories\ContactUsRepositoryInterface;
 use App\Repositories\SliderServiceRepositoryInterface;
@@ -68,6 +70,7 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
         $this->app->bind(OrderItemRepositoryInterface::class, OrderItemRepository::class);
+        $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
     }
 
     /**

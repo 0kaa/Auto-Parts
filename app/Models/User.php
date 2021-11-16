@@ -66,7 +66,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class, 'seller_id', 'id');
     }
-    
+
     public function activity_name()
     {
         return $this->hasOne(ActivityType::class, 'id', 'activity_type_id');
@@ -85,5 +85,15 @@ class User extends Authenticatable
     public function user_favourites()
     {
         return $this->hasMany(Favourite::class, 'user_id', 'id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id');
+    }
+
+    public function devices()
+    {
+        return $this->hasMany(DeviceToken::class, 'user_id', 'id');
     }
 }
