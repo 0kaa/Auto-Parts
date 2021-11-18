@@ -36,9 +36,11 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     Route::get('product/{id}',          'ApiProductController@show');
     Route::get('ratings/product/{id}',  'ApiProductController@getProductRatings');
     Route::get('stores',                'ApiStoreController@getStoresList');
-    Route::get('static-page/{slug}',    'ApiStaticPages@getStaticPage');
+    Route::get('static-page/{slug}',    'ApiStaticPagesController@getStaticPage');
     Route::get('faqs',                  'ApiFaqsController@index');
-    Route::post('contactus',            'ApiContactUs@create');
+    Route::post('contactus',            'ApiContactUsController@create');
+    // get All cars
+    Route::get('cars',                  'ApiCarController@index');
 
 
     // Auth Required
@@ -58,6 +60,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('store/favourties/create/{id}',     'ApiFavourtiesController@createStoreFavourtie');
         Route::post('new-order',                        'ApiOrderController@CreateOrder');
         Route::get('search',                            'ApiSearchController@search');
+        Route::post('custom-order/create',              'ApiCustomOrderController@CreateCustomOrder');
     });
 
     // User | Store Account data

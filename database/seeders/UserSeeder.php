@@ -27,12 +27,17 @@ class UserSeeder extends Seeder
         $admin->assignRole('admin');
 
         $owner_store = User::create(array(
-            'name' => 'Owner',
-            'email' => "owner@gmail.com",
-            'password' => bcrypt("password"),
-            'phone' => '123123',
-            'address' => "Egypt, Elmansoura",
-            'email_verified_at' => now()
+            'name'                      => 'Owner',
+            'email'                     => "owner@gmail.com",
+            'password'                  => bcrypt("password"),
+            'phone'                     => '123123',
+            'address'                   => "Egypt, Elmansoura",
+            'city_id'                   => 1,
+            'region_id'                 => 1,
+            'activity_type_id'          => 1,
+            'company_sector_id'         => 1,
+            'commercial_register_id'    => "123123",
+            'email_verified_at'         => now()
 
         ));
 

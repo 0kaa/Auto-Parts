@@ -38,6 +38,8 @@ Route::middleware(['admin','Localization'])->name('admin.')->group(function() {
 
     Route::resource('regions', 'RegionController');
 
+    Route::resource('cars', 'CarController');
+
     Route::resource('cities', 'CityController');
 
     Route::resource('company-sectors', 'CompanySectorController');

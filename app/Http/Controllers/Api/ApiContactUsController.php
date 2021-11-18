@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\ContactUsRepositoryInterface;
 use Illuminate\Http\Request;
 
-class ApiContactUs extends Controller
+class ApiContactUsController extends Controller
 {
 
     use ApiResponseTrait;

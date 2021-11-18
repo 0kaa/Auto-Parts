@@ -24,6 +24,9 @@ use App\Repositories\Eloquent\FavouriteRepository;
 use App\Repositories\Eloquent\NotificationRepository;
 use App\Repositories\Eloquent\OrderRepository;
 use App\Repositories\Eloquent\OrderItemRepository;
+use App\Repositories\Eloquent\CustomOrderRepository;
+use App\Repositories\Eloquent\CarRepository;
+
 
 use App\Repositories\RegionRepositoryInterface;
 use App\Repositories\NotificationRepositoryInterface;
@@ -40,6 +43,8 @@ use App\Repositories\RatingRepositoryInterface;
 use App\Repositories\FavouriteRepositoryInterface;
 use App\Repositories\OrderRepositoryInterface;
 use App\Repositories\OrderItemRepositoryInterface;
+use App\Repositories\CustomOrderRepositoryInterface;
+use App\Repositories\CarRepositoryInterface;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -71,6 +76,8 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
         $this->app->bind(OrderItemRepositoryInterface::class, OrderItemRepository::class);
         $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
+        $this->app->bind(CustomOrderRepositoryInterface::class, CustomOrderRepository::class);
+        $this->app->bind(CarRepositoryInterface::class, CarRepository::class);
     }
 
     /**

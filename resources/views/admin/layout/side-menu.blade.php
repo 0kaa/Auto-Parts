@@ -112,6 +112,24 @@
                 </ul>
             </li>
             {{--end cities--}}
+            {{--cars--}}
+            <li class="nav-item {{areActiveRoutes(['admin.cars.index','admin.cars.create','admin.cars.edit' ])}}">
+                <a href="#">
+                    <i data-feather='circle'></i>
+                    <span class="menu-title" data-i18n="User">@lang('local.cars')</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item {{ isActiveRoute('admin.cars.index')  }}"><a href="{{route('admin.cars.index')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('local.cars')</span></a>
+                    </li>
+                    <li class="nav-item {{ isActiveRoute('admin.cars.create')  }}"><a href="{{route('admin.cars.create')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('admin.add_new', ['field' => __('local.car')])</span></a>
+                    </li>
+                </ul>
+            </li>
+            {{--end cars--}}
 
             {{--company_sector--}}
             <li class="nav-item {{areActiveRoutes(['admin.company-sectors.index','admin.company-sectors.create','admin.company-sectors.edit' ])}}">

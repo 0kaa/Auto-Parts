@@ -18,24 +18,25 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('address')->nullable();          
+            $table->string('address')->nullable();
             $table->string('verification_code')->nullable();
             $table->integer('approved')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('image')->nullable();
             $table->string('password');
             $table->boolean('is_notify')->default(true);
-//            data company
+            // data company
             $table->string('name_company')->nullable();
             $table->string('name_owner_company')->nullable();
             $table->string('national_identity')->nullable();
             $table->date('date')->nullable();
             $table->string('file')->nullable();
             $table->string('ibn')->nullable();
-            $table->enum('is_company_facility_agent',array('yes','no'))->nullable();  // هل المنشأة وكيل لأحد الشركات ؟
-            $table->enum('is_company_facility_authorized_distributor',array('yes','no'))->nullable();   // هل المنشأة موزع معتمد ؟
-            $table->enum('other_branches',array('yes','no'))->nullable();   //  هل يوجد لديك فروع أخرىد ؟
-//            end data company
+            $table->enum('is_company_facility_agent', array('yes', 'no'))->nullable();  // هل المنشأة وكيل لأحد الشركات ؟
+            $table->enum('is_company_facility_authorized_distributor', array('yes', 'no'))->nullable();   // هل المنشأة موزع معتمد ؟
+            $table->enum('other_branches', array('yes', 'no'))->nullable();   //  هل يوجد لديك فروع أخرىد ؟
+            $table->string('commercial_register_id')->nullable(); // السجل التجاري
+            // end data company
             $table->rememberToken();
             $table->timestamps();
         });
