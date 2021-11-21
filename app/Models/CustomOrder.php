@@ -16,6 +16,11 @@ class CustomOrder extends Model
      */
     protected $fillable = [
         'seller_id',
+        'piece_name',
+        'piece_image',
+        'piece_price',
+        'car_id',
+        'order_status',
         'user_id',
         'activity_type_id',
         'sup_activity_id',
@@ -26,4 +31,31 @@ class CustomOrder extends Model
         'order_data' => 'array',
 
     ];
+
+    public function seller()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function activityType()
+    {
+        return $this->belongsTo(ActivityType::class);
+    }
+
+    public function supActivity()
+    {
+        return $this->belongsTo(SupActivity::class);
+    }
+
+    public function car()
+    {
+        return $this->belongsTo(Car::class);
+    }
+
+    
 }

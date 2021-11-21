@@ -14,6 +14,21 @@ class CustomOrderResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            "id"                    => $this->id,
+            "order_status"          => $this->order_status,
+            "activity_type_id"      => $this->activityType->id,
+            "activity_type_name"    => $this->activityType->name,
+            "sup_activity_id"       => $this->supActivity->id,
+            "sup_activity_name"     => $this->supActivity->name,
+            "piece_name"            => $this->piece_name,
+            "piece_image"           => $this->piece_image,
+            "piece_price"           => $this->piece_price,
+            "car"                   => $this->car->name,
+            "order_data"            => $this->order_data,
+            "seller"                => new StoresResource($this->seller),
+            "user"                  => new UserResource($this->user),
+
+        ];
     }
 }

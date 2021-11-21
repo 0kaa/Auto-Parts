@@ -39,14 +39,14 @@ class ApiAuthController extends Controller
             ]
         ])->first();
 
-        if (!$user_device_id) {
-            $user->devices()->create([
-                'device_id'         => $request->device_id,
-                'platform_type'     => $request->platform_type,
-                'firebase_token'    => $request->firebase_token,
-                'user_id'           => $user->id,
-            ]);
-        }
+        // if (!$user_device_id) {
+        //     $user->devices()->create([
+        //         'device_id'         => $request->device_id,
+        //         'platform_type'     => $request->platform_type,
+        //         'firebase_token'    => $request->firebase_token,
+        //         'user_id'           => $user->id,
+        //     ]);
+        // }
 
 
         if ($user && Hash::check($request->password, $user->password)) {

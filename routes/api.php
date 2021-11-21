@@ -60,25 +60,35 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('store/favourties/create/{id}',     'ApiFavourtiesController@createStoreFavourtie');
         Route::post('new-order',                        'ApiOrderController@CreateOrder');
         Route::get('search',                            'ApiSearchController@search');
+        // user custom orders
         Route::post('custom-order/create',              'ApiCustomOrderController@CreateCustomOrder');
+        Route::get('user-custom-order/{id}',            'ApiCustomOrderController@getCustomOrder');
+        Route::post('user-custom-order/{id}/accept',    'ApiCustomOrderController@userAcceptedOrders');
+        Route::post('user-custom-order/{id}/reject',    'ApiCustomOrderController@userRejectedOrders');
+
+        // Price offers
+        Route::get('price-offers',                      'ApiCustomOrderController@getPriceOffers');
     });
 
     // User | Store Account data
     Route::group(['middleware' => ['auth:sanctum', 'role:owner_store|user']], function () {
         Route::resource('/my-account',                  'ApiAccountController');
         Route::get('my-orders',                         'ApiOrderController@myOrders');
+        // custom order
+        Route::get('custom-order/{id}',                 'ApiCustomOrderController@getOrder');
     });
 
 
     // Owner Store
     Route::group(['middleware' => ['auth:sanctum', 'role:owner_store']], function () {
         Route::post('product/create',                   'ApiProductController@create');
-        Route::resource('/my-company',                  'ApiCompanyController');
-        Route::resource('/my-branches',                 'ApiBranchesController');
+        Route::resource('my-company',                   'ApiCompanyController');
+        Route::resource('my-branches',                  'ApiBranchesController');
+        Route::get('order/{id}',                        'ApiOrderController@getOrder');
         Route::put('order/update-status',               'ApiOrderController@updateOrderStatus');
         Route::get('my-orders/filter',                  'ApiOrderController@filterOrders');
-
-        // get order by id
-        Route::get('order/{id}',                         'ApiOrderController@getOrder');
+        Route::get('seller-custom-orders',              'ApiCustomOrderController@getSellerOrders');
+        Route::post('seller-custom-order/{id}/accept',  'ApiCustomOrderController@sellerAcceptedOrder');
+        Route::post('seller-custom-order/{id}/reject',  'ApiCustomOrderController@sellerRejectedOrder');
     });
 });

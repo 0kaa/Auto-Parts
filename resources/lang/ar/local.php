@@ -137,4 +137,16 @@ return [
     'order_not_deleted' => 'لم يتم حذف الطلب',
     'order_not_found' => 'لم يتم العثور على طلب بهذا الرقم',
     'order_status_updated' => 'تم تحديث حالة الطلب بنجاح',
+    'order_already_accepted' => 'لقد تم قبول الطلب بالفعل',
+    'order_already_rejected' => 'لقد تم رفض الطلب بالفعل',
+    'order_already_delivered' => 'لقد تم تسليم الطلب بالفعل',
+    'order_already_canceled' => 'لقد تم إلغاء الطلب بالفعل',
+    'order_already_completed' => 'لقد تم إنهاء الطلب بالفعل',
+    'order_already_declined' => 'لقد تم رفض الطلب بالفعل',
+    'order_not_allowed_update' => 'لا يمكن تحديث الطلب',
+    'order_status_required' => 'يجب تحديد حالة الطلب',
+    'order_not_accepted' => 'لم يتم قبول الطلب',
+    'order_not_rejected' => 'لم يتم رفض الطلب',
+
+
 ];
