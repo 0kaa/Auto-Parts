@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Resources\Api\CustomOrderResource;
 use App\Http\Resources\Api\PriceOffersResource;
+use App\Models\RejectedOrders;
 use App\Repositories\CustomOrderRepositoryInterface;
 
 class ApiCustomOrderController extends Controller
@@ -23,7 +24,7 @@ class ApiCustomOrderController extends Controller
     {
         $user = auth()->user();
         $attributes = $request->all();
-        $customOrder = $this->customOrderRepository->create([
+        $this->customOrderRepository->create([
             'user_id'           => $user->id,
             'seller_id'         => $attributes['seller_id'],
             "piece_name"        => $attributes['piece_name'],
@@ -65,6 +66,8 @@ class ApiCustomOrderController extends Controller
 
             $this->customOrderRepository->update(['order_status' => $attributes['order_status'], 'piece_price' => $attributes['piece_price']], $id);
 
+            // Notification
+
             return $this->ApiResponse(null, trans('local.order_done'), 200);
         } else {
             return $this->ApiResponse(null, trans('local.order_status_required'), 400);
@@ -75,6 +78,7 @@ class ApiCustomOrderController extends Controller
     {
         $user = auth()->user();
 
+        $all_orders = $this->customOrderRepository->getAll();
         $customOrder = $this->customOrderRepository->findOne($id);
 
         if (!$customOrder) {
@@ -97,7 +101,16 @@ class ApiCustomOrderController extends Controller
 
         if ($attributes['order_status'] == 'seller_rejected') {
 
-            $this->customOrderRepository->update(['order_status' => $attributes['order_status']], $id);
+            $rejectedOrder = RejectedOrders::where('order_id', $customOrder->id)->pluck('seller_id');
+
+            if (in_array($customOrder->seller_id, $rejectedOrder->toArray()) == false) {
+                RejectedOrders::create([
+                    'order_id' => $customOrder->id,
+                    'seller_id' => $customOrder->seller_id,
+                ]);
+            }
+
+            RedirectOrderToAnotherUser($customOrder->seller_id, $rejectedOrder, $customOrder);
 
             return $this->ApiResponse(null, trans('local.order_already_rejected'), 200);
         } else {
@@ -165,7 +178,18 @@ class ApiCustomOrderController extends Controller
 
         if ($attributes['order_status'] == 'rejected') {
 
-            $this->customOrderRepository->update(['order_status' => $attributes['order_status']], $id);
+            // $this->customOrderRepository->update(['order_status' => $attributes['order_status']], $id);
+
+            $rejectedOrder = RejectedOrders::where('order_id', $customOrder->id)->pluck('seller_id');
+
+            if (in_array($customOrder->seller_id, $rejectedOrder->toArray()) == false) {
+                RejectedOrders::create([
+                    'order_id' => $customOrder->id,
+                    'seller_id' => $customOrder->seller_id,
+                ]);
+            }
+
+            RedirectOrderToAnotherUser($customOrder->seller_id, $rejectedOrder, $customOrder);
 
             return $this->ApiResponse(null, trans('local.order_status_updated'), 200);
         } else {

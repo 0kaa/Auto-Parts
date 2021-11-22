@@ -20,11 +20,10 @@ class CreateActivitiesTypeTable extends Migration
             $table->string('type')->nullable();
             $table->integer('num_pieces');
             $table->string('image');
-            $table->integer('parent_id')->nullable();
             $table->timestamps();
         });
 
-        Schema::table('users', function(Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('activity_type_id')->nullable();
             $table->foreign('activity_type_id')->references('id')->on('activities_type')
                 ->onDelete('cascade');

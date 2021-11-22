@@ -56,7 +56,7 @@ class ApiProductController extends Controller
     public function show($id)
     {
         $product = $this->productRepository->findOne($id);
-        if (empty($product)) {
+        if (!$product) {
             return $this->ApiResponse(null, trans('local.no_product_found'), 422);
         }
         return $this->ApiResponse(new ProductDetailResource($product), null, 200);
@@ -66,14 +66,11 @@ class ApiProductController extends Controller
     public function getStoreProducts($id)
     {
         $store = $this->userRepository->findOne($id);
-        if (!$store) {
+        if (!$store || !$store->hasRole('owner_store')) {
             return $this->ApiResponse(null, trans('local.no_product_found'), 200);
         }
         $products  = new StoreResource($store);
 
-
         return $this->ApiResponse($products, null, 200);
     }
-
-    
 }

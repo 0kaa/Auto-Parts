@@ -43,6 +43,40 @@ class UserSeeder extends Seeder
 
         $owner_store->assignRole('owner_store');
 
+        $owner_store2 = User::create(array(
+            'name'                      => 'Owner',
+            'email'                     => "owner1@gmail.com",
+            'password'                  => bcrypt("password"),
+            'phone'                     => '1231233',
+            'address'                   => "Egypt, Elmansoura",
+            'city_id'                   => 1,
+            'region_id'                 => 1,
+            'activity_type_id'          => 1,
+            'company_sector_id'         => 1,
+            'commercial_register_id'    => "123123",
+            'email_verified_at'         => now()
+
+        ));
+
+        $owner_store2->assignRole('owner_store');
+
+        $owner_store3 = User::create(array(
+            'name'                      => 'Owner',
+            'email'                     => "owner2@gmail.com",
+            'password'                  => bcrypt("password"),
+            'phone'                     => '12312333',
+            'address'                   => "Egypt, Elmansoura",
+            'city_id'                   => 1,
+            'region_id'                 => 1,
+            'activity_type_id'          => 1,
+            'company_sector_id'         => 1,
+            'commercial_register_id'    => "123123",
+            'email_verified_at'         => now()
+
+        ));
+
+        $owner_store3->assignRole('owner_store');
+
 
         $user = User::create(array(
             'name' => 'User',

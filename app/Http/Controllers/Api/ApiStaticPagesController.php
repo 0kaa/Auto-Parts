@@ -9,7 +9,7 @@ use App\Repositories\StaticPageRepositoryInterface;
 use Illuminate\Http\Request;
 
 
-class ApiStaticPages extends Controller
+class ApiStaticPagesController extends Controller
 {
 
     use ApiResponseTrait;

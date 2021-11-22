@@ -44,8 +44,7 @@ class ApiActivitiesController extends Controller
      */
     public function show($id)
     {
-        $activities_type =  $this->activityTypeRepository->findOne($id);
-
+        $activities_type =  $this->activityTypeRepository->findOne($id);        
         return $this->ApiResponse(new ActivityResource($activities_type), null, 200);
     }
     

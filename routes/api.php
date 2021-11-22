@@ -15,16 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace('Api\Auth')->group(function () {
-
-    // Authentication Routes -> [Login , Register]
     Route::post('login', 'ApiAuthController@login');
     Route::post('register', 'ApiAuthController@register');
-
-    // Auth Middleware -> [ Loggedin ]
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::get('get_user', 'ApiAuthController@get_user'); // Get User Data By token        
-
-    });
 });
 
 
@@ -32,21 +24,18 @@ Route::namespace('Api')->middleware('lang')->group(function () {
 
     Route::get('activities',            'ApiActivitiesController@index');
     Route::get('activity/{id}',         'ApiActivitiesController@show');
-    Route::get('products/store/{id}',   'ApiProductController@getStoreProducts');
-    Route::get('product/{id}',          'ApiProductController@show');
-    Route::get('ratings/product/{id}',  'ApiProductController@getProductRatings');
     Route::get('stores',                'ApiStoreController@getStoresList');
+    Route::get('product/{id}',          'ApiProductController@show');
+    Route::get('products/store/{id}',   'ApiProductController@getStoreProducts');
+
     Route::get('static-page/{slug}',    'ApiStaticPagesController@getStaticPage');
     Route::get('faqs',                  'ApiFaqsController@index');
-    Route::post('contactus',            'ApiContactUsController@create');
-    // get All cars
     Route::get('cars',                  'ApiCarController@index');
+    Route::post('contactus',            'ApiContactUsController@create');
 
 
-    // Auth Required
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('/change-password',              'ApiAccountController@change_password');
-        // Notifications
         Route::get('notifications',                 'ApiNotificationsController@index');
     });
 
@@ -60,13 +49,10 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('store/favourties/create/{id}',     'ApiFavourtiesController@createStoreFavourtie');
         Route::post('new-order',                        'ApiOrderController@CreateOrder');
         Route::get('search',                            'ApiSearchController@search');
-        // user custom orders
         Route::post('custom-order/create',              'ApiCustomOrderController@CreateCustomOrder');
         Route::get('user-custom-order/{id}',            'ApiCustomOrderController@getCustomOrder');
         Route::post('user-custom-order/{id}/accept',    'ApiCustomOrderController@userAcceptedOrders');
         Route::post('user-custom-order/{id}/reject',    'ApiCustomOrderController@userRejectedOrders');
-
-        // Price offers
         Route::get('price-offers',                      'ApiCustomOrderController@getPriceOffers');
     });
 

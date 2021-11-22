@@ -1,8 +1,9 @@
 <?php
+
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HindAlmujaghedMail;
 
-    /*
+/*
     |--------------------------------------------------------------------------
     | Detect Active Route Function
     |--------------------------------------------------------------------------
@@ -11,22 +12,26 @@ use App\Mail\HindAlmujaghedMail;
     | Very useful for navigation, marking if the link is active.
     |
     */
-    function isActiveRoute($route, $output = "active"){
-        if(Route::currentRouteName() === $route) return $output;
-    }
 
-    function getSetting($key){
-        return \App\Models\Setting::where('key',$key)->first();
-    }
+function isActiveRoute($route, $output = "active")
+{
+    if (Route::currentRouteName() === $route) return $output;
+}
 
-    function getSettings($keys){
-        return \App\Models\Setting::whereIn('key',$keys)->get();
-    }
+function getSetting($key)
+{
+    return \App\Models\Setting::where('key', $key)->first();
+}
+
+function getSettings($keys)
+{
+    return \App\Models\Setting::whereIn('key', $keys)->get();
+}
 
 
 
 
-    /*
+/*
     |--------------------------------------------------------------------------
     | Detect Active Routes Function
     |--------------------------------------------------------------------------
@@ -35,17 +40,17 @@ use App\Mail\HindAlmujaghedMail;
     | Very useful for navigation, marking if the link is active.
     |
     */
-    function areActiveRoutes(Array $routes, $output = "active open-sub-menu"){
-        foreach($routes as $route){
-            if(Route::currentRouteName() === $route) return $output;
-        }
+function areActiveRoutes(array $routes, $output = "active open-sub-menu")
+{
+    foreach ($routes as $route) {
+        if (Route::currentRouteName() === $route) return $output;
     }
+}
 
-function sendEmail($title, $message, $to){
+function sendEmail($title, $message, $to)
+{
 
     Mail::to($to)->send(new \App\Mail\Kuco($title, $message));
-
-
 }
 
 function send_activation_code($numbers, $msg, $timeSend = 0, $dateSend = 0, $deleteKey = 0, $viewResult = 1)
@@ -62,3 +67,30 @@ function send_activation_code($numbers, $msg, $timeSend = 0, $dateSend = 0, $del
 
 
 
+
+
+function RedirectOrderToAnotherUser($seller_id, $rejected, $customOrder)
+{
+    $seller = \App\Models\User::where('id', $seller_id)->first();
+
+    $user_same = \App\Models\User::whereNotIn('id', $rejected->toArray())
+        ->where('id', '!=', $seller_id)
+        ->where('city_id', $seller->city_id)
+        ->where('is_company_facility_agent', $seller->is_company_facility_agent)
+        ->where('is_company_facility_authorized_distributor', $seller->is_company_facility_authorized_distributor)
+        ->where('activity_type_id', $seller->activity_type_id)
+        ->where('region_id', $seller->region_id)
+        ->whereRelation('roles', 'name', 'owner_store')
+        ->first();
+
+    if (!$user_same) {
+        $customOrder->update([
+            'order_status' => "not_found",
+        ]);
+        return false;
+    }
+
+    $customOrder->update([
+        'seller_id' => $user_same->id,
+    ]);
+}

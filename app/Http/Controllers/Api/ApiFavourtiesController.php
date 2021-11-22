@@ -36,7 +36,6 @@ class ApiFavourtiesController extends Controller
     {
         $user = auth()->user();
 
-
         $stores_favourites = $user->user_favourites()->where('favouriteable_type', 'App\Models\User')->get();
 
         $products_favourites = $user->user_favourites()->where('favouriteable_type', 'App\Models\Product')->get();
