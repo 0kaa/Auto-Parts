@@ -130,6 +130,24 @@
                 </ul>
             </li>
             {{--end cars--}}
+            {{--Packages--}}
+            <li class="nav-item {{areActiveRoutes(['admin.packages.index','admin.packages.create','admin.packages.edit' ])}}">
+                <a href="#">
+                    <i data-feather='circle'></i>
+                    <span class="menu-title" data-i18n="User">@lang('local.packages')</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item {{ isActiveRoute('admin.packages.index')  }}"><a href="{{route('admin.packages.index')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('local.packages')</span></a>
+                    </li>
+                    <li class="nav-item {{ isActiveRoute('admin.packages.create')  }}"><a href="{{route('admin.packages.create')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('admin.add_new', ['field' => __('local.package')])</span></a>
+                    </li>
+                </ul>
+            </li>
+            {{--end packages --}}
 
             {{--company_sector--}}
             <li class="nav-item {{areActiveRoutes(['admin.company-sectors.index','admin.company-sectors.create','admin.company-sectors.edit' ])}}">

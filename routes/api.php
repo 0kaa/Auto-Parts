@@ -67,9 +67,10 @@ Route::namespace('Api')->middleware('lang')->group(function () {
 
     // Owner Store
     Route::group(['middleware' => ['auth:sanctum', 'role:owner_store']], function () {
-        Route::post('product/create',                   'ApiProductController@create');
         Route::resource('my-company',                   'ApiCompanyController');
         Route::resource('my-branches',                  'ApiBranchesController');
+        Route::get('packages',                          'ApiPackagesController@index');
+        Route::post('product/create',                   'ApiProductController@create');
         Route::get('order/{id}',                        'ApiOrderController@getOrder');
         Route::put('order/update-status',               'ApiOrderController@updateOrderStatus');
         Route::get('my-orders/filter',                  'ApiOrderController@filterOrders');

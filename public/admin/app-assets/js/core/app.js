@@ -100,6 +100,61 @@ window.colors = {
       });
     }
 
+    // Add Features 
+
+
+    var lang = $('#append_features').data('lang');
+
+    if (lang == 'ar') {
+
+      var delete_feature = 'حذف الميزة';
+      var feature = 'ميزة';
+
+    } else {
+
+      var delete_feature = 'Delete Feature';
+      var feature = 'Feature';
+
+
+    }
+    var i = 0;
+    $(document).on('click', '.click-plus', function () {
+
+
+
+      var append = `<div class="remove-this"> <div class="add-divs">
+      <div class="click-add-res click-minus">
+      <span>-</span>
+      ${delete_feature}
+      </div>
+      <div class="shep-div">
+
+      </div>
+          </div><div class="sub-more-input">
+
+          <div class="input-sub-regester">
+              <input type="text" name="feature_${i}" class="form-control array_features" placeholder="${feature}" required>
+          </div>
+
+      </div>             
+      </div>              
+      `;
+      i++;
+      $('#append_features').append(append);
+
+    });
+
+
+    $(document).on('click', '.click-minus', function () {
+      $(this).closest('.remove-this').remove();
+    });
+    $(document).on('click', '.click-minus-two', function () {
+      $(this).closest('.remove-this').remove();
+    });
+
+
+    // end Features
+
     // Do not close cart or notification dropdown on click of the items
     $('.dropdown-notification .dropdown-menu, .dropdown-cart .dropdown-menu').on('click', function (e) {
       e.stopPropagation();

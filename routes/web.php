@@ -13,19 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('lang/{locale}', [\App\Http\Controllers\Admin\HomeController::class,'lang'])->name('lang');
+Route::get('lang/{locale}', [\App\Http\Controllers\Admin\HomeController::class, 'lang'])->name('lang');
 
 Route::middleware(['guest'])->group(function () {
     // Auth Routes
 
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('show-login');
     Route::post('login', 'Auth\LoginController@login')->name('login');
-
 });
 
 
 // Dashboard routes
-Route::middleware(['admin','Localization'])->name('admin.')->group(function() {
+Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () {
 
     Route::get('dashboard', 'HomeController@index')->name('dashboard');
 
@@ -40,6 +39,8 @@ Route::middleware(['admin','Localization'])->name('admin.')->group(function() {
 
     Route::resource('cars', 'CarController');
 
+    Route::resource('packages', 'PackageController');
+
     Route::resource('cities', 'CityController');
 
     Route::resource('company-sectors', 'CompanySectorController');
@@ -47,10 +48,8 @@ Route::middleware(['admin','Localization'])->name('admin.')->group(function() {
     Route::resource('sliders-services', 'SliderServiceController');
 
     Route::resource('news-letter', 'NewsLetterController');
-    
+
     Route::resource('faqs', 'FaqsController');
 
     Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-
-
 });

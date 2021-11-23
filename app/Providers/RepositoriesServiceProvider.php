@@ -26,6 +26,7 @@ use App\Repositories\Eloquent\OrderRepository;
 use App\Repositories\Eloquent\OrderItemRepository;
 use App\Repositories\Eloquent\CustomOrderRepository;
 use App\Repositories\Eloquent\CarRepository;
+use App\Repositories\Eloquent\PackageRepository;
 
 
 use App\Repositories\RegionRepositoryInterface;
@@ -45,6 +46,7 @@ use App\Repositories\OrderRepositoryInterface;
 use App\Repositories\OrderItemRepositoryInterface;
 use App\Repositories\CustomOrderRepositoryInterface;
 use App\Repositories\CarRepositoryInterface;
+use App\Repositories\PackageRepositoryInterface;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -78,6 +80,7 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
         $this->app->bind(CustomOrderRepositoryInterface::class, CustomOrderRepository::class);
         $this->app->bind(CarRepositoryInterface::class, CarRepository::class);
+        $this->app->bind(PackageRepositoryInterface::class, PackageRepository::class);
     }
 
     /**
