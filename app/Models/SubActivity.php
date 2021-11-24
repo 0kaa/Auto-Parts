@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 
-class SupActivity extends Model
+class SubActivity extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name_ar', 'name_en', 'image'];
+    protected $fillable = ['name_ar', 'name_en'];
 
     public function getNameAttribute()
     {

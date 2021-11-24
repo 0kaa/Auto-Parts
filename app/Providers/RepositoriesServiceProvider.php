@@ -27,6 +27,8 @@ use App\Repositories\Eloquent\OrderItemRepository;
 use App\Repositories\Eloquent\CustomOrderRepository;
 use App\Repositories\Eloquent\CarRepository;
 use App\Repositories\Eloquent\PackageRepository;
+use App\Repositories\Eloquent\SubscriptionsPackageRepository;
+use App\Repositories\Eloquent\SubActivityTypeRepository;
 
 
 use App\Repositories\RegionRepositoryInterface;
@@ -47,6 +49,8 @@ use App\Repositories\OrderItemRepositoryInterface;
 use App\Repositories\CustomOrderRepositoryInterface;
 use App\Repositories\CarRepositoryInterface;
 use App\Repositories\PackageRepositoryInterface;
+use App\Repositories\SubActivityTypeRepositoryInterface;
+use App\Repositories\SubscriptionsPackageRepositoryInterface;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -68,6 +72,7 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(FavouriteRepositoryInterface::class, FavouriteRepository::class);
         $this->app->bind(StaticPageRepositoryInterface::class, StaticPageRepository::class);
         $this->app->bind(ActivityTypeRepositoryInterface::class, ActivityTypeRepository::class);
+        $this->app->bind(SubActivityTypeRepositoryInterface::class, SubActivityTypeRepository::class);
         $this->app->bind(RegionRepositoryInterface::class, RegionRepository::class);
         $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
         $this->app->bind(CompanySectorRepositoryInterface::class, CompanySectorRepository::class);
@@ -81,6 +86,7 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(CustomOrderRepositoryInterface::class, CustomOrderRepository::class);
         $this->app->bind(CarRepositoryInterface::class, CarRepository::class);
         $this->app->bind(PackageRepositoryInterface::class, PackageRepository::class);
+        $this->app->bind(SubscriptionsPackageRepositoryInterface::class, SubscriptionsPackageRepository::class);
     }
 
     /**

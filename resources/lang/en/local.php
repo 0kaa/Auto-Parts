@@ -119,6 +119,8 @@ return [
     'rating_done' => 'The product has been rated successfully',
     'update_rating' => 'The product rating has been updated',
     'no_product_found' => 'Not found product with this ID',
+    'product_updated' => 'The product has been updated successfully',
+    'product_deleted' => 'The product has been deleted successfully',
     'favourite_added' => 'Added to Favourites',
     'favourite_removed' => 'Removed from Favourites',
     'order_done' => 'The order has been successfully placed',
@@ -150,4 +152,9 @@ return [
     'keyword_en' => 'Keyword english',
     'add_feature' => 'Add feature',
     'feature' => 'Feature',
+    'already_subscriped_to_this_plan' => 'You are already subscribed to this plan',
+    'subscription_updated' => 'Subscription updated successfully',
+    'plan_not_found' => 'Plan not found',
+    'duration_time' => 'Duration time in days',
+
 ];

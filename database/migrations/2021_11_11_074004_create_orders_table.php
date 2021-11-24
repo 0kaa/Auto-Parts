@@ -15,22 +15,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id('id');
+            $table->string('order_number')->nullable();
             $table->enum('order_status', ['pending', 'accepted', 'processing', 'completed', 'cancelled'])->defailt('pending');
-
-            // DateTime
             $table->string('order_address');
-
-            // Relationship
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
             $table->unsignedBigInteger('seller_id')->nullable();
             $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
-            
-            
-            // Total Amount
-            $table->string('grand_total');
-
+            $table->float('total_amount', 10, 2);
             $table->timestamps();
         });
     }

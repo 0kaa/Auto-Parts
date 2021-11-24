@@ -63,6 +63,7 @@ class ApiRatingController extends Controller
 
         if ($user->hasRole('owner_store')) {
             if (!$check_user_rate) {
+
                 $user->ratings()->create([
                     'user_id' => $user_id,
                     'rating' => $request->rating,
@@ -70,6 +71,7 @@ class ApiRatingController extends Controller
                 ]);
 
                 return $this->ApiResponse(null, trans('local.rating_done'), 200);
+
             } else {
                 $update_rating =  $user->ratings()->where([
                     'user_id' => $user_id,

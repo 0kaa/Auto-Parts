@@ -23,8 +23,8 @@ class CreateCustomOrdersTable extends Migration
             $table->unsignedBigInteger('activity_type_id')->nullable();
             $table->foreign('activity_type_id')->references('id')->on('activities_type');
 
-            $table->unsignedBigInteger('sup_activity_id')->nullable();
-            $table->foreign('sup_activity_id')->references('id')->on('sup_activities');
+            $table->unsignedBigInteger('sub_activity_id')->nullable();
+            $table->foreign('sub_activity_id')->references('id')->on('sub_activities');
 
             $table->json('order_data');
             // Relationships

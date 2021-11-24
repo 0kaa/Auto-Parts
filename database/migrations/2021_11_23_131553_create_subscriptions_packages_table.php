@@ -21,6 +21,7 @@ class CreateSubscriptionsPackagesTable extends Migration
             $table->foreign('plan_id')->references('id')->on('packages')->onDelete('cascade');
             $table->date('start_date');
             $table->date('end_date');
+            $table->enum('status', ['active', 'expired', 'canceled']);
             $table->timestamps();
         });
     }

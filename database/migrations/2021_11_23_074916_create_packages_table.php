@@ -22,6 +22,7 @@ class CreatePackagesTable extends Migration
             $table->string('discount')->nullable();
             $table->string('duration_ar');
             $table->string('duration_en');
+            $table->string('duration_time');
             $table->string('description_ar');
             $table->string('description_en');
             $table->string('keyword_ar');

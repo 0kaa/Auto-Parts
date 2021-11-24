@@ -31,9 +31,6 @@ class ApiFaqsController extends Controller
     public function index()
     {
         $faqs = $this->faqsRepository->getAll();
-        if ($faqs->isNotEmpty()) {
-            return $this->ApiResponse(FaqsResource::collection($faqs), null, 200);
-        }
-        return $this->ApiResponse(null, 'No Faqs Found', 404);
+        return $this->ApiResponse(FaqsResource::collection($faqs), null, 200);
     }
 }

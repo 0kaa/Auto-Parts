@@ -15,12 +15,12 @@ class StoresResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'image' => $this->image,
-            'name' => $this->name,
-            // 'badge' => $this->badge,
-            'rating' => $this->ratings()->avg('rating'),
-            'address' => $this->address,
+            'id'            => $this->id,
+            'image'         => $this->image,
+            'name'          => $this->name,
+            'badge'         => $this->package ? $this->package->badge : null,
+            'rating'        => $this->ratings()->avg('rating'),
+            'address'       => $this->address,
             'activity_type' => $this->activity_name ? $this->activity_name->find($this->activity_type_id)->name : null,
         ];
     }

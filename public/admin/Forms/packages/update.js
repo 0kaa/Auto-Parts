@@ -10,6 +10,7 @@ $(document).ready(function () {
     var discount = form.find('#discount');
     var duration_ar = form.find('#duration_ar');
     var duration_en = form.find('#duration_en');
+    var duration_time = form.find('#duration_time');
     var keyword_ar = form.find('#keyword_ar');
     var keyword_en = form.find('#keyword_en');
 
@@ -28,6 +29,7 @@ $(document).ready(function () {
         formData.append('discount', discount.val());
         formData.append('duration_ar', duration_ar.val());
         formData.append('duration_en', duration_en.val());
+        formData.append('duration_time', duration_time.val());
         formData.append('keyword_ar', keyword_ar.val());
         formData.append('keyword_en', keyword_en.val());
 
@@ -68,6 +70,7 @@ $(document).ready(function () {
                     textFieldError(discount, error.response.data.errors.discount);
                     textFieldError(duration_ar, error.response.data.errors.duration_ar);
                     textFieldError(duration_en, error.response.data.errors.duration_en);
+                    textFieldError(duration_time, error.response.data.errors.duration_time);
                     textFieldError(keyword_ar, error.response.data.errors.keyword_ar);
                     textFieldError(keyword_en, error.response.data.errors.keyword_en);
 

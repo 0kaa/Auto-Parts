@@ -9,5 +9,23 @@ class SubscriptionsPackage extends Model
 {
     use HasFactory;
     // fillable
-    protected $fillable = [];
+    protected $fillable = [
+        'id',
+        'user_id',
+        'plan_id',
+        'start_date',
+        'end_date',
+    ];
+
+    // relations
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function plan()
+    {
+        return $this->belongsTo(Package::class);
+    }
+    
 }

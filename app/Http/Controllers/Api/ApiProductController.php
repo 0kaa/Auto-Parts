@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Requests\Api\CreateProductRequest;
 use App\Http\Resources\Api\ProductDetailResource;
 use App\Http\Resources\Api\StoreResource;
+use App\Services\UploadFilesServices;
+use Illuminate\Support\Facades\Storage;
 
 class ApiProductController extends Controller
 {
@@ -17,22 +19,26 @@ class ApiProductController extends Controller
     use ApiResponseTrait;
     protected $userRepository;
     protected $ProductRepository;
+    protected $filesServices;
 
-    public function __construct(UserRepositoryInterface $userRepository, ProductRepositoryInterface $productRepository)
+    private $productDirectory = 'products';
+
+    public function __construct(UserRepositoryInterface $userRepository, ProductRepositoryInterface $productRepository, UploadFilesServices $filesServices)
     {
 
         $this->userRepository  = $userRepository;
         $this->productRepository  = $productRepository;
+        $this->filesServices = $filesServices;
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(CreateProductRequest $request)
     {
+        $image = 'product-no-img.jpg';
+
+        if ($request->hasFile('image')) {
+            $img = $request->file('image');
+            $image = $this->filesServices->uploadfile($img, $this->productDirectory);
+        }
 
         $product = $this->productRepository->create([
             'name' => $request->name,
@@ -40,19 +46,13 @@ class ApiProductController extends Controller
             'description' => $request->description,
             'features' => $request->features,
             'details' => $request->details,
+            'image' => $image,
             'seller_id' => auth()->user()->id
         ]);
 
         return $this->ApiResponse($product, 'Retrive Data success', 200);
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $product = $this->productRepository->findOne($id);
@@ -62,6 +62,52 @@ class ApiProductController extends Controller
         return $this->ApiResponse(new ProductDetailResource($product), null, 200);
     }
 
+    public function update(Request $request, $id)
+    {
+        $product = $this->productRepository->findOne($id);
+
+        if (!$product || $product->seller_id != auth()->user()->id) {
+            return $this->ApiResponse(null, trans('local.no_product_found'), 404);
+        }
+
+        $image = $product->image;
+        
+        if ($request->hasFile('image')) {
+            $img = $request->file('image');
+            Storage::delete($product->image);
+            $image = $this->filesServices->uploadfile($img, $this->productDirectory);
+        }
+
+        $product->update([
+            'image'         => $image,
+            'name'          => $request->name ? $request->name : $product->name,
+            'price'         => $request->price ? $request->price : $product->price,
+            'description'   => $request->description ? $request->description : $product->description,
+            'features'      => $request->features ? $request->features : $product->features,
+            'details'       => $request->details ? $request->details : $product->details,
+        ]);
+
+        $product->save();
+
+        return $this->ApiResponse(null, trans('local.product_updated'), 200);
+    }
+
+    public function delete($id)
+    {
+        $product = $this->productRepository->findOne($id);
+
+        if (!$product || $product->seller_id != auth()->user()->id) {
+            return $this->ApiResponse(null, trans('local.no_product_found'), 404);
+        }
+
+        if (isset($product->image)) {
+            Storage::delete($product->image);
+        }
+
+        $product->delete();
+
+        return $this->ApiResponse(null, trans('local.product_deleted'), 200);
+    }
 
     public function getStoreProducts($id)
     {

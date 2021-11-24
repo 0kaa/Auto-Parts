@@ -13,7 +13,8 @@ class Order extends Model
         'id',
         'order_status',
         'order_address',
-        'grand_total',
+        'total_amount',
+        'order_number',
         'seller_id',
         'user_id',
     ];
@@ -32,4 +33,5 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class, 'order_id', 'id');
     }
+    
 }

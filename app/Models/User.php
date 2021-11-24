@@ -105,4 +105,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(DeviceToken::class, 'user_id', 'id');
     }
+
+    public function package()
+    {
+        return $this->hasOne(Package::class, 'id', 'package_id');
+    }
 }

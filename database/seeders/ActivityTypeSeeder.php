@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\ActivityType;
-use App\Models\SupActivity;
+use App\Models\SubActivity;
 
 use Illuminate\Database\Seeder;
 
@@ -62,7 +62,7 @@ class ActivityTypeSeeder extends Seeder
             ]
         ]);
 
-        SupActivity::insert([
+        SubActivity::insert([
             [
                 'name_ar' => 'مكيانيكا',
                 'name_en' => 'mechanics',

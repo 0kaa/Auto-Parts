@@ -129,6 +129,8 @@ return [
     'rating_done' => 'تم تقييم المنتج بنجاح',
     'update_rating' => 'تم تعديل تقييم المنتج بنجاح',
     'no_product_found' => 'ID لم يتم العثور على منتج بهذا',
+    'product_updated' => 'تم تعديل المنتج بنجاح',
+    'product_deleted' => 'تم حذف المنتج بنجاح',
     'favourite_added' => 'تم الاضافة الي المحفوظات',
     'favourite_removed' => 'تم الحذف من المحفوظات',
     'order_done' => 'تم تقديم الطلب بنجاح',
@@ -159,5 +161,8 @@ return [
     'keyword_en' => 'الكلمة المفتاحية بالانجليزية',
     'add_feature' => 'اضافة ميزة',
     'feature' => 'الميزة',
-
+    'already_subscriped_to_this_plan' => 'لقد تم الاشتراك بالفعل في هذا الخطة',
+    'subscription_updated' => 'تم تحديث الاشتراك بنجاح',
+    'plan_not_found' => 'لم يتم العثور على خطة بهذا الرقم',
+    'duration_time' => 'المدة بالايام'
 ];

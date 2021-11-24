@@ -20,6 +20,7 @@ class Package extends Model
         'discount_price',
         'duration_ar',
         'duration_en',
+        'duration_time',
         'keyword_ar',
         'keyword_en',
         'badge',

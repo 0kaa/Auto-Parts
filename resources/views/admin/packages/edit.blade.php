@@ -189,6 +189,21 @@
 
                             <div class="form-group">
 
+                                <label class="form-label" for="duration_time"> <span class="tx-danger">*</span>
+                                    @lang('local.duration_time')</label>
+                                <input type="text" id="duration_time" class="form-control" name="duration_time" placeholder=" @lang('local.duration_time')" value="{{isset($packages)?$packages->duration_time:''}}"
+                                       aria-label=" @lang('local.duration_time')" aria-describedby="basic-addon-name" required="">
+                                <div class="alert alert-danger mg-t-20" role="alert">
+                                    <div class="d-flex align-items-center justify-content-start">
+                                        <i class="icon ion-ios-close alert-icon tx-32"></i>
+                                        <span></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+
                                 <label class="form-label" for="keyword_ar"> <span class="tx-danger">*</span>
                                     @lang('local.keyword_ar')</label>
                                 <input type="text" id="keyword_ar" class="form-control" name="keyword_ar" placeholder=" @lang('local.keyword_ar')" value="{{isset($packages)?$packages->keyword_ar:''}}"
