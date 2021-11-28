@@ -43,6 +43,8 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
 
     Route::resource('cities', 'CityController');
 
+    Route::resource('shippings', 'ShippingController');
+    
     Route::resource('company-sectors', 'CompanySectorController');
 
     Route::resource('sliders-services', 'SliderServiceController');

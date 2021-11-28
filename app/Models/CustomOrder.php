@@ -23,7 +23,7 @@ class CustomOrder extends Model
         'order_status',
         'user_id',
         'activity_type_id',
-        'sup_activity_id',
+        'sub_activity_id',
         'order_data'
     ];
 
@@ -47,9 +47,9 @@ class CustomOrder extends Model
         return $this->belongsTo(ActivityType::class);
     }
 
-    public function supActivity()
+    public function subActivity()
     {
-        return $this->belongsTo(SupActivity::class);
+        return $this->belongsTo(SubActivity::class);
     }
 
     public function car()

@@ -148,6 +148,24 @@
                 </ul>
             </li>
             {{--end packages --}}
+            {{--Shippings--}}
+            <li class="nav-item {{areActiveRoutes(['admin.shippings.index','admin.shippings.create','admin.shippings.edit' ])}}">
+                <a href="#">
+                    <i data-feather='circle'></i>
+                    <span class="menu-title" data-i18n="User">@lang('local.shippings')</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item {{ isActiveRoute('admin.shippings.index')  }}"><a href="{{route('admin.shippings.index')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('local.shippings')</span></a>
+                    </li>
+                    <li class="nav-item {{ isActiveRoute('admin.shippings.create')  }}"><a href="{{route('admin.shippings.create')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('admin.add_new', ['field' => __('local.shipping')])</span></a>
+                    </li>
+                </ul>
+            </li>
+            {{--end Shippings --}}
 
             {{--company_sector--}}
             <li class="nav-item {{areActiveRoutes(['admin.company-sectors.index','admin.company-sectors.create','admin.company-sectors.edit' ])}}">

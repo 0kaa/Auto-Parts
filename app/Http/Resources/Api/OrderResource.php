@@ -16,14 +16,18 @@ class OrderResource extends JsonResource
     {
 
         return [
-            'id'            => $this->id,
-            'order_number'  => $this->order_number,
-            'total_count'   => $this->order_items->sum('quantity'),
-            'total_amount'  => $this->total_amount,
-            'order_name'    => $this->order_items->first()->product->name,
-            'order_status'  => $this->order_status,
-            "created_at"    => $this->created_at->format('Y-m-d H:i a'),
-            'order_address' => $this->order_address,
+            'id'                    => $this->id,
+            'order_number'          => $this->order_number,
+            'total_count'           => $this->order_items->sum('quantity'),
+            'total_amount'          => $this->total_amount,
+            'order_name'            => $this->order_items->first()->product->name,
+            'order_status'          => $this->order_status,
+            "created_at"            => $this->created_at->format('Y-m-d H:i a'),            
+            'order_delivered_at'    => $this->order_delivered_at,
+            'order_ship_name'       => $this->order_ship_name,
+            'order_ship_address'    => $this->order_ship_address,
+            'order_ship_phone'      => $this->order_ship_phone,
+            'shipping'              => new ShippingResource($this->shipping),
         ];
     }
 }

@@ -29,6 +29,8 @@ use App\Repositories\Eloquent\CarRepository;
 use App\Repositories\Eloquent\PackageRepository;
 use App\Repositories\Eloquent\SubscriptionsPackageRepository;
 use App\Repositories\Eloquent\SubActivityTypeRepository;
+use App\Repositories\Eloquent\ShippingRepository;
+use App\Repositories\Eloquent\PriceOfferRepository;
 
 
 use App\Repositories\RegionRepositoryInterface;
@@ -51,6 +53,8 @@ use App\Repositories\CarRepositoryInterface;
 use App\Repositories\PackageRepositoryInterface;
 use App\Repositories\SubActivityTypeRepositoryInterface;
 use App\Repositories\SubscriptionsPackageRepositoryInterface;
+use App\Repositories\ShippingRepositoryInterface;
+use App\Repositories\PriceOfferRepositoryInterface;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -87,6 +91,8 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(CarRepositoryInterface::class, CarRepository::class);
         $this->app->bind(PackageRepositoryInterface::class, PackageRepository::class);
         $this->app->bind(SubscriptionsPackageRepositoryInterface::class, SubscriptionsPackageRepository::class);
+        $this->app->bind(ShippingRepositoryInterface::class, ShippingRepository::class);
+        $this->app->bind(PriceOfferRepositoryInterface::class, PriceOfferRepository::class);
     }
 
     /**

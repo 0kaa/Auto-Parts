@@ -24,7 +24,7 @@ class UpdateOrderStatus extends FormRequest
     public function rules()
     {
         return [
-            'order_status'  => 'required|string|in:pending,processing,completed,cancelled',
+            'order_status'  => 'required|string|in:pending,processing,delivered,completed,cancelled',
             'order_id'      => 'required',
         ];
     }

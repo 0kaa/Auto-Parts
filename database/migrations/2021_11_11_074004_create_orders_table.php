@@ -16,13 +16,16 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id('id');
             $table->string('order_number')->nullable();
-            $table->enum('order_status', ['pending', 'accepted', 'processing', 'completed', 'cancelled'])->defailt('pending');
-            $table->string('order_address');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('seller_id')->nullable();
-            $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('order_ship_name');
+            $table->string('order_ship_phone');
+            $table->string('order_ship_address')->nullable();
             $table->float('total_amount', 10, 2);
+            $table->dateTime('order_delivered_at')->nullable();
+            $table->enum('order_status', ['pending', 'accepted', 'processing', 'delivered', 'completed', 'cancelled'])->defailt('pending');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('seller_id')->nullable();
             $table->timestamps();
         });
     }

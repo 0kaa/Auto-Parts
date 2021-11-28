@@ -18,6 +18,7 @@ class OrderItemResource extends JsonResource
             'product_name'  => $this->product->name,
             'product_price' => $this->product->price,
             'product_id'    => $this->product->id,
+            'product_rating'=> $this->product->ratings()->avg('rating') ? $this->product->ratings()->avg('rating') : 0,
             'quantity'      => $this->quantity,
 
         ];

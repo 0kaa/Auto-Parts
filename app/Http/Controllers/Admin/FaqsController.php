@@ -51,4 +51,12 @@ class FaqsController extends Controller
         $this->faqsRepository->update($request->except('_method'), $id);
         return  response()->json(['success' => trans('admin.updated_success', ['field' => __('local.faqs')]), 200]);
     }
+
+    public function destroy($id)
+    {
+        $this->faqsRepository->delete($id);
+        return  response()->json([
+            'success' => trans('local.deleted_success'), 'status' => 200
+        ]);
+    }
 }

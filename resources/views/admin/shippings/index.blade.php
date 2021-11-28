@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 
-@section('title', __('local.faqs'))
+@section('title', __('local.shippings'))
 
 @section('content')
 
@@ -15,7 +15,7 @@
                                     <div class="content-header-left col-md-9 col-12 mb-2">
                                         <div class="row breadcrumbs-top">
                                             <div class="col-12">
-                                                <h2 class="content-header-title float-left mb-0">@lang('local.faqs')</h2>
+                                                <h2 class="content-header-title float-left mb-0">@lang('local.shippings')</h2>
                                                 <div class="breadcrumb-wrapper">
                                                     <ol class="breadcrumb">
                                                         <li class="breadcrumb-item"><a
@@ -35,7 +35,7 @@
 
 
                             <div class="table-responsive">
-                                <table class="table zero-configuration" id="faqs-table">
+                                <table class="table zero-configuration" id="shipping-table">
                                     <thead>
                                     <tr>
                                         <th>@lang('loal.id')</th>
@@ -45,14 +45,14 @@
                                     </thead>
                                     <tbody>
 
-                                    @foreach ($faqs as $faq)
+                                    @foreach ($shippings as $shipping)
 
-                                        <tr data-id="{{ $faq->id }}" class="row-with-img">
+                                        <tr data-id="{{ $shipping->id }}" class="row-with-img">
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{app()->isLocale('en')?$faq->question_en:$faq->question_ar}}</td>
+                                            <td>{{app()->isLocale('en')?$shipping->shipping_name_en:$shipping->shipping_name_ar}}</td>
                                             <td>
                                                 <a
-                                                        href="{{route('admin.faqs.edit',  $faq->id)}}">
+                                                        href="{{route('admin.shippings.edit',  $shipping->id)}}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14"
                                                          height="14" viewBox="0 0 24 24" fill="none"
                                                          stroke="currentColor" stroke-width="2"
@@ -62,7 +62,7 @@
                                                     </svg>
                                                 </a>
 
-                                                <a class="table-action-delete" data-user-id="{{$faq->id}}"
+                                                <a class="table-action-delete" data-user-id="{{$shipping->id}}"
                                                    href="javascript:void(0);">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14"
                                                          height="14" viewBox="0 0 24 24" fill="none"
@@ -80,25 +80,24 @@
 
                                     </tbody>
                                 </table>
-
-                                <div id="delete-faqs" class="modal fade">
+                                <div id="delete-shipping" class="modal fade">
                                     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                                         <div class="modal-content bd-0 tx-14">
                                             <div class="modal-header bg-danger pd-y-15 pd-x-25">
                                                 <h6 class="tx-14 mg-b-0 header-title"><i
-                                                            class="fa fa-trash mg-r-10"></i>@lang('modals.delete_title', ['title' => __('local.faqs')])
+                                                            class="fa fa-trash mg-r-10"></i>@lang('modals.delete_title', ['title' => __('local.shipping')])
                                                 </h6>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form id="delete-faqs-form">
+                                            <form id="delete-shipping-form">
                                                 @csrf
                                                 <div class="modal-body pd-25">
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                                                            <p class="mg-b-10 tx-16 tx-gray tx-mont">@lang('modals.delete_all_descr', ['title' => __('local.faqs')])</p>
+                                                            <p class="mg-b-10 tx-16 tx-gray tx-mont">@lang('modals.delete_all_descr', ['title' => __('local.shipping')])</p>
                                                             <p class="mg-b-0 tx-16 tx-danger tx-mont delete-msg force-en-on-ar"></p>
                                                             @isset($warning)
                                                                 <div class="alert alert-warning mg-t-20 mg-b-0"
@@ -170,6 +169,7 @@
                                 </div>
 
 
+
                             </div>
 
                         </div>
@@ -180,10 +180,9 @@
 
     </section>
 
-
     @push('js')
 
-    <script type="text/javascript" src="{{ asset('admin/Forms/faqs/index.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/Forms/shippings/index.js') }}"></script>
 
 @endpush
 

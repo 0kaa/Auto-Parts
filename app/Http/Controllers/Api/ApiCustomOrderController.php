@@ -31,7 +31,7 @@ class ApiCustomOrderController extends Controller
             "piece_image"       => $attributes['piece_image'],
             "car_id"            => $attributes['car_id'],
             'activity_type_id'  => $attributes['activity_type_id'],
-            'sup_activity_id'   => $attributes['sup_activity_id'],
+            'sub_activity_id'   => $attributes['sub_activity_id'],
             'order_data'        => $attributes['order_data'],
         ]);
 
@@ -230,5 +230,4 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
         }
     }
-    
 }

@@ -21,7 +21,7 @@ Route::namespace('Api\Auth')->group(function () {
 
 
 Route::namespace('Api')->middleware('lang')->group(function () {
-    
+
     Route::get('activities',            'ApiActivitiesController@index');
     // sub activities
     Route::get('activity/{id}',         'ApiActivitiesController@show');
@@ -34,7 +34,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     Route::get('faqs',                  'ApiFaqsController@index');
     Route::get('cars',                  'ApiCarController@index');
     Route::post('contactus',            'ApiContactUsController@create');
-
+    Route::get('shippings',             'ApiShippingController@index');
 
     // All users but authenticated required
     Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -42,13 +42,17 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::get('notifications',                'ApiNotificationsController@index');
     });
 
-    // User authenticated required
-    Route::group(['middleware' => ['auth:sanctum', 'role:user']], function () {
+    // User | workshop authenticated required
+    Route::group(['middleware' => ['auth:sanctum', 'role:user|workshop']], function () {
         Route::post('custom-order/create',              'ApiCustomOrderController@CreateCustomOrder');
         Route::get('user-custom-order/{id}',            'ApiCustomOrderController@getCustomOrder');
         Route::post('user-custom-order/{id}/accept',    'ApiCustomOrderController@userAcceptedOrders');
         Route::post('user-custom-order/{id}/reject',    'ApiCustomOrderController@userRejectedOrders');
-        Route::get('price-offers',                      'ApiCustomOrderController@getPriceOffers');
+        // Price offers
+        Route::get('price-offers',                      'ApiPriceOfferController@index');
+        
+
+        // Route::get('price-offers',                      'ApiCustomOrderController@getPriceOffers');
         Route::post('rating/product/{id}',              'ApiRatingController@createProductRating');
         Route::post('rating/store/{id}',                'ApiRatingController@createStoreRating');
         Route::get('my-favourites',                     'ApiFavourtiesController@index');
@@ -58,8 +62,8 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::get('search',                            'ApiSearchController@search');
     });
 
-    // User | Store authenticated required
-    Route::group(['middleware' => ['auth:sanctum', 'role:owner_store|user']], function () {
+    // User | Store | workshop authenticated required
+    Route::group(['middleware' => ['auth:sanctum', 'role:owner_store|user|workshop']], function () {
         Route::resource('my-account',                   'ApiAccountController');
         Route::get('my-orders',                         'ApiOrderController@myOrders');
         Route::get('order/{id}',                        'ApiOrderController@getOrder');
@@ -76,11 +80,14 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('product/create',                   'ApiProductController@create');
         Route::post('product/update/{id}',              'ApiProductController@update');
         Route::delete('product/delete/{id}',            'ApiProductController@delete');
-        
         Route::put('order/update-status',               'ApiOrderController@updateOrderStatus');
-        Route::get('my-orders/filter',                  'ApiOrderController@filterOrders');
+        Route::post('my-orders/search',                 'ApiOrderController@searchOrders');
         Route::get('seller-custom-orders',              'ApiCustomOrderController@getSellerOrders');
         Route::post('seller-custom-order/{id}/accept',  'ApiCustomOrderController@sellerAcceptedOrder');
         Route::post('seller-custom-order/{id}/reject',  'ApiCustomOrderController@sellerRejectedOrder');
+        Route::post('price-offer/create',               'ApiPriceOfferController@create');
+        Route::get('price-offer/{id}',                  'ApiPriceOfferController@show');
+        Route::get('price-offer/{id}/accept',           'ApiPriceOfferController@accept');
+        Route::get('price-offer/{id}/reject',           'ApiPriceOfferController@reject');
     });
 });

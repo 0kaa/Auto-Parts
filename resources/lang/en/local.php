@@ -38,6 +38,8 @@ return [
     'packages' => 'packages',
     'cars' => 'cars',
     'cities' => 'cities',
+    'shippings' => 'Shipping Types',
+    'shipping' => 'Shipping Type',
     'region' => 'region',
     'package' => 'package',
     'car' => 'car',

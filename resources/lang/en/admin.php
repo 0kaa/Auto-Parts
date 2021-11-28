@@ -56,4 +56,6 @@ return [
     'question_en' => 'Question English',
     'answer_ar' => 'Answer Arabic',
     'answer_en' => 'Answer English',
+    'shipping_name_ar' => 'Shipping type name arabic',
+    'shipping_name_en' => 'Shipping type name english',
 ];

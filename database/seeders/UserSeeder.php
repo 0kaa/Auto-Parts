@@ -89,5 +89,17 @@ class UserSeeder extends Seeder
         ));
 
         $user->assignRole('user');
+
+        $workshop = User::create(array(
+            'name' => 'Workshop',
+            'email' => "workshop@gmail.com",
+            'password' => bcrypt("password"),
+            'phone' => '123321',
+            'address' => "Egypt, Elmansoura",
+            'email_verified_at' => now()
+
+        ));
+
+        $workshop->assignRole('workshop');
     }
 }

@@ -40,6 +40,8 @@ return [
     'packages' => 'الباقات',
     'cars' => 'السيارات',
     'cities' => 'المدن',
+    'shippings' => 'طرق الشحن',
+    'shipping' => 'طريقة شحن',
     'region' => 'منطقة',
     'package' => 'الباقة',
     'car' => 'سيارة',
