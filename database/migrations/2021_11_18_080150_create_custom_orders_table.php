@@ -20,6 +20,7 @@ class CreateCustomOrdersTable extends Migration
             $table->string('piece_image')->nullable();
             $table->string('piece_description')->nullable();
             $table->string('piece_price')->nullable();
+            $table->string('form_image')->nullable();
             $table->unsignedBigInteger('activity_type_id')->nullable();
             $table->foreign('activity_type_id')->references('id')->on('activities_type');
 
@@ -31,10 +32,10 @@ class CreateCustomOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->unsignedBigInteger('seller_id');
+            $table->unsignedBigInteger('seller_id')->nullable();
             $table->foreign('seller_id')->references('id')->on('users');
             // 
-            $table->enum('order_status', ['pending', 'accepted', 'seller_accepted', 'seller_rejected', 'rejected', 'processing', 'not_found', 'completed', 'cancelled'])->default('pending');
+            $table->enum('order_status', ['pending', 'accepted', 'rejected', 'processing', 'not_found', 'completed', 'cancelled'])->default('pending');
 
             $table->timestamps();
         });

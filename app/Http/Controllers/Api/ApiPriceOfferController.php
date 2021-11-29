@@ -34,7 +34,6 @@ class ApiPriceOfferController extends Controller
             'price'             => $attributes['price'],
             'note'              => $attributes['note'],
             'status'            => 'pending',
-
         ]);
     
         return $this->ApiResponse(null, 'Price offer created', 200);

@@ -45,14 +45,15 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     // User | workshop authenticated required
     Route::group(['middleware' => ['auth:sanctum', 'role:user|workshop']], function () {
         Route::post('custom-order/create',              'ApiCustomOrderController@CreateCustomOrder');
+        Route::post('custom-order/create-multi',        'ApiCustomOrderController@CreateMultiCustomOrder');
         Route::get('user-custom-order/{id}',            'ApiCustomOrderController@getCustomOrder');
-        Route::post('user-custom-order/{id}/accept',    'ApiCustomOrderController@userAcceptedOrders');
-        Route::post('user-custom-order/{id}/reject',    'ApiCustomOrderController@userRejectedOrders');
+        Route::post('price-offer/{id}/accept',          'ApiCustomOrderController@AcceptPriceOffer');
+        Route::post('price-offer/{id}/reject',          'ApiCustomOrderController@RejectPriceOffer');
         // Price offers
-        Route::get('price-offers',                      'ApiPriceOfferController@index');
+        Route::get('price-offers/order/{id}',           'ApiCustomOrderController@PriceOffers');        
+        Route::get('my-custom-orders',                  'ApiCustomOrderController@userOrders');
         
 
-        // Route::get('price-offers',                      'ApiCustomOrderController@getPriceOffers');
         Route::post('rating/product/{id}',              'ApiRatingController@createProductRating');
         Route::post('rating/store/{id}',                'ApiRatingController@createStoreRating');
         Route::get('my-favourites',                     'ApiFavourtiesController@index');

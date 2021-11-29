@@ -15,10 +15,12 @@ class PriceOffersResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'            =>  $this->id,
-            'price'         =>  $this->piece_price,
-            'created_at'    =>  $this->created_at->diffForHumans(),
-            'seller'        =>  new StoresResource($this->seller),
+            'id'            => $this->id,
+            'order_id'      => $this->customOrder->id,
+            'price'         => $this->price,
+            'piece_name'    => $this->customOrder->piece_name,
+            'created_at'    => $this->created_at->diffForHumans(),
+            'seller'        => new StoresResource($this->seller),
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CustomOrderResource extends JsonResource
+class CustomOrderDetailsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,10 +23,11 @@ class CustomOrderResource extends JsonResource
             "sub_activity_name"     => $this->subActivity->name,
             "piece_name"            => $this->piece_name,
             "piece_image"           => $this->piece_image,
-            "piece_price"           => $this->piece_price,
+            "piece_description"     => $this->piece_description,
+            'piece_price'           => $this->piece_price,
+            'form_image'            => $this->form_image,
             "car"                   => $this->car->name,
             "order_data"            => $this->order_data,
-            "seller"                => new StoresResource($this->seller),
             "user"                  => new UserResource($this->user),
 
         ];

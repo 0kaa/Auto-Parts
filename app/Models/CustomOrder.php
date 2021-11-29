@@ -19,6 +19,8 @@ class CustomOrder extends Model
         'piece_name',
         'piece_image',
         'piece_price',
+        'piece_description',
+        'form_image',
         'car_id',
         'order_status',
         'user_id',
@@ -57,5 +59,8 @@ class CustomOrder extends Model
         return $this->belongsTo(Car::class);
     }
 
-    
+    public function multiCustomOrder()
+    {
+        return $this->belongsTo(MultiCustomOrder::class, 'id', 'custom_order_id');
+    }
 }

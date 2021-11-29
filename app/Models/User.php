@@ -110,4 +110,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Package::class, 'id', 'package_id');
     }
+
+    public function multi_custom_orders()
+    {
+        return $this->hasOne(MultiCustomOrder::class);
+    }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PriceOffer extends Model
+class MultiCustomOrder extends Model
 {
     use HasFactory;
 
@@ -14,24 +14,15 @@ class PriceOffer extends Model
      *
      * @var string[]
      */
-
     protected $fillable = [
-        'custom_order_id',
+        'id',
         'seller_id',
-        'price',
-        'status',
-        'note',
-        'created_at',
-        'updated_at',
+        'custom_order_id',
     ];
 
     public function customOrder()
     {
         return $this->belongsTo(CustomOrder::class);
     }
-
-    public function seller()
-    {
-        return $this->belongsTo(User::class);
-    }
+    
 }
