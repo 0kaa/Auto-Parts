@@ -31,6 +31,7 @@ use App\Repositories\Eloquent\SubscriptionsPackageRepository;
 use App\Repositories\Eloquent\SubActivityTypeRepository;
 use App\Repositories\Eloquent\ShippingRepository;
 use App\Repositories\Eloquent\PriceOfferRepository;
+use App\Repositories\Eloquent\DeviceTokenRepository;
 
 
 use App\Repositories\RegionRepositoryInterface;
@@ -55,6 +56,7 @@ use App\Repositories\SubActivityTypeRepositoryInterface;
 use App\Repositories\SubscriptionsPackageRepositoryInterface;
 use App\Repositories\ShippingRepositoryInterface;
 use App\Repositories\PriceOfferRepositoryInterface;
+use App\Repositories\DeviceTokenRepositoryInterface;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -93,6 +95,8 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(SubscriptionsPackageRepositoryInterface::class, SubscriptionsPackageRepository::class);
         $this->app->bind(ShippingRepositoryInterface::class, ShippingRepository::class);
         $this->app->bind(PriceOfferRepositoryInterface::class, PriceOfferRepository::class);
+        $this->app->bind(DeviceTokenRepositoryInterface::class, DeviceTokenRepository::class);
+        
     }
 
     /**

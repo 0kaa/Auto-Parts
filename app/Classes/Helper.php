@@ -81,16 +81,18 @@ function RedirectOrderToAnotherUser($seller_id, $rejected, $customOrder)
         ->where('activity_type_id', $seller->activity_type_id)
         ->where('region_id', $seller->region_id)
         ->whereRelation('roles', 'name', 'owner_store')
-        ->first();
+        ->limit(5)->get();
 
-    if (!$user_same) {
-        $customOrder->update([
-            'order_status' => "not_found",
-        ]);
+    
+    if ($user_same->isEmpty()) {
+        $customOrder->update(['order_status' => "not_found"]);
         return false;
     }
 
-    $customOrder->update([
-        'seller_id' => $user_same->id,
-    ]);
+    foreach ($user_same as $user) {
+        \App\Models\MultiCustomOrder::create([
+            'seller_id' => $user->id,
+            'custom_order_id' => $customOrder->id
+        ]);
+    }
 }

@@ -83,6 +83,8 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::delete('product/delete/{id}',            'ApiProductController@delete');
         Route::put('order/update-status',               'ApiOrderController@updateOrderStatus');
         Route::post('my-orders/search',                 'ApiOrderController@searchOrders');
+        // current orders
+        Route::get('my-orders/current',                 'ApiOrderController@currentOrders');
         Route::get('seller-custom-orders',              'ApiCustomOrderController@getSellerOrders');
         Route::post('seller-custom-order/{id}/accept',  'ApiCustomOrderController@sellerAcceptedOrder');
         Route::post('seller-custom-order/{id}/reject',  'ApiCustomOrderController@sellerRejectedOrder');

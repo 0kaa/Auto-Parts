@@ -8,12 +8,11 @@ class Notify
     public static function getTokens($device_id, $user_id)
     {
 
-        $deviceTokenRepository = \App::make('App\Repositories\DeviceTokenUserRepositoryInterface');
+        $deviceTokenRepository = \App::make('App\Repositories\DeviceTokenRepositoryInterface');
 
         if ($user_id != null) {
-            $tokens = $deviceTokenRepository->whereHas('user', ['is_notify' => 1], [['user_id', $user_id]])->pluck('device_token');
+            $tokens = $deviceTokenRepository->whereHas('user', ['is_notify' => 1], [['user_id', $user_id]])->pluck('firebase_token');
         }
-
         return $tokens;
     }
 
@@ -33,16 +32,14 @@ class Notify
         if ($device_id == null) {
             $tokenList = SELF::getTokens($device_id, $user_id);
         }
-
-
+        
         $notification = [
             'body' => \App::getLocale() == 'ar' ? $msg_ar : $msg_en,
             'data' => $data,
             'user_id' => $user_id,
             'image' => asset('admin/logo2.png'),
             'sound' => true,
-        ];
-
+        ];        
         $extraNotificationData = [
             'data' => $data,
             'user_id' => $user_id,
@@ -62,7 +59,7 @@ class Notify
         // dump($fcmNotification);
 
         $headers = [
-            'Authorization: key=AAAAvm5OHt8:APA91bEjouR_wSChmmz1ZTHOj45DoqfDoRfNmzeFnARWnCXIeLWH7jgbkAXlATU_FjVdBc1tOTxYEfToQCzVbje9Yp22p3a5n4tDLHpOlOvNvauEiywAyPYe0qmhQE2wE_SiG4kzPAas',
+            'Authorization: key=AAAAyNiq-8Y:APA91bH01iU6o8oEoVNgppwZIZMlxq8l_saWRkWWb_5HYojaIhQEaHqyZjWTAHxAacmOqOhMVdvyB-LlOraqqcACx_mhkZTxS233N9Pb9_JnoJKddHkpxYZ01YliwXgItibXgK48fFXE',
             'Content-Type: application/json'
         ];
 

@@ -77,15 +77,15 @@ class ApiOrderController extends Controller
                 ]);
             }
 
-            // $notification = $this->notificationRepository->create([
-            //     'user_id'       => $request->seller_id,
-            //     'type'          => 'order',
-            //     'model_id'      => $order->id,
-            //     'message_en'    => 'You have a new order',
-            //     'message_ar'    => 'لديك طلب جديد',
-            // ]);
+            $notification = $this->notificationRepository->create([
+                'user_id'       => $request->seller_id,
+                'type'          => 'order',
+                'model_id'      => $order->id,
+                'message_en'    => 'You have a new order',
+                'message_ar'    => 'لديك طلب جديد',
+            ]);
 
-            // Notify::NotifyMob($notification->message_ar, $notification->message_en, $request->seller_id, null, $data = null);
+            Notify::NotifyMob($notification->message_ar, $notification->message_en, $request->seller_id, null, $data = null);
 
             return $this->ApiResponse(null, trans('local.order_done'), 200);
         } catch (\Exception $e) {
@@ -93,14 +93,24 @@ class ApiOrderController extends Controller
         }
     }
 
+    public function currentOrders()
+    {
+        try {
+            $user       = auth()->user();
+            $orders     = $user->store_orders()->get();
+            return $this->ApiResponse(OrderResource::collection($orders), null, 200);
+        } catch (\Exception $e) {
+            return $this->ApiResponse(null, $e->getMessage(), 400);
+        }
+    }
+
     public function getOrder($id)
     {
-        $order = $this->orderRepository->findOne($id);
-
-        if ($order) {
+        try {
+            $order = $this->orderRepository->findOne($id);
             return $this->ApiResponse(new OrderDetailsResource($order), null, 200);
-        } else {
-            return $this->ApiResponse(null, null, 404);
+        } catch (\Exception $e) {
+            return $this->ApiResponse(null, $e->getMessage(), 400);
         }
     }
 
@@ -108,35 +118,39 @@ class ApiOrderController extends Controller
     // Search Orders with date , name
     public function searchOrders(Request $request)
     {
-        $user = auth()->user();
+        try {
+            $user = auth()->user();
 
-        // order db table
-        $q = Order::query();
+            // order db table
+            $q = Order::query();
 
-        // get my orders only
-        $q->where('seller_id', $user->id);
+            // get my orders only
+            $q->where('seller_id', $user->id);
 
-        // search by start_date
-        if ($request->has('start_date')) {
-            $date = $request->start_date;
-            $q->whereDate('created_at', '>=', $date);
+            // search by start_date
+            if ($request->has('start_date')) {
+                $date = $request->start_date;
+                $q->whereDate('created_at', '>=', $date);
+            }
+
+            // search by end_date
+            if ($request->has('end_date')) {
+                $date = $request->end_date;
+                $q->whereDate('created_at', '<=', $date);
+            }
+
+            // search by order_status
+            if ($request->has('order_status')) {
+                $order_status = $request->order_status;
+                $q->where('order_status', $order_status);
+            }
+
+            $orders = $q->get();
+
+            return $this->ApiResponse(OrderResource::collection($orders), null, 200);
+        } catch (\Exception $e) {
+            return $this->ApiResponse(null, $e->getMessage(), 400);
         }
-
-        // search by end_date
-        if ($request->has('end_date')) {
-            $date = $request->end_date;
-            $q->whereDate('created_at', '<=', $date);
-        }
-
-        // search by order_status
-        if ($request->has('order_status')) {
-            $order_status = $request->order_status;
-            $q->where('order_status', $order_status);
-        }
-
-        $orders = $q->get();
-
-        return $this->ApiResponse(OrderResource::collection($orders), null, 200);
     }
 
 

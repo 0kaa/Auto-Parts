@@ -21,7 +21,8 @@ class CreateMultiCustomOrdersTable extends Migration
 
             $table->unsignedBigInteger('seller_id')->nullable();
             $table->foreign('seller_id')->references('id')->on('users');
-            
+
+            $table->enum('order_status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

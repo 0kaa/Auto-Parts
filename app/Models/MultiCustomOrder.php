@@ -18,11 +18,11 @@ class MultiCustomOrder extends Model
         'id',
         'seller_id',
         'custom_order_id',
+        'order_status',
     ];
 
     public function customOrder()
     {
         return $this->belongsTo(CustomOrder::class);
     }
-    
 }

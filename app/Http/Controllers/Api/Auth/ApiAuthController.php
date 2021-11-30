@@ -28,35 +28,32 @@ class ApiAuthController extends Controller
     public function login(LoginRequest $request)
     {
 
-        $user = $this->usersRepository->getWhere([['email', $request->email]])->first();
+        try {
+            $user = $this->usersRepository->getWhere([['email', $request->email]])->first();
 
-        $user_device_id = $user->devices->where([
-            [
-                'device_id' => $request->device_id
-            ],
-            [
-                'platform_type' => $request->platform_type
-            ]
-        ])->first();
+            $user_device_id = $user->devices->where('device_id', $request->device_id)->where('platform_type', $request->platform_type)->first();
 
-        // if (!$user_device_id) {
-        //     $user->devices()->create([
-        //         'device_id'         => $request->device_id,
-        //         'platform_type'     => $request->platform_type,
-        //         'firebase_token'    => $request->firebase_token,
-        //         'user_id'           => $user->id,
-        //     ]);
-        // }
+            if (!$user_device_id) {
+                $user->devices()->create([
+                    'device_id'         => $request->device_id,
+                    'platform_type'     => $request->platform_type,
+                    'firebase_token'    => $request->firebase_token,
+                    'user_id'           => $user->id,
+                ]);
+            }
 
 
-        if ($user && Hash::check($request->password, $user->password)) {
+            if ($user && Hash::check($request->password, $user->password)) {
 
-            $token = $user->createToken('tokens')->plainTextToken;
-        } else {
-            return $this->ApiResponse(null, trans('admin.login_error'), 404);
+                $token = $user->createToken('tokens')->plainTextToken;
+            } else {
+                return $this->ApiResponse(null, trans('admin.login_error'), 404);
+            }
+
+            return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], 'test message', 200);
+        } catch (\Exception $e) {
+            return $this->ApiResponse(null, $e->getMessage(), 400);
         }
-
-        return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], 'test message', 200);
     }
 
     public function register(RegisterRequest $request)
