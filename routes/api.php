@@ -36,10 +36,15 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     Route::post('contactus',            'ApiContactUsController@create');
     Route::get('shippings',             'ApiShippingController@index');
 
-    // All users but authenticated required
+    // All users | authenticated required
     Route::group(['middleware' => ['auth:sanctum']], function () {
-        Route::put('change-password',              'ApiAccountController@change_password');
-        Route::get('notifications',                'ApiNotificationsController@index');
+        Route::put('change-password',                   'ApiAccountController@change_password');
+        Route::get('notifications',                     'ApiNotificationsController@index');
+        Route::get('my-account',                        'ApiAccountController@index');
+        Route::post('my-account/update',                'ApiAccountController@update');
+        Route::get('my-orders',                         'ApiOrderController@myOrders');
+        Route::get('order/{id}',                        'ApiOrderController@getOrder');
+        Route::get('custom-order/{id}',                 'ApiCustomOrderController@getOrder');
     });
 
     // User | workshop authenticated required
@@ -61,14 +66,6 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('store/favourties/create/{id}',     'ApiFavourtiesController@createStoreFavourtie');
         Route::post('new-order',                        'ApiOrderController@CreateOrder');
         Route::get('search',                            'ApiSearchController@search');
-    });
-
-    // User | Store | workshop authenticated required
-    Route::group(['middleware' => ['auth:sanctum', 'role:owner_store|user|workshop']], function () {
-        Route::resource('my-account',                   'ApiAccountController');
-        Route::get('my-orders',                         'ApiOrderController@myOrders');
-        Route::get('order/{id}',                        'ApiOrderController@getOrder');
-        Route::get('custom-order/{id}',                 'ApiCustomOrderController@getOrder');
     });
 
 
