@@ -44,7 +44,6 @@ class ApiAuthController extends Controller
 
 
             if ($user && Hash::check($request->password, $user->password)) {
-
                 $token = $user->createToken('tokens')->plainTextToken;
             } else {
                 return $this->ApiResponse(null, trans('admin.login_error'), 404);
@@ -52,7 +51,7 @@ class ApiAuthController extends Controller
 
             return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], 'test message', 200);
         } catch (\Exception $e) {
-            return $this->ApiResponse(null, $e->getMessage(), 400);
+            return $this->ApiResponse(null, trans('admin.login_error'), 404);
         }
     }
 

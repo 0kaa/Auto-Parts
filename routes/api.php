@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('Api\Auth')->group(function () {
+Route::namespace('Api\Auth')->middleware('lang')->group(function () {
     Route::post('login', 'ApiAuthController@login');
     Route::post('register', 'ApiAuthController@register');
 });
