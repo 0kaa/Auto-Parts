@@ -20,32 +20,32 @@ class CarsSeeder extends Seeder
             [
                 'name_ar'   => 'تويوتا',
                 'name_en'   => 'Toyota',
-                'image'     => public_path('images/cars/toyota-logo.svg'),
+                'image'     => 'cars/toyota.png',
             ],
             [
                 'name_ar'   => 'نيسان',
                 'name_en'   => 'Nissan',
-                'image'     => public_path('images/cars/nissan-logo.svg'),
+                'image'     => 'cars/nissan-logo.svg',
             ],
             [
                 'name_ar'   => 'مرسيدس',
                 'name_en'   => 'Mersedes',
-                'image'     => public_path('images/cars/mersedes-logo.svg'),
+                'image'     => 'cars/mersedes-logo.svg',
             ],
             [
                 'name_ar'   => 'لكزس',
                 'name_en'   => 'Lexus',
-                'image'     => public_path('images/cars/lexus-icon.svg'),
+                'image'     => 'cars/lexus-icon.svg',
             ],
             [
                 'name_ar'   => 'فورد',
                 'name_en'   => 'Ford',
-                'image'     => public_path('images/cars/ford-logo.svg'),
+                'image'     => 'cars/ford-logo.svg',
             ],
             [
                 'name_ar'   => 'شيفروليه',
                 'name_en'   => 'Chevrolet',
-                'image'     => public_path('images/cars/chevrolet-logo.svg'),
+                'image'     => 'cars/chevrolet-logo.svg',
             ],
 
         ]);
