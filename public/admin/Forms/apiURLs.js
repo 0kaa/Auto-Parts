@@ -1,18 +1,11 @@
 /* -------------------------------------------------------------------------------
  * --------------------------------- API URL -------------------------------------
  * ------------------------------------------------------------------------------- */
-// const apiDashboardURL = window.location.protocol + '//' + window.location.hostname + '/' + $('html').attr('lang') + '/dashboard/';
-// const apiWebsiteURL = window.location.protocol + '//' + window.location.hostname + '/' + $('html').attr('lang') + '/';
-
-
- const apiWebsiteURL = 'http://127.0.0.1:8000/';
-
- const apiDashboardURL = 'http://127.0.0.1:8000/admin/';
-
+// const apiDashboardURL = window.location.protocol + '//' + window.location.hostname + '/admin/';
+// const apiWebsiteURL = window.location.protocol + '//' + window.location.hostname + '/';
 
 
 $(document).ready(function() {
-
     $('.langauge-switcher').on('click', function(e) {
         var languageToSwitchTo = $(this).attr('switchToLang');
         var pathnameArray = document.location.href.split('/');

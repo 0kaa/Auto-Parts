@@ -56,6 +56,9 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'website' => env('APP_API_WEBSITE', 'http://127.0.0.1:8000/'),
+    'dashboard' => env('APP_API_DASHBOARD', 'http://127.0.0.1:8000/admin/'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

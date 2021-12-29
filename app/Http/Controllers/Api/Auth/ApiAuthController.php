@@ -88,7 +88,6 @@ class ApiAuthController extends Controller
     public function get_user()
     {
         $user = auth()->user();
-        // return $this->ApiResponse(['user' => $user], 'test message', 200);
         return $this->ApiResponse(['user' => new UserResource($user)], 'test message', 200);
     }
 }

@@ -113,6 +113,8 @@
             });
         }
     });
+    window.apiWebsiteURL = `{{ config('app.website') }}`;
+    window.apiDashboardURL = `{{ config('app.dashboard') }}`;
 
 </script>
 
