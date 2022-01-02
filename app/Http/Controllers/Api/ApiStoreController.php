@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\StoreResource;
 use App\Http\Resources\Api\StoresResource;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
@@ -25,5 +26,12 @@ class ApiStoreController extends Controller
         $stores = $this->userRepository->user_role('owner_store');
 
         return $this->ApiResponse(StoresResource::collection($stores), null, 200);
+    }
+
+    public function getStore($id) {
+
+        $store = $this->userRepository->findOne($id);
+
+        return $this->ApiResponse(new StoreResource($store), null, 200);
     }
 }

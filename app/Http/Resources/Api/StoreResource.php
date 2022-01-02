@@ -21,7 +21,6 @@ class StoreResource extends JsonResource
             'region'                    => $this->region_name ? $this->region_name->name : null,
             'city'                      => $this->city_name ? $this->city_name->name : null,
             'commercial_register_id'    => $this->commercial_register_id,
-            'products'                  => new ProductPaginationResource($this->products()->paginate(10))
         ];
     }
 }

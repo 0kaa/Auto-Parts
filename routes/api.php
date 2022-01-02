@@ -27,6 +27,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     Route::get('activity/{id}',         'ApiActivitiesController@show');
     Route::get('activity/{id}/sub',     'ApiActivitiesController@getSubActivities');
     Route::get('stores',                'ApiStoreController@getStoresList');
+    Route::get('store/{id}',            'ApiStoreController@getStore');
     Route::get('product/{id}',          'ApiProductController@show');
     Route::get('products/store/{id}',   'ApiProductController@getStoreProducts');
 

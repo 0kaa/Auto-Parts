@@ -9,7 +9,7 @@ use App\Repositories\ProductRepositoryInterface;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Requests\Api\CreateProductRequest;
 use App\Http\Resources\Api\ProductDetailResource;
-use App\Http\Resources\Api\StoreResource;
+use App\Http\Resources\Api\StoreProductsResource;
 use App\Services\UploadFilesServices;
 use Illuminate\Support\Facades\Storage;
 
@@ -71,7 +71,7 @@ class ApiProductController extends Controller
         }
 
         $image = $product->image;
-        
+
         if ($request->hasFile('image')) {
             $img = $request->file('image');
             Storage::delete($product->image);
@@ -115,7 +115,7 @@ class ApiProductController extends Controller
         if (!$store || !$store->hasRole('owner_store')) {
             return $this->ApiResponse(null, trans('local.no_product_found'), 200);
         }
-        $products  = new StoreResource($store);
+        $products  = new StoreProductsResource($store);
 
         return $this->ApiResponse($products, null, 200);
     }
