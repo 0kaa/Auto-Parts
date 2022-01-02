@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\Web\ActiveCodeRequest;
 use Illuminate\Validation\Validator;
 use App\Http\Requests\web\RegisterRequest;
 use App\Repositories\UserRepositoryInterface;
@@ -42,7 +43,7 @@ class ApiAuthController extends Controller
                 ]);
             }
 
-            if ($user && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
+            if ($user && $user->approved == 1 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
                 $token = $user->createToken('tokens')->plainTextToken;
             } else {
                 return $this->ApiResponse(null, trans('admin.login_error'), 404);
@@ -60,7 +61,8 @@ class ApiAuthController extends Controller
         $attribute = $request->except('password', 'confirm_password');
 
         $attribute['password'] = bcrypt($request->password);
-
+        $attribute['verification_code'] = rand(1111, 9999);
+        $attribute['approved'] = 0;
         $user = $this->usersRepository->create($attribute);
 
         if ($user) {
@@ -80,6 +82,23 @@ class ApiAuthController extends Controller
         } else {
 
             return $this->ApiResponse(null, trans('local.successfully.registered'), 404);
+        }
+    }
+
+    public function verifyCode(ActiveCodeRequest $request)
+    {
+
+        try {
+            $code = $this->usersRepository->getWhere([['verification_code', $request->code], ['phone', $request->phone]])->first();
+
+            if ($code) {
+                $code->update(['approved' => 1, 'verification_code' => null]);
+                return $this->ApiResponse(null, trans('local.verify_code_success'), 200);
+            } else {
+                return $this->ApiResponse(null, trans('local.verify_code_error'), 404);
+            }
+        } catch (\Exception $e) {
+            return $this->ApiResponse(null, $e, 404);
         }
     }
 

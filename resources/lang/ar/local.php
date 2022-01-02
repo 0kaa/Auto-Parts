@@ -84,7 +84,8 @@ return [
     'send' => 'إرسال',
     'contact_success' => 'تم ارسال الرساله بنجاح',
     'register' => 'سجل معنا',
-
+    'verify_code_success' => 'تم التحقق بنجاح',
+    'verify_code_error' => 'كود التحقق غير صحيح',
     'name_enterprise' => 'اسم المنشأة',
     'user_name_enterprise' => 'اسم صاحب المنشأة',
     'user_identity_enterprise' => 'رقم هوية صاحب المنشأة',

@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace('Api\Auth')->middleware('lang')->group(function () {
-    Route::post('login', 'ApiAuthController@login');
-    Route::post('register', 'ApiAuthController@register');
+    Route::post('login',            'ApiAuthController@login');
+    Route::post('register',         'ApiAuthController@register');
+    Route::post('verify-code',      'ApiAuthController@verifyCode');
 });
 
 
@@ -56,9 +57,9 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('price-offer/{id}/accept',          'ApiCustomOrderController@AcceptPriceOffer');
         Route::post('price-offer/{id}/reject',          'ApiCustomOrderController@RejectPriceOffer');
         // Price offers
-        Route::get('price-offers/order/{id}',           'ApiCustomOrderController@PriceOffers');        
+        Route::get('price-offers/order/{id}',           'ApiCustomOrderController@PriceOffers');
         Route::get('my-custom-orders',                  'ApiCustomOrderController@userOrders');
-        
+
 
         Route::post('rating/product/{id}',              'ApiRatingController@createProductRating');
         Route::post('rating/store/{id}',                'ApiRatingController@createStoreRating');
