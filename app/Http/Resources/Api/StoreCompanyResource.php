@@ -22,8 +22,8 @@ class StoreCompanyResource extends JsonResource
             'name_owner_company' => $this->name_owner_company,
             'national_identity' => $this->national_identity,
             'date' => $this->date,
-            'city' => $this->city,
-            'region_id' => $this->region_id,
+            'city' => new CityResource($this->city_name),
+            'region' => new RegionResource($this->region_name),
             'file' => $this->file
         ];
     }

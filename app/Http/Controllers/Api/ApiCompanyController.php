@@ -30,7 +30,6 @@ class ApiCompanyController extends Controller
     {
 
         $user = auth()->user();
-
         $user->update([
             'activity_type_id' => ($request->get('activity_type_id') ? $request->get('activity_type_id') : $user->activity_type_id),
             'name_company' => ($request->get('name_company') ? $request->get('name_company') : $user->name_company),
@@ -39,7 +38,7 @@ class ApiCompanyController extends Controller
             'name_owner_company' => ($request->get('name_owner_company') ? $request->get('name_owner_company') : $user->name_owner_company),
             'national_identity' => ($request->get('national_identity') ? $request->get('national_identity') : $user->national_identity),
             'date' => ($request->get('date') ? $request->get('date') : $user->date),
-            'city' => ($request->get('city') ? $request->get('city') : $user->city),
+            'city_id' => ($request->get('city_id') ? $request->get('city_id') : $user->city_id),
             'region_id' => ($request->get('region_id') ? $request->get('region_id') : $user->region_id),
             'file' => ($request->has('file') ? $request->file('file')->store('company') : $user->file),
         ]);

@@ -15,6 +15,8 @@ class UserResource extends JsonResource
             "email"         => $this->email,
             "phone"         => $this->phone,
             "address"       => $this->address,
+            "lat"           => $this->lat,
+            "lng"           => $this->lng,
             "image"         => $this->image,
             "created_at"    => $this->created_at->format('Y-m-d'),
             'type'          => $this->roles->pluck('name')->first(),

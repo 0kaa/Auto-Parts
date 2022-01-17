@@ -21,6 +21,8 @@ class StoresResource extends JsonResource
             'badge'         => $this->package ? $this->package->badge : null,
             'rating'        => $this->ratings()->avg('rating'),
             'address'       => $this->address,
+            "lat"           => $this->lat,
+            "lng"           => $this->lng,
             'activity_type' => $this->activity_name ? $this->activity_name->find($this->activity_type_id)->name : null,
         ];
     }

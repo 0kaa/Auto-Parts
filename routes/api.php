@@ -35,6 +35,8 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     Route::get('static-page/{slug}',    'ApiStaticPagesController@getStaticPage');
     Route::get('faqs',                  'ApiFaqsController@index');
     Route::get('cars',                  'ApiCarController@index');
+    Route::get('cities',                'ApiCityController@index');
+    Route::get('regions',                'ApiRegionController@index');
     Route::post('contactus',            'ApiContactUsController@create');
     Route::get('shippings',             'ApiShippingController@index');
 
@@ -73,7 +75,8 @@ Route::namespace('Api')->middleware('lang')->group(function () {
 
     // Owner Store authenticated required
     Route::group(['middleware' => ['auth:sanctum', 'role:owner_store']], function () {
-        Route::resource('my-company',                   'ApiCompanyController');
+        Route::get('my-company',                        'ApiCompanyController@index');
+        Route::post('my-company/update',                'ApiCompanyController@update');
         Route::resource('my-branches',                  'ApiBranchesController');
         Route::post('package-subscription/create',      'ApiPackagesController@createSubscription');
         Route::get('packages',                          'ApiPackagesController@index');
