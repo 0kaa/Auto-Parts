@@ -15,7 +15,6 @@ class BranchResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
             'region' => new RegionResource($this->region),
             'city' => new CityResource($this->city),
             'phone' => $this->phone,

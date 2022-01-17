@@ -77,7 +77,8 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     Route::group(['middleware' => ['auth:sanctum', 'role:owner_store']], function () {
         Route::get('my-company',                        'ApiCompanyController@index');
         Route::post('my-company/update',                'ApiCompanyController@update');
-        Route::resource('my-branches',                  'ApiBranchesController');
+        Route::get('my-branches',                       'ApiBranchesController@index');
+        Route::post('my-branches/update',               'ApiBranchesController@update');
         Route::post('package-subscription/create',      'ApiPackagesController@createSubscription');
         Route::get('packages',                          'ApiPackagesController@index');
         Route::post('product/create',                   'ApiProductController@create');

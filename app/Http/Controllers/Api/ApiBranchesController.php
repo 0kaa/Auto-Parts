@@ -30,7 +30,7 @@ class ApiBranchesController extends Controller
     {
 
         $user = auth()->user();
-
+        // dd(json_decode($request->branches));
         $user->update([
             'activity_type_id' => ($request->get('activity_type_id') ? $request->get('activity_type_id') : $user->activity_type_id),
         ]);
@@ -40,7 +40,7 @@ class ApiBranchesController extends Controller
             foreach (json_decode($request->branches) as $branch) {
                 $user->branches()->create([
                     'address'   => $branch->address,
-                    'city'      => $branch->city_id,
+                    'city_id'   => $branch->city_id,
                     'region_id' => $branch->region_id,
                     'phone'     => $branch->phone,
                 ]);
