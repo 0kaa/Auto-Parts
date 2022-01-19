@@ -28,9 +28,14 @@ class ApiStoreController extends Controller
         return $this->ApiResponse(StoresResource::collection($stores), null, 200);
     }
 
-    public function getStore($id) {
+    public function getStore($id)
+    {
 
         $store = $this->userRepository->findOne($id);
+        dd($store->role);
+        if ($store->user_role != 'owner_store') {
+            return $this->ApiResponse(null, 'You are not owner of this store', 401);
+        }
 
         return $this->ApiResponse(new StoreResource($store), null, 200);
     }

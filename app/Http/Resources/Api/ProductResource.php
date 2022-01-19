@@ -20,7 +20,8 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
-            'image' => $this->image,
+            // get image with full url of project
+            'image' => url('/') . '/' . $this->image,
             'rating' => $this->ratings()->avg('rating') ? $this->ratings()->avg('rating') : 0
         ];
     }
