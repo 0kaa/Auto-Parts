@@ -85,7 +85,7 @@ class ApiOrderController extends Controller
                 'message_ar'    => 'لديك طلب جديد',
             ]);
 
-            Notify::NotifyMob($notification->message_ar, $notification->message_en, $request->seller_id, null, $data = null);
+            // Notify::NotifyMob($notification->message_ar, $notification->message_en, $request->seller_id, null, $data = null);
 
             return $this->ApiResponse(null, trans('local.order_done'), 200);
         } catch (\Exception $e) {
