@@ -154,8 +154,14 @@ class ApiCartController extends Controller
 
             $cartItem->save();
 
-            $cart->total_amount = $cartItem->quantity * $cartItem->price;
+            // calc total amount if quantity changed
+            $total = 0;
 
+            foreach ($cart->cart_items as $item) {
+                $total += $item->price * $item->quantity;
+            }
+
+            $cart->total_amount = $total;
             $cart->save();
 
             return $this->ApiResponse(null, trans('local.cart_updated'), 200);
