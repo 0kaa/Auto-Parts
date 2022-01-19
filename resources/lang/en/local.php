@@ -159,5 +159,11 @@ return [
     'subscription_updated' => 'Subscription updated successfully',
     'plan_not_found' => 'Plan not found',
     'duration_time' => 'Duration time in days',
-
+    'about_app' => 'About App',
+    'privacy_app' => 'Privacy',
+    'terms_app' => 'Terms & Conditions',
+    "help_app" => 'Return policy',
+    'added_to_cart' => 'Added to cart successfully',
+    'removed_from_cart' => 'Removed from cart successfully',
+    "cart_updated" => 'Cart updated successfully',
 ];

@@ -50,6 +50,10 @@ class User extends Authenticatable
         return $this->hasMany(BranchesCompanyUser::class);
     }
 
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class, 'id', 'user_id');
+    }
 
     public function products()
     {

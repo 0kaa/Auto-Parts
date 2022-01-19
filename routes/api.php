@@ -71,7 +71,11 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::get('search',                            'ApiSearchController@search');
 
         // Cart
-        Route::post('cart/create',                       'ApiCartController@create');
+        Route::post('cart/create',                      'ApiCartController@addToCart');
+        Route::post('cart/remove',                      'ApiCartController@removeFromCart');
+        // changeQuantity
+        Route::post('cart/change-quantity',             'ApiCartController@changeQuantity');
+        Route::get('cart',                              'ApiCartController@getMyCart');
     });
 
 

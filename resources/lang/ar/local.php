@@ -167,5 +167,12 @@ return [
     'already_subscriped_to_this_plan' => 'لقد تم الاشتراك بالفعل في هذا الخطة',
     'subscription_updated' => 'تم تحديث الاشتراك بنجاح',
     'plan_not_found' => 'لم يتم العثور على خطة بهذا الرقم',
-    'duration_time' => 'المدة بالايام'
+    'duration_time' => 'المدة بالايام',
+    'about_app' => 'عن التطبيق',
+    'privacy_app' => 'سياسة الخصوصية',
+    'terms_app' => 'الشروط و الاحكام',
+    'help_app' => 'سياسة الاسترجاع',
+    'added_to_cart' => 'تمت اضافة المنتج بنجاح',
+    'removed_from_cart' => 'تم حذف المنتج من السلة',
+    "cart_updated" => "تم تحديث السلة بنجاح",
 ];

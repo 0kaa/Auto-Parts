@@ -24,6 +24,8 @@ use App\Repositories\Eloquent\FavouriteRepository;
 use App\Repositories\Eloquent\NotificationRepository;
 use App\Repositories\Eloquent\OrderRepository;
 use App\Repositories\Eloquent\OrderItemRepository;
+use App\Repositories\Eloquent\CartRepository;
+use App\Repositories\Eloquent\CartItemRepository;
 use App\Repositories\Eloquent\CustomOrderRepository;
 use App\Repositories\Eloquent\CarRepository;
 use App\Repositories\Eloquent\PackageRepository;
@@ -32,6 +34,7 @@ use App\Repositories\Eloquent\SubActivityTypeRepository;
 use App\Repositories\Eloquent\ShippingRepository;
 use App\Repositories\Eloquent\PriceOfferRepository;
 use App\Repositories\Eloquent\DeviceTokenRepository;
+
 
 
 use App\Repositories\RegionRepositoryInterface;
@@ -49,6 +52,8 @@ use App\Repositories\RatingRepositoryInterface;
 use App\Repositories\FavouriteRepositoryInterface;
 use App\Repositories\OrderRepositoryInterface;
 use App\Repositories\OrderItemRepositoryInterface;
+use App\Repositories\CartRepositoryInterface;
+use App\Repositories\CartItemRepositoryInterface;
 use App\Repositories\CustomOrderRepositoryInterface;
 use App\Repositories\CarRepositoryInterface;
 use App\Repositories\PackageRepositoryInterface;
@@ -88,6 +93,8 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
         $this->app->bind(OrderItemRepositoryInterface::class, OrderItemRepository::class);
+        $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
+        $this->app->bind(CartItemRepositoryInterface::class, CartItemRepository::class);
         $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
         $this->app->bind(CustomOrderRepositoryInterface::class, CustomOrderRepository::class);
         $this->app->bind(CarRepositoryInterface::class, CarRepository::class);
@@ -96,7 +103,6 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(ShippingRepositoryInterface::class, ShippingRepository::class);
         $this->app->bind(PriceOfferRepositoryInterface::class, PriceOfferRepository::class);
         $this->app->bind(DeviceTokenRepositoryInterface::class, DeviceTokenRepository::class);
-        
     }
 
     /**
