@@ -9,6 +9,8 @@ use App\Http\Requests\Api\UpdateOrderStatus;
 use App\Http\Resources\Api\OrderDetailsResource;
 use App\Http\Resources\Api\OrderResource;
 use App\Models\Order;
+use App\Repositories\CartItemRepositoryInterface;
+use App\Repositories\CartRepositoryInterface;
 use App\Repositories\NotificationRepositoryInterface;
 use App\Repositories\ProductRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
@@ -32,6 +34,8 @@ class ApiOrderController extends Controller
         ProductRepositoryInterface $productRepository,
         OrderRepositoryInterface $orderRepository,
         OrderItemRepositoryInterface $orderItemRepository,
+        CartRepositoryInterface $cartRepository,
+        CartItemRepositoryInterface $cartItemRepository,
         NotificationRepositoryInterface $notificationRepository
     ) {
 
@@ -40,6 +44,8 @@ class ApiOrderController extends Controller
         $this->orderRepository          = $orderRepository;
         $this->orderItemRepository      = $orderItemRepository;
         $this->notificationRepository   = $notificationRepository;
+        $this->cartRepository           = $cartRepository;
+        $this->cartItemRepository       = $cartItemRepository;
     }
 
     public function CreateOrder(CreateOrderRequest $request)
@@ -48,45 +54,65 @@ class ApiOrderController extends Controller
             $user = auth()->user();
             $total_amount = 0;
 
-            foreach ($request->products as $product) {
-                $product_model = $this->productRepository->findOne($product['id']);
-                $total_amount += $product_model->price * $product['quantity'];
-            }
+            $cart = $user->cart;
+
+            $cartItems = $cart->cart_items;
+
+            $sellers = $cartItems->map(function ($item) {
+                return $item->product->seller;
+            });
+
+            $sellers = $sellers->unique();
+
 
             $latestOrder = Order::orderBy('created_at', 'DESC')->first();
 
-            $order = $this->orderRepository->create([
-                'user_id'               => $user->id,
-                'order_number'          => '#' . str_pad($latestOrder ? $latestOrder->id + 1 : 0 + 1, 4, "0", STR_PAD_LEFT),
-                'seller_id'             => $request->seller_id,
-                'order_ship_address'    => $request->order_ship_address,
-                'order_ship_name'       => $request->order_ship_name,
-                'order_ship_phone'      => $request->order_ship_phone,
-                'shipping_id'           => $request->shipping_id,
-                'total_amount'          => $total_amount,
-                'order_status'          => 'pending',
-            ]);
+            foreach ($sellers as $seller) {
 
-            foreach ($request->products as $product) {
-                $product_model = $this->productRepository->findOne($product['id']);
-                $this->orderItemRepository->create([
-                    'order_id'      => $order->id,
-                    'product_id'    => $product['id'],
-                    'quantity'      => $product['quantity'],
-                    'price'         => $product_model->price,
+                $order = $this->orderRepository->create([
+                    'user_id'               => $user->id,
+                    'order_number'          => '#' . str_pad($latestOrder ? $latestOrder->id + 1 : 0 + 1, 4, "0", STR_PAD_LEFT),
+                    'seller_id'             => $seller->id,
+                    'order_ship_address'    => $request->order_ship_address,
+                    'order_ship_name'       => $request->order_ship_name,
+                    'order_ship_phone'      => $request->order_ship_phone,
+                    'shipping_id'           => $request->shipping_id,
+                    'total_amount'          => $total_amount,
+                    'order_status'          => 'pending',
                 ]);
+
+                $total_amount = 0;
+
+                foreach ($cartItems as $cartItem) {
+                    if ($cartItem->product->seller->id == $seller->id) {
+
+                        $this->orderItemRepository->create([
+                            'order_id' => $order->id,
+                            'product_id' => $cartItem->product->id,
+                            'quantity' => $cartItem->quantity,
+                            'price' => $cartItem->product->price,
+                        ]);
+
+                        $total_amount += $cartItem->product->price * $cartItem->quantity;
+                        $order->total_amount = $total_amount;
+                        $order->save();
+                    }
+                }
             }
 
-            $notification = $this->notificationRepository->create([
-                'user_id'       => $request->seller_id,
-                'type'          => 'order',
-                'model_id'      => $order->id,
-                'message_en'    => 'You have a new order',
-                'message_ar'    => 'لديك طلب جديد',
-            ]);
+
+            // $notification = $this->notificationRepository->create([
+            //     'user_id'       => $request->seller_id,
+            //     'type'          => 'order',
+            //     'model_id'      => $order->id,
+            //     'message_en'    => 'You have a new order',
+            //     'message_ar'    => 'لديك طلب جديد',
+            // ]);
 
             // Notify::NotifyMob($notification->message_ar, $notification->message_en, $request->seller_id, null, $data = null);
 
+            $cart->delete();
+        
             return $this->ApiResponse(null, trans('local.order_done'), 200);
         } catch (\Exception $e) {
             return $this->ApiResponse(null, $e->getMessage(), 400);

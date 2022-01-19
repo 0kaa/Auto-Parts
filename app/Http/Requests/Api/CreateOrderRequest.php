@@ -27,10 +27,6 @@ class CreateOrderRequest extends FormRequest
             'order_ship_address'    => 'required',
             'order_ship_name'       => 'required',
             'order_ship_phone'      => 'required',
-            'seller_id'             => 'required',
-            'products'              => 'required|array|min:1',
-            'products.*.id'         => 'required|exists:products,id',
-            'products.*.quantity'   => 'required|integer|min:1',
             'shipping_id'           => 'required|exists:shippings,id',
         ];
     }
