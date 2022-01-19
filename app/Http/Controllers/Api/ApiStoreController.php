@@ -32,11 +32,11 @@ class ApiStoreController extends Controller
     {
 
         $store = $this->userRepository->findOne($id);
-        dd($store->role);
-        if ($store->user_role != 'owner_store') {
-            return $this->ApiResponse(null, 'You are not owner of this store', 401);
+
+        if ($store && $store->hasRole('owner_store')) {
+            return $this->ApiResponse(new StoreResource($store), null, 200);
         }
 
-        return $this->ApiResponse(new StoreResource($store), null, 200);
+        return $this->ApiResponse(null, trans('local.store_not_found'), 401);
     }
 }

@@ -166,4 +166,5 @@ return [
     'added_to_cart' => 'Added to cart successfully',
     'removed_from_cart' => 'Removed from cart successfully',
     "cart_updated" => 'Cart updated successfully',
+    "store_not_found" => 'Store not found',
 ];
