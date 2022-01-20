@@ -107,4 +107,59 @@ class ApiAuthController extends Controller
         $user = auth()->user();
         return $this->ApiResponse(['user' => new UserResource($user)], 'test message', 200);
     }
+
+    public function resetPassword(Request $request)
+    {
+        $phone = $request->phone;
+
+        $user = $this->usersRepository->findWhere([
+            ['phone', $phone],
+        ]);
+        if ($user && $user->approved == 1) {
+            $code = rand(1111, 9999);
+            $user->update(['verification_code' => $code]);
+            // $this->sendSms($phone, $code);
+            return $this->ApiResponse(null, trans('admin.code_sent'), 200);
+        }
+
+        return $this->ApiResponse(null, trans('errors.user_not_found'), 404);
+    }
+
+    public function verifyCodeNewPassword(Request $request)
+    {
+
+        $user = $this->usersRepository->findWhere([['phone', $request->phone]]);
+
+        if ($user) {
+            if ($user->verification_code == $request->code) {
+                $token = $user->createToken('tokens')->plainTextToken;
+                return $this->ApiResponse(['token' => $token], null, 200);
+            } else {
+                return $this->ApiResponse(null, trans('local.verify_code_error'), 404);
+            }
+        }
+
+        return $this->ApiResponse(null, trans('errors.user_not_found'), 404);
+    }
+
+
+    public function newPassword(Request $request)
+    {
+        try {
+
+            $user = auth()->user();
+
+            if ($request->password == $request->password_confirm) {
+
+                $user->update(['password' => bcrypt($request->password), 'verification_code' => null]);
+
+                return $this->ApiResponse(null, trans('admin.updated_success'), 200);
+            } else {
+                return $this->ApiResponse(null, trans('validation.password'), 404);
+            }
+        } catch (\Exception $e) {
+
+            return $this->ApiResponse(null, $e, 404);
+        }
+    }
 }
