@@ -41,9 +41,12 @@ class ApiPackagesController extends Controller
 
         $subscriptions = $this->subscriptionsPackageRepository->getWhere(['user_id' => $user->id])->first();
 
-        if ($subscriptions->plan_id == $request->plan_id) {
+
+        if ($subscriptions && $subscriptions->plan_id == $request->plan_id) {
             return $this->ApiResponse(null, trans('local.already_subscriped_to_this_plan'), 403);
         }
+
+
 
         if ($subscriptions) {
             $subscriptions->plan_id = $request->plan_id;
@@ -68,7 +71,6 @@ class ApiPackagesController extends Controller
             $user->package_id = $request->plan_id;
             $user->save();
             return $this->ApiResponse($subscription, null, 200);
-
         } else {
             return $this->ApiResponse(null, trans('local.plan_not_found'), 403);
         }
