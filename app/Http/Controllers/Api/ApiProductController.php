@@ -40,7 +40,7 @@ class ApiProductController extends Controller
             $image = $this->filesServices->uploadfile($img, $this->productDirectory);
         }
 
-        $product = $this->productRepository->create([
+        $this->productRepository->create([
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
@@ -50,7 +50,7 @@ class ApiProductController extends Controller
             'seller_id' => auth()->user()->id
         ]);
 
-        return $this->ApiResponse($product, 'Retrive Data success', 200);
+        return $this->ApiResponse(null, 'Retrive Data success', 200);
     }
 
     public function show($id)

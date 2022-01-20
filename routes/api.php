@@ -93,7 +93,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('product/create',                   'ApiProductController@create');
         Route::post('product/update/{id}',              'ApiProductController@update');
         Route::delete('product/delete/{id}',            'ApiProductController@delete');
-        Route::put('order/update-status',               'ApiOrderController@updateOrderStatus');
+        Route::post('order/update-status',               'ApiOrderController@updateOrderStatus');
         Route::post('my-orders/search',                 'ApiOrderController@searchOrders');
         // current orders
         Route::get('my-orders/current',                 'ApiOrderController@currentOrders');

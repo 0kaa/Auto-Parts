@@ -112,7 +112,7 @@ class ApiOrderController extends Controller
             // Notify::NotifyMob($notification->message_ar, $notification->message_en, $request->seller_id, null, $data = null);
 
             $cart->delete();
-        
+
             return $this->ApiResponse(null, trans('local.order_done'), 200);
         } catch (\Exception $e) {
             return $this->ApiResponse(null, $e->getMessage(), 400);
@@ -213,12 +213,10 @@ class ApiOrderController extends Controller
 
             $user_orders = [];
             $workshop_orders = [];
-            $shop_orders = [];
 
-            $orders->each(function ($order) use (&$user_orders, &$workshop_orders, &$shop_orders) {
-                if ($order->user->hasRole('owner_store')) {
-                    $shop_orders[]      = $order;
-                } elseif ($order->user->hasRole('workshop')) {
+
+            $orders->each(function ($order) use (&$user_orders, &$workshop_orders) {
+                if ($order->user->hasRole('workshop')) {
                     $workshop_orders[]  = $order;
                 } else {
                     $user_orders[]      = $order;
@@ -227,9 +225,8 @@ class ApiOrderController extends Controller
 
             $user_orders        = OrderResource::collection($user_orders);
             $workshop_orders    = OrderResource::collection($workshop_orders);
-            $shop_orders        = OrderResource::collection($shop_orders);
 
-            return $this->ApiResponse(compact('user_orders', 'workshop_orders', 'shop_orders'), null, 200);
+            return $this->ApiResponse(compact('user_orders', 'workshop_orders'), null, 200);
         }
 
         $current_orders = OrderResource::collection($user->user_orders()->where('order_status', '<>', 'completed')->orderBy('created_at', 'ASC')->get());
