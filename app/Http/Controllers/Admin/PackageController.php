@@ -41,11 +41,13 @@ class PackageController extends Controller
             $badge = $this->filesServices->uploadfile($img, $this->badgeDirectory);
         }
         $features = [];
+
         if ($request->featuresarray) {
             foreach (explode(',', $request->featuresarray) as $key => $feature) {
-                $features[$key] = $feature;
+                $features[$key]['text'] = $feature;
             }
         }
+
         $this->packageRepository->create(array_merge($request->except('badge', 'featuresarray'), ['badge' => $badge, "features" => $features]));
 
         return  response()->json(['success' => trans('admin.added_success', ['field' => __('local.package')]), 200]);
@@ -73,7 +75,7 @@ class PackageController extends Controller
         $features = [];
         if ($request->featuresarray) {
             foreach (explode(',', $request->featuresarray) as $key => $feature) {
-                $features[$key] = $feature;
+                $features[$key]['text'] = $feature;
             }
         }
 
