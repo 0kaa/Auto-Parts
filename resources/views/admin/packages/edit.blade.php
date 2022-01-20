@@ -234,7 +234,7 @@
 
                             <div id="append_features" data-lang="{{app()->getLocale()}}">
                               @if(isset($packages) && $packages->features)
-                                @foreach($packages->features as $key => $feature)
+                                @foreach($packages->features as $key => $feature)                                
                                 <div class="remove-this">
                                     <div class="add-divs">
                                         <div class="click-add-res click-minus">
@@ -247,7 +247,7 @@
                                 <div class="form-group">
                                     <label class="form-label" for="features"> <span class="tx-danger">*</span>
                                         @lang('local.feature')</label>
-                                    <input type="text" id="features" class="form-control array_features" name="feature_{{$key}}" placeholder=" @lang('local.feature')" value="{{$feature}}" aria-label=" @lang('local.feature')" aria-describedby="basic-addon-name" required="">
+                                    <input type="text" id="features" class="form-control array_features" name="feature_{{$key}}" placeholder=" @lang('local.feature')" value="{{$feature['text']}}" aria-label=" @lang('local.feature')" aria-describedby="basic-addon-name" required="">
                                     <div class="alert alert-danger mg-t-20" role="alert">
                                         <div class="d-flex align-items-center justify-content-start">
                                             <i class="icon ion-ios-close alert-icon tx-32"></i>
