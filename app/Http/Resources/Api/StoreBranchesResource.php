@@ -14,14 +14,23 @@ class StoreBranchesResource extends JsonResource
      */
     public function toArray($request)
     {
+        foreach ($this->branches as $key => $branch) {
+            $branches[] = [
+                'branch_num' => __('local.branch_' . $key),
+                'region' => new RegionResource($branch->region),
+                'city' => new CityResource($branch->city),
+                'phone' => $this->phone,
+                'address' => $this->address,
+            ];
+        }
         return [
             'id' => $this->id,
-            'image' => url('/storage') . '/' .$this->image,
+            'image' => url('/storage') . '/' . $this->image,
             'is_company_facility_agent' => $this->is_company_facility_agent,
             'is_company_facility_authorized_distributor' => $this->is_company_facility_authorized_distributor,
             'other_branches' => $this->other_branches,
             'company_sector_id' => $this->company_sector_id,
-            'branches' => BranchResource::collection($this->branches)
+            'branches' => $branches
         ];
     }
 }
