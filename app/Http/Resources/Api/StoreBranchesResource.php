@@ -16,7 +16,7 @@ class StoreBranchesResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => url('/') . '/' .$this->image,
+            'image' => url('/storage') . '/' .$this->image,
             'is_company_facility_agent' => $this->is_company_facility_agent,
             'is_company_facility_authorized_distributor' => $this->is_company_facility_authorized_distributor,
             'other_branches' => $this->other_branches,

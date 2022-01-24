@@ -24,7 +24,7 @@ class ProductDetailResource extends JsonResource
             'seller_id' => $this->seller->id,
             'seller_name' => $this->seller->name_owner_compamny,
             'seller_rating' => $this->seller->rating,
-            'seller_image' => url('/') . '/' . $this->seller->image,
+            'seller_image' => url('/storage') . '/' . $this->seller->image,
             'store_name' => $this->seller->name_company,
             'features' => $this->features,
             'details' => $this->details,
