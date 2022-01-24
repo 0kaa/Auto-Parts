@@ -17,20 +17,20 @@ class MasterApiRequest extends FormRequest
 
     public function messages()
     {
-        return [
-
-        ];
+        return [];
     }
 
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json(
             [
-            // 'error' => $validator->errors()->first(),
-            'message' => $validator->errors()->first(),
-            'status' => 'false',
+                'data' => [
+                    'message' => $validator->errors()->first(),
+                    'data' => [],
+                    'status' => 'false',
+                ]
             ],
-            JsonResponse::HTTP_UNPROCESSABLE_ENTITY)); // 422
-    }    
-
+            JsonResponse::HTTP_UNPROCESSABLE_ENTITY
+        )); // 422
+    }
 }

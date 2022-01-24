@@ -176,4 +176,5 @@ return [
     'removed_from_cart' => 'تم حذف المنتج من السلة',
     "cart_updated" => "تم تحديث السلة بنجاح",
     'store_not_found' => 'لم يتم العثور على متجر بهذا الرقم',
+    'phone_required' => 'يجب ادخال رقم الهاتف',
 ];
