@@ -43,11 +43,11 @@ class ApiAuthController extends Controller
                 ]);
             }
 
-            // if ($user && $user->approved == 1 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
-            $token = $user->createToken('tokens')->plainTextToken;
-            // } else {
-            //     return $this->ApiResponse(null, trans('admin.login_error'), 404);
-            // }
+            if ($user && $user->approved == 1 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
+                $token = $user->createToken('tokens')->plainTextToken;
+            } else {
+                return $this->ApiResponse(null, trans('admin.login_error'), 404);
+            }
 
             return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], trans('admin.login_success'), 200);
         } catch (\Exception $e) {
