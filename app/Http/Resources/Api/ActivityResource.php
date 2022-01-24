@@ -18,7 +18,7 @@ class ActivityResource extends JsonResource
             'id'        => $this->id,
             'name'      => $this->name,
             'type'      => $this->type,
-            'image'     => $this->image,
+            'image'     => url('/') . '/' . $this->image,
             'stores'    => StoresResource::collection($this->store),
         ];
     }
