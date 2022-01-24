@@ -19,8 +19,8 @@ class StoreBranchesResource extends JsonResource
                 'branch_num' => __('local.branch_' . $key),
                 'region' => new RegionResource($branch->region),
                 'city' => new CityResource($branch->city),
-                'phone' => $this->phone,
-                'address' => $this->address,
+                'phone' => $branch->phone,
+                'address' => $branch->address,
             ];
         }
         return [

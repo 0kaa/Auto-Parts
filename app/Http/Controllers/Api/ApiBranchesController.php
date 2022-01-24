@@ -30,28 +30,17 @@ class ApiBranchesController extends Controller
     {
 
         $user = auth()->user();
-        // dd(json_decode($request->branches));
-        $user->update([
-            'activity_type_id' => ($request->get('activity_type_id') ? $request->get('activity_type_id') : $user->activity_type_id),
-        ]);
-
         if ($request->branches) {
             $user->branches()->delete();
-            foreach (json_decode($request->branches) as $branch) {
+            foreach ($request->branches as $branch) {
                 $user->branches()->create([
-                    'address'   => $branch->address,
-                    'city_id'   => $branch->city_id,
-                    'region_id' => $branch->region_id,
-                    'phone'     => $branch->phone,
+                    'address'   => $branch['address'],
+                    'city_id'   => $branch['city_id'],
+                    'region_id' => $branch['region_id'],
+                    'phone'     => $branch['phone'],
                 ]);
             }
         }
-
-
-        // $user->update([
-        //     'activity_type_id' => ($request->get('activity_type_id') ? $request->get('activity_type_id') : $user->activity_type_id),
-
-        // ]);
 
         return $this->ApiResponse(new StoreBranchesResource($user), trans('admin.updated_success'), 200);
     }
