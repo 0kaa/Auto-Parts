@@ -40,6 +40,7 @@ class ApiCompanyController extends Controller
             'date' => ($request->get('date') ? $request->get('date') : $user->date),
             'city_id' => ($request->get('city_id') ? $request->get('city_id') : $user->city_id),
             'region_id' => ($request->get('region_id') ? $request->get('region_id') : $user->region_id),
+            'commercial_register_id' => ($request->get('commercial_register_id') ? $request->get('commercial_register_id') : $user->commercial_register_id),
             'file' => ($request->has('file') ? $request->file('file')->store('company') : $user->file),
         ]);
 
