@@ -33,7 +33,7 @@ class ApiCompanyController extends Controller
         $user->update([
             'activity_type_id' => ($request->get('activity_type_id') ? $request->get('activity_type_id') : $user->activity_type_id),
             'name_company' => ($request->get('name_company') ? $request->get('name_company') : $user->name_company),
-            'image' => ($request->has('image') ? $request->file('image') : $user->image),
+            'image' => ($request->has('image') ? $request->file('image')->store('user') : $user->image),
             'name_company' => ($request->get('name_company') ? $request->get('name_company') : $user->name_company),
             'name_owner_company' => ($request->get('name_owner_company') ? $request->get('name_owner_company') : $user->name_owner_company),
             'national_identity' => ($request->get('national_identity') ? $request->get('national_identity') : $user->national_identity),
