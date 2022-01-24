@@ -26,25 +26,30 @@ Route::namespace('Api\Auth')->middleware('lang')->group(function () {
 
 Route::namespace('Api')->middleware('lang')->group(function () {
 
-    Route::get('activities',            'ApiActivitiesController@index');
-    // sub activities
-    Route::get('activity/{id}',         'ApiActivitiesController@show');
-    Route::get('activity/{id}/sub',     'ApiActivitiesController@getSubActivities');
-    Route::get('stores',                'ApiStoreController@getStoresList');
-    Route::get('store/{id}',            'ApiStoreController@getStore');
-    Route::get('product/{id}',          'ApiProductController@show');
-    Route::get('products/store/{id}',   'ApiProductController@getStoreProducts');
 
-    Route::get('static-page/{slug}',    'ApiStaticPagesController@getStaticPage');
-    Route::get('faqs',                  'ApiFaqsController@index');
-    Route::get('cars',                  'ApiCarController@index');
-    Route::get('cities',                'ApiCityController@index');
-    Route::get('regions',                'ApiRegionController@index');
-    Route::post('contactus',            'ApiContactUsController@create');
-    Route::get('shippings',             'ApiShippingController@index');
 
     // All users | authenticated required
     Route::group(['middleware' => ['auth:sanctum']], function () {
+
+        Route::get('activities',            'ApiActivitiesController@index');
+        // sub activities
+        Route::get('activity/{id}',         'ApiActivitiesController@show');
+        Route::get('activity/{id}/sub',     'ApiActivitiesController@getSubActivities');
+        Route::get('stores',                'ApiStoreController@getStoresList');
+        Route::get('store/{id}',            'ApiStoreController@getStore');
+        Route::get('product/{id}',          'ApiProductController@show');
+        Route::get('products/store/{id}',   'ApiProductController@getStoreProducts');
+
+        Route::get('static-page/{slug}',    'ApiStaticPagesController@getStaticPage');
+        Route::get('faqs',                  'ApiFaqsController@index');
+        Route::get('cars',                  'ApiCarController@index');
+        Route::get('companies-sector',      'ApiAccountController@companiesSector');
+        Route::get('cities',                'ApiCityController@index');
+        Route::get('regions',               'ApiRegionController@index');
+        Route::post('contactus',            'ApiContactUsController@create');
+        Route::get('shippings',             'ApiShippingController@index');
+
+
         Route::post('change-password',                  'ApiAccountController@change_password');
         Route::get('notifications',                     'ApiNotificationsController@index');
         Route::get('my-account',                        'ApiAccountController@index');

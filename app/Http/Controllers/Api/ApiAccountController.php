@@ -6,7 +6,9 @@ use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ChangePasswordRequest;
 use App\Http\Requests\Api\UpdateAccountRequest;
+use App\Http\Resources\Api\CompanySectorResource;
 use App\Http\Resources\Api\UserResource;
+use App\Models\CompanySector;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -37,7 +39,7 @@ class ApiAccountController extends Controller
     public function update(UpdateAccountRequest $request)
     {
         $user = auth()->user();
-        
+
         $user->update([
             'name' => ($request->get('name') ? $request->get('name') : $user->name),
             'email' => ($request->get('email') ? $request->get('email') : $user->email),
@@ -63,5 +65,12 @@ class ApiAccountController extends Controller
         } else {
             return $this->ApiResponse('null', trans('admin.password_required'), 404);
         }
+    }
+
+    public function companiesSector()
+    {
+        $compaines = CompanySector::all();
+
+        return $this->ApiResponse(CompanySectorResource::collection($compaines), trans('admin.updated_success'), 200);
     }
 }
