@@ -136,6 +136,7 @@ return [
     'product_deleted' => 'تم حذف المنتج بنجاح',
     'favourite_added' => 'تم الاضافة الي المحفوظات',
     'favourite_removed' => 'تم الحذف من المحفوظات',
+    'activity_id_not_found' => 'ID لم يتم العثور على نشاط بهذا',
     'order_done' => 'تم تقديم الطلب بنجاح',
     'order_not_done' => 'لم يتم تقديم الطلب',
     'order_not_found' => 'لم يتم العثور على طلب بهذا الرقم',
@@ -223,4 +224,5 @@ return [
     'branch_43' => 'الفرع الثامن والعشرون',
     'branch_44' => 'الفرع التاسع والعشرون',
     'branch_45' => 'الفرع العشرون والعشرون',
+    "you_are_not_registered_in_this_activity_type" => "انت غير مسجل في هذا النوع من النشاط",
 ];

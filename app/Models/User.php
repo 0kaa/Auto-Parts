@@ -80,6 +80,11 @@ class User extends Authenticatable
         return $this->hasOne(ActivityType::class, 'id', 'activity_type_id');
     }
 
+    public function activities()
+    {
+        return $this->hasMany(UserActivities::class, 'user_id', 'id');
+    }
+
     public function region_name()
     {
         return $this->hasOne(Region::class, 'id', 'region_id');

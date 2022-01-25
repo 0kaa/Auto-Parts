@@ -89,6 +89,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
 
     // Owner Store authenticated required
     Route::group(['middleware' => ['auth:sanctum', 'role:owner_store']], function () {
+        Route::get('stores/activity/{id}',              'ApiStoreController@getStoresInMyActivity');
         Route::get('my-company',                        'ApiCompanyController@index');
         Route::post('my-company/update',                'ApiCompanyController@update');
         Route::get('my-branches',                       'ApiBranchesController@index');

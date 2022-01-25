@@ -53,9 +53,10 @@ class ApiActivitiesController extends Controller
     public function show($id)
     {
         $activities_type =  $this->activityTypeRepository->findOne($id);
-        $user = auth()->user();
 
-        dd($user);
+        if (!$activities_type) {
+            return $this->ApiResponse(null, trans('local.activity_id_not_found'), 404);
+        }
 
         return $this->ApiResponse(new ActivityResource($activities_type), null, 200);
     }

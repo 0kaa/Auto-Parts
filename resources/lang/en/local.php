@@ -126,6 +126,7 @@ return [
     'product_deleted' => 'The product has been deleted successfully',
     'favourite_added' => 'Added to Favourites',
     'favourite_removed' => 'Removed from Favourites',
+    "activity_id_not_found" => "Activity Type ID not found",
     'order_done' => 'The order has been successfully placed',
 
     'order_not_done' => 'The order has not been placed',
@@ -213,4 +214,5 @@ return [
     "branch_43" => 'Forty Fourth Branch',
     "branch_44" => 'Forty Fifth Branch',
     "branch_45" => 'Forty Sixth Branch',
+    "you_are_not_registered_in_this_activity_type" => 'You are not registered in this activity type',
 ];
