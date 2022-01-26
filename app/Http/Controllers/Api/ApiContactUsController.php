@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\ContactRequest;
 use App\Repositories\ContactUsRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -19,15 +20,15 @@ class ApiContactUsController extends Controller
         $this->contactUsRepository  = $contactUsRepository;
     }
 
-    public function create(Request $request)
+    public function create(ContactRequest $request)
     {
-        $name = $request->name;
-        $email = $request->email;
-        $message = $request->message;
+        try {
 
-        $form = $this->contactUsRepository->create(['name' => $name, 'email' => $email, 'message' => $message]);
+            $form = $this->contactUsRepository->create(['name' => $request->name, 'email' => $request->email, 'message' => $request->message]);
 
-        return $this->ApiResponse($form, null, 200);
+            return $this->ApiResponse($form, trans('local.contact_success'), 200);
+        } catch (\Exception $e) {
+            return $this->ApiResponse(null, $e->getMessage(), 400);
+        }
     }
-
 }
