@@ -44,7 +44,7 @@ class ApiAuthController extends Controller
             }
 
             if ($user && $user->approved == 0 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
-                return $this->ApiResponse(['phone' => $user->phone, 'code' => $user->verification_code], null, 200);
+                return $this->ApiResponse(['phone' => $user->phone, 'approved' => $user->approved, 'code' => $user->verification_code], null, 200);
             }
 
 
@@ -76,7 +76,7 @@ class ApiAuthController extends Controller
             } else {
                 return $this->ApiResponse(null, trans('local.user_type_not_found'), 404);
             }
-            
+
             $user->devices()->create([
                 'device_id'         => $request->device_id,
                 'platform_type'     => $request->platform_type,
