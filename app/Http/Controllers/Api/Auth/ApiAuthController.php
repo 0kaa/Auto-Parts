@@ -98,6 +98,10 @@ class ApiAuthController extends Controller
         try {
             $code = $this->usersRepository->getWhere([['verification_code', $request->code], ['phone', $request->phone]])->first();
 
+            if (!$code) {
+                return $this->ApiResponse(null, trans('local.verify_code_error'), 404);
+            }
+
             $user_device_id = $code->devices->where('device_id', $request->device_id)->where('platform_type', $request->platform_type)->first();
 
             if ($code) {

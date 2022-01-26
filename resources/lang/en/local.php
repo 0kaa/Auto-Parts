@@ -81,7 +81,7 @@ return [
     'contact_success' => 'Done Send Message Successfully',
     'register' => 'Register',
     'verify_code_success' => 'verify code success',
-    'verify_code_error' => 'verify code error',
+    'verify_code_error' => 'Verify code not correct',
     'name_enterprise' => 'Facility Name',
     'user_name_enterprise' => 'The name of the owner of the facility',
     'user_identity_enterprise' => 'The owners ID number',
