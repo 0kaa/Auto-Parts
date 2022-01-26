@@ -43,6 +43,11 @@ class ApiAuthController extends Controller
                 ]);
             }
 
+            if ($user && $user->approved == 0 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
+                return $this->ApiResponse(['phone' => $user->phone, 'code' => $user->verification_code], null, 200);
+            }
+
+
             if ($user && $user->approved == 1 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
                 $token = $user->createToken('tokens')->plainTextToken;
             } else {
@@ -66,7 +71,12 @@ class ApiAuthController extends Controller
         $user = $this->usersRepository->create($attribute);
 
         if ($user) {
-
+            if ($request->type == 'user' || $request->type == 'workshop') {
+                $user->assignRole($request->type);
+            } else {
+                return $this->ApiResponse(null, trans('local.user_type_not_found'), 404);
+            }
+            
             $user->devices()->create([
                 'device_id'         => $request->device_id,
                 'platform_type'     => $request->platform_type,
@@ -76,9 +86,7 @@ class ApiAuthController extends Controller
 
             $token = $user->createToken('tokens')->plainTextToken;
 
-            $user->assignRole('user');
-
-            return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], null, 200);
+            return $this->ApiResponse(['token' => $token, 'code' => $user->verification_code, 'user' => new UserResource($user)], null, 200);
         } else {
 
             return $this->ApiResponse(null, trans('local.successfully.registered'), 404);

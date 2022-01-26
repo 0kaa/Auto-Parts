@@ -225,4 +225,5 @@ return [
     'branch_44' => 'الفرع التاسع والعشرون',
     'branch_45' => 'الفرع العشرون والعشرون',
     "you_are_not_registered_in_this_activity_type" => "انت غير مسجل في هذا النوع من النشاط",
+    "user_type_not_found" => "نوع المستخدم غير موجود",
 ];

@@ -27,6 +27,9 @@ Route::namespace('Api\Auth')->middleware('lang')->group(function () {
 Route::namespace('Api')->middleware('lang')->group(function () {
 
 
+    Route::get('static-page/{slug}',    'ApiStaticPagesController@getStaticPage');
+    Route::get('faqs',                  'ApiFaqsController@index');
+
 
     // All users | authenticated required
     Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -40,8 +43,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::get('product/{id}',          'ApiProductController@show');
         Route::get('products/store/{id}',   'ApiProductController@getStoreProducts');
 
-        Route::get('static-page/{slug}',    'ApiStaticPagesController@getStaticPage');
-        Route::get('faqs',                  'ApiFaqsController@index');
+
         Route::get('cars',                  'ApiCarController@index');
         Route::get('companies-sector',      'ApiAccountController@companiesSector');
         Route::get('cities',                'ApiCityController@index');
