@@ -34,7 +34,6 @@ class ApiAuthController extends Controller
             $user_device_id = $user->devices->where('device_id', $request->device_id)->where('platform_type', $request->platform_type)->first();
 
             if (!$user_device_id) {
-
                 $user->devices()->create([
                     'device_id'         => $request->device_id,
                     'platform_type'     => $request->platform_type,
@@ -99,9 +98,24 @@ class ApiAuthController extends Controller
         try {
             $code = $this->usersRepository->getWhere([['verification_code', $request->code], ['phone', $request->phone]])->first();
 
+            $user_device_id = $code->devices->where('device_id', $request->device_id)->where('platform_type', $request->platform_type)->first();
+
             if ($code) {
+
+                if (!$user_device_id) {
+                    $code->devices()->create([
+                        'device_id'         => $request->device_id,
+                        'platform_type'     => $request->platform_type,
+                        'firebase_token'    => $request->firebase_token,
+                        'user_id'           => $code->id,
+                    ]);
+                }
+
                 $code->update(['approved' => 1, 'verification_code' => null]);
-                return $this->ApiResponse(null, trans('local.verify_code_success'), 200);
+
+                $token = $code->createToken('tokens')->plainTextToken;
+
+                return $this->ApiResponse(['token' => $token, 'code' => $code->verification_code, 'user' => new UserResource($code)], trans('local.verify_code_success'), 200);
             } else {
                 return $this->ApiResponse(null, trans('local.verify_code_error'), 404);
             }

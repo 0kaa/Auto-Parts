@@ -25,8 +25,11 @@ class ActiveCodeRequest extends FormRequest
     {
         return [
 
-            'code' => 'required'
-            
+            'code' => 'required',
+            'phone' => 'required',
+            "device_id" => 'required',
+            'platform_type' => 'required',
+            'firebase_token' => 'required',
         ];
     }
 }
