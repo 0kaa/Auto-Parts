@@ -17,6 +17,7 @@ class UserResource extends JsonResource
             "address"       => $this->address,
             "lat"           => $this->lat,
             "lng"           => $this->lng,
+            'is_notify'     => $this->is_notify,
             "image"         => $this->image ? url('/storage') . '/' . $this->image : null,
             "created_at"    => $this->created_at->format('Y-m-d'),
             'type'          => $this->roles->pluck('name')->first(),

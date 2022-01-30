@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ChangePasswordRequest;
+use App\Http\Requests\Api\ToggleNotificationsRequest;
 use App\Http\Requests\Api\UpdateAccountRequest;
 use App\Http\Resources\Api\CompanySectorResource;
 use App\Http\Resources\Api\UserResource;
@@ -41,11 +42,11 @@ class ApiAccountController extends Controller
         $user = auth()->user();
 
         $user->update([
-            'name' => ($request->get('name') ? $request->get('name') : $user->name),
-            'email' => ($request->get('email') ? $request->get('email') : $user->email),
-            'phone' => ($request->get('phone') ? $request->get('phone') : $user->phone),
-            'address' => ($request->get('address') ? $request->get('address') : $user->address),
-            'image' => ($request->hasFile('image') ? $this->filesServices->uploadfile($request->file('image'), $this->userDirectory) : $user->image),
+            'name' => $request->name ? $request->name : $user->name,
+            'email' => $request->email ? $request->email : $user->email,
+            'phone' => $request->phone ? $request->phone : $user->phone,
+            'address' => $request->address ? $request->address : $user->address,
+            'image' => $request->hasFile('image') ? $this->filesServices->uploadfile($request->file('image'), $this->userDirectory) : $user->image,
         ]);
 
         return $this->ApiResponse(new UserResource($user), trans('admin.updated_success'), 200);
@@ -59,8 +60,8 @@ class ApiAccountController extends Controller
 
         if (Hash::check($request->password, $user_password)) {
             $new_password = bcrypt($request->new_password);
-            $user->update(['password' => $new_password]);
-
+            $user->password = $new_password;
+            $user->save();
             return $this->ApiResponse('null', trans('admin.updated_success'), 200);
         } else {
             return $this->ApiResponse('null', trans('admin.password_required'), 404);
@@ -72,5 +73,27 @@ class ApiAccountController extends Controller
         $compaines = CompanySector::all();
 
         return $this->ApiResponse(CompanySectorResource::collection($compaines), trans('admin.updated_success'), 200);
+    }
+
+    public function toggleNotifications(ToggleNotificationsRequest $request)
+    {
+        try {
+            $user = auth()->user();
+
+            $notification_status = $request->notification_status;
+
+            $notification_status = $notification_status == 1 ? 1 : 0;
+
+            $user->is_notify = $notification_status;
+
+            $user->save();
+
+            if ($notification_status == 1) {
+                return $this->ApiResponse(null, trans('local.notifications_turned_on'), 200);
+            }
+            return $this->ApiResponse(null, trans('local.notifications_turned_off'), 200);
+        } catch (\Exception $e) {
+            return $this->ApiResponse(null, $e->getMessage(), 400);
+        }
     }
 }

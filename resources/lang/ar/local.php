@@ -227,4 +227,6 @@ return [
     "you_are_not_registered_in_this_activity_type" => "انت غير مسجل في هذا النوع من النشاط",
     "user_type_not_found" => "نوع المستخدم غير موجود",
     'product_added_successfuly' => 'تم اضافة المنتج بنجاح',
+    'notifications_turned_on' => 'تم تشغيل الاشعارات',
+    'notifications_turned_off' => 'تم اغلاق الاشعارات',
 ];

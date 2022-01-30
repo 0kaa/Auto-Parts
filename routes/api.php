@@ -56,6 +56,8 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::get('notifications',                     'ApiNotificationsController@index');
         Route::get('my-account',                        'ApiAccountController@index');
         Route::post('my-account/update',                'ApiAccountController@update');
+        // open app notifications
+        Route::post('notifications/toggle',                    'ApiAccountController@toggleNotifications');
         Route::get('my-orders',                         'ApiOrderController@myOrders');
         Route::get('order/{id}',                        'ApiOrderController@getOrder');
         Route::get('custom-order/{id}',                 'ApiCustomOrderController@getOrder');
