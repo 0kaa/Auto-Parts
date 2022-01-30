@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_ship_address')->nullable();
             $table->float('total_amount', 10, 2);
             $table->dateTime('order_delivered_at')->nullable();
-            $table->enum('order_status', ['pending', 'accepted', 'processing', 'delivered', 'completed', 'cancelled'])->defailt('pending');
+            $table->enum('order_status', ['pending', 'accepted', 'processing', 'completed', 'cancelled'])->defailt('pending');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();

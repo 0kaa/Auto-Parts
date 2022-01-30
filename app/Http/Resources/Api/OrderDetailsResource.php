@@ -24,6 +24,13 @@ class OrderDetailsResource extends JsonResource
             'order_ship_phone'      => $this->order_ship_phone,
             'order_delivered_at'    => $this->order_delivered_at,
             'total_amount'          => $this->total_amount,
+            'shipping_amount'       => 1,
+            'total'                 => $this->total_amount + 1,
+            'seller_name'           => $this->seller->name,
+            'seller_activity_type'  => $this->seller->activity_name->name,
+            'seller_region'         => $this->seller->region_name->name,
+            'seller_city'           => $this->seller->city_name->name,
+            'seller_commercial_register_id' => $this->seller->commercial_register_id,
             'products'              => OrderItemResource::collection($this->order_items),
 
         ];

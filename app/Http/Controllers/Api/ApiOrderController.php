@@ -134,7 +134,11 @@ class ApiOrderController extends Controller
     {
         try {
             $order = $this->orderRepository->findOne($id);
-            return $this->ApiResponse(new OrderDetailsResource($order), null, 200);
+            if ($order) {
+                return $this->ApiResponse(new OrderDetailsResource($order), null, 200);
+            } else {
+                return $this->ApiResponse(null, trans('local.order_not_found'), 404);
+            }
         } catch (\Exception $e) {
             return $this->ApiResponse(null, $e->getMessage(), 400);
         }
@@ -185,8 +189,8 @@ class ApiOrderController extends Controller
 
         $order = $this->orderRepository->findOne($request->order_id);
 
-        if ($order && $order->seller_id == auth()->user()->id && $order->order_status != 'delivered') {
-            if ($request->order_status == 'delivered') {
+        if ($order && $order->seller_id == auth()->user()->id && $order->order_status != 'completed') {
+            if ($request->order_status == 'completed') {
                 $order->order_status = $request->order_status;
                 $order->order_delivered_at = new DateTime();
                 $order->save();
