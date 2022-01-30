@@ -216,4 +216,5 @@ return [
     "branch_45" => 'Forty Sixth Branch',
     "you_are_not_registered_in_this_activity_type" => 'You are not registered in this activity type',
     "user_type_not_found" => 'User type not found',
+    'product_added_successfuly' => 'Product added successfully',
 ];

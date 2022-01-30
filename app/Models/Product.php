@@ -28,16 +28,16 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'features' => 'array',
-        'details' => 'array',
+        'features'  => 'array',
+        'details'   => 'array',
     ];
 
     public static $rules = [
-        'name' => 'required',
-        'price' => 'required',
+        'name'      => 'required',
+        'price'     => 'required',
+        'details'   => 'required',
+        'features'  => 'required',
     ];
-
-
 
     /**
      * The attributes that should be hidden for serialization.

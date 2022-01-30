@@ -50,7 +50,7 @@ class ApiProductController extends Controller
             'seller_id' => auth()->user()->id
         ]);
 
-        return $this->ApiResponse(null, 'Retrive Data success', 200);
+        return $this->ApiResponse(null, trans('local.product_added_successfuly'), 200);
     }
 
     public function show($id)
