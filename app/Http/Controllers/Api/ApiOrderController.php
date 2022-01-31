@@ -19,6 +19,9 @@ use App\Repositories\OrderItemRepositoryInterface;
 use App\Services\Notify;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\Api\OrderStatusResource;
+use App\Models\OrderStatus;
 
 class ApiOrderController extends Controller
 {
@@ -78,7 +81,7 @@ class ApiOrderController extends Controller
                     'order_ship_phone'      => $request->order_ship_phone,
                     'shipping_id'           => $request->shipping_id,
                     'total_amount'          => $total_amount,
-                    'order_status'          => 'pending',
+                    'order_status_id'       => 1,
                 ]);
 
                 $total_amount = 0;
@@ -169,10 +172,10 @@ class ApiOrderController extends Controller
                 $q->whereDate('created_at', '<=', $date);
             }
 
-            // search by order_status
-            if ($request->has('order_status')) {
-                $order_status = $request->order_status;
-                $q->where('order_status', $order_status);
+            // search by order_status_id
+            if ($request->has('order_status_id')) {
+                $order_status_id = $request->order_status_id;
+                $q->where('order_status_id', $order_status_id);
             }
 
             $orders = $q->get();
@@ -188,15 +191,20 @@ class ApiOrderController extends Controller
     {
 
         $order = $this->orderRepository->findOne($request->order_id);
+        $orderStatus = OrderStatus::where('id', $request->order_status_id)->first();
 
-        if ($order && $order->seller_id == auth()->user()->id && $order->order_status != 'completed') {
-            if ($request->order_status == 'completed') {
-                $order->order_status = $request->order_status;
+        if (!$orderStatus) {
+            return $this->ApiResponse(null, trans('local.order_status_required'), 404);
+        }
+
+        if ($order && $order->seller_id == auth()->user()->id && $order->order_status->slug != 'completed') {
+            if ($orderStatus->slug == 'completed') {
+                $order->order_status_id = $orderStatus->id;
                 $order->order_delivered_at = new DateTime();
                 $order->save();
                 return $this->ApiResponse(null, trans('local.order_status_updated'), 200);
             }
-            $order->order_status = $request->order_status;
+            $order->order_status_id = $orderStatus->id;
             $order->save();
             return $this->ApiResponse(null, trans('local.order_status_updated'), 200);
         } else {
@@ -238,5 +246,12 @@ class ApiOrderController extends Controller
         $previous_orders = OrderResource::collection($user->user_orders()->where('order_status', '=', 'completed')->get());
 
         return $this->ApiResponse(compact('current_orders', 'previous_orders'), null, 200);
+    }
+
+    public function orderStatus()
+    {
+        $order_status = OrderStatus::all();
+
+        return $this->ApiResponse(OrderStatusResource::collection($order_status), null, 200);
     }
 }

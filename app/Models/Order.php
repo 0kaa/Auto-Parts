@@ -11,7 +11,7 @@ class Order extends Model
 
     protected $fillable = [
         'id',
-        'order_status',
+        'order_status_id',
         'order_ship_name',
         'order_ship_phone',
         'order_ship_address',
@@ -41,6 +41,11 @@ class Order extends Model
     public function shipping()
     {
         return $this->belongsTo(Shipping::class, 'shipping_id', 'id');
+    }
+
+    public function order_status()
+    {
+        return $this->belongsTo(OrderStatus::class, 'order_status_id', 'id');
     }
     
 }

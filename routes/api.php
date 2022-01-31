@@ -56,10 +56,10 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::get('notifications',                     'ApiNotificationsController@index');
         Route::get('my-account',                        'ApiAccountController@index');
         Route::post('my-account/update',                'ApiAccountController@update');
-        // open app notifications
-        Route::post('notifications/toggle',                    'ApiAccountController@toggleNotifications');
+        Route::post('notifications/toggle',             'ApiAccountController@toggleNotifications');
         Route::get('my-orders',                         'ApiOrderController@myOrders');
         Route::get('order/{id}',                        'ApiOrderController@getOrder');
+        Route::get('order_status',                      'ApiOrderController@orderStatus');
         Route::get('custom-order/{id}',                 'ApiCustomOrderController@getOrder');
     });
 
@@ -70,7 +70,6 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::get('user-custom-order/{id}',            'ApiCustomOrderController@getCustomOrder');
         Route::post('price-offer/{id}/accept',          'ApiCustomOrderController@AcceptPriceOffer');
         Route::post('price-offer/{id}/reject',          'ApiCustomOrderController@RejectPriceOffer');
-        // Price offers
         Route::get('price-offers/order/{id}',           'ApiCustomOrderController@PriceOffers');
         Route::get('my-custom-orders',                  'ApiCustomOrderController@userOrders');
 
@@ -82,12 +81,10 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('new-order',                        'ApiOrderController@CreateOrder');
         Route::get('search',                            'ApiSearchController@search');
 
-        // Cart
+        Route::get('cart',                              'ApiCartController@getMyCart');
         Route::post('cart/create',                      'ApiCartController@addToCart');
         Route::post('cart/remove',                      'ApiCartController@removeFromCart');
-        // changeQuantity
         Route::post('cart/change-quantity',             'ApiCartController@changeQuantity');
-        Route::get('cart',                              'ApiCartController@getMyCart');
     });
 
 
