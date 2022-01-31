@@ -17,6 +17,7 @@ class ProductDetailResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'image' => $this->image ? url('/storage') . '/' . $this->image : null,
             'price' => $this->price,
             'description' => $this->description,
             'rating' => $this->rating,
