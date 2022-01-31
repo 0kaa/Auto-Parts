@@ -33,10 +33,12 @@ class Product extends Model
     ];
 
     public static $rules = [
-        'name'      => 'required',
-        'price'     => 'required',
-        'details'   => 'required',
-        'features'  => 'required',
+        'name'          => 'required',
+        'price'         => 'required',
+        'image'         => 'required',
+        'description'   => 'required',
+        'details'       => 'required',
+        'features'      => 'required',
     ];
 
     /**
@@ -60,5 +62,4 @@ class Product extends Model
     {
         return $this->morphMany(Favourite::class, 'favouriteable');
     }
-    
 }
