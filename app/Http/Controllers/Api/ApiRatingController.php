@@ -27,6 +27,11 @@ class ApiRatingController extends Controller
         $product = $this->productRepository->findOne($id);
 
         $user = auth()->user();
+
+        if($request->rating > 5) {
+            return $this->ApiResponse(null, trans('local.maximum_rating_is_five'), 400);
+        }
+
         $check_product_rate = $product->ratings->contains('user_id', $user->id);
 
         if (!$check_product_rate) {

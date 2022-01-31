@@ -229,4 +229,5 @@ return [
     'product_added_successfuly' => 'تم اضافة المنتج بنجاح',
     'notifications_turned_on' => 'تم تشغيل الاشعارات',
     'notifications_turned_off' => 'تم اغلاق الاشعارات',
+    "maximum_rating_is_five" => "التقييم الاقصى هو 5",
 ];

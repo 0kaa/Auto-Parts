@@ -219,4 +219,5 @@ return [
     'product_added_successfuly' => 'Product added successfully',
     'notifications_turned_on'   => 'Notifications turned on successfully',
     'notifications_turned_off'  => 'Notifications turned off successfully',
+    "maximum_rating_is_five" => 'Maximum rating is five',
 ];
