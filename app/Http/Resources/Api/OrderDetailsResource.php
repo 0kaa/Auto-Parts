@@ -16,7 +16,7 @@ class OrderDetailsResource extends JsonResource
     {
         return [
             'id'                    => $this->id,
-            'order_status'          => $this->order_status,
+            'order_status'          => $this->order_status->name,
             "order_date"            => $this->created_at->format('l j F Y'),
             'order_time'            => $this->created_at->format('H:i a'),
             'order_ship_name'       => $this->order_ship_name,
