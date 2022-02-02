@@ -164,8 +164,14 @@ class ApiCartController extends Controller
 
             $cart->total_amount = $total;
             $cart->save();
-
-            return $this->ApiResponse(null, trans('local.cart_updated'), 200);
+            $shipping_amount = 1;
+            $data = [
+                'total_amount' => $cart->total_amount,
+                'shipping_amount' => $shipping_amount,
+                'total' => $cart->total_amount + $shipping_amount,
+                'cart_item' => new CartItemsResource($cartItem),
+            ];
+            return $this->ApiResponse($data, trans('local.cart_updated'), 200);
         } catch (\Exception $e) {
             return $this->ApiResponse(null, $e->getMessage(), 400);
         }
