@@ -230,4 +230,5 @@ return [
     'notifications_turned_on' => 'تم تشغيل الاشعارات',
     'notifications_turned_off' => 'تم اغلاق الاشعارات',
     "maximum_rating_is_five" => "التقييم الاقصى هو 5",
+    "cart_item_not_found" => "المنتج غير موجود في سلة المشتريات",
 ];

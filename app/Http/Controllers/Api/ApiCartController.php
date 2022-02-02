@@ -148,6 +148,9 @@ class ApiCartController extends Controller
 
             $cartItem = $this->cartItemRepository->findOne($request->cart_item_id);
 
+            if (!$cartItem) return $this->ApiResponse(null, trans('local.cart_item_not_found'), 404);
+
+
             $cartItem->quantity = $request->quantity;
 
             $cartItem->save();

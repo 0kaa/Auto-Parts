@@ -220,4 +220,5 @@ return [
     'notifications_turned_on'   => 'Notifications turned on successfully',
     'notifications_turned_off'  => 'Notifications turned off successfully',
     "maximum_rating_is_five" => 'Maximum rating is five',
+    "cart_item_not_found" => 'Cart item not found',
 ];
