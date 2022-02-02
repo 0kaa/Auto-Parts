@@ -109,8 +109,8 @@ class ApiCartController extends Controller
 
                 ];
             }
-
-            return $this->ApiResponse(['cart' => $items, 'total_amount' => $cart->total_amount], '', 200);
+            $shipping_amount = 1;
+            return $this->ApiResponse(['cart' => $items, 'total_amount' => $cart->total_amount, 'shipping_amount' => $shipping_amount, 'total' => $this->total_amount + $shipping_amount], '', 200);
         } catch (\Exception $e) {
 
             return $this->ApiResponse(null, $e->getMessage(), 400);
