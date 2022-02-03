@@ -133,7 +133,15 @@ class ApiCartController extends Controller
 
             $cartItem->delete();
 
-            return $this->ApiResponse(null, trans('local.removed_from_cart'), 200);
+            $shipping_amount = 1;
+
+            $data = [
+                'total_amount' => $cart->total_amount,
+                'shipping_amount' => $shipping_amount,
+                'total' => $cart->total_amount + $shipping_amount,
+            ];
+
+            return $this->ApiResponse($data, trans('local.removed_from_cart'), 200);
         } catch (\Exception $e) {
             return $this->ApiResponse(null, $e->getMessage(), 400);
         }
