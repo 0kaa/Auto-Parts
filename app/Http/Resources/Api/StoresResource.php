@@ -16,8 +16,8 @@ class StoresResource extends JsonResource
     {
         return [
             'id'            => $this->id,
-            'image'         => url('/storage') . '/' . $this->image,
-            'cover'         => url('/storage') . '/' . $this->activity_name->cover,
+            'image'         => $this->image ? url('/storage') . '/' . $this->image : $this->image,
+            'cover'         => $this->activity_name->cover ?  url('/storage') . '/' . $this->activity_name->cover : $this->activity_name->cover,
             'name'          => $this->name,
             'badge'         => $this->package ? url('/storage') . '/' . $this->package->badge : null,
             'rating'        => $this->ratings()->avg('rating'),
