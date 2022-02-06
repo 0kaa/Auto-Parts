@@ -62,4 +62,8 @@ class Product extends Model
     {
         return $this->morphMany(Favourite::class, 'favouriteable');
     }
+
+    public function isFav() {
+        return $this->favourite()->where('user_id', auth()->id())->exists();
+    }
 }

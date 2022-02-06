@@ -29,6 +29,7 @@ class ProductDetailResource extends JsonResource
             'store_name' => $this->seller->name_company,
             'features' => $this->features,
             'details' => $this->details,
+            'is_fav' => $this->isFav($this->id),
             'ratings' => RatingResource::collection($this->ratings),
         ];
     }

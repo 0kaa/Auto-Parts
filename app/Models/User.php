@@ -129,4 +129,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(MultiCustomOrder::class);
     }
+    public function isFav() {
+        return $this->favourite()->where('user_id', auth()->id())->exists();
+    }
 }
