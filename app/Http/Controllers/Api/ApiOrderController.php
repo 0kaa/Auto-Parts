@@ -55,9 +55,13 @@ class ApiOrderController extends Controller
     {
         try {
             $user = auth()->user();
+
             $total_amount = 0;
 
             $cart = $user->cart;
+
+            if (!$cart) return $this->ApiResponse(null, trans('local.cart_empty'), 404);
+
 
             $cartItems = $cart->cart_items;
 
@@ -191,6 +195,7 @@ class ApiOrderController extends Controller
     {
 
         $order = $this->orderRepository->findOne($request->order_id);
+
         $orderStatus = OrderStatus::where('id', $request->order_status_id)->first();
 
         if (!$orderStatus) {
@@ -241,9 +246,11 @@ class ApiOrderController extends Controller
             return $this->ApiResponse(compact('user_orders', 'workshop_orders'), null, 200);
         }
 
-        $current_orders = OrderResource::collection($user->user_orders()->where('order_status', '<>', 'completed')->orderBy('created_at', 'ASC')->get());
+        $orderStatus = OrderStatus::where('slug', 'completed')->first();
 
-        $previous_orders = OrderResource::collection($user->user_orders()->where('order_status', '=', 'completed')->get());
+        $current_orders = OrderResource::collection($user->user_orders()->where('order_status_id', '<>', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
+
+        $previous_orders = OrderResource::collection($user->user_orders()->where('order_status_id', '=', $orderStatus->id)->get());
 
         return $this->ApiResponse(compact('current_orders', 'previous_orders'), null, 200);
     }
