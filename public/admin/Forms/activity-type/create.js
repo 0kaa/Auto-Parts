@@ -5,6 +5,7 @@ $(document).ready(function() {
     var name_en = form.find('#name_en');
     var num_pieces = form.find('#num_pieces');
     var image = form.find('#image');
+    var cover = form.find("#cover");
 
 
     form.submit(function(e) {
@@ -16,6 +17,7 @@ $(document).ready(function() {
         formData.append('name_en',name_en.val());
         formData.append('num_pieces',num_pieces.val());
         ifFileFoundAppend('image', image[0], formData);
+        ifFileFoundAppend('cover', cover[0], formData);
 
 
 
@@ -41,6 +43,7 @@ $(document).ready(function() {
                     textFieldError(name_en, error.response.data.errors.name_en);
                     textFieldError(num_pieces, error.response.data.errors.num_pieces);
                     fileFieldError(image, error.response.data.errors.image);
+                    fileFieldError(cover, error.response.data.errors.cover);
 
                 } else if (error.response.status !== 422) {
                     onFormFailure(form);

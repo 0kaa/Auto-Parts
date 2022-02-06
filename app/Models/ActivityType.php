@@ -13,7 +13,7 @@ class ActivityType extends Model
 
     protected $table = 'activities_type';
 
-    protected $fillable = ['name_ar', 'name_en', 'num_pieces', 'image'];
+    protected $fillable = ['name_ar', 'cover', 'name_en', 'num_pieces', 'image'];
 
     public function getNameAttribute()
     {
@@ -24,5 +24,10 @@ class ActivityType extends Model
     public function store()
     {
         return $this->hasMany(User::class)->role('owner_store');
+    }
+
+    public function sub_activity()
+    {
+        return $this->hasMany(SubActivity::class);
     }
 }

@@ -97,6 +97,30 @@
                             </div>
 
                             <div class="col-md-6">
+                                <h5 class="tx-gray-800 mg-b-5">@lang('admin.cover'): <span class="tx-danger">*</span> </h5>
+                                <p class="mg-b-20"> </p>
+                                <div class="form-group">
+                                    <img src="@if(isset($activity_type)&&$activity_type->cover!=""){{ file_exists('storage/'.$activity_type->cover)?asset('storage/'.$activity_type->cover ):(file_exists('website/'.$activity_type->cover)?asset('website/'.$activity_type->cover):asset('admin/images/img-upload-placeholder.jpg')) }}
+                                    @else{{asset('admin/images/img-upload-placeholder.jpg')}}@endif"
+                                         class="preview-img" >
+
+                                    <label class="custom-file">
+                                        <input type="file" id="cover"
+                                               class="form-control-file upload-img"/>
+                                        <span class="custom-file-control custom-file-control-primary">
+                                    </span>
+                                    </label>
+
+                                    <div class="alert alert-danger mg-t-20" role="alert">
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <i class="icon ion-ios-close alert-icon tx-32"></i>
+                                            <span></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <h5 class="tx-gray-800 mg-b-5">@lang('admin.image'): <span class="tx-danger">*</span> </h5>
                                 <p class="mg-b-20"> </p>
                                 <div class="form-group">
