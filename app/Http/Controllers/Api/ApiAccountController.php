@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ChangePasswordRequest;
 use App\Http\Requests\Api\ToggleNotificationsRequest;
-use App\Http\Requests\Api\UpdateAccountRequest;
 use App\Http\Resources\Api\CompanySectorResource;
 use App\Http\Resources\Api\UserResource;
 use App\Models\CompanySector;
@@ -37,7 +36,7 @@ class ApiAccountController extends Controller
         return $this->ApiResponse(new UserResource($user), null, 200);
     }
 
-    public function update(UpdateAccountRequest $request)
+    public function update(Request $request)
     {
         $user = auth()->user();
 
