@@ -38,6 +38,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         // sub activities
         Route::get('activity/{id}',         'ApiActivitiesController@show');
         Route::get('activity/{id}/sub',     'ApiActivitiesController@getSubActivities');
+        Route::get('sub/activity/{id}/sub',     'ApiActivitiesController@getSubSubActivities');
         Route::get('stores',                'ApiStoreController@getStoresList');
         Route::get('store/{id}',            'ApiStoreController@getStore');
         Route::get('product/{id}',          'ApiProductController@show');
@@ -65,6 +66,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
 
     // User | workshop authenticated required
     Route::group(['middleware' => ['auth:sanctum', 'role:user|workshop']], function () {
+        Route::get('sub/{id}/attributes',               'ApiAttributeController@getSubAttributes');
         Route::post('custom-order/create',              'ApiCustomOrderController@CreateCustomOrder');
         Route::post('custom-order/create-multi',        'ApiCustomOrderController@CreateMultiCustomOrder');
         Route::get('user-custom-order/{id}',            'ApiCustomOrderController@getCustomOrder');

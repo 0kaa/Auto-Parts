@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SubActivitiesResource extends JsonResource
+class AttributeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,8 +15,10 @@ class SubActivitiesResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'                    => $this->id,
-            'name'                  => $this->name,
+            'attribute_id'                => $this->id,
+            'name'              => $this->name,
+            'type'              => $this->type,
+            'options'           => $this->options ? OptionResource::collection($this->options) : null,
         ];
     }
 }

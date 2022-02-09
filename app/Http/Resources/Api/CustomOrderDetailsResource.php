@@ -16,6 +16,7 @@ class CustomOrderDetailsResource extends JsonResource
     {
         return [
             "id"                    => $this->id,
+            "user_id"               => $this->user->id,
             "order_status"          => $this->order_status,
             "activity_type_id"      => $this->activityType->id,
             "activity_type_name"    => $this->activityType->name,
@@ -27,9 +28,13 @@ class CustomOrderDetailsResource extends JsonResource
             'piece_price'           => $this->piece_price,
             'form_image'            => url('/') . '/' . $this->form_image,
             "car"                   => $this->car->name,
-            "order_data"            => $this->order_data,
-            "user"                  => new UserResource($this->user),
-
+            'attributes'            => $this->attributes->map(function ($attribute) {
+                return [
+                    'id'                => $attribute->id,
+                    'attribute_name'    => $attribute->attribute->name,
+                    'value'             => $attribute->attribute->type == 'text' ||  $attribute->attribute->type == 'file' ? $attribute->value : $attribute->option->name,
+                ];
+            }),
         ];
     }
 }

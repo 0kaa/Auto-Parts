@@ -32,6 +32,7 @@ class UserSeeder extends Seeder
             'password'                  => bcrypt("password"),
             'phone'                     => '123123',
             'address'                   => "Egypt, Elmansoura",
+            'approved'                  => 1,
             'city_id'                   => 1,
             'region_id'                 => 1,
             'activity_type_id'          => 1,
@@ -49,6 +50,7 @@ class UserSeeder extends Seeder
             'password'                  => bcrypt("password"),
             'phone'                     => '1231233',
             'address'                   => "Egypt, Elmansoura",
+            'approved'                  => 1,
             'city_id'                   => 1,
             'region_id'                 => 1,
             'activity_type_id'          => 1,
@@ -66,6 +68,7 @@ class UserSeeder extends Seeder
             'password'                  => bcrypt("password"),
             'phone'                     => '12312333',
             'address'                   => "Egypt, Elmansoura",
+            'approved'                  => 1,
             'city_id'                   => 1,
             'region_id'                 => 1,
             'activity_type_id'          => 1,
@@ -84,6 +87,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt("password"),
             'phone' => '1231234',
             'address' => "Egypt, Elmansoura",
+            'approved' => 1,
             'email_verified_at' => now()
 
         ));
@@ -96,6 +100,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt("password"),
             'phone' => '123321',
             'address' => "Egypt, Elmansoura",
+            'approved' => 1,
             'email_verified_at' => now()
 
         ));

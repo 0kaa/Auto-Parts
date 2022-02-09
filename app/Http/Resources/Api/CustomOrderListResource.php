@@ -17,9 +17,10 @@ class CustomOrderListResource extends JsonResource
         return [
             'id'                    => $this->id,
             'piece_name'            => $this->piece_name,
-            'piece_image'           => $this->piece_image,
+            'piece_image'           => $this->piece_image ? url('storage/' . $this->piece_image) : null,
+            'car_name'              => $this->car->name,
+            'car_image'             => $this->car->image ? url('storage/' . $this->car->image) : null,
             'piece_description'     => $this->piece_description,
-            
         ];
     }
 }

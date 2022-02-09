@@ -222,4 +222,9 @@ return [
     "maximum_rating_is_five" => 'Maximum rating is five',
     "cart_item_not_found" => 'Cart item not found',
     'cart_empty' => 'Cart is empty',
+    "sub_activity_notfound" =>  'Sub activity not found',
+    "attribute_not_found" => 'Attribute not found',
+    "option_not_found"  => 'Option not found',
+    "file_required" => "File is required",
+    "sub_sub_activity_required" => "Sub sub activity is required",
 ];

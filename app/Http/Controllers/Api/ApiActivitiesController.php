@@ -63,7 +63,16 @@ class ApiActivitiesController extends Controller
 
     public function getSubActivities($id)
     {
-        $sub_activities_type = $this->subActivityTypeRepository->getWhere(['activity_type_id' => $id]);
+        $sub_activities_type = $this->subActivityTypeRepository->getWhere(['activity_type_id' => $id, 'parent_id' => null]);
+
         return $this->ApiResponse(SubActivitiesResource::collection($sub_activities_type), null, 200);
     }
+
+    public function getSubSubActivities($id)
+    {
+        $sub_sub_activities_type = $this->subActivityTypeRepository->getWhere(['parent_id' => $id]);
+
+        return $this->ApiResponse(SubActivitiesResource::collection($sub_sub_activities_type), null, 200);
+    }
+
 }

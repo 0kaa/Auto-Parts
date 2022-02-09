@@ -232,4 +232,10 @@ return [
     "maximum_rating_is_five" => "التقييم الاقصى هو 5",
     "cart_item_not_found" => "المنتج غير موجود في سلة المشتريات",
     "cart_empty" => "سلة المشتريات فارغة",
+    "sub_activity_notfound" => "النشاط غير موجود",
+    "attribute_not_found" => "الخاصية غير موجودة",
+    "option_not_found"  => "الخيار غير موجود",
+    "file_required" => "يرجي ارسال الملف",
+    "sub_sub_activity_required" => "يرجي اختيار النشاط الفرعي",
+    
 ];

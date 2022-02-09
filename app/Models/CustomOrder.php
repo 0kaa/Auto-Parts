@@ -26,13 +26,10 @@ class CustomOrder extends Model
         'user_id',
         'activity_type_id',
         'sub_activity_id',
-        'order_data'
+        'sub_sub_activity_id',
+        'note',
     ];
 
-    protected $casts = [
-        'order_data' => 'array',
-
-    ];
 
     public function seller()
     {
@@ -62,5 +59,10 @@ class CustomOrder extends Model
     public function multiCustomOrder()
     {
         return $this->belongsTo(MultiCustomOrder::class, 'id', 'custom_order_id');
+    }
+
+    public function attributes()
+    {
+        return $this->hasMany(CustomOrderAttribute::class);
     }
 }
