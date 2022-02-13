@@ -70,6 +70,7 @@ class ApiAuthController extends Controller
         $user = $this->usersRepository->create($attribute);
 
         if ($user) {
+
             if ($request->type == 'user' || $request->type == 'workshop') {
                 $user->assignRole($request->type);
             } else {
@@ -85,7 +86,11 @@ class ApiAuthController extends Controller
 
             $token = $user->createToken('tokens')->plainTextToken;
 
-            return $this->ApiResponse(['token' => $token, 'code' => $user->verification_code, 'user' => new UserResource($user)], null, 200);
+            if ($user->approved == 1) {
+                return $this->ApiResponse(['token' => $token, 'code' => $user->verification_code, 'user' => new UserResource($user)], null, 200);
+            } else {
+                return $this->ApiResponse(['code' => $user->verification_code, 'phone' => $user->phone, 'approved' => $user->approved], null, 200);
+            }
         } else {
 
             return $this->ApiResponse(null, trans('local.successfully.registered'), 404);
