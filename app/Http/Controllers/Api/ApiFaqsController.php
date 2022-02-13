@@ -9,6 +9,7 @@ use App\Repositories\FaqsRepositoryInterface;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\FaqsResource;
+use App\Models\Setting;
 
 class ApiFaqsController extends Controller
 {
@@ -31,6 +32,10 @@ class ApiFaqsController extends Controller
     public function index()
     {
         $faqs = $this->faqsRepository->getAll();
-        return $this->ApiResponse(FaqsResource::collection($faqs), null, 200);
+        return $this->ApiResponse([
+            'faqs' => FaqsResource::collection($faqs),
+            'email' => Setting::where('key', 'email')->first()->value,
+            'website' => Setting::where('key', 'website')->first()->value,
+        ], null, 200);
     }
 }
