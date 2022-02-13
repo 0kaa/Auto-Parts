@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\UpdateBranchesRequest;
 use App\Http\Resources\Api\StoreBranchesResource;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class ApiBranchesController extends Controller
         return $this->ApiResponse(new StoreBranchesResource($user), null, 200);
     }
 
-    public function update(Request $request)
+    public function update(UpdateBranchesRequest $request)
     {
 
         $user = auth()->user();
