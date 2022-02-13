@@ -150,7 +150,7 @@ class ApiAuthController extends Controller
             $code = rand(1111, 9999);
             $user->update(['verification_code' => $code]);
             // $this->sendSms($phone, $code);
-            return $this->ApiResponse(null, trans('admin.code_sent'), 200);
+            return $this->ApiResponse($code, trans('admin.code_sent'), 200);
         }
 
         return $this->ApiResponse(null, trans('errors.user_not_found'), 404);
