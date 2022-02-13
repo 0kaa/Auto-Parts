@@ -19,7 +19,10 @@ class CreateAttributesTable extends Migration
             $table->foreign('sub_activity_id')->references('id')->on('sub_activities')->onDelete('cascade');
             $table->string('name_ar');
             $table->string('name_en');
-            $table->enum('type' , ['text' , 'number' , 'date' , 'time' , 'select' , 'checkbox' , 'radio' , 'file' , 'textarea'])->default('select');
+            $table->enum('type', ['text', 'number', 'date', 'time', 'select', 'checkbox', 'radio', 'range', 'file', 'textarea'])->default('select');
+            $table->string('min')->nullable();
+            $table->string('max')->nullable();
+            $table->string('step')->nullable();
             $table->timestamps();
         });
     }

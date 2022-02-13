@@ -25,7 +25,7 @@ class CreateCustomOrderAttributesTable extends Migration
             $table->unsignedBigInteger('custom_order_id')->nullable();
             $table->foreign('custom_order_id')->references('id')->on('custom_orders')->onDelete('cascade');
 
-            $table->enum('type', ['text', 'number', 'date', 'time', 'select', 'checkbox', 'radio', 'file', 'textarea'])->default('select');
+            $table->enum('type', ['text', 'number', 'date', 'time', 'select', 'checkbox', 'radio', 'range', 'file', 'textarea'])->default('select');
 
             $table->string('value')->nullable();
 

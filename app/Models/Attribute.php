@@ -10,7 +10,7 @@ class Attribute extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name_ar', 'name_en', 'sub_activity_id', 'type'];
+    protected $fillable = ['name_ar', 'name_en', 'min', 'max', 'step', 'sub_activity_id', 'type'];
 
     public function getNameAttribute()
     {

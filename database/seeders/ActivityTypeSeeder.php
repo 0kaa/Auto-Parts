@@ -377,72 +377,111 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_mechanical_options_ar = [
             [
-                'وكالة',
-                'درجة اولي',
-                'درجة ثانية'
-            ],
-            ['v4', 'v6', 'v8', 'v10', 'v12'],
-            [
-                'تيربو',
-                'توين تيربو',
-                'سوبر',
-                'غير ذلك',
-                'لا يوجد إضافات'
+                'type' => "select",
+                'options' => [
+                    'وكالة',
+                    'درجة اولي',
+                    'درجة ثانية'
+                ]
             ],
             [
-                'قير عادي',
-                'قير اوتوماتيك',
+                'type' => 'select',
+                'options' => [
+                    'v4', 'v6', 'v8', 'v10', 'v12'
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    'تيربو',
+                    'توين تيربو',
+                    'سوبر',
+                    'غير ذلك',
+                    'لا يوجد إضافات'
+                ]
             ],
             [
-                'بنزين',
-                'ديزل',
-                'هجين',
-                'كهرب'
+                'type' => 'select',
+                'options' => [
+                    'قير عادي',
+                    'قير اوتوماتيك',
+                ]
             ],
-            [],
+            [
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل',
+                    'هجين',
+                    'كهرب'
+                ]
+            ],
+            ['type' => 'text'],
 
         ];
 
         $attribute_mechanical_options_en = [
             [
-                'company',
-                'first grade',
-                'second grade'
-            ],
-            ['v4', 'v6', 'v8', 'v10', 'v12'],
-            [
-                'turbo',
-                'turbo twin',
-                'super',
-                'other',
-                'none'
+                'type' => "select",
+                'options' => [
+                    'company',
+                    'first grade',
+                    'second grade'
+                ]
             ],
             [
-                'normal crank',
-                'automated crank',
+                'type' => 'select',
+                'options' => [
+                    'v4', 'v6', 'v8', 'v10', 'v12'
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    'turbine',
+                    'turbo-turbine',
+                    'super',
+                    'other',
+                    'no additions'
+                ]
             ],
             [
-                'gasoline',
-                'diesel',
-                'hybrid',
-                'electric'
+                'type' => 'select',
+                'options' => [
+                    'normal crank',
+                    'automated crank',
+                ]
             ],
-            [],
-
+            [
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'fuel',
+                    'diesel',
+                    'hybrid',
+                    'electric'
+                ]
+            ],
+            ['type' => 'text'],
         ];
 
         /***************************************** Attributes for electric for new spare parts ****************************************** */
@@ -466,72 +505,110 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_electric_options_ar = [
             [
-                'وكالة',
-                'درجة اولي',
-                'درجة ثانية'
-            ],
-            ['v4', 'v6', 'v8', 'v10', 'v12'],
-            [
-                'تيربو',
-                'توين تيربو',
-                'سوبر',
-                'غير ذلك',
-                'لا يوجد إضافات'
+                'type' => 'select',
+                'options' => [
+                    'وكالة',
+                    'درجة اولي',
+                    'درجة ثانية'
+                ]
             ],
             [
-                'قير عادي',
-                'قير اوتوماتيك',
+                'type' => 'select',
+                'options' => [
+                    'v4', 'v6', 'v8', 'v10', 'v12'
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    'تيربو',
+                    'توين تيربو',
+                    'سوبر',
+                    'غير ذلك',
+                    'لا يوجد إضافات'
+                ]
             ],
             [
-                'بنزين',
-                'ديزل',
-                'هجين',
-                'كهرب'
+                'type' => 'select',
+                'options' => [
+                    'قير عادي',
+                    'قير اوتوماتيك',
+                ]
             ],
-            [],
-
+            [
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'fuel',
+                    'diesel',
+                    'hybrid',
+                    'electric'
+                ]
+            ],
+            ['type' => 'text'],
         ];
 
         $attribute_electric_options_en = [
             [
-                'company',
-                'first grade',
-                'second grade'
-            ],
-            ['v4', 'v6', 'v8', 'v10', 'v12'],
-            [
-                'turbo',
-                'turbo twin',
-                'super',
-                'other',
-                'none'
+                'type' => "select",
+                'options' => [
+                    'company',
+                    'first grade',
+                    'second grade'
+                ]
             ],
             [
-                'normal crank',
-                'automated crank',
+                'type' => 'select',
+                'options' => [
+                    'v4', 'v6', 'v8', 'v10', 'v12'
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    'turbine',
+                    'turbo-turbine',
+                    'super',
+                    'other',
+                    'no additions'
+                ]
             ],
             [
-                'gasoline',
-                'diesel',
-                'hybrid',
-                'electric'
+                'type' => 'select',
+                'options' => [
+                    'normal crank',
+                    'automated crank',
+                ]
             ],
-            [],
-
+            [
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'fuel',
+                    'diesel',
+                    'hybrid',
+                    'electric'
+                ]
+            ],
+            ['type' => 'text'],
         ];
 
         /***************************************** Attributes for mechanical_1 for repair spare parts ****************************************** */
@@ -557,88 +634,140 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_mechanical_1_options_ar = [
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
             [
-                'وكالة',
-                'درجة اولي',
-                'درجة ثانية'
-            ],
-            ['v4', 'v6', 'v8', 'v10', 'v12'],
-            [
-                'تيربو',
-                'توين تيربو',
-                'سوبر',
-                'غير ذلك',
-                'لا يوجد إضافات'
+                'type' => 'select',
+                'options' => [
+                    'وكالة',
+                    'درجة اولي',
+                    'درجة ثانية'
+                ]
             ],
             [
-                'قير عادي',
-                'قير اوتوماتيك',
+                'type' => 'select',
+                'options' => [
+                    'v4', 'v6', 'v8', 'v10', 'v12'
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    'تيربو',
+                    'توين تيربو',
+                    'سوبر',
+                    'غير ذلك',
+                    'لا يوجد إضافات'
+                ]
             ],
             [
-                'بنزين',
-                'ديزل',
-                'هجين',
-                'كهرب'
+                'type' => 'select',
+                'options' => [
+                    'قير عادي',
+                    'قير اوتوماتيك',
+                ]
             ],
             [
-                '1.6',
-                '2.4',
-                '6.0'
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
             ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل',
+                    'هجين',
+                    'كهرب'
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    '1.6',
+                    '2.4',
+                    '6.0'
+                ]
+            ],
+
 
         ];
 
         $attribute_mechanical_1_options_en = [
             [
-                'yes',
-                'no'
+                'type' => "select",
+                'options' => [
+                    'yes',
+                    'no',
+                ]
             ],
             [
-                'company',
-                'first grade',
-                'second grade'
-            ],
-            ['v4', 'v6', 'v8', 'v10', 'v12'],
-            [
-                'turbo',
-                'turbo twin',
-                'super',
-                'other',
-                'none'
+                'type' => 'select',
+                'options' => [
+                    'company',
+                    'first grade',
+                    'second grade'
+                ]
             ],
             [
-                'normal crank',
-                'automated crank',
+                'type' => 'select',
+                'options' => [
+                    'v4', 'v6', 'v8', 'v10', 'v12'
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    'turbine',
+                    'turbo-turbine',
+                    'super',
+                    'other',
+                    'no additions'
+                ]
             ],
             [
-                'gasoline',
-                'diesel',
-                'hybrid',
-                'electric'
+                'type' => 'select',
+                'options' => [
+                    'normal crank',
+                    'automated crank',
+                ]
             ],
             [
-                '1.6',
-                '2.4',
-                '6.0'
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
             ],
-
+            [
+                'type' => 'select',
+                'options' => [
+                    'fuel',
+                    'diesel',
+                    'hybrid',
+                    'electric'
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    '1.6',
+                    '2.4',
+                    '6.0'
+                ]
+            ],
         ];
 
         /***************************************** Attributes for electric_1 for repair spare parts ****************************************** */
@@ -665,79 +794,128 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_electric_1_options_ar = [
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
             [
-                'وكالة',
-                'درجة اولي',
-                'درجة ثانية'
-            ],
-            ['v4', 'v6', 'v8', 'v10', 'v12'],
-            [
-                'تيربو',
-                'توين تيربو',
-                'سوبر',
-                'غير ذلك',
-                'لا يوجد إضافات'
+                'type' => 'select',
+                'options' => [
+                    'وكالة',
+                    'درجة اولي',
+                    'درجة ثانية'
+                ]
             ],
             [
-                'قير عادي',
-                'قير اوتوماتيك',
+                'type' => 'select',
+                'options' => [
+                    'v4', 'v6', 'v8', 'v10', 'v12'
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    'تيربو',
+                    'توين تيربو',
+                    'سوبر',
+                    'غير ذلك',
+                    'لا يوجد إضافات'
+                ]
             ],
             [
-                'بنزين',
-                'ديزل',
-                'هجين',
-                'كهرب'
+                'type' => 'select',
+                'options' => [
+                    'قير عادي',
+                    'قير اوتوماتيك',
+                ]
             ],
-            [],
+            [
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل',
+                    'هجين',
+                    'كهرب'
+                ]
+            ],
+            [
+                'type' => 'text',
+            ],
         ];
 
         $attribute_electric_1_options_en = [
             [
-                'yes',
-                'no'
+                'type' => "select",
+                'options' => [
+                    'yes',
+                    'no',
+                ]
             ],
             [
-                'company',
-                'first grade',
-                'second grade'
-            ],
-            ['v4', 'v6', 'v8', 'v10', 'v12'],
-            [
-                'turbo',
-                'turbo twin',
-                'super',
-                'other',
-                'none'
+                'type' => 'select',
+                'options' => [
+                    'company',
+                    'first grade',
+                    'second grade'
+                ]
             ],
             [
-                'normal crank',
-                'automated crank',
+                'type' => 'select',
+                'options' => [
+                    'v4', 'v6', 'v8', 'v10', 'v12'
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    'turbine',
+                    'turbo-turbine',
+                    'super',
+                    'other',
+                    'no additions'
+                ]
             ],
             [
-                'gasoline',
-                'diesel',
-                'hybrid',
-                'electric'
+                'type' => 'select',
+                'options' => [
+                    'normal crank',
+                    'automated crank',
+                ]
             ],
-            []
-
+            [
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'fuel',
+                    'diesel',
+                    'hybrid',
+                    'electric'
+                ]
+            ],
+            [
+                'type' => 'text',
+            ],
         ];
 
         /***************************************** Attributes for external_1 for repair spare parts ****************************************** */
@@ -758,72 +936,101 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_external_1_options_ar = [
             [
-                'ابيض ثلجي',
-                'ابيض لؤلؤي',
-                'اسود',
-                'فضي',
-                'الرمادي',
-                'ازرق',
-                'كحلي',
-                'البني',
-                'الذهبي',
-                'احمر',
-                'اصفر',
-                'أخضر',
-                'غير ذلك',
+                "type" => 'select',
+                'options'   => [
+                    'ابيض ثلجي',
+                    'ابيض لؤلؤي',
+                    'اسود',
+                    'فضي',
+                    'الرمادي',
+                    'ازرق',
+                    'كحلي',
+                    'البني',
+                    'الذهبي',
+                    'احمر',
+                    'اصفر',
+                    'أخضر',
+                    'غير ذلك',
+                ]
 
             ],
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
             [
-                'نعم',
-                'لا',
-            ],
-            [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
+            ], [
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
         ];
 
         $attribute_external_1_options_en = [
             [
-                'snow white',
-                'pearly white',
-                'black',
-                'silver',
-                'gray',
-                'blue',
-                'Navy blue',
-                'brown',
-                'gold',
-                'red',
-                'yellow',
-                'green',
-                'other',
-            ],
-            [
-                'yes',
-                'no'
-            ],
-            [
-                'yes',
-                'no'
-            ],
-            [
-                'yes',
-                'no'
-            ],
-            [
-                'yes',
-                'no'
-            ],
+                "type" => 'select',
+                'options'   => [
+                    'white',
+                    'yellow',
+                    'black',
+                    'grey',
+                    'brown',
+                    'red',
+                    'orange',
+                    'yellow',
+                    'green',
+                    'gold',
+                    'silver',
+                    'blue',
+                    'other',
+                ]
 
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
+            ],
         ];
 
         /***************************************** Attributes for internal_1 for repair spare parts ****************************************** */
@@ -844,59 +1051,82 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_internal_1_options_ar = [
             [
-                'بيج',
-                'أحمر ',
-                'أسود ',
-                'اوف وايت',
-                'رصاصي فاتح',
-                'رصاصي غامق',
-                'أحمر مقلم بأسود',
-                'غير ذلك',
+                'type' => 'select',
+                'options' => [
+                    'بيج',
+                    'أحمر ',
+                    'أسود ',
+                    'اوف وايت',
+                    'رصاصي فاتح',
+                    'رصاصي غامق',
+                    'أحمر مقلم بأسود',
+                    'غير ذلك',
+                ]
             ],
             [
-                'مخمل',
-                'جلد',
-                'شمواه',
-                'غير ذلك'
+                'type' => 'select',
+                'options' => [
+                    'مخمل',
+                    'جلد',
+                    'شمواه',
+                    'غير ذلك'
+                ]
             ],
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
-            []
+            ['type' => 'text']
         ];
 
         $attribute_internal_1_options_en = [
             [
-                'beige',
-                'red ',
-                'black ',
-                'off white',
-                'light gray',
-                'dark gray',
-                'black striped red',
-                'other',
+                'type' => 'select',
+                'options' => [
+                    'beige',
+                    'red',
+                    'black ',
+                    'Off White',
+                    'light lead',
+                    'dark lead',
+                    'Red with black stripes',
+                    'Other',
+                ]
             ],
             [
-                'leather',
-                'fabric',
-                'synthetic',
-                'other'
+                'type' => 'select',
+                'options' => [
+                    'velvet',
+                    'leather',
+                    'suede',
+                    'Other'
+                ]
             ],
             [
-                'yes',
-                'no'
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
             ],
             [
-                'yes',
-                'no'
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
             ],
-            []
-
+            ['type' => 'text']
         ];
 
         /***************************************** Attributes for cars for tires ****************************************** */
@@ -923,37 +1153,84 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_cars_options_ar = [
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
-            [],
-            [],
-            [],
-            [],
-            [],
             [
-                'السنة الحالية',
-                'السنة السابقة',
+                'type' => 'range',
+                'min' => 155,
+                'max' => 315,
+                'step' => 5,
             ],
-            'file',
+            [
+                'type' => 'range',
+                'min' => 65,
+                'max' => 95,
+                'step' => 5,
+            ],
+            [
+                'type' => 'range',
+                'min' => 13,
+                'max' => 22,
+                'step' => 1,
+            ],
+            ['type' => 'text'],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'السنة الحالية',
+                    'السنة السابقة',
+                ]
+            ],
+            [
+                'type' => 'file'
+            ],
 
         ];
 
         $attribute_cars_options_en = [
             [
-                'yes',
-                'no',
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
             ],
-            [],
-            [],
-            [],
-            [],
-            [],
             [
-                'current year',
-                'previous year',
+                'type' => 'range',
+                'min' => 155,
+                'max' => 315,
+                'step' => 5,
             ],
-            'file',
+            [
+                'type' => 'range',
+                'min' => 65,
+                'max' => 95,
+                'step' => 5,
+            ],
+            [
+                'type' => 'range',
+                'min' => 13,
+                'max' => 22,
+                'step' => 1,
+            ],
+            ['type' => 'text'],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'current year',
+                    'previous year',
+                ]
+            ],
+            [
+                'type' => 'file'
+            ],
+
 
         ];
 
@@ -979,81 +1256,107 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_trucks_options_ar = [
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
             [
-                '10R22.5',
-                '1400R20',
-                '1200R20 ',
-                '1100R20 ',
-                '1000R20 ',
-                '900R20 ',
-                '825R20',
-                '385/65R22.5',
-                '315/70R22.5',
-                '315/80R22.5',
-                '13R22.5',
-                '12R22.5',
-                '11R22.5',
-                '1200R24',
-                'غير ذلك',
+                'type' => 'select',
+                'options' => [
+                    '10R22.5',
+                    '1400R20',
+                    '1200R20 ',
+                    '1100R20 ',
+                    '1000R20 ',
+                    '900R20 ',
+                    '825R20',
+                    '385/65R22.5',
+                    '315/70R22.5',
+                    '315/80R22.5',
+                    '13R22.5',
+                    '12R22.5',
+                    '11R22.5',
+                    '1200R24',
+                    'غير ذلك',
+                ]
             ],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'السنة الحالية',
-                'السنة السابقة',
+                'type' => 'select',
+                'options' => [
+                    'السنة الحالية',
+                    'السنة السابقة',
+                ]
             ],
-            'file',
+            ['type' => 'file'],
             [
-                '12',
-                '14',
-                '16',
-                '18',
-                '20',
-                'غير ذلك',
+                'type' => 'select',
+                'options' => [
+                    '12',
+                    '14',
+                    '16',
+                    '18',
+                    '20',
+                    'غير ذلك',
+                ]
+
             ]
 
         ];
-
         $attribute_trucks_options_en = [
             [
-                'yes',
-                'no',
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
             ],
             [
-                '10R22.5',
-                '1400R20',
-                '1200R20 ',
-                '1100R20 ',
-                '1000R20 ',
-                '900R20 ',
-                '825R20',
-                '385/65R22.5',
-                '315/70R22.5',
-                '315/80R22.5',
-                '13R22.5',
-                '12R22.5',
-                '11R22.5',
-                '1200R24',
-                'other',
+                'type' => 'select',
+                'options' => [
+                    '10R22.5',
+                    '1400R20',
+                    '1200R20 ',
+                    '1100R20 ',
+                    '1000R20 ',
+                    '900R20 ',
+                    '825R20',
+                    '385/65R22.5',
+                    '315/70R22.5',
+                    '315/80R22.5',
+                    '13R22.5',
+                    '12R22.5',
+                    '11R22.5',
+                    '1200R24',
+                    'other',
+                ]
             ],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'current year',
-                'previous year',
+                'type' => 'select',
+                'options' => [
+                    'current year',
+                    'previous year',
+                ]
             ],
-            'file',
+            ['type' => 'file'],
             [
-                '12',
-                '14',
-                '16',
-                '18',
-                '20',
-                'other',
+                'type' => 'select',
+                'options' => [
+                    '12',
+                    '14',
+                    '16',
+                    '18',
+                    '20',
+                    'other',
+                ]
+
             ]
+
 
         ];
 
@@ -1079,76 +1382,100 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_agricultural_options_ar = [
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
             [
-                '14.9/28',
-                '13.6/28',
-                '12.4/28',
-                '14.9/24',
-                '750/18',
-                '1110/16',
-                '20.8/38',
-                '13.6/38',
-                '18.4/34',
-                '16.9/34',
-                '18.4/30',
-                'غير ذلك',
+
+                'type' => 'select',
+                'options' => [
+                    '14.9/28',
+                    '13.6/28',
+                    '12.4/28',
+                    '14.9/24',
+                    '750/18',
+                    '1110/16',
+                    '20.8/38',
+                    '13.6/38',
+                    '18.4/34',
+                    '16.9/34',
+                    '18.4/30',
+                    'غير ذلك',
+                ]
             ],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'السنة الحالية',
-                'السنة السابقة',
+                'type' => 'select',
+                'options' => [
+                    'السنة الحالية',
+                    'السنة السابقة',
+                ]
             ],
-            'file',
+            ['type' => 'file'],
             [
-                '6',
-                '8',
-                '10',
-                '12',
-                '14',
-                'غير ذلك',
+                'type' => 'select',
+                'options' => [
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                    '14',
+                    'غير ذلك',
+                ]
             ]
 
         ];
 
         $attribute_agricultural_options_en = [
             [
-                'yes',
-                'no',
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
             ],
             [
-                '14.9/28',
-                '13.6/28',
-                '12.4/28',
-                '14.9/24',
-                '750/18',
-                '1110/16',
-                '20.8/38',
-                '13.6/38',
-                '18.4/34',
-                '16.9/34',
-                '18.4/30',
-                'other',
+                'type' => 'select',
+                'options' => [
+                    '14.9/28',
+                    '13.6/28',
+                    '12.4/28',
+                    '14.9/24',
+                    '750/18',
+                    '1110/16',
+                    '20.8/38',
+                    '13.6/38',
+                    '18.4/34',
+                    '16.9/34',
+                    '18.4/30',
+                    'other',
+                ]
             ],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'current year',
-                'previous year',
+                'type' => 'select',
+                'options' => [
+                    'current year',
+                    'previous year',
+                ]
             ],
-            'file',
+            ['type' => 'file'],
             [
-                '6',
-                '8',
-                '10',
-                '12',
-                '14',
-                'other',
+                'type' => 'select',
+                'options' => [
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                    '14',
+                    'other',
+                ]
             ]
-
 
         ];
 
@@ -1174,66 +1501,91 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_industrial_options_ar = [
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
             [
-                '23.5R25',
-                '20.5R25',
-                '17.5R25',
-                '15.5R25',
-                '1600R24',
-                '1400R24',
-                '29.5R25',
-                '26.5R25',
-                'غير ذلك',
+                'type' => 'select',
+                'options' => [
+                    '23.5R25',
+                    '20.5R25',
+                    '17.5R25',
+                    '15.5R25',
+                    '1600R24',
+                    '1400R24',
+                    '29.5R25',
+                    '26.5R25',
+                    'غير ذلك',
+                ]
+
             ],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'السنة الحالية',
-                'السنة السابقة',
+                'type' => 'select',
+                'options' => [
+                    'السنة الحالية',
+                    'السنة السابقة',
+                ]
             ],
-            'file',
+            ['type' => 'file'],
             [
-                '16',
-                '20',
-                '24',
-                '28',
-                'غير ذلك',
+                'type' => 'select',
+                'options' => [
+                    '16',
+                    '20',
+                    '24',
+                    '28',
+                    'غير ذلك',
+                ]
             ]
 
         ];
 
         $attribute_industrial_options_en = [
             [
-                'yes',
-                'no',
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
             ],
             [
-                '23.5R25',
-                '20.5R25',
-                '17.5R25',
-                '15.5R25',
-                '1600R24',
-                '1400R24',
-                '29.5R25',
-                '26.5R25',
-                'other',
+                'type' => 'select',
+                'options' => [
+                    '23.5R25',
+                    '20.5R25',
+                    '17.5R25',
+                    '15.5R25',
+                    '1600R24',
+                    '1400R24',
+                    '29.5R25',
+                    '26.5R25',
+                    'other',
+                ]
             ],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'current year',
-                'previous year',
+                'type' => 'select',
+                'options' => [
+                    'current year',
+                    'previous year',
+                ]
             ],
-            'file',
+            ['type' => 'file'],
             [
-                '16',
-                '20',
-                '24',
-                '28',
-                'other',
+                'type' => 'select',
+                'options' => [
+                    '16',
+                    '20',
+                    '24',
+                    '28',
+                    'other',
+                ]
             ]
         ];
 
@@ -1262,43 +1614,340 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_cars_1_options_ar = [
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ],
-            [],
-            [],
             [
-                'حديد',
-                'كروم',
+                'type' => 'range',
+                'min' => 13,
+                'max' => 22,
+                'step' => 1,
             ],
-            [],
+            ['type' => 'text'],
             [
-                'نعم',
-                'لا',
+                'type' => 'select',
+                'options' => [
+                    'حديد',
+                    'كروم',
+                ]
             ],
-            [],
-            'file',
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
+            ],
+            ['type' => 'text'],
+            ['type' => 'file'],
 
         ];
-
         $attribute_cars_1_options_en = [
             [
-                'yes',
-                'no',
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
             ],
-            [],
-            [],
             [
-                'alloy',
-                'rubber',
+                'type' => 'range',
+                'min' => 13,
+                'max' => 22,
+                'step' => 1,
             ],
-            [],
+            ['type' => 'text'],
             [
-                'yes',
-                'no',
+                'type' => 'select',
+                'options' => [
+                    'alloy',
+                    'carbon',
+                ]
             ],
-            [],
-            'file',
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
+            ],
+            ['type' => 'text'],
+            ['type' => 'file'],
+        ];
+        /***************************************** Attributes for trucks_1 for wheels ****************************************** */
+
+        $attribute_trucks_1_ar = [
+            'هل تريد إطارات مماثلة لإطارات مركبتك ؟',
+            'مقاس الجنوط',
+            'اسم الشركة المصنعة للجنوط',
+            'نوع الجنوط',
+            'كم تحتاج جنط ؟',
+            'هل تحتاج صواميل ؟',
+            'عدد الصواميل',
+            'صورة الكفر',
+
+        ];
+        $attribute_trucks_1_en = [
+            'Do you want similar tires for your car ?',
+            'Wheel size',
+            'Name of the company that manufactures the tires',
+            'Type of wheels',
+            'How many wheels do you need ?',
+            'Do you need spares ?',
+            'How many spares do you need ?',
+            'Wheel image',
+        ];
+        $attribute_trucks_1_options_ar = [
+            [
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
+            ],
+            [
+                'type' => 'range',
+                'min' => 19,
+                'max' => 29,
+                'step' => 1,
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'حديد',
+                    'كروم',
+                ]
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
+            ],
+            ['type' => 'text'],
+            ['type' => 'file'],
+
+        ];
+        $attribute_trucks_1_options_en = [
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
+            ],
+            [
+                'type' => 'range',
+                'min' => 19,
+                'max' => 29,
+                'step' => 1,
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'alloy',
+                    'carbon',
+                ]
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
+            ],
+            ['type' => 'text'],
+            ['type' => 'file'],
+        ];
+        /***************************************** Attributes for agricultural_1 for wheels ****************************************** */
+
+        $attribute_agricultural_1_ar = [
+            'هل تريد إطارات مماثلة لإطارات مركبتك ؟',
+            'مقاس الجنوط',
+            'اسم الشركة المصنعة للجنوط',
+            'نوع الجنوط',
+            'كم تحتاج جنط ؟',
+            'هل تحتاج صواميل ؟',
+            'عدد الصواميل',
+            'صورة الكفر',
+
+        ];
+        $attribute_agricultural_1_en = [
+            'Do you want similar tires for your car ?',
+            'Wheel size',
+            'Name of the company that manufactures the tires',
+            'Type of wheels',
+            'How many wheels do you need ?',
+            'Do you need spares ?',
+            'How many spares do you need ?',
+            'Wheel image',
+        ];
+        $attribute_agricultural_1_options_ar = [
+            [
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
+            ],
+            [
+                'type' => 'range',
+                'min' => 19,
+                'max' => 29,
+                'step' => 1,
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'حديد',
+                    'كروم',
+                ]
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
+            ],
+            ['type' => 'text'],
+            ['type' => 'file'],
+
+        ];
+        $attribute_agricultural_1_options_en = [
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
+            ],
+            [
+                'type' => 'range',
+                'min' => 19,
+                'max' => 29,
+                'step' => 1,
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'alloy',
+                    'carbon',
+                ]
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
+            ],
+            ['type' => 'text'],
+            ['type' => 'file'],
+        ];
+        /***************************************** Attributes for industrial_1 for wheels ****************************************** */
+
+        $attribute_industrial_1_ar = [
+            'هل تريد إطارات مماثلة لإطارات مركبتك ؟',
+            'مقاس الجنوط',
+            'اسم الشركة المصنعة للجنوط',
+            'نوع الجنوط',
+            'كم تحتاج جنط ؟',
+            'هل تحتاج صواميل ؟',
+            'عدد الصواميل',
+            'صورة الكفر',
+
+        ];
+        $attribute_industrial_1_en = [
+            'Do you want similar tires for your car ?',
+            'Wheel size',
+            'Name of the company that manufactures the tires',
+            'Type of wheels',
+            'How many wheels do you need ?',
+            'Do you need spares ?',
+            'How many spares do you need ?',
+            'Wheel image',
+        ];
+        $attribute_industrial_1_options_ar = [
+            [
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
+            ],
+            [
+                'type' => 'range',
+                'min' => 19,
+                'max' => 29,
+                'step' => 1,
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'حديد',
+                    'كروم',
+                ]
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
+            ],
+            ['type' => 'text'],
+            ['type' => 'file'],
+
+        ];
+        $attribute_industrial_1_options_en = [
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
+            ],
+            [
+                'type' => 'range',
+                'min' => 19,
+                'max' => 29,
+                'step' => 1,
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'alloy',
+                    'carbon',
+                ]
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no',
+                ]
+            ],
+            ['type' => 'text'],
+            ['type' => 'file'],
         ];
 
         /***************************************** Attributes for engine_oils for oils ****************************************** */
@@ -1328,102 +1977,132 @@ class ActivityTypeSeeder extends Seeder
             'Previous oil',
         ];
         $attribute_engine_oils_options_ar = [
-            [],
+            ['type' => 'text'],
             [
-                'بنزين',
-                'ديزل'
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل'
+                ]
             ],
             [
-                'v3',
-                'v4',
-                'v6',
-                'v8',
-                'v10',
-                'v12',
+                'type' => 'select',
+                'options' => [
+                    'v3',
+                    'v4',
+                    'v6',
+                    'v8',
+                    'v10',
+                    'v12',
+                ]
             ],
-            [],
+            ['type' => 'text'],
             [
-                'لا يوجد إضافات',
-                'تيربو',
-                'توين تيربو',
-                'سوبر',
-                'غير ذلك',
+                'type' => 'select',
+                'options' => [
+                    'لا يوجد إضافات',
+                    'تيربو',
+                    'توين تيربو',
+                    'سوبر',
+                    'غير ذلك',
+                ]
             ],
             [
-                '10w-30',
-                '5w-50',
-                '5w-40',
-                '5w-30',
-                '5w-20',
-                '0w-40',
-                '0w-30',
-                '0w-20',
-                '20w-50',
-                '20w-40',
-                '15w-40',
-                '10w-60',
-                '10w-50',
-                '10w-40',
+                'type' => 'select',
+                'options' => [
+                    '10w-30',
+                    '5w-50',
+                    '5w-40',
+                    '5w-30',
+                    '5w-20',
+                    '0w-40',
+                    '0w-30',
+                    '0w-20',
+                    '20w-50',
+                    '20w-40',
+                    '15w-40',
+                    '10w-60',
+                    '10w-50',
+                    '10w-40',
+                ]
             ],
-            [],
+            ['type' => 'text'],
             [
-                '0.946ml',
-                '1L',
-                '4L',
-                '5L',
-            ],
-            [],
-            [],
 
+                'type' => 'select',
+                'options' => [
+                    '0.946ml',
+                    '1L',
+                    '4L',
+                    '5L',
+                ]
+            ],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
-
         $attribute_engine_oils_options_en = [
-            [],
+            ['type' => 'text'],
             [
-                'petrol',
-                'diesel',
+                'type' => 'select',
+                'options' => [
+                    'gasoline',
+                    'diesel',
+                ]
             ],
             [
-                'v3',
-                'v4',
-                'v6',
-                'v8',
-                'v10',
-                'v12',
+                'type' => 'select',
+                'options' => [
+                    'v3',
+                    'v4',
+                    'v6',
+                    'v8',
+                    'v10',
+                    'v12',
+                ]
             ],
-            [],
+            ['type' => 'text'],
             [
-                'no additional features',
-                'turbo',
-                'turbo twin',
-                'super',
-                'other',
+                'type' => 'select',
+                'options' => [
+                    'no additional features',
+                    'turbo',
+                    'turbo-turbo',
+                    'super',
+                    'other',
+                ]
             ],
             [
-                '10w-30',
-                '5w-50',
-                '5w-40',
-                '5w-30',
-                '5w-20',
-                '0w-40',
-                '0w-30',
-                '0w-20',
-                '20w-50',
-                '20w-40',
-                '15w-40',
-                '10w-60',
-                '10w-50',
-                '10w-40',
+                'type' => 'select',
+                'options' => [
+                    '10w-30',
+                    '5w-50',
+                    '5w-40',
+                    '5w-30',
+                    '5w-20',
+                    '0w-40',
+                    '0w-30',
+                    '0w-20',
+                    '20w-50',
+                    '20w-40',
+                    '15w-40',
+                    '10w-60',
+                    '10w-50',
+                    '10w-40',
+                ]
             ],
-            [],
+            ['type' => 'text'],
             [
-                '0.946ml',
-                '1L',
-                '4L',
-                '5L',
+
+                'type' => 'select',
+                'options' => [
+                    '0.946ml',
+                    '1L',
+                    '4L',
+                    '5L',
+                ]
             ],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
 
         /***************************************** Attributes for bituminous_oil for oils ****************************************** */
@@ -1451,83 +2130,122 @@ class ActivityTypeSeeder extends Seeder
             'Has the coolant changed before',
         ];
         $attribute_bituminous_oil_options_ar = [
-            [],
+            ['type' => 'text'],
+
             [
-                'اوتوماتيك',
-                'قير عادي',
+                'type' => 'select',
+                'options' => [
+                    'اوتوماتيك',
+                    'قير عادي',
+                ]
             ],
             [
-                '75w-80',
-                '75w-90',
-                '75w-140',
-                '80w-90',
-                '85w-90'
+                'type' => 'select',
+                'options' => [
+                    '75w-80',
+                    '75w-90',
+                    '75w-140',
+                    '80w-90',
+                    '85w-90'
+                ]
             ],
             [
-                'ATF',
-                'CVT',
-                'DCT'
+                'type' => 'select',
+                'options' => [
+                    'ATF',
+                    'CVT',
+                    'DCT'
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
+
             ],
-            [],
+            ['type' => 'text'],
             [
-                '0.946ml',
-                '1L',
-                '4L',
-                '5L'
+                'type' => 'select',
+                'options' => [
+                    '0.946ml',
+                    '1L',
+                    '4L',
+                    '5L'
+                ]
             ],
-            [],
+            ['type' => 'text'],
             [
-                'نعم',
-                'لا'
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا'
+                ]
             ]
 
         ];
 
         $attribute_bituminous_oil_options_en = [
-            [],
-            [
-                'automatic',
-                'normal',
-            ],
-            [
-                '75w-80',
-                '75w-90',
-                '75w-140',
-                '80w-90',
-                '85w-90'
-            ],
-            [
-                'ATF',
-                'CVT',
-                'DCT'
-            ],
-            [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
-            ],
-            [],
-            [
-                '0.946ml',
-                '1L',
-                '4L',
-                '5L'
-            ],
-            [],
-            [
-                'yes',
-                'no'
-            ]
+            ['type' => 'text'],
 
+            [
+                'type' => 'select',
+                'options' => [
+                    'automatic',
+                    'regular',
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    '75w-80',
+                    '75w-90',
+                    '75w-140',
+                    '80w-90',
+                    '85w-90'
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'ATF',
+                    'CVT',
+                    'DCT'
+                ]
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
+
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    '0.946ml',
+                    '1L',
+                    '4L',
+                    '5L'
+                ]
+            ],
+            ['type' => 'text'],
+            [
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no'
+                ]
+            ]
         ];
         /***************************************** Attributes for differential_oil for oils ****************************************** */
 
@@ -1546,39 +2264,49 @@ class ActivityTypeSeeder extends Seeder
             'Has the coolant changed before',
         ];
         $attribute_differential_oil_options_ar = [
-            [],
+            ['type' => 'text'],
             [
-                '75w-80',
-                '75w-90',
-                '75w-140',
-                '80w-90',
-                '85w-90'
+                'type' => 'select',
+                'options' => [
+                    '75w-80',
+                    '75w-90',
+                    '75w-140',
+                    '80w-90',
+                    '85w-90'
+                ]
             ],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'نعم',
-                'لا'
+                'type' => 'select',
+                'options' => [
+                    'نعم',
+                    'لا',
+                ]
             ]
 
         ];
-
         $attribute_differential_oil_options_en = [
-            [],
+            ['type' => 'text'],
             [
-                '75w-80',
-                '75w-90',
-                '75w-140',
-                '80w-90',
-                '85w-90'
+                'type' => 'select',
+                'options' => [
+                    '75w-80',
+                    '75w-90',
+                    '75w-140',
+                    '80w-90',
+                    '85w-90'
+                ]
             ],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'yes',
-                'no'
+                'type' => 'select',
+                'options' => [
+                    'yes',
+                    'no'
+                ]
             ]
-
         ];
         /***************************************** Attributes for brake_fluid for oils ****************************************** */
 
@@ -1594,24 +2322,29 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_brake_fluid_options_ar = [
             [
-                'DOT3',
-                'DOT4',
-                'DOT 5',
-                'DOT 5.1'
+                'type' => 'select',
+                'options' => [
+                    'DOT3',
+                    'DOT4',
+                    'DOT 5',
+                    'DOT 5.1'
+                ]
             ],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
-
         $attribute_brake_fluid_options_en = [
             [
-                'DOT3',
-                'DOT4',
-                'DOT 5',
-                'DOT 5.1'
+                'type' => 'select',
+                'options' => [
+                    'DOT3',
+                    'DOT4',
+                    'DOT 5',
+                    'DOT 5.1'
+                ]
             ],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for derrickson_oil for oils ****************************************** */
 
@@ -1626,15 +2359,15 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_derrickson_oil_options_ar = [
-            [],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
 
         $attribute_derrickson_oil_options_en = [
-            [],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for other for oils ****************************************** */
 
@@ -1649,15 +2382,15 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_other_options_ar = [
-            [],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
 
         $attribute_other_options_en = [
-            [],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for engine_oil_filter for filters ****************************************** */
 
@@ -1672,22 +2405,27 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_engine_oil_filter_options_ar = [
-            [],
+            ['type' => 'text'],
             [
-                'بنزين',
-                'ديزل'
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل'
+                ]
             ],
-            []
+            ['type' => 'text'],
         ];
 
         $attribute_engine_oil_filter_options_en = [
-            [],
+            ['type' => 'text'],
             [
-                'petrol',
-                'diesel'
+                'type' => 'select',
+                'options' => [
+                    'piston',
+                    'disk'
+                ]
             ],
-            []
-
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for coolant_oil_filter for filters ****************************************** */
 
@@ -1709,54 +2447,76 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_coolant_oil_filter_options_ar = [
             [
-                'اوتوماتيك',
-                'قير عادي',
+                'type' => 'select',
+                'options' => [
+                    'اوتوماتيك',
+                    'قير عادي',
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
             ],
-            [],
+            ['type' => 'text'],
             [
-                'ATF',
-                'CVT',
-                'DCT',
+                'type' => 'select',
+                'options' => [
+                    'ATF',
+                    'CVT',
+                    'DCT',
+                ]
             ],
             [
-                'بنزين',
-                'ديزل'
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل'
+                ]
             ],
-            []
+            ['type' => 'text'],
         ];
 
         $attribute_coolant_oil_filter_options_en = [
             [
-                'automatics',
-                'normal',
+                'type' => 'select',
+                'options' => [
+                    'automatics',
+                    'normal',
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
             ],
-            [],
+            ['type' => 'text'],
             [
-                'ATF',
-                'CVT',
-                'DCT',
+                'type' => 'select',
+                'options' => [
+                    'ATF',
+                    'CVT',
+                    'DCT',
+                ]
             ],
             [
-                'petrol',
-                'diesel'
+                'type' => 'select',
+                'options' => [
+                    'piston',
+                    'disk'
+                ]
             ],
-            []
-
-
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for petrol_filter for filters ****************************************** */
 
@@ -1768,11 +2528,11 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_petrol_filter_options_ar = [
-            []
+            ['type' => 'text']
         ];
 
         $attribute_petrol_filter_options_en = [
-            []
+            ['type' => 'text']
         ];
         /***************************************** Attributes for diesel_filter for filters ****************************************** */
 
@@ -1784,11 +2544,11 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_diesel_filter_options_ar = [
-            []
+            ['type' => 'text']
         ];
 
         $attribute_diesel_filter_options_en = [
-            []
+            ['type' => 'text']
         ];
         /***************************************** Attributes for machine_air_filter for filters ****************************************** */
 
@@ -1800,11 +2560,11 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_machine_air_filter_options_ar = [
-            []
+            ['type' => 'text']
         ];
 
         $attribute_machine_air_filter_options_en = [
-            []
+            ['type' => 'text']
         ];
         /***************************************** Attributes for air_conditioner_filter for filters ****************************************** */
 
@@ -1816,11 +2576,10 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_air_conditioner_filter_options_ar = [
-            []
+            ['type' => 'text']
         ];
-
         $attribute_air_conditioner_filter_options_en = [
-            []
+            ['type' => 'text']
         ];
         /***************************************** Attributes for other_1 for filters ****************************************** */
 
@@ -1831,11 +2590,11 @@ class ActivityTypeSeeder extends Seeder
             'Your request'
         ];
         $attribute_other_1_options_ar = [
-            []
+            ['type' => 'text']
         ];
 
         $attribute_other_1_options_en = [
-            []
+            ['type' => 'text']
         ];
         /***************************************** Attributes for machine_processor for machines ****************************************** */
 
@@ -1854,26 +2613,30 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_machine_processor_options_ar = [
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'بنزين',
-                'ديزل'
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل'
+                ]
             ],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
-
         $attribute_machine_processor_options_en = [
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'petrol',
-                'diesel'
+                'type' => 'select',
+                'options' => [
+                    'piston',
+                    'disk'
+                ]
             ],
-            [],
-            []
-
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for gear_processor for machines ****************************************** */
 
@@ -1898,57 +2661,83 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_gear_processor_options_ar = [
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'بنزين',
-                'ديزل'
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل'
+                ],
             ],
             [
-                'اوتوماتيك',
-                'قير عادي'
+                'type' => 'select',
+                'options' => [
+                    'اوتوماتيك',
+                    'قير عادي'
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
-            ],
-            [
-                'ATF',
-                'CVT',
-                'DCT'
-            ],
-            [],
-            []
-        ];
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
 
+            ],
+            [
+                'type' => 'select',
+                'options' => [
+                    'ATF',
+                    'CVT',
+                    'DCT'
+                ]
+            ],
+            ['type' => 'text'],
+            ['type' => 'text'],
+        ];
         $attribute_gear_processor_options_en = [
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'petrol',
-                'diesel'
+                'type' => 'select',
+                'options' => [
+                    'piston',
+                    'disk'
+                ],
             ],
             [
-                'automatics',
-                'normal'
+                'type' => 'select',
+                'options' => [
+                    'automatics',
+                    'normal'
+                ]
             ],
             [
-                '4',
-                '6',
-                '8',
-                '10',
-                '12',
+                'type' => 'select',
+                'options' => [
+                    '4',
+                    '6',
+                    '8',
+                    '10',
+                    '12',
+                ]
+
             ],
             [
-                'ATF',
-                'CVT',
-                'DCT'
+                'type' => 'select',
+                'options' => [
+                    'ATF',
+                    'CVT',
+                    'DCT'
+                ]
             ],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
+
         ];
         /***************************************** Attributes for difference_wizard for machines ****************************************** */
 
@@ -1967,25 +2756,31 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_difference_wizard_options_ar = [
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'بنزين',
-                'ديزل'
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل'
+                ]
             ],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
 
         $attribute_difference_wizard_options_en = [
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'petrol',
-                'diesel'
+                'type' => 'select',
+                'options' => [
+                    'piston',
+                    'disk'
+                ]
             ],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for drakeson_wizard for machines ****************************************** */
 
@@ -2002,17 +2797,16 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_drakeson_wizard_options_ar = [
-            [],
-            [],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
-
         $attribute_drakeson_wizard_options_en = [
-            [],
-            [],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for other_2 for machines ****************************************** */
 
@@ -2035,44 +2829,62 @@ class ActivityTypeSeeder extends Seeder
             'Coolant type for automatics',
         ];
         $attribute_other_2_options_ar = [
-            [],
-            [],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'بنزين',
-                'ديزل',
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل'
+                ]
             ],
             [
-                'اوتوماتيك',
-                'عادي'
+                'type' => 'select',
+                'options' => [
+                    'اوتوماتيك',
+                    'عادي'
+                ]
+
             ],
             [
-                'ATF',
-                'CVT',
-                'DCT'
+                'type' => 'select',
+                'options' => [
+                    'ATF',
+                    'CVT',
+                    'DCT'
+                ]
             ]
         ];
 
         $attribute_other_2_options_en = [
-            [],
-            [],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'petrol',
-                'diesel',
+                'type' => 'select',
+                'options' => [
+                    'piston',
+                    'disk'
+                ]
             ],
             [
-                'automatics',
-                'normal'
+                'type' => 'select',
+                'options' => [
+                    'automatics',
+                    'normal'
+                ]
             ],
             [
-                'ATF',
-                'CVT',
-                'DCT'
+                'type' => 'select',
+                'options' => [
+                    'ATF',
+                    'CVT',
+                    'DCT'
+                ]
             ]
-
         ];
         /***************************************** Attributes for wrenches for mechanical-cleaners ****************************************** */
 
@@ -2088,20 +2900,27 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_wrenches_options_ar = [
             [
-                'بنزين',
-                'ديزل',
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل',
+                ]
             ],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
+
         ];
 
         $attribute_wrenches_options_en = [
             [
-                'petrol',
-                'diesel',
+                'type' => 'select',
+                'options' => [
+                    'piston',
+                    'disk',
+                ]
             ],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for screwdrivers for mechanical-cleaners ****************************************** */
 
@@ -2117,20 +2936,26 @@ class ActivityTypeSeeder extends Seeder
         ];
         $attribute_screwdrivers_options_ar = [
             [
-                'بنزين',
-                'ديزل',
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل',
+                ]
             ],
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
 
         $attribute_screwdrivers_options_en = [
             [
-                'petrol',
-                'diesel',
+                'type' => 'select',
+                'options' => [
+                    'piston',
+                    'disk',
+                ]
             ],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for electronics for mechanical-cleaners ****************************************** */
 
@@ -2143,13 +2968,13 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_electronics_options_ar = [
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
 
         $attribute_electronics_options_en = [
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for air_conditioning for mechanical-cleaners ****************************************** */
 
@@ -2162,13 +2987,13 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_air_conditioning_options_ar = [
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
 
         $attribute_air_conditioning_options_en = [
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for other_3 for mechanical-cleaners ****************************************** */
 
@@ -2191,65 +3016,88 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_other_3_options_ar = [
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'بنزين',
-                'ديزل',
+                'type' => 'select',
+                'options' => [
+                    'بنزين',
+                    'ديزل',
+                ]
             ],
             [
-                'اوتوماتيك',
-                'عادي'
+                'type' => 'select',
+                'options' => [
+                    'اوتوماتيك',
+                    'عادي'
+                ]
             ],
             [
-                'v2',
-                'v3',
-                'v4',
-                'v6',
-                'v8',
-                'v10',
-                'v12',
+                'type' => 'select',
+                'options' => [
+                    'v2',
+                    'v3',
+                    'v4',
+                    'v6',
+                    'v8',
+                    'v10',
+                    'v12',
+                ]
             ],
             [
-                'لا يوجد اضافات',
-                'تيربو',
-                'توين تيربو',
-                'سوبر',
-                'غير ذلك',
+                'type' => 'select',
+                'options' => [
+                    'لا يوجد اضافات',
+                    'تيربو',
+                    'توين تيربو',
+                    'سوبر',
+                    'غير ذلك',
+                ]
             ],
-            []
+            ['type' => 'text']
 
         ];
 
         $attribute_other_3_options_en = [
-            [],
-            [],
+            ['type' => 'text'],
+            ['type' => 'text'],
             [
-                'petrol',
-                'diesel',
+                'type' => 'select',
+                'options' => [
+                    'piston',
+                    'disk',
+                ]
             ],
             [
-                'automatics',
-                'normal'
+                'type' => 'select',
+                'options' => [
+                    'automatic',
+                    'manual',
+                ]
             ],
             [
-                'v2',
-                'v3',
-                'v4',
-                'v6',
-                'v8',
-                'v10',
-                'v12',
+                'type' => 'select',
+                'options' => [
+                    'v2',
+                    'v3',
+                    'v4',
+                    'v6',
+                    'v8',
+                    'v10',
+                    'v12',
+                ]
             ],
             [
-                'no additions',
-                'teirbo',
-                'teirbo teirbo',
-                'super',
-                'other',
+                'type' => 'select',
+                'options' => [
+                    'no additions',
+                    'tire',
+                    'tire tire',
+                    'super',
+                    'other',
+                ]
             ],
-            []
-
+            ['type' => 'text']
         ];
         /***************************************** Attributes for radiator_water for rear ****************************************** */
 
@@ -2264,25 +3112,31 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_radiator_water_options_ar = [
-            [],
+            ['type' => 'text'],
             [
-                '33%',
-                '50%',
-                '100%',
-                'مياه مقطرة',
+                'type' => 'select',
+                'options' => [
+                    '33%',
+                    '50%',
+                    '100%',
+                    'مياه مقطرة',
+                ]
             ],
-            []
+            ['type' => 'text'],
         ];
 
         $attribute_radiator_water_options_en = [
-            [],
+            ['type' => 'text'],
             [
-                '33%',
-                '50%',
-                '100%',
-                'water radiator',
+                'type' => 'select',
+                'options' => [
+                    '33%',
+                    '50%',
+                    '100%',
+                    'water tank',
+                ]
             ],
-            []
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for sealant for rear ****************************************** */
 
@@ -2295,12 +3149,12 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_sealant_options_ar = [
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         $attribute_sealant_options_en = [
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for radiator_cleaner for rear ****************************************** */
 
@@ -2313,12 +3167,12 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_radiator_cleaner_options_ar = [
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         $attribute_radiator_cleaner_options_en = [
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for colent for rear ****************************************** */
 
@@ -2331,12 +3185,12 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_colent_options_ar = [
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         $attribute_colent_options_en = [
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         /***************************************** Attributes for other_4 for rear ****************************************** */
         $attribute_other_4_ar = [
@@ -2350,36 +3204,33 @@ class ActivityTypeSeeder extends Seeder
             'Quantity'
         ];
         $attribute_other_4_options_ar = [
-            [],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
         $attribute_other_4_options_en = [
-            [],
-            [],
-            []
+            ['type' => 'text'],
+            ['type' => 'text'],
+            ['type' => 'text'],
         ];
 
         foreach ($sub_activity as $key =>  $sub) {
             if ($sub->slug == 'mechanical') {
-
                 foreach ($attribute_mechanical_ar as $attributeKey => $attribute) {
-
                     $parnetAttribute = Attribute::create([
                         'name_ar' => $attribute,
                         'name_en' => $attribute_mechanical_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_mechanical_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_mechanical_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_mechanical_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_mechanical_options_ar[$attributeKey]) == 'array') {
-
-                        foreach ($attribute_mechanical_options_ar[$attributeKey] as $optionKey => $option) {
+                    if ($attribute_mechanical_options_ar[$attributeKey]['type'] == 'select') {
+                        foreach ($attribute_mechanical_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_mechanical_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_mechanical_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2388,22 +3239,21 @@ class ActivityTypeSeeder extends Seeder
                 }
             } elseif ($sub->slug == 'electric') {
                 foreach ($attribute_electric_ar as $attributeKey => $attribute) {
-
                     $parnetAttribute = Attribute::create([
                         'name_ar' => $attribute,
                         'name_en' => $attribute_electric_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_electric_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_electric_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_electric_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_electric_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_electric_options_ar[$attributeKey]['type'] == 'select') {
 
-                        foreach ($attribute_electric_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_electric_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_electric_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_electric_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2417,17 +3267,17 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_mechanical_1_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_mechanical_1_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_mechanical_1_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_mechanical_1_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_mechanical_1_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_mechanical_1_options_ar[$attributeKey]['type'] == 'select') {
 
-                        foreach ($attribute_mechanical_1_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_mechanical_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_mechanical_1_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_mechanical_1_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2441,17 +3291,17 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_electric_1_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_electric_1_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_electric_1_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_electric_1_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_electric_1_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_electric_1_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_electric_1_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_electric_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_electric_1_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_electric_1_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2465,17 +3315,17 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_external_1_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_external_1_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_external_1_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_external_1_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_external_1_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_external_1_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_external_1_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_external_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_external_1_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_external_1_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2489,17 +3339,17 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_internal_1_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_internal_1_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_internal_1_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_internal_1_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_internal_1_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_internal_1_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_internal_1_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_internal_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_internal_1_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_internal_1_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2513,17 +3363,20 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_cars_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_cars_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_cars_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_cars_options_ar[$attributeKey]['type'],
+                        'min' => $attribute_cars_options_ar[$attributeKey]['type'] == 'range' ? $attribute_cars_options_ar[$attributeKey]['min'] : null,
+                        'max' => $attribute_cars_options_ar[$attributeKey]['type'] == 'range' ? $attribute_cars_options_ar[$attributeKey]['max'] : null,
+                        'step' => $attribute_cars_options_ar[$attributeKey]['type'] == 'range' ? $attribute_cars_options_ar[$attributeKey]['step'] : null,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_cars_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_cars_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_cars_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_cars_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_cars_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_cars_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2537,17 +3390,20 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_trucks_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_trucks_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_trucks_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_trucks_options_ar[$attributeKey]['type'],
+                        'min' => $attribute_trucks_options_ar[$attributeKey]['type'] == 'range' ? $attribute_trucks_options_ar[$attributeKey]['min'] : null,
+                        'max' => $attribute_trucks_options_ar[$attributeKey]['type'] == 'range' ? $attribute_trucks_options_ar[$attributeKey]['max'] : null,
+                        'step' => $attribute_trucks_options_ar[$attributeKey]['type'] == 'range' ? $attribute_trucks_options_ar[$attributeKey]['step'] : null,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_trucks_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_trucks_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_trucks_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_trucks_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_trucks_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_trucks_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2561,17 +3417,20 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_agricultural_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_agricultural_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_agricultural_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_agricultural_options_ar[$attributeKey]['type'],
+                        'min' => $attribute_agricultural_options_ar[$attributeKey]['type'] == 'range' ? $attribute_agricultural_options_ar[$attributeKey]['min'] : null,
+                        'max' => $attribute_agricultural_options_ar[$attributeKey]['type'] == 'range' ? $attribute_agricultural_options_ar[$attributeKey]['max'] : null,
+                        'step' => $attribute_agricultural_options_ar[$attributeKey]['type'] == 'range' ? $attribute_agricultural_options_ar[$attributeKey]['step'] : null,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_agricultural_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_agricultural_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_agricultural_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_agricultural_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_agricultural_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_agricultural_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2585,41 +3444,128 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_industrial_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_industrial_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_industrial_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_industrial_options_ar[$attributeKey]['type'],
+                        'min' => $attribute_industrial_options_ar[$attributeKey]['type'] == 'range' ? $attribute_industrial_options_ar[$attributeKey]['min'] : null,
+                        'max' => $attribute_industrial_options_ar[$attributeKey]['type'] == 'range' ? $attribute_industrial_options_ar[$attributeKey]['max'] : null,
+                        'step' => $attribute_industrial_options_ar[$attributeKey]['type'] == 'range' ? $attribute_industrial_options_ar[$attributeKey]['step'] : null,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_industrial_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_industrial_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_industrial_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_industrial_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_industrial_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_industrial_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
                         }
                     }
                 }
-            } elseif ($sub->slug == 'cars-1' || $sub->slug == 'trucks-1' || $sub->slug == 'agricultural-1' || $sub->slug == 'industrial-1') {
+            } elseif ($sub->slug == 'cars-1') {
                 foreach ($attribute_cars_1_ar as $attributeKey => $attribute) {
 
                     $parnetAttribute = Attribute::create([
                         'name_ar' => $attribute,
                         'name_en' => $attribute_cars_1_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_cars_1_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_cars_1_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_cars_1_options_ar[$attributeKey]['type'],
+                        'min' => $attribute_cars_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_cars_1_options_ar[$attributeKey]['min'] : null,
+                        'max' => $attribute_cars_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_cars_1_options_ar[$attributeKey]['max'] : null,
+                        'step' => $attribute_cars_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_cars_1_options_ar[$attributeKey]['step'] : null,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_cars_1_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_cars_1_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_cars_1_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_cars_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_cars_1_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_cars_1_options_en[$attributeKey]['options'][$optionKey],
+                                'created_at' => now(),
+                                'updated_at' => now(),
+                            ]);
+                        }
+                    }
+                }
+            } elseif ($sub->slug == 'trucks-1') {
+                foreach ($attribute_trucks_1_ar as $attributeKey => $attribute) {
+
+                    $parnetAttribute = Attribute::create([
+                        'name_ar' => $attribute,
+                        'name_en' => $attribute_trucks_1_en[$attributeKey],
+                        'sub_activity_id' => $sub->id,
+                        'type' => $attribute_trucks_1_options_ar[$attributeKey]['type'],
+                        'min' => $attribute_trucks_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_trucks_1_options_ar[$attributeKey]['min'] : null,
+                        'max' => $attribute_trucks_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_trucks_1_options_ar[$attributeKey]['max'] : null,
+                        'step' => $attribute_trucks_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_trucks_1_options_ar[$attributeKey]['step'] : null,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                    if ($attribute_trucks_1_options_ar[$attributeKey] == 'select') {
+
+                        foreach ($attribute_trucks_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
+
+                            $parnetAttribute->options()->create([
+                                'name_ar' => $option,
+                                'name_en' => $attribute_trucks_1_options_en[$attributeKey]['options'][$optionKey],
+                                'created_at' => now(),
+                                'updated_at' => now(),
+                            ]);
+                        }
+                    }
+                }
+            } elseif ($sub->slug == 'agricultural-1') {
+                foreach ($attribute_agricultural_1_ar as $attributeKey => $attribute) {
+
+                    $parnetAttribute = Attribute::create([
+                        'name_ar' => $attribute,
+                        'name_en' => $attribute_agricultural_1_en[$attributeKey],
+                        'sub_activity_id' => $sub->id,
+                        'type' => $attribute_agricultural_1_options_ar[$attributeKey]['type'],
+                        'min' => $attribute_agricultural_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_agricultural_1_options_ar[$attributeKey]['min'] : null,
+                        'max' => $attribute_agricultural_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_agricultural_1_options_ar[$attributeKey]['max'] : null,
+                        'step' => $attribute_agricultural_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_agricultural_1_options_ar[$attributeKey]['step'] : null,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                    if ($attribute_agricultural_1_options_ar[$attributeKey] == 'select') {
+
+                        foreach ($attribute_agricultural_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
+
+                            $parnetAttribute->options()->create([
+                                'name_ar' => $option,
+                                'name_en' => $attribute_agricultural_1_options_en[$attributeKey]['options'][$optionKey],
+                                'created_at' => now(),
+                                'updated_at' => now(),
+                            ]);
+                        }
+                    }
+                }
+            } elseif ($sub->slug == 'industrial-1') {
+                foreach ($attribute_industrial_1_ar as $attributeKey => $attribute) {
+
+                    $parnetAttribute = Attribute::create([
+                        'name_ar' => $attribute,
+                        'name_en' => $attribute_industrial_1_en[$attributeKey],
+                        'sub_activity_id' => $sub->id,
+                        'type' => $attribute_industrial_1_options_ar[$attributeKey]['type'],
+                        'min' => $attribute_industrial_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_industrial_1_options_ar[$attributeKey]['min'] : null,
+                        'max' => $attribute_industrial_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_industrial_1_options_ar[$attributeKey]['max'] : null,
+                        'step' => $attribute_industrial_1_options_ar[$attributeKey]['type'] == 'range' ? $attribute_industrial_1_options_ar[$attributeKey]['step'] : null,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                    if ($attribute_industrial_1_options_ar[$attributeKey] == 'select') {
+
+                        foreach ($attribute_industrial_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
+
+                            $parnetAttribute->options()->create([
+                                'name_ar' => $option,
+                                'name_en' => $attribute_industrial_1_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2633,17 +3579,17 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_engine_oils_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_engine_oils_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_engine_oils_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_engine_oils_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_engine_oils_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_engine_oils_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_engine_oils_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_engine_oils_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_engine_oils_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_engine_oils_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2657,17 +3603,17 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_bituminous_oil_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_bituminous_oil_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_bituminous_oil_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_bituminous_oil_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_bituminous_oil_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_bituminous_oil_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_bituminous_oil_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_bituminous_oil_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_bituminous_oil_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_bituminous_oil_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2681,17 +3627,17 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_differential_oil_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_differential_oil_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_differential_oil_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_differential_oil_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_differential_oil_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_differential_oil_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_differential_oil_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_differential_oil_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_differential_oil_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_differential_oil_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2705,17 +3651,17 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_brake_fluid_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_brake_fluid_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_brake_fluid_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_brake_fluid_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_brake_fluid_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_brake_fluid_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_brake_fluid_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_brake_fluid_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_brake_fluid_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_brake_fluid_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2729,17 +3675,17 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_derrickson_oil_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_derrickson_oil_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_derrickson_oil_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_derrickson_oil_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_derrickson_oil_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_derrickson_oil_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_derrickson_oil_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_derrickson_oil_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_derrickson_oil_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_derrickson_oil_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2753,17 +3699,17 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_other_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_other_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_other_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_other_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_other_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_other_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_other_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_other_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_other_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_other_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2777,17 +3723,17 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_engine_oil_filter_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_engine_oil_filter_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_engine_oil_filter_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_engine_oil_filter_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_engine_oil_filter_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_engine_oil_filter_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_engine_oil_filter_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_engine_oil_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_engine_oil_filter_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_engine_oil_filter_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2801,16 +3747,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_coolant_oil_filter_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_coolant_oil_filter_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_coolant_oil_filter_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_coolant_oil_filter_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_coolant_oil_filter_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_coolant_oil_filter_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_coolant_oil_filter_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_coolant_oil_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_coolant_oil_filter_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_coolant_oil_filter_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2824,16 +3770,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_petrol_filter_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_petrol_filter_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_petrol_filter_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_petrol_filter_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_petrol_filter_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_petrol_filter_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_petrol_filter_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_petrol_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_petrol_filter_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_petrol_filter_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2847,16 +3793,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_diesel_filter_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_diesel_filter_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_diesel_filter_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_diesel_filter_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_diesel_filter_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_diesel_filter_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_diesel_filter_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_diesel_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_diesel_filter_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_diesel_filter_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2870,16 +3816,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_machine_air_filter_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_machine_air_filter_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_machine_air_filter_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_machine_air_filter_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_machine_air_filter_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_machine_air_filter_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_machine_air_filter_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_machine_air_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_machine_air_filter_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_machine_air_filter_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2893,16 +3839,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_air_conditioner_filter_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_air_conditioner_filter_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_air_conditioner_filter_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_air_conditioner_filter_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_air_conditioner_filter_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_air_conditioner_filter_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_air_conditioner_filter_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_air_conditioner_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_air_conditioner_filter_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_air_conditioner_filter_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2916,16 +3862,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_other_1_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_other_1_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_other_1_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_other_1_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_other_1_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_other_1_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_other_1_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_other_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_other_1_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_other_1_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2939,16 +3885,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_machine_processor_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_machine_processor_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_machine_processor_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_machine_processor_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_machine_processor_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_machine_processor_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_machine_processor_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_machine_processor_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_machine_processor_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_machine_processor_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2962,16 +3908,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_gear_processor_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_gear_processor_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_gear_processor_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_gear_processor_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_gear_processor_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_gear_processor_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_gear_processor_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_gear_processor_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_gear_processor_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_gear_processor_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -2985,16 +3931,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_difference_wizard_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_difference_wizard_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_difference_wizard_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_difference_wizard_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_difference_wizard_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_difference_wizard_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_difference_wizard_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_difference_wizard_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_difference_wizard_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_difference_wizard_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3008,16 +3954,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_drakeson_wizard_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_drakeson_wizard_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_drakeson_wizard_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_drakeson_wizard_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_drakeson_wizard_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_drakeson_wizard_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_drakeson_wizard_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_drakeson_wizard_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_drakeson_wizard_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_drakeson_wizard_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3031,16 +3977,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_other_2_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_other_2_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_other_2_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_other_2_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_other_2_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_other_2_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_other_2_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_other_2_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_other_2_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_other_2_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3054,16 +4000,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_wrenches_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_wrenches_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_wrenches_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_wrenches_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_wrenches_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_wrenches_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_wrenches_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_wrenches_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_wrenches_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_wrenches_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3077,16 +4023,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_screwdrivers_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_screwdrivers_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_screwdrivers_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_screwdrivers_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_screwdrivers_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_screwdrivers_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_screwdrivers_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_screwdrivers_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_screwdrivers_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_screwdrivers_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3100,16 +4046,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_electronics_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_electronics_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_electronics_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_electronics_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_electronics_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_electronics_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_electronics_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_electronics_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_electronics_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_electronics_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3123,16 +4069,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_air_conditioning_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_air_conditioning_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_air_conditioning_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_air_conditioning_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_air_conditioning_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_air_conditioning_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_air_conditioning_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_air_conditioning_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_air_conditioning_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_air_conditioning_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3146,16 +4092,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_other_3_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_other_3_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_other_3_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_other_3_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_other_3_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_other_3_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_other_3_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_other_3_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_other_3_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_other_3_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3169,16 +4115,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_radiator_water_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_radiator_water_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_radiator_water_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_radiator_water_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_radiator_water_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_radiator_water_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_radiator_water_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_radiator_water_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_radiator_water_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_radiator_water_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3192,16 +4138,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_sealant_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_sealant_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_sealant_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_sealant_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_sealant_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_sealant_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_sealant_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_sealant_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_sealant_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_sealant_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3215,16 +4161,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_radiator_cleaner_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_radiator_cleaner_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_radiator_cleaner_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_radiator_cleaner_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_radiator_cleaner_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_radiator_cleaner_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_radiator_cleaner_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_radiator_cleaner_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_radiator_cleaner_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_radiator_cleaner_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3238,16 +4184,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_colent_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_colent_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_colent_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_colent_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_colent_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_colent_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_colent_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_colent_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_colent_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_colent_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
@@ -3261,16 +4207,16 @@ class ActivityTypeSeeder extends Seeder
                         'name_ar' => $attribute,
                         'name_en' => $attribute_other_4_en[$attributeKey],
                         'sub_activity_id' => $sub->id,
-                        'type' => $attribute_other_4_options_ar[$attributeKey] == 'file' ? 'file' : (count($attribute_other_4_options_ar[$attributeKey]) == 0 ? 'text' : 'select'),
+                        'type' => $attribute_other_4_options_ar[$attributeKey]['type'],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if (gettype($attribute_other_4_options_ar[$attributeKey]) == 'array') {
+                    if ($attribute_other_4_options_ar[$attributeKey] == 'select') {
 
-                        foreach ($attribute_other_4_options_ar[$attributeKey] as $optionKey => $option) {
+                        foreach ($attribute_other_4_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
                                 'name_ar' => $option,
-                                'name_en' => $attribute_other_4_options_en[$attributeKey][$optionKey],
+                                'name_en' => $attribute_other_4_options_en[$attributeKey]['options'][$optionKey],
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
