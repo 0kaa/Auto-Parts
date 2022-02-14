@@ -3295,7 +3295,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_electric_1_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_electric_1_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_electric_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3319,7 +3319,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_external_1_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_external_1_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_external_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3343,7 +3343,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_internal_1_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_internal_1_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_internal_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3370,7 +3370,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_cars_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_cars_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_cars_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3397,7 +3397,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_trucks_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_trucks_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_trucks_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3424,7 +3424,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_agricultural_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_agricultural_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_agricultural_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3451,7 +3451,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_industrial_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_industrial_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_industrial_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3478,7 +3478,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_cars_1_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_cars_1_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_cars_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3505,7 +3505,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_trucks_1_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_trucks_1_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_trucks_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3532,7 +3532,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_agricultural_1_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_agricultural_1_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_agricultural_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3559,7 +3559,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_industrial_1_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_industrial_1_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_industrial_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3583,7 +3583,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_engine_oils_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_engine_oils_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_engine_oils_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3607,7 +3607,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_bituminous_oil_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_bituminous_oil_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_bituminous_oil_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3631,7 +3631,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_differential_oil_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_differential_oil_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_differential_oil_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3655,7 +3655,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_brake_fluid_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_brake_fluid_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_brake_fluid_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3679,7 +3679,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_derrickson_oil_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_derrickson_oil_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_derrickson_oil_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3703,7 +3703,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_other_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_other_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_other_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3727,7 +3727,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_engine_oil_filter_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_engine_oil_filter_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_engine_oil_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
 
@@ -3751,7 +3751,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_coolant_oil_filter_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_coolant_oil_filter_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_coolant_oil_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -3774,7 +3774,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_petrol_filter_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_petrol_filter_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_petrol_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -3797,7 +3797,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_diesel_filter_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_diesel_filter_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_diesel_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -3820,7 +3820,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_machine_air_filter_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_machine_air_filter_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_machine_air_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -3843,7 +3843,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_air_conditioner_filter_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_air_conditioner_filter_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_air_conditioner_filter_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -3866,7 +3866,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_other_1_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_other_1_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_other_1_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -3889,7 +3889,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_machine_processor_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_machine_processor_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_machine_processor_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -3912,7 +3912,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_gear_processor_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_gear_processor_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_gear_processor_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -3935,7 +3935,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_difference_wizard_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_difference_wizard_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_difference_wizard_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -3958,7 +3958,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_drakeson_wizard_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_drakeson_wizard_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_drakeson_wizard_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -3981,7 +3981,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_other_2_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_other_2_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_other_2_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -4004,7 +4004,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_wrenches_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_wrenches_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_wrenches_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -4027,7 +4027,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_screwdrivers_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_screwdrivers_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_screwdrivers_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -4050,7 +4050,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_electronics_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_electronics_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_electronics_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -4073,7 +4073,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_air_conditioning_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_air_conditioning_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_air_conditioning_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -4096,7 +4096,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_other_3_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_other_3_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_other_3_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -4119,7 +4119,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_radiator_water_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_radiator_water_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_radiator_water_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -4142,7 +4142,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_sealant_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_sealant_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_sealant_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -4165,7 +4165,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_radiator_cleaner_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_radiator_cleaner_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_radiator_cleaner_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -4188,7 +4188,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_colent_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_colent_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_colent_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
@@ -4211,7 +4211,7 @@ class ActivityTypeSeeder extends Seeder
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-                    if ($attribute_other_4_options_ar[$attributeKey] == 'select') {
+                    if ($attribute_other_4_options_ar[$attributeKey]['type'] == 'select') {
 
                         foreach ($attribute_other_4_options_ar[$attributeKey]['options'] as $optionKey => $option) {
                             $parnetAttribute->options()->create([
