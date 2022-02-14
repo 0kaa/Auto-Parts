@@ -171,7 +171,7 @@ class ApiCustomOrderController extends Controller
                 'attribute_id' => $attribute_id->id,
                 'option_id'    => $attribute_option ? $attribute_option->id : null,
                 'type'         => $attribute_id->type,
-                'value'        => $attribute_id->type == 'file' ? $value : ($attribute_id->type == 'text' ? $attribute['value'] : null),
+                'value'        => $attribute_id->type == 'file' ? $value : ($attribute_id->type !== 'select' ? $attribute['value'] : null),
             ]);
         }
 
@@ -191,7 +191,33 @@ class ApiCustomOrderController extends Controller
         $piece_image    = '';
         $form_image     = '';
 
+        $activity       = $this->activityTypeRepository->findOne($attributes['activity_type_id']);
+
+        if (!$activity) {
+            return $this->ApiResponse(null, trans('local.activity_id_not_found'), 404);
+        }
+
+        $sub_activity       = $activity->sub_activity()->where('id', $attributes['sub_activity_id'])->first();
+        $sub_sub_activity   = null;
+
+        if (!$sub_activity) {
+            return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
+        }
+
+        if ($activity->id == 6) {
+            if ($request->sub_sub_activity_id) {
+                $sub_sub_activity = $activity->sub_activity()->where('id', $request->sub_sub_activity_id)->where('parent_id', $sub_activity->id)->first();
+                if (!$sub_sub_activity) return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
+            } else {
+                return $this->ApiResponse(null, trans('local.sub_sub_activity_required'), 404);
+            }
+        }
+
         $sellers = User::whereRelation('roles', 'name', 'owner_store')->where('activity_type_id', $request->activity_type_id)->limit(5)->get();
+
+        if ($sellers->count() == 0) {
+            return $this->ApiResponse(null, trans('local.sellers_not_founded_in_this_activity'), 404);
+        }
 
         if ($request->hasFile('piece_image')) {
             $img = $request->file('piece_image');
@@ -203,17 +229,87 @@ class ApiCustomOrderController extends Controller
             $form_image = $this->filesServices->uploadfile($form_img, $this->customOrderDirectory);
         }
 
-        $customOrder = $this->customOrderRepository->create([
-            'user_id'           => $user->id,
-            "piece_name"        => $attributes['piece_name'],
-            "piece_image"       => $piece_image,
-            'form_image'        => $form_image,
-            "car_id"            => $attributes['car_id'],
-            'activity_type_id'  => $attributes['activity_type_id'],
-            'sub_activity_id'   => $attributes['sub_activity_id'],
-            'order_data'        => $attributes['order_data'],
+        $customOrder =  $this->customOrderRepository->create([
+            'user_id'               => $user->id,
+            "piece_name"            => $attributes['piece_name'],
+            "piece_image"           => $piece_image,
+            'note'                  => $attributes['note'],
+            'form_image'            => $form_image,
+            "car_id"                => $attributes['car_id'],
+            'activity_type_id'      => $activity->id,
+            'sub_activity_id'       => $sub_activity->id,
+            'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
         ]);
 
+        foreach ($attributes['attributes'] as $key => $attribute) {
+
+            $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
+
+            if (!$attribute_id) {
+
+                if (isset($customOrder->piece_image)) {
+                    Storage::delete($customOrder->piece_image);
+                }
+
+                if (isset($customOrder->form_image)) {
+                    Storage::delete($customOrder->form_image);
+                }
+
+                $customOrder->delete();
+
+                return $this->ApiResponse(null, trans('local.attribute_not_found'), 404);
+            }
+
+            if ($attribute_id->type == 'select') {
+                $attribute_option = $attribute_id->options->where('id', $attribute['option_id'])->first();
+
+                if (!$attribute_option) {
+
+                    if (isset($customOrder->piece_image)) {
+                        Storage::delete($customOrder->piece_image);
+                    }
+
+                    if (isset($customOrder->form_image)) {
+                        Storage::delete($customOrder->form_image);
+                    }
+
+                    $customOrder->delete();
+
+                    return $this->ApiResponse(null, trans('local.option_not_found'), 404);
+                }
+            } else {
+                $attribute_option = null;
+
+                if ($attribute_id->type == 'file') {
+                    if ($request->file('attributes')) {
+
+                        $file = $request->file('attributes')[$key]['value'];
+
+                        $value = $this->filesServices->uploadfile($file, $this->customOrderDirectory);
+                    } else {
+
+                        if (isset($customOrder->piece_image)) {
+                            Storage::delete($customOrder->piece_image);
+                        }
+
+                        if (isset($customOrder->form_image)) {
+                            Storage::delete($customOrder->form_image);
+                        }
+
+                        $customOrder->delete();
+
+                        return $this->ApiResponse(null, trans('local.file_required'), 404);
+                    }
+                }
+            }
+
+            $customOrder->attributes()->create([
+                'attribute_id' => $attribute_id->id,
+                'option_id'    => $attribute_option ? $attribute_option->id : null,
+                'type'         => $attribute_id->type,
+                'value'        => $attribute_id->type == 'file' ? $value : ($attribute_id->type == 'text' ? $attribute['value'] : null),
+            ]);
+        }
         foreach ($sellers as $seller) {
             MultiCustomOrder::create(['seller_id' => $seller->id, 'custom_order_id' => $customOrder->id]);
         }
