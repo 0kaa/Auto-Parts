@@ -14,6 +14,7 @@ class StoreBranchesResource extends JsonResource
      */
     public function toArray($request)
     {
+        $branches = [];
         foreach ($this->branches as $key => $branch) {
             $branches[] = [
                 'branch_num' => __('local.branch_' . $key),
@@ -30,7 +31,7 @@ class StoreBranchesResource extends JsonResource
             'is_company_facility_authorized_distributor' => $this->is_company_facility_authorized_distributor,
             'other_branches' => $this->other_branches,
             'company' => $this->company_sector->name,
-            'branches' => $branches ? $branches : null,
+            'branches' => $branches ? $branches : [],
         ];
     }
 }
