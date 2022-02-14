@@ -30,7 +30,7 @@ class StoreBranchesResource extends JsonResource
             'is_company_facility_authorized_distributor' => $this->is_company_facility_authorized_distributor,
             'other_branches' => $this->other_branches,
             'company' => $this->company_sector->name,
-            'branches' => $branches
+            'branches' => $branches ? $branches : null,
         ];
     }
 }
