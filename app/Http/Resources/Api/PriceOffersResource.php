@@ -20,6 +20,7 @@ class PriceOffersResource extends JsonResource
             'price'         => $this->price,
             'piece_name'    => $this->customOrder->piece_name,
             'created_at'    => $this->created_at->diffForHumans(),
+            "note"          => $this->note,
             'seller'        => new StoresResource($this->seller),
         ];
     }

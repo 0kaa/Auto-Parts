@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HindAlmujaghedMail;
+use App\Models\OrderStatus;
 
 /*
     |--------------------------------------------------------------------------
@@ -83,16 +84,20 @@ function RedirectOrderToAnotherUser($seller_id, $rejected, $customOrder)
         ->whereRelation('roles', 'name', 'owner_store')
         ->limit(5)->get();
 
+    $order_status_not_found = OrderStatus::where('slug', 'not_found')->first();
     
     if ($user_same->isEmpty()) {
-        $customOrder->update(['order_status' => "not_found"]);
+        $customOrder->update(['order_status->id' => $order_status_not_found->id]);
         return false;
     }
+
+    $order_status_pending = OrderStatus::where('slug', 'pending')->first();
 
     foreach ($user_same as $user) {
         \App\Models\MultiCustomOrder::create([
             'seller_id' => $user->id,
-            'custom_order_id' => $customOrder->id
+            'custom_order_id' => $customOrder->id,
+            'order_status_id' => $order_status_pending->id,
         ]);
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Resources\Api\CustomOrderListResource;
 use App\Http\Resources\Api\CustomOrderDetailsResource;
 use App\Http\Resources\Api\PriceOffersResource;
 use App\Models\MultiCustomOrder;
+use App\Models\OrderStatus;
 use App\Models\RejectedOrders;
 use App\Models\User;
 use App\Repositories\ActivityTypeRepositoryInterface;
@@ -92,6 +93,8 @@ class ApiCustomOrderController extends Controller
             $form_image = $this->filesServices->uploadfile($form_img, $this->customOrderDirectory);
         }
 
+        $order_status_pending = OrderStatus::where('slug', 'pending')->first();
+
         $customOrder =  $this->customOrderRepository->create([
             'seller_id'             => $attributes['seller_id'],
             'user_id'               => $user->id,
@@ -100,6 +103,7 @@ class ApiCustomOrderController extends Controller
             'note'                  => $attributes['note'],
             'form_image'            => $form_image,
             "car_id"                => $attributes['car_id'],
+            'order_status_id'       => $order_status_pending->id,
             'activity_type_id'      => $activity->id,
             'sub_activity_id'       => $sub_activity->id,
             'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
@@ -177,7 +181,8 @@ class ApiCustomOrderController extends Controller
 
         MultiCustomOrder::create([
             'seller_id' => $attributes['seller_id'],
-            'custom_order_id' => $customOrder->id
+            'custom_order_id' => $customOrder->id,
+            'order_status_id' => $order_status_pending->id
         ]);
 
         // Notification to seller
@@ -200,9 +205,7 @@ class ApiCustomOrderController extends Controller
         $sub_activity       = $activity->sub_activity()->where('id', $attributes['sub_activity_id'])->first();
         $sub_sub_activity   = null;
 
-        if (!$sub_activity) {
-            return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
-        }
+        if (!$sub_activity) return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
 
         if ($activity->id == 6) {
             if ($request->sub_sub_activity_id) {
@@ -215,9 +218,7 @@ class ApiCustomOrderController extends Controller
 
         $sellers = User::whereRelation('roles', 'name', 'owner_store')->where('activity_type_id', $request->activity_type_id)->limit(5)->get();
 
-        if ($sellers->count() == 0) {
-            return $this->ApiResponse(null, trans('local.sellers_not_founded_in_this_activity'), 404);
-        }
+        if ($sellers->count() == 0) return $this->ApiResponse(null, trans('local.sellers_not_founded_in_this_activity'), 404);
 
         if ($request->hasFile('piece_image')) {
             $img = $request->file('piece_image');
@@ -229,6 +230,8 @@ class ApiCustomOrderController extends Controller
             $form_image = $this->filesServices->uploadfile($form_img, $this->customOrderDirectory);
         }
 
+        $order_status_pending = OrderStatus::where('slug', 'pending')->first();
+
         $customOrder =  $this->customOrderRepository->create([
             'user_id'               => $user->id,
             "piece_name"            => $attributes['piece_name'],
@@ -236,6 +239,7 @@ class ApiCustomOrderController extends Controller
             'note'                  => $attributes['note'],
             'form_image'            => $form_image,
             "car_id"                => $attributes['car_id'],
+            'order_status_id'       => $order_status_pending->id,
             'activity_type_id'      => $activity->id,
             'sub_activity_id'       => $sub_activity->id,
             'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
@@ -311,7 +315,7 @@ class ApiCustomOrderController extends Controller
             ]);
         }
         foreach ($sellers as $seller) {
-            MultiCustomOrder::create(['seller_id' => $seller->id, 'custom_order_id' => $customOrder->id]);
+            MultiCustomOrder::create(['seller_id' => $seller->id, 'custom_order_id' => $customOrder->id, 'order_status_id' => $order_status_pending->id]);
         }
 
         // Notification to seller
@@ -334,22 +338,22 @@ class ApiCustomOrderController extends Controller
 
         $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_id', $customOrder->id], ['seller_id', $user->id]]);
 
-        if ($priceOffer->isNotEmpty() || $customOrder->order_status != 'pending') {
+        if ($priceOffer->isNotEmpty() || $customOrder->order_status->slug !==  'pending') {
             return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
         }
 
-        $attributes = $request->all();
-
-        if (!isset($attributes['order_status']) || !isset($attributes['price'])) {
+        if (!isset($request->order_status_id) || !isset($request->price)) {
             return $this->ApiResponse(null, trans('local.order_status_required'), 400);
         }
+
+        $order_status_pending = OrderStatus::where('slug', 'pending')->first();
 
         $this->priceOfferRepository->create([
             'custom_order_id'   => $customOrder->id,
             'seller_id'         => $user->id,
-            'price'             => $attributes['price'],
-            'status'            => 'pending',
-            'note'              => $attributes['note'] ?? null,
+            'price'             => $request->price,
+            'status_id'         => $order_status_pending->id,
+            'note'              => $request->note ?? null,
         ]);
 
         // Notification
@@ -382,13 +386,15 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_found'), 403);
         }
 
-        if (!isset($request->order_status)) {
+        if (!isset($request->order_status_id)) {
             return $this->ApiResponse(null, trans('local.order_status_required'), 400);
         }
 
-        if ($request->order_status == 'seller_rejected') {
+        $rejected_status = OrderStatus::where('slug', 'seller_rejected')->first();
 
-            MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $user->id)->update(['order_status' => 'rejected']);
+        if ($request->order_status_id == $rejected_status->id) {
+
+            MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $user->id)->update(['order_status_id' => $rejected_status->id]);
 
             $rejectedOrder = RejectedOrders::where('order_id', $customOrder->id)->pluck('seller_id');
 
@@ -419,6 +425,8 @@ class ApiCustomOrderController extends Controller
 
         $customOrder = $this->customOrderRepository->findOne($priceOffer->custom_order_id);
 
+        $accepted_status = OrderStatus::where('slug', 'accepted')->first();
+
         if (!$customOrder) {
             return $this->ApiResponse(null, trans('local.order_not_found'), 404);
         }
@@ -427,24 +435,24 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
         }
 
-        if ($priceOffer->status == 'accepted') {
+        if ($priceOffer->status_id == $accepted_status->id) {
             return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
         }
 
-        if (!isset($request->order_status)) {
+        if (!isset($request->order_status_id)) {
             return $this->ApiResponse(null, trans('local.order_status_required'), 400);
         }
 
-        if ($request->order_status == 'accepted') {
-
-            $priceOffer->update(['status' => 'accepted']);
+        if ($request->order_status_id == $accepted_status->id) {
+            $priceOffer->update(['status_id' => $accepted_status->id]);
             $priceOffer->save();
 
             $customOrder->update([
-                'order_status'  => 'accepted',
+                'order_status_id'  => $accepted_status->id,
                 'piece_price'   => $priceOffer->price,
                 'seller_id'     => $priceOffer->seller_id
             ]);
+            
             $customOrder->save();
 
             return $this->ApiResponse(null, trans('local.order_done'), 200);
@@ -463,6 +471,10 @@ class ApiCustomOrderController extends Controller
 
         $seller_ids = MultiCustomOrder::where('custom_order_id', $priceOffer->custom_order_id)->pluck('seller_id')->toArray();
 
+        $accepted_status = OrderStatus::where('slug', 'accepted')->first();
+
+        $rejected_status = OrderStatus::where('slug', 'rejected')->first();
+
         if (!$customOrder) {
             return $this->ApiResponse(null, trans('local.order_not_found'), 404);
         }
@@ -471,19 +483,20 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
         }
 
-        if ($priceOffer->status == 'accepted') {
+        if ($priceOffer->status_id == $accepted_status->id) {
             return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
         }
 
         $attributes = $request->all();
 
-        if (!isset($attributes['order_status'])) {
+        if (!isset($attributes['order_status_id'])) {
             return $this->ApiResponse(null, trans('local.order_status_required'), 400);
         }
 
-        if ($request->order_status == 'rejected') {
+        if ($request->order_status_id == $rejected_status->id) {
 
-            MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $priceOffer->seller_id)->update(['order_status' => 'rejected']);
+            MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $priceOffer->seller_id)->update(['order_status_id' => $rejected_status->id]);
+            
             $rejectedOrder = RejectedOrders::where('order_id', $customOrder->id)->pluck('seller_id');
 
             if (in_array($priceOffer->seller_id, $rejectedOrder->toArray()) == false) {

@@ -17,7 +17,7 @@ class CustomOrderDetailsResource extends JsonResource
         return [
             "id"                    => $this->id,
             "user_id"               => $this->user->id,
-            "order_status"          => $this->order_status,
+            "order_status"          => $this->order_status->name,
             "activity_type_id"      => $this->activityType->id,
             "activity_type_name"    => $this->activityType->name,
             "sub_activity_id"       => $this->subActivity->id,

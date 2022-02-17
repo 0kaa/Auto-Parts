@@ -40,6 +40,36 @@ class OrderStatusSeeder extends Seeder
                 'name_ar' => 'تم الغاء الطلب',
                 'slug' => 'cancelled',
             ],
+            [
+                'name_en' => 'paid',
+                'name_ar' => 'تم الدفع',
+                'slug'    => 'paid'
+            ],
+            [
+                'name_en' => 'unpaid',
+                'name_ar' => 'لم يتم الدفع',
+                'slug'    => 'unpaid'
+            ],
+            [
+                'name_en' => 'seller accepted order',
+                'name_ar' => 'تم قبول الطلب من البائع',
+                'slug'    => 'seller_accepted'
+            ],
+            [
+                'name_en' => 'seller rejected order',
+                'name_ar' => 'تم رفض الطلب من البائع',
+                'slug'    => 'seller_rejected'
+            ],
+            [
+                'name_en' => 'rejected',
+                'name_ar' => 'تم رفض الطلب',
+                'slug'    => 'rejected'
+            ],
+            [
+                'name_en' => 'not found',
+                'name_ar' => 'لم يتم العثور على الطلب',
+                'slug'    => 'not_found'
+            ]
         ]);
     }
 }

@@ -19,7 +19,7 @@ class PriceOffer extends Model
         'custom_order_id',
         'seller_id',
         'price',
-        'status',
+        'status_id',
         'note',
         'created_at',
         'updated_at',
@@ -33,5 +33,10 @@ class PriceOffer extends Model
     public function seller()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function order_status()
+    {
+        return $this->belongsTo(OrderStatus::class, 'status_id', 'id');
     }
 }

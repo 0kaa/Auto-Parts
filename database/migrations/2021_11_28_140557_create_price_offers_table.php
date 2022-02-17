@@ -19,7 +19,6 @@ class CreatePriceOffersTable extends Migration
             $table->unsignedBigInteger('seller_id');
             $table->unsignedBigInteger('price');
             $table->string('note')->nullable();
-            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->foreign('custom_order_id')->references('id')->on('custom_orders')->onDelete('cascade');
             $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

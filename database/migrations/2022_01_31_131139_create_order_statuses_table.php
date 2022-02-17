@@ -24,6 +24,18 @@ class CreateOrderStatusesTable extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->foreignId('order_status_id')->constrained('order_statuses')->onDelete('cascade');
         });
+
+        Schema::table('custom_orders', function (Blueprint $table) {
+            $table->foreignId('order_status_id')->constrained('order_statuses')->onDelete('cascade');
+        });
+
+        Schema::table('multi_custom_orders', function (Blueprint $table) {
+            $table->foreignId('order_status_id')->constrained('order_statuses')->onDelete('cascade');
+        });
+
+        Schema::table('price_offers', function (Blueprint $table) {
+            $table->foreignId('status_id')->constrained('order_statuses')->onDelete('cascade');
+        });
     }
 
     /**
