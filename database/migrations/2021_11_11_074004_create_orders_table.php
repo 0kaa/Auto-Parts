@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_ship_phone');
             $table->string('order_ship_address')->nullable();
             $table->float('total_amount', 10, 2);
+            $table->string('payment_url')->nullable();
             $table->dateTime('order_delivered_at')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('seller_id')->nullable();

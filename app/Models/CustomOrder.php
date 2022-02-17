@@ -22,7 +22,8 @@ class CustomOrder extends Model
         'piece_description',
         'form_image',
         'car_id',
-        'order_status',
+        'order_status_id',
+        'payment_url',
         'user_id',
         'activity_type_id',
         'sub_activity_id',
@@ -64,5 +65,10 @@ class CustomOrder extends Model
     public function attributes()
     {
         return $this->hasMany(CustomOrderAttribute::class);
+    }
+    
+    public function order_status()
+    {
+        return $this->belongsTo(OrderStatus::class, 'order_status_id', 'id');
     }
 }

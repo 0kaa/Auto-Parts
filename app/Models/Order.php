@@ -17,6 +17,7 @@ class Order extends Model
         'order_ship_address',
         'order_delivered_at',
         'total_amount',
+        'payment_url',
         'order_number',
         'seller_id',
         'user_id',
@@ -47,5 +48,4 @@ class Order extends Model
     {
         return $this->belongsTo(OrderStatus::class, 'order_status_id', 'id');
     }
-    
 }

@@ -21,6 +21,7 @@ class OrderResource extends JsonResource
             'total_count'           => $this->order_items->sum('quantity'),
             'total_amount'          => $this->total_amount,
             'order_name'            => $this->order_items->first()->product->name,
+            'payment_url'           => $this->payment_url,
             'order_status'          => $this->order_status->name,
             "time"                  => $this->created_at->format('H:i a'),
             'date'                  => $this->created_at->format('Y-m-d'),

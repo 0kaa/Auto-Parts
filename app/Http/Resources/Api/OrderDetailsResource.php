@@ -22,6 +22,7 @@ class OrderDetailsResource extends JsonResource
             'order_ship_name'       => $this->order_ship_name,
             'order_ship_address'    => $this->order_ship_address,
             'order_ship_phone'      => $this->order_ship_phone,
+            'payment_url'           => $this->payment_url,
             'order_delivered_at'    => $this->order_delivered_at,
             'total_amount'          => $this->total_amount,
             'shipping_amount'       => 1,
