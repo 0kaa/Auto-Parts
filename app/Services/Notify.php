@@ -59,7 +59,7 @@ class Notify
         // dump($fcmNotification);
 
         $headers = [
-            'Authorization: key=AAAAyNiq-8Y:APA91bH01iU6o8oEoVNgppwZIZMlxq8l_saWRkWWb_5HYojaIhQEaHqyZjWTAHxAacmOqOhMVdvyB-LlOraqqcACx_mhkZTxS233N9Pb9_JnoJKddHkpxYZ01YliwXgItibXgK48fFXE',
+            'Authorization: key=AAAA7xUVf3A:APA91bGqrKwhhpR37H-pNxEQG8Z75SJ2g3VdWiHBbVHI0okzu9CgWt5fV8BlNZSR4zAWyubfjzrfvw346A9XhmzdtLC0VdQMjaAmcsXv6tYe8PSLQ5V4lQHmEQQ4ZeCBfSD8G9Qk_Pzh',
             'Content-Type: application/json'
         ];
 

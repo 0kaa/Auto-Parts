@@ -23,16 +23,16 @@ class CustomOrderDetailsResource extends JsonResource
             "sub_activity_id"       => $this->subActivity->id,
             "sub_activity_name"     => $this->subActivity->name,
             "piece_name"            => $this->piece_name,
-            "piece_image"           => url('/') . '/' . $this->piece_image,
+            "piece_image"           => $this->piece_image ? url('/storage') . '/' . $this->piece_image : $this->piece_image,
             "piece_description"     => $this->piece_description,
             'piece_price'           => $this->piece_price,
-            'form_image'            => url('/') . '/' . $this->form_image,
+            'form_image'            => $this->form_image ? url('/storage') . '/' . $this->form_image : $this->form_image,
             "car"                   => $this->car->name,
             'attributes'            => $this->attributes->map(function ($attribute) {
                 return [
                     'id'                => $attribute->id,
                     'attribute_name'    => $attribute->attribute->name,
-                    'value'             => $attribute->attribute->type == 'text' ||  $attribute->attribute->type == 'file' ? $attribute->value : $attribute->option->name,
+                    'value'             => $attribute->attribute->type == 'select' ?  $attribute->option->name : $attribute->value,
                 ];
             }),
         ];
