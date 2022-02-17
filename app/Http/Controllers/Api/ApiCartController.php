@@ -89,6 +89,10 @@ class ApiCartController extends Controller
 
             $cart = $user->cart;
 
+            if (!$cart) {
+                return $this->ApiResponse(null, trans('local.cart_empty'), 400);
+            }
+
             $cartItems = $cart->cart_items;
 
             $sellers = $cartItems->map(function ($item) {
