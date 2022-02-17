@@ -23,6 +23,10 @@ Route::namespace('Api\Auth')->middleware('lang')->group(function () {
     Route::post('reset-password/new-password',          'ApiAuthController@newPassword')->middleware('auth:sanctum');
 });
 
+Route::namespace('Api')->group(function () { 
+    Route::get('charge-redirect', 'ApiPaymentController@get_charge');
+});
+
 
 Route::namespace('Api')->middleware('lang')->group(function () {
 
@@ -38,7 +42,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         // sub activities
         Route::get('activity/{id}',         'ApiActivitiesController@show');
         Route::get('activity/{id}/sub',     'ApiActivitiesController@getSubActivities');
-        Route::get('sub/activity/{id}/sub',     'ApiActivitiesController@getSubSubActivities');
+        Route::get('sub/activity/{id}/sub', 'ApiActivitiesController@getSubSubActivities');
         Route::get('stores',                'ApiStoreController@getStoresList');
         Route::get('store/{id}',            'ApiStoreController@getStore');
         Route::get('product/{id}',          'ApiProductController@show');
@@ -81,8 +85,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('product/favourties/create/{id}',   'ApiFavourtiesController@createProductFavourtie');
         Route::post('store/favourties/create/{id}',     'ApiFavourtiesController@createStoreFavourtie');
         Route::post('new-order',                        'ApiOrderController@CreateOrder');
-        Route::get('search',                            'ApiSearchController@search');
-
+        Route::post('search',                           'ApiSearchController@search');
         Route::get('cart',                              'ApiCartController@getMyCart');
         Route::post('cart/create',                      'ApiCartController@addToCart');
         Route::post('cart/remove',                      'ApiCartController@removeFromCart');

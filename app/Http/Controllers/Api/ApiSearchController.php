@@ -20,12 +20,18 @@ class ApiSearchController extends Controller
 
     {
         $search_type = $request->search_type;
+
         if ($search_type == 'product') {
             $searchResultsInProduct = $this->AdvanceSearch(new Product(), ['keyword' => 'keyword',], request());
 
-            $searchResultsInProduct = ProductResource::collection($searchResultsInProduct);
+            if ($searchResultsInProduct->count() > 0) {
 
-            return $this->ApiResponse($searchResultsInProduct, trans('validation.attributes.search'), 200);
+                $searchResultsInProduct = ProductResource::collection($searchResultsInProduct);
+
+                return $this->ApiResponse($searchResultsInProduct, trans('validation.attributes.search'), 200);
+            } else {
+                return $this->ApiResponse([], trans('local.search_empty'), 404);
+            }
         }
 
         // Holding to create orders models

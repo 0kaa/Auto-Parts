@@ -228,4 +228,5 @@ return [
     "file_required" => "File is required",
     "sub_sub_activity_required" => "Sub sub activity is required",
     "sellers_not_founded_in_this_activity" => "Sellers not founded in this activity",
+    "search_empty" => "Search is empty",
 ];
