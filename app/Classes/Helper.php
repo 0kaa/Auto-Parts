@@ -87,7 +87,7 @@ function RedirectOrderToAnotherUser($seller_id, $rejected, $customOrder)
     $order_status_not_found = OrderStatus::where('slug', 'not_found')->first();
     
     if ($user_same->isEmpty()) {
-        $customOrder->update(['order_status->id' => $order_status_not_found->id]);
+        $customOrder->update(['order_status_id' => $order_status_not_found->id]);
         return false;
     }
 

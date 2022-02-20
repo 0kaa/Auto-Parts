@@ -337,7 +337,6 @@ class ApiCustomOrderController extends Controller
         }
 
         $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_id', $customOrder->id], ['seller_id', $user->id]]);
-
         if ($priceOffer->isNotEmpty() || $customOrder->order_status->slug !==  'pending') {
             return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
         }
@@ -345,6 +344,10 @@ class ApiCustomOrderController extends Controller
         if (!isset($request->order_status_id) || !isset($request->price)) {
             return $this->ApiResponse(null, trans('local.order_status_required'), 400);
         }
+        $customOrder->order_status_id =  $request->order_status_id;
+        $customOrder->save();
+
+        MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $user->id)->update(['order_status_id' => $request->order_status_id]);
 
         $order_status_pending = OrderStatus::where('slug', 'pending')->first();
 
@@ -448,12 +451,14 @@ class ApiCustomOrderController extends Controller
             $priceOffer->save();
 
             $customOrder->update([
-                'order_status_id'  => $accepted_status->id,
-                'piece_price'   => $priceOffer->price,
-                'seller_id'     => $priceOffer->seller_id
+                'order_status_id'   => $accepted_status->id,
+                'piece_price'       => $priceOffer->price,
+                'seller_id'         => $priceOffer->seller_id
             ]);
-            
+
             $customOrder->save();
+
+            MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('user_id', $user->id)->update(['order_status_id' => $accepted_status->id]);
 
             return $this->ApiResponse(null, trans('local.order_done'), 200);
         } else {
@@ -496,7 +501,7 @@ class ApiCustomOrderController extends Controller
         if ($request->order_status_id == $rejected_status->id) {
 
             MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $priceOffer->seller_id)->update(['order_status_id' => $rejected_status->id]);
-            
+
             $rejectedOrder = RejectedOrders::where('order_id', $customOrder->id)->pluck('seller_id');
 
             if (in_array($priceOffer->seller_id, $rejectedOrder->toArray()) == false) {
