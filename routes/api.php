@@ -23,7 +23,7 @@ Route::namespace('Api\Auth')->middleware('lang')->group(function () {
     Route::post('reset-password/new-password',          'ApiAuthController@newPassword')->middleware('auth:sanctum');
 });
 
-Route::namespace('Api')->group(function () { 
+Route::namespace('Api')->group(function () {
     Route::get('charge-redirect', 'ApiPaymentController@get_charge');
 });
 
@@ -78,7 +78,6 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('price-offer/{id}/reject',          'ApiCustomOrderController@RejectPriceOffer');
         Route::get('price-offers/order/{id}',           'ApiCustomOrderController@PriceOffers');
         Route::get('my-custom-orders',                  'ApiCustomOrderController@userOrders');
-
         Route::post('rating/product/{id}',              'ApiRatingController@createProductRating');
         Route::post('rating/store/{id}',                'ApiRatingController@createStoreRating');
         Route::get('my-favourites',                     'ApiFavourtiesController@index');

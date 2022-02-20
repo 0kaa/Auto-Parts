@@ -6,12 +6,15 @@ use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CreateOrderRequest;
 use App\Http\Requests\Api\UpdateOrderStatus;
+use App\Http\Resources\Api\CustomOrderListResource;
+use App\Http\Resources\Api\MultiCustomOrderResource;
 use App\Http\Resources\Api\OrderDetailsResource;
 use App\Http\Resources\Api\OrderResource;
 use App\Models\Order;
 use App\Repositories\CartItemRepositoryInterface;
 use App\Repositories\CartRepositoryInterface;
 use App\Repositories\NotificationRepositoryInterface;
+use App\Repositories\CustomOrderRepositoryInterface;
 use App\Repositories\ProductRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\OrderRepositoryInterface;
@@ -32,6 +35,7 @@ class ApiOrderController extends Controller
     protected $orderRepository;
     protected $orderItemRepository;
     protected $notificationRepository;
+    protected $customOrderRepository;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -40,6 +44,7 @@ class ApiOrderController extends Controller
         OrderItemRepositoryInterface $orderItemRepository,
         CartRepositoryInterface $cartRepository,
         CartItemRepositoryInterface $cartItemRepository,
+        CustomOrderRepositoryInterface $customOrderRepository,
         NotificationRepositoryInterface $notificationRepository
     ) {
 
@@ -50,6 +55,7 @@ class ApiOrderController extends Controller
         $this->notificationRepository   = $notificationRepository;
         $this->cartRepository           = $cartRepository;
         $this->cartItemRepository       = $cartItemRepository;
+        $this->customOrderRepository    = $customOrderRepository;
     }
 
     public function CreateOrder(CreateOrderRequest $request)
@@ -277,36 +283,30 @@ class ApiOrderController extends Controller
         $isUser         = auth()->user()->hasRole('user');
         $isOwnerStore   = auth()->user()->hasRole('owner_store');
         $user           = auth()->user();
+        $orderStatus    = OrderStatus::where('slug', 'completed')->first();
 
         if ($isOwnerStore) {
 
-            $orders = $this->orderRepository->getWhereWith(['user'], ["seller_id" => $user->id]);
+            $orders = OrderResource::collection($user->store_orders()->where('order_status_id', '<>', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
 
-            $user_orders = [];
-            $workshop_orders = [];
+            $custom_orders = MultiCustomOrderResource::collection($user->store_custom_orders()->where('order_status_id', '<>', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
 
+            $previous_orders = OrderResource::collection($user->store_orders()->where('order_status_id', '=', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
 
-            $orders->each(function ($order) use (&$user_orders, &$workshop_orders) {
-                if ($order->user->hasRole('workshop')) {
-                    $workshop_orders[]  = $order;
-                } else {
-                    $user_orders[]      = $order;
-                }
-            });
+            $previous_custom_orders = MultiCustomOrderResource::collection($user->store_custom_orders()->where('order_status_id', '=', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
 
-            $user_orders        = OrderResource::collection($user_orders);
-            $workshop_orders    = OrderResource::collection($workshop_orders);
-
-            return $this->ApiResponse(compact('user_orders', 'workshop_orders'), null, 200);
+            return $this->ApiResponse(compact('orders', 'custom_orders', 'previous_orders', 'previous_custom_orders'), null, 200);
         }
 
-        $orderStatus = OrderStatus::where('slug', 'completed')->first();
+        $orders = OrderResource::collection($user->user_orders()->where('order_status_id', '<>', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
 
-        $current_orders = OrderResource::collection($user->user_orders()->where('order_status_id', '<>', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
+        $custom_orders = CustomOrderListResource::collection($user->user_custom_orders()->where('order_status_id', '<>', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
 
-        $previous_orders = OrderResource::collection($user->user_orders()->where('order_status_id', '=', $orderStatus->id)->get());
+        $previous_orders = OrderResource::collection($user->user_orders()->where('order_status_id', '=', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
 
-        return $this->ApiResponse(compact('current_orders', 'previous_orders'), null, 200);
+        $previous_custom_orders = CustomOrderListResource::collection($user->user_custom_orders()->where('order_status_id', '=', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
+
+        return $this->ApiResponse(compact('orders', 'custom_orders', 'previous_orders', 'previous_custom_orders'), null, 200);
     }
 
     public function orderStatus()

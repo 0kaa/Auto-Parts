@@ -70,9 +70,19 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'user_id', 'id');
     }
 
+    public function user_custom_orders()
+    {
+        return $this->hasMany(CustomOrder::class, 'user_id', 'id');
+    }
+
     public function store_orders()
     {
         return $this->hasMany(Order::class, 'seller_id', 'id');
+    }
+
+    public function store_custom_orders()
+    {
+        return $this->hasMany(MultiCustomOrder::class, 'seller_id', 'id');
     }
 
     public function activity_name()
@@ -129,7 +139,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(MultiCustomOrder::class);
     }
-    public function isFav() {
+    public function isFav()
+    {
         return $this->favourite()->where('user_id', auth()->id())->exists();
     }
 }
