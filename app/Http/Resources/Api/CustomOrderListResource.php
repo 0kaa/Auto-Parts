@@ -16,6 +16,7 @@ class CustomOrderListResource extends JsonResource
     {
         return [
             'id'                    => $this->id,
+            'order_number'          => strval($this->id),
             'piece_name'            => $this->piece_name,
             'piece_image'           => $this->piece_image ? url('storage/' . $this->piece_image) : null,
             'order_status'          => $this->order_status->name,
