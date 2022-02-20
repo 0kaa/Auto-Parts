@@ -151,7 +151,7 @@ class ApiCustomOrderController extends Controller
                 if ($attribute_id->type == 'file') {
                     if ($request->file('attributes')) {
 
-                        $file = $request->file('attributes')[$key]['value'];
+                        $file = $request->file('attributes')[$key]['image'];
 
                         $value = $this->filesServices->uploadfile($file, $this->customOrderDirectory);
                     } else {
@@ -287,7 +287,7 @@ class ApiCustomOrderController extends Controller
                 if ($attribute_id->type == 'file') {
                     if ($request->file('attributes')) {
 
-                        $file = $request->file('attributes')[$key]['value'];
+                        $file = $request->file('attributes')[$key]['image'];
 
                         $value = $this->filesServices->uploadfile($file, $this->customOrderDirectory);
                     } else {
