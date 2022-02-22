@@ -19,7 +19,7 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'price' => $this->price,
+            'price' => $this->price . 'SAR',
             // get image with full url of project
             'is_fav'        => $this->isFav($this->id),
             'image' => url('/storage') . '/' . $this->image,

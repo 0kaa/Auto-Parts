@@ -18,7 +18,7 @@ class ProductDetailResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'image' => $this->image ? url('/storage') . '/' . $this->image : null,
-            'price' => $this->price,
+            'price' => $this->price . ' SAR',
             'description' => $this->description,
             'rating' => $this->ratings()->avg('rating') ? $this->ratings()->avg('rating') : 0,
             'comments_count' => count($this->ratings),

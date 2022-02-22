@@ -19,7 +19,7 @@ class OrderResource extends JsonResource
             'id'                    => $this->id,
             'order_number'          => $this->order_number,
             'total_count'           => $this->order_items->sum('quantity'),
-            'total_amount'          => $this->total_amount,
+            'total_amount'          => $this->total_amount . ' SAR',
             'order_name'            => $this->order_items->first()->product->name,
             'payment_url'           => $this->payment_url,
             'order_status'          => $this->order_status->name,

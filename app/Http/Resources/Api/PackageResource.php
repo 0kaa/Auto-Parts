@@ -21,9 +21,9 @@ class PackageResource extends JsonResource
             'duration'              => $this->duration,
             'keyword'               => $this->keyword,
             'badge'                 => url('/storage') . '/' . $this->badge,
-            'price'                 => $this->price + 0,
-            'discount'              => $this->discount + 0,
-            'price_after_discount'  => $this->price + 0 - $this->discount + 0,
+            'price'                 => $this->price . ' SAR',
+            'discount'              => $this->discount . ' SAR',
+            'price_after_discount'  => $this->price + 0 - $this->discount + 0 . ' SAR',
             'features'              => $this->features,
         ];
     }

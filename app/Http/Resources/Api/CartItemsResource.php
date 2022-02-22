@@ -17,7 +17,7 @@ class CartItemsResource extends JsonResource
         return [
             "id"            => $this->id,
             "quantity"      => $this->quantity,
-            "total_price"   => $this->quantity * $this->product->price,
+            "total_price"   => $this->quantity * $this->product->price . ' SAR',
             'product'       => new ProductResource($this->product),
         ];
     }

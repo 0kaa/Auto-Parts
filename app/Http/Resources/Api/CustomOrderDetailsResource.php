@@ -25,7 +25,7 @@ class CustomOrderDetailsResource extends JsonResource
             "piece_name"            => $this->piece_name,
             "piece_image"           => $this->piece_image ? url('/storage') . '/' . $this->piece_image : $this->piece_image,
             "piece_description"     => $this->piece_description,
-            'piece_price'           => $this->piece_price,
+            'piece_price'           => $this->piece_price ? $this->piece_price . ' SAR' : null,
             'form_image'            => $this->form_image ? url('/storage') . '/' . $this->form_image : $this->form_image,
             "car"                   => $this->car->name,
             'attributes'            => $this->attributes->map(function ($attribute) {
