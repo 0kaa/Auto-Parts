@@ -29,6 +29,7 @@ class CustomOrder extends Model
         'sub_activity_id',
         'sub_sub_activity_id',
         'note',
+        'quantity',
     ];
 
 

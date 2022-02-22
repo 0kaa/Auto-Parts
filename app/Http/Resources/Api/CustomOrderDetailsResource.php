@@ -32,12 +32,13 @@ class CustomOrderDetailsResource extends JsonResource
             'piece_price'           => $this->piece_price ? $this->piece_price . ' SAR' : null,
             'form_image'            => $this->form_image ? url('/storage') . '/' . $this->form_image : $this->form_image,
             "car"                   => $this->car->name,
+            'quantity'              => $this->quantity,
             'attributes'            => $this->attributes->map(function ($attribute) {
                 return [
                     'id'                => $attribute->id,
                     'attribute_name'    => $attribute->attribute->name,
                     'attribute_type'    => $attribute->attribute->type,
-                    'value'             => $attribute->attribute->type == 'select' ?  $attribute->option->name : $attribute->value,
+                    'value'             => $attribute->attribute->type == 'select' ?  $attribute->option->name : ($attribute->attribute->type == 'file' ? url('/storage') . '/' . $attribute->value : $attribute->value),
                 ];
             }),
         ];

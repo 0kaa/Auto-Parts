@@ -23,7 +23,7 @@ class CreateCustomOrdersTable extends Migration
             $table->string('form_image')->nullable();
             $table->string('note')->nullable();
             $table->string('payment_url')->nullable();
-
+            $table->integer('quantity')->default(1);
             $table->unsignedBigInteger('activity_type_id')->nullable();
             $table->foreign('activity_type_id')->references('id')->on('activities_type');
 

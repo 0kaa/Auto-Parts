@@ -112,8 +112,5 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('seller-custom-order/{id}/accept',  'ApiCustomOrderController@sellerAcceptedOrder');
         Route::post('seller-custom-order/{id}/reject',  'ApiCustomOrderController@sellerRejectedOrder');
         Route::post('price-offer/create',               'ApiPriceOfferController@create');
-        Route::get('price-offer/{id}',                  'ApiPriceOfferController@show');
-        Route::get('price-offer/{id}/accept',           'ApiPriceOfferController@accept');
-        Route::get('price-offer/{id}/reject',           'ApiPriceOfferController@reject');
     });
 });

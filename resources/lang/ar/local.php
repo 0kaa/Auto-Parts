@@ -239,4 +239,5 @@ return [
     "sub_sub_activity_required" => "يرجي اختيار النشاط الفرعي",
     "sellers_not_founded_in_this_activity" => "لا يوجد بائعين في هذا النشاط",
     "search_empty" => "لا يوجد نتائج للبحث",
+    "price_required" => "يرجي ادخال السعر",
 ];
