@@ -17,6 +17,10 @@ class CustomOrderDetailsResource extends JsonResource
         return [
             "id"                    => $this->id,
             "user_id"               => $this->user->id,
+            "user_name"             => $this->user->name,
+            "user_email"            => $this->user->email,
+            "user_phone"            => $this->user->phone,
+            "user_address"          => $this->user->address,
             "order_status"          => $this->order_status->name,
             "activity_type_id"      => $this->activityType->id,
             "activity_type_name"    => $this->activityType->name,
@@ -32,6 +36,7 @@ class CustomOrderDetailsResource extends JsonResource
                 return [
                     'id'                => $attribute->id,
                     'attribute_name'    => $attribute->attribute->name,
+                    'attribute_type'    => $attribute->attribute->type,
                     'value'             => $attribute->attribute->type == 'select' ?  $attribute->option->name : $attribute->value,
                 ];
             }),
