@@ -321,7 +321,7 @@ class ApiOrderController extends Controller
 
         $orders = OrderResource::collection($user->user_orders()->where('order_status_id', '<>', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
 
-        $custom_orders = CustomOrderListResource::collection($user->user_custom_orders()->where('order_status_id', '<>', $orderStatus_accepted->id)->orderBy('created_at', 'ASC')->get());
+        $custom_orders = CustomOrderListResource::collection($user->user_custom_orders()->where('order_status_id', '<>', $orderStatus_accepted->id)->where('order_status_id', '<>', $orderStatus_seller_rejected->id)->where('order_status_id', '<>', $orderStatus_rejected->id)->orderBy('created_at', 'ASC')->get());
 
         $previous_orders = OrderResource::collection($user->user_orders()->where('order_status_id', '=', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
 
