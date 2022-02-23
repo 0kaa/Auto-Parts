@@ -25,7 +25,7 @@ class StoreCompanyResource extends JsonResource
             'city' => new CityResource($this->city_name),
             'region' => new RegionResource($this->region_name),
             'commercial_register_id' => $this->commercial_register_id,
-            'file' => url('/storage') . '/' . $this->file
+            'file' => $this->file ? url('/storage') . '/' . $this->file : null,
         ];
     }
 }
