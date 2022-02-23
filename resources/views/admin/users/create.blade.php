@@ -162,6 +162,7 @@
                                     <option value="" readonly="" selected>@lang('admin.select')</option>
                                     <option value="user">@lang('local.user')</option>
                                     <option value="owner_store" >@lang('local.owner_store')</option>
+                                    <option value="workshop" >@lang('local.workshop')</option>
 
                                 </select>
 
@@ -332,6 +333,29 @@
 
                             <div class="form-group">
 
+                                <label class="form-label" for="city_id"> <span class="tx-danger">*</span>
+                                    @lang('local.city')</label>
+                                <select id="city_id" class="form-control select2-show-search"
+                                        placeholder=" @lang('local.city')" aria-label=" @lang('local.city')"
+                                        aria-describedby="basic-addon-name" required="">
+                                    <option value="" readonly="" selected>@lang('admin.select')</option>
+
+                                    @foreach($cities as $city)
+                                        <option value="{{$city->id}}" >{{app()->isLocale('en')?$city->name_en:$city->name_ar}}</option>
+                                    @endforeach
+                                </select>
+
+                                <div class="alert alert-danger mg-t-20" role="alert">
+                                    <div class="d-flex align-items-center justify-content-start">
+                                        <i class="icon ion-ios-close alert-icon tx-32"></i>
+                                        <span></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            {{-- <div class="form-group">
+
                                 <label class="form-label" for="city"> <span class="tx-danger">*</span>
                                     @lang('local.city')</label>
                                 <input type="text" id="city" class="form-control" placeholder=" @lang('local.city')" value="{{isset($user)?$user->city:''}}"
@@ -343,7 +367,7 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> --}}
 
 
                             <div class="form-group">
@@ -438,10 +462,10 @@
                                         <div id="map"></div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <input type="hidden" id="latitude" name="latitude" readonly="" class="form-control" required>
+                                        <input type="hidden" id="lat" name="lat" readonly="" class="form-control" required>
                                     </div>
                                     <div class="col-lg-6">
-                                        <input type="hidden" id="longitude" name="longitude" readonly="" class="form-control" required>
+                                        <input type="hidden" id="longitude" name="lat" readonly="" class="form-control" required>
                                     </div>
 
                                 </div>

@@ -242,4 +242,5 @@ return [
     "price_required" => "يرجي ادخال السعر",
     "user_price_offer" => 'قام هذا التاجر بعرض سعر قيمته',
     "for_service" => "لخدمة",
+    "workshop" => "ورشة",
 ];

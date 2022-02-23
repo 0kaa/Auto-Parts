@@ -41,4 +41,20 @@ class UserController extends Controller
         $cities = $this->cityRepository->getAll();
         return view('admin.users.create', compact('activities_type', 'regions', 'cities'));
     }
+
+    public function store(Request $request)
+    {
+        $this->userRepository->create($request->all());
+
+        return redirect()->route('admin.users.index');
+    }
+
+    public function edit($id)
+    {
+        $user = $this->userRepository->findOne($id);
+        $activities_type = $this->activityTypeRepository->getAll();
+        $regions = $this->regionRepository->getAll();
+        $cities = $this->cityRepository->getAll();
+        return view('admin.users.edit', compact('user', 'activities_type', 'regions', 'cities'));
+    }
 }

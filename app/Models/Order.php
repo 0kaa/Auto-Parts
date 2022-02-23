@@ -24,6 +24,21 @@ class Order extends Model
         'shipping_id'
     ];
 
+    // public function getOrderDeliveredAtAttribute($date){
+
+    //     $dateFromat = Carbon::createFromFormat('Y-m-d H:i:s', $date);
+        
+    //     // Get the current app locale
+    //     $locale = app()->getLocale();
+    //     // Tell Carbon to use the current app locale
+    //     Carbon::setlocale($locale);
+
+    //     $format = $locale === 'ar' ? 'M' : 'M';
+    //     // Use `translatedFormat()` to get a translated date string
+    //     return $dateFromat->translatedFormat($format);        
+        
+    // }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id')->select('id', 'name', 'image');

@@ -232,4 +232,5 @@ return [
     "price_required" => "Price is required",
     "user_price_offer" => "This user has a price offer",
     "for_service" => "For service",
+    "workshop" => "Workshop",
 ];
