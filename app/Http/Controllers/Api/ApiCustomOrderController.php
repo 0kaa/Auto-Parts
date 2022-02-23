@@ -537,11 +537,15 @@ class ApiCustomOrderController extends Controller
 
         $customOrder = $this->customOrderRepository->findOne($id);
 
+        $multiOrder = MultiCustomOrder::where('custom_order_id', $id)->where('seller_id', $user->id)->first();
+
         if (!$customOrder) {
             return $this->ApiResponse(null, trans('local.order_not_found'), 404);
         }
 
-        if ($customOrder->user_id == $user->id || $customOrder->seller_id == $user->id) {
+        if ($customOrder->user_id == $user->id) {
+            return $this->ApiResponse(new CustomOrderDetailsResource($customOrder), null, 200);
+        } elseif ($multiOrder->seller_id == $user->id) {
             return $this->ApiResponse(new CustomOrderDetailsResource($customOrder), null, 200);
         } else {
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
