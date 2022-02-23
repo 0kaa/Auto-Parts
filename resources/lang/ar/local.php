@@ -240,4 +240,6 @@ return [
     "sellers_not_founded_in_this_activity" => "لا يوجد بائعين في هذا النشاط",
     "search_empty" => "لا يوجد نتائج للبحث",
     "price_required" => "يرجي ادخال السعر",
+    "user_price_offer" => 'قام هذا التاجر بعرض سعر قيمته',
+    "for_service" => "لخدمة",
 ];

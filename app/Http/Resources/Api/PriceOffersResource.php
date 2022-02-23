@@ -19,6 +19,7 @@ class PriceOffersResource extends JsonResource
             'order_id'      => $this->customOrder->id,
             'price'         => $this->price . ' SAR',
             'piece_name'    => $this->customOrder->piece_name,
+            'message'       => __('local.user_price_offer') . ' ' . $this->price . ' SAR' . ' ' . __('local.for_service') . ' ' . $this->customOrder->piece_name,
             'created_at'    => $this->created_at->diffForHumans(),
             "note"          => $this->note,
             'seller'        => new StoresResource($this->seller),

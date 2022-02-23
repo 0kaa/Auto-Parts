@@ -230,4 +230,6 @@ return [
     "sellers_not_founded_in_this_activity" => "Sellers not founded in this activity",
     "search_empty" => "Search is empty",
     "price_required" => "Price is required",
+    "user_price_offer" => "This user has a price offer",
+    "for_service" => "For service",
 ];
