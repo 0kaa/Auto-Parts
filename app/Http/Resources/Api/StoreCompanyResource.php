@@ -16,7 +16,7 @@ class StoreCompanyResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => url('/storage') . '/' . $this->image,
+            'image' => $this->image ? url('/storage') . '/' . $this->image : url('/product-no-img.jpg'),
             'activity_type' => $this->activity_name ? $this->activity_name->find($this->activity_type_id)->name : null,
             'name_company' => $this->name_company,
             'name_owner_company' => $this->name_owner_company,
@@ -25,7 +25,7 @@ class StoreCompanyResource extends JsonResource
             'city' => new CityResource($this->city_name),
             'region' => new RegionResource($this->region_name),
             'commercial_register_id' => $this->commercial_register_id,
-            'file' => $this->file ? url('/storage') . '/' . $this->file : null,
+            'file' => $this->file ? url('/storage') . '/' . $this->file : url('/product-no-img.jpg'),
         ];
     }
 }

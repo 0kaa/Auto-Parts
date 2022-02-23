@@ -17,7 +17,7 @@ class CarResource extends JsonResource
         return [
             'id'    => $this->id,
             'name'  => $this->name,
-            'image' => url('/storage') . '/' . $this->image,
+            'image' => $this->image ? url('/storage') . '/' . $this->image : url('/product-no-img.jpg'),
         ];
     }
 }

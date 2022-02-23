@@ -20,7 +20,7 @@ class PackageResource extends JsonResource
             'description'           => $this->description,
             'duration'              => $this->duration,
             'keyword'               => $this->keyword,
-            'badge'                 => url('/storage') . '/' . $this->badge,
+            'badge'                 => $this->badge ? url('/storage') . '/' . $this->badge : url('/product-no-img.jpg'),
             'price'                 => $this->price . ' SAR',
             'discount'              => $this->discount . ' SAR',
             'price_after_discount'  => $this->price + 0 - $this->discount + 0 . ' SAR',

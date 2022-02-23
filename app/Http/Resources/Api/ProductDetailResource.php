@@ -17,7 +17,7 @@ class ProductDetailResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image' => $this->image ? url('/storage') . '/' . $this->image : null,
+            'image' => $this->image ? url('/storage') . '/' . $this->image : url('/product-no-img.jpg'),
             'price' => $this->price . ' SAR',
             'description' => $this->description,
             'rating' => $this->ratings()->avg('rating') ? $this->ratings()->avg('rating') : 0,
@@ -25,7 +25,7 @@ class ProductDetailResource extends JsonResource
             'seller_id' => $this->seller->id,
             'seller_name' => $this->seller->name_owner_company,
             'seller_rating' => $this->seller->ratings()->avg('rating') ? $this->seller->ratings()->avg('rating') : 0,
-            'seller_image' => $this->seller->image ? url('/storage') . '/' . $this->seller->image : $this->seller->image,
+            'seller_image' => $this->seller->image ? url('/storage') . '/' . $this->seller->image : url('/product-no-img.jpg'),
             'store_name' => $this->seller->name_company,
             'features' => $this->features,
             'details' => $this->details,

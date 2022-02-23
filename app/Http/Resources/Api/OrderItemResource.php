@@ -16,7 +16,7 @@ class OrderItemResource extends JsonResource
     {
         return [
             'product_name'  => $this->product->name,
-            'product_image' => url('/storage') . '/' . $this->product->image,
+            'product_image' => $this->product->image ? url('/storage') . '/' . $this->product->image : url('/product-no-img.jpg'),
             'product_price' => $this->product->price . ' SAR',
             'product_id'    => $this->product->id,
             'product_rating' => $this->product->ratings()->avg('rating') ? $this->product->ratings()->avg('rating') : 0,

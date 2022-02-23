@@ -20,7 +20,7 @@ class UserResource extends JsonResource
             "lat"           => $this->lat,
             "lng"           => $this->lng,
             'is_notify'     => $this->is_notify,
-            "image"         => $this->image ? url('/storage') . '/' . $this->image : null,
+            "image"         => $this->image ? url('/storage') . '/' . $this->image : url('/product-no-img.jpg'),
             "created_at"    => $this->created_at->format('Y-m-d'),
             'type'          => $this->roles->pluck('name')->first(),
             'approved'      => $this->approved,
