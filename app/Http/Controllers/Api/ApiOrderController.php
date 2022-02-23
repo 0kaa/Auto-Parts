@@ -242,6 +242,24 @@ class ApiOrderController extends Controller
                 $q->where('order_status_id', $order_status_id);
             }
 
+            // search by user role user | workshop
+            if ($request->has('type')) {
+                $type = $request->type;
+                if ($type == 'user') {
+                    $q->whereHas('user', function ($q) {
+                        $q->whereHas('roles', function ($q) {
+                            $q->where('name', 'user');
+                        });
+                    });
+                } else {
+                    $q->whereHas('user', function ($q) {
+                        $q->whereHas('roles', function ($q) {
+                            $q->where('name', 'workshop');
+                        });
+                    });
+                }
+            }
+
             $orders = $q->get();
 
             return $this->ApiResponse(OrderResource::collection($orders), null, 200);
