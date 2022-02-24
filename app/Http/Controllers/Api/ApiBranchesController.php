@@ -29,7 +29,7 @@ class ApiBranchesController extends Controller
 
     public function update(UpdateBranchesRequest $request)
     {
-
+        dd($request->branches);
         $user = auth()->user();
         if ($request->branches) {
             $user->branches()->delete();
