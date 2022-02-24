@@ -25,7 +25,7 @@ trait Searching
                     }
 
                     if ($column == 'keyword' && $searchtype == 'like') {
-                        $q->where('order_ship_name', 'like', '%' . $request->keyword . '%')->Orwhere('description', 'like', '%' . $request->keyword . '%');
+                        $q->where('order_ship_name', 'like', '%' . $request->keyword . '%')->Orwhere('order_ship_address', 'like', '%' . $request->keyword . '%');
                     }
                     
                     if ($searchtype == '=' && isset($request->{$column})) {
