@@ -19,8 +19,9 @@ class ApiSearchController extends Controller
     public function search(SearchRequest $request)
 
     {
-        $search_type = $request->search_type;
 
+        $search_type = $request->search_type;
+dd($search_type);
         if ($search_type == 'product') {
             $searchResultsInProduct = $this->AdvanceSearch(new Product(), ['keyword' => 'keyword',], request());
 
