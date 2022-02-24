@@ -36,7 +36,6 @@ class RoleMiddleware
             $roles = array($role);
         }
 
-        dd($roles);
 
         foreach ($roles as $role) {
             if ($authGuard->user()->hasRole($role)) {
