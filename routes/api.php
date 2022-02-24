@@ -84,13 +84,15 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('product/favourties/create/{id}',   'ApiFavourtiesController@createProductFavourtie');
         Route::post('store/favourties/create/{id}',     'ApiFavourtiesController@createStoreFavourtie');
         Route::post('new-order',                        'ApiOrderController@CreateOrder');
-        Route::post('search',                           'ApiSearchController@search');
         Route::get('cart',                              'ApiCartController@getMyCart');
         Route::post('cart/create',                      'ApiCartController@addToCart');
         Route::post('cart/remove',                      'ApiCartController@removeFromCart');
         Route::post('cart/change-quantity',             'ApiCartController@changeQuantity');
     });
 
+    Route::group(['middleware' => ['auth:sanctum', 'role:user|workshop|owner_store']], function () {
+        Route::post('search',                           'ApiSearchController@search');
+    });
 
     // Owner Store authenticated required
     Route::group(['middleware' => ['auth:sanctum', 'role:owner_store']], function () {
@@ -106,7 +108,6 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::delete('product/delete/{id}',            'ApiProductController@delete');
         Route::post('order/update-status',               'ApiOrderController@updateOrderStatus');
         Route::post('my-orders/search',                 'ApiOrderController@searchOrders');
-        Route::post('search',                           'ApiSearchController@search');
 
         // current orders
         Route::get('my-orders/current',                 'ApiOrderController@currentOrders');
