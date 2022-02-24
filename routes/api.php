@@ -106,6 +106,8 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::delete('product/delete/{id}',            'ApiProductController@delete');
         Route::post('order/update-status',               'ApiOrderController@updateOrderStatus');
         Route::post('my-orders/search',                 'ApiOrderController@searchOrders');
+        Route::post('search',                           'ApiSearchController@search');
+
         // current orders
         Route::get('my-orders/current',                 'ApiOrderController@currentOrders');
         Route::get('seller-custom-orders',              'ApiCustomOrderController@getSellerOrders');

@@ -36,12 +36,13 @@ class ApiSearchController extends Controller
 
         // Holding to create orders models
 
-        // if ($search_type == 'order') {
-        //     $searchResultsInOrder = $this->AdvanceSearch(new Order(), ['keyword' => 'like',], request());
+        if ($search_type == 'order') {
+            $searchResultsInOrder = $this->AdvanceSearch(new Order(), ['keyword' => 'like',], request());
 
-        //     $searchResultsInOrder = ProductResource::collection($searchResultsInOrder);
+            $searchResultsInOrder = ProductResource::collection($searchResultsInOrder);
 
-        //     return $this->ApiResponse($searchResultsInOrder, trans('validation.attributes.search'), 200);
-        // }
+            return $this->ApiResponse($searchResultsInOrder, trans('validation.attributes.search'), 200);
+        }
+
     }
 }
