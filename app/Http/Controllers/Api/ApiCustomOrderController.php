@@ -241,7 +241,7 @@ class ApiCustomOrderController extends Controller
             'form_image'            => $form_image,
             "car_id"                => $attributes['car_id'],
             'order_status_id'       => $order_status_pending->id,
-            'quantity'              => $request->quantity,
+            // 'quantity'              => $request->quantity,
             'activity_type_id'      => $activity->id,
             'sub_activity_id'       => $sub_activity->id,
             'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
