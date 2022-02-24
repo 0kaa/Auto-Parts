@@ -30,6 +30,7 @@ class ApiSearchController extends Controller
                 $searchResultsInProduct = ProductResource::collection($searchResultsInProduct);
 
                 return $this->ApiResponse($searchResultsInProduct, trans('validation.attributes.search'), 200);
+                
             } else {
                 return $this->ApiResponse([], trans('local.search_empty'), 404);
             }
@@ -38,12 +39,12 @@ class ApiSearchController extends Controller
         // Holding to create orders models
 
         if ($search_type == 'order') {
+
             $searchResultsInOrder = $this->AdvanceSearch(new Order(), ['keyword' => 'like',], request());
 
             $searchResultsInOrder = ProductResource::collection($searchResultsInOrder);
 
             return $this->ApiResponse($searchResultsInOrder, trans('validation.attributes.search'), 200);
         }
-
     }
 }

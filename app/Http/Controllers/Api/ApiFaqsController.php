@@ -32,10 +32,11 @@ class ApiFaqsController extends Controller
     public function index()
     {
         $faqs = $this->faqsRepository->getAll();
+
         return $this->ApiResponse([
             'faqs' => FaqsResource::collection($faqs),
-            'email' => Setting::where('key', 'email')->first()->value,
-            'website' => Setting::where('key', 'website')->first()->value,
+            'email' => Setting::where('key', 'email')->first()['value'],
+            'website' => Setting::where('key', 'website')->first()['value'],
         ], null, 200);
     }
 }
