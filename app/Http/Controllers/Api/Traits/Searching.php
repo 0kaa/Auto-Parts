@@ -28,12 +28,12 @@ trait Searching
                         $q->where('order_ship_name', 'like', '%' . $request->keyword . '%')->Orwhere('order_ship_address', 'like', '%' . $request->keyword . '%');
                     }
                     
-                    if ($searchtype == '=' && isset($request->{$column})) {
-                        $q->where($column, $request->{$column});
-                    }
-                    if ($searchtype == 'like' && isset($request->{$column})) {
-                        $q->where($column, 'like', '%' . $request->{$column} . '%');
-                    }
+                    // if ($searchtype == '=' && isset($request->{$column})) {
+                    //     $q->where($column, $request->{$column});
+                    // }
+                    // if ($searchtype == 'like' && isset($request->{$column})) {
+                    //     $q->where($column, 'like', '%' . $request->{$column} . '%');
+                    // }
                     
                 });
             }
