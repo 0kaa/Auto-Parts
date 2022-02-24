@@ -179,12 +179,15 @@ class ApiOrderController extends Controller
             // Notify::NotifyMob($notification->message_ar, $notification->message_en, $request->seller_id, null, $data = null);
 
             $cart->delete();
-
+                dd($cart);
             return $this->ApiResponse($charge['transaction']['url'], trans('local.order_done'), 200);
         } catch (\Exception $e) {
             return $this->ApiResponse(null, $e->getMessage(), 400);
         }
     }
+
+
+
 
     public function currentOrders()
     {
