@@ -24,10 +24,10 @@ class UpdateBranchesRequest extends MasterApiRequest
     public function rules()
     {
         return [
-            'branches.*.region_id' => 'required|exists:regions,id',
-            'branches.*.city_id' => 'required|exists:cities,id',
-            'branches.*.phone' => 'required|numeric',
-            'branches.*.address' => 'required|string',
+            // 'branches.*.region_id' => 'required|exists:regions,id',
+            // 'branches.*.city_id' => 'required|exists:cities,id',
+            // 'branches.*.phone' => 'required|numeric',
+            // 'branches.*.address' => 'required|string',
 
         ];
     }
