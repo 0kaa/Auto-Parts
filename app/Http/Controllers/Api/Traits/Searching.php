@@ -23,6 +23,7 @@ trait Searching
                     if ($column == 'keyword' && $searchtype == 'keyword') {
                         $q->where('name', 'like', '%' . $request->keyword . '%')->Orwhere('description', 'like', '%' . $request->keyword . '%');
                     }
+                    
                     if ($searchtype == '=' && isset($request->{$column})) {
                         $q->where($column, $request->{$column});
                     }
