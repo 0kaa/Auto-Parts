@@ -46,7 +46,7 @@ class ApiPaymentController extends Controller
             $order->payment_url = null;
             $order->save();
 
-            return $this->ApiResponse(null, 'تم الغاء الدفع', 402);
+            return $this->ApiResponse(null, 'تم الغاء الدفع', 200);
         }
     }
 }
