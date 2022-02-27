@@ -38,14 +38,15 @@ class ApiPaymentController extends Controller
 
             return $this->ApiResponse(null, 'تم الدفع بنجاح', 200);
         } elseif ($charge['status'] == 'CANCELLED') {
-            $order_status_cancelled = OrderStatus::where('slug', 'cancelled')->first();
+            $order_status_unpaid = OrderStatus::where('slug', 'unpaid')->first();
 
             $getCharge->status = 'CANCELLED';
             $getCharge->save();
-            $order->order_status_id = $order_status_cancelled->id;
+            $order->order_status_id = $order_status_unpaid->id;
+            $order->payment_url = null;
             $order->save();
 
-            return $this->ApiResponse(null, 'تم الغاء الدفع', 200);
+            return $this->ApiResponse(null, 'تم الغاء الدفع', 402);
         }
     }
 }
