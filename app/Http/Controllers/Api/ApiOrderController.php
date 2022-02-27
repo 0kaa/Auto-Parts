@@ -135,7 +135,7 @@ class ApiOrderController extends Controller
                     \"phone\":{\"country_code\":\"965\",\"number\":\"$user->phone\"}},
                     \"merchant\":{\"id\":\"$user->id\"},
                     \"source\":{\"id\":\"src_sa.mada\"},
-                    \"redirect\":{\"url\":\"http://127.0.0.1:8000/api/charge-redirect\"}
+                    \"redirect\":{\"url\":\"http://api.ketageaher.com/api/charge-redirect\"}
                 }",
 
                 CURLOPT_HTTPHEADER => array(
