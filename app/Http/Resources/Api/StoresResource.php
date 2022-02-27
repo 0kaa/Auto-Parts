@@ -20,7 +20,7 @@ class StoresResource extends JsonResource
             'cover'         => $this->activity_name->cover ?  url('/storage') . '/' . $this->activity_name->cover : url('/product-no-img.jpg'),
             'name'          => $this->name,
             'badge'         => $this->package ? url('/storage') . '/' . $this->package->badge : null,
-            'rating'        => $this->ratings()->avg('rating'),
+            'rating'        => $this->ratings()->avg('rating') ? $this->ratings()->avg('rating') : 0,
             'address'       => $this->address,
             'is_fav'        => $this->isFav($this->id),
             "lat"           => $this->lat,
