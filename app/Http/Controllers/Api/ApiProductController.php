@@ -44,8 +44,8 @@ class ApiProductController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
-            'features' => $request->features,
-            'details' => $request->details,
+            'features' => $request->features ? $request->features : [],
+            'details' => $request->details ? $request->details : [],
             'image' => $image,
             'seller_id' => auth()->user()->id
         ]);

@@ -27,8 +27,8 @@ class ProductDetailResource extends JsonResource
             'seller_rating' => $this->seller->ratings()->avg('rating') ? $this->seller->ratings()->avg('rating') : 0,
             'seller_image' => $this->seller->image ? url('/storage') . '/' . $this->seller->image : url('/product-no-img.jpg'),
             'store_name' => $this->seller->name_company,
-            'features' => $this->features,
-            'details' => $this->details,
+            'features' => $this->features ? $this->features : [],
+            'details' => $this->details ? $this->details : [],
             'is_fav' => $this->isFav($this->id),
             'ratings' => RatingResource::collection($this->ratings),
         ];

@@ -36,9 +36,7 @@ class Product extends Model
         'name'          => 'required',
         'price'         => 'required',
         'image'         => 'required',
-        'description'   => 'required',
-        'details'       => 'required',
-        'features'      => 'required',
+        'description'   => 'required',        
     ];
 
     /**
