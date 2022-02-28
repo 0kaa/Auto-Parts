@@ -28,6 +28,7 @@ class CreateOrderRequest extends FormRequest
             'order_ship_name'       => 'required',
             'order_ship_phone'      => 'required',
             'shipping_id'           => 'required|exists:shippings,id',
+            'payment_id'            => 'required|exists:payment_methods,id',
         ];
     }
 }
