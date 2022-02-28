@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShippingsTable extends Migration
+class CreatePaymentMethodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,20 @@ class CreateShippingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shippings', function (Blueprint $table) {
+        Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->string('shipping_name_en');
-            $table->string('shipping_name_ar');
+            $table->string('name_ar');
+            $table->string('name_en');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
 
         Schema::table('orders', function (Blueprint $table) {
-            $table->foreignId('shipping_id')->constrained('shippings')->onDelete('cascade');
+            $table->foreignId('payment_id')->constrained('payment_methods')->onDelete('cascade');
         });
+
         Schema::table('custom_orders', function (Blueprint $table) {
-            $table->foreignId('shipping_id')->constrained('shippings')->onDelete('cascade');
+            $table->foreignId('payment_id')->constrained('payment_methods')->onDelete('cascade');
         });
     }
 
@@ -35,6 +37,6 @@ class CreateShippingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shippings');
+        Schema::dropIfExists('payment_methods');
     }
 }

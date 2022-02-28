@@ -67,9 +67,14 @@ class CustomOrder extends Model
     {
         return $this->hasMany(CustomOrderAttribute::class);
     }
-    
+
     public function order_status()
     {
         return $this->belongsTo(OrderStatus::class, 'order_status_id', 'id');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(PaymentMethod::class, 'payment_id', 'id');
     }
 }

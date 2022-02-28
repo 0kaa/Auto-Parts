@@ -18,6 +18,7 @@ class Order extends Model
         'order_delivered_at',
         'total_amount',
         'payment_url',
+        'payment_id',
         'order_number',
         'seller_id',
         'user_id',
@@ -27,7 +28,7 @@ class Order extends Model
     // public function getOrderDeliveredAtAttribute($date){
 
     //     $dateFromat = Carbon::createFromFormat('Y-m-d H:i:s', $date);
-        
+
     //     // Get the current app locale
     //     $locale = app()->getLocale();
     //     // Tell Carbon to use the current app locale
@@ -36,7 +37,7 @@ class Order extends Model
     //     $format = $locale === 'ar' ? 'M' : 'M';
     //     // Use `translatedFormat()` to get a translated date string
     //     return $dateFromat->translatedFormat($format);        
-        
+
     // }
 
     public function user()
@@ -62,5 +63,10 @@ class Order extends Model
     public function order_status()
     {
         return $this->belongsTo(OrderStatus::class, 'order_status_id', 'id');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(PaymentMethod::class, 'payment_id', 'id');
     }
 }

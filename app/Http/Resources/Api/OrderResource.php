@@ -30,6 +30,7 @@ class OrderResource extends JsonResource
             'order_ship_address'    => $this->order_ship_address,
             'order_ship_phone'      => $this->order_ship_phone,
             'shipping'              => new ShippingResource($this->shipping),
+            'payment'               => new PaymentMethodsResource($this->payment),
         ];
     }
 }

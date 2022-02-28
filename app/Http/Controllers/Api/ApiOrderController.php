@@ -91,6 +91,7 @@ class ApiOrderController extends Controller
                     'order_ship_name'       => $request->order_ship_name,
                     'order_ship_phone'      => $request->order_ship_phone,
                     'shipping_id'           => $request->shipping_id,
+                    'payment_id'            => $request->payment_id,
                     'total_amount'          => $total_amount,
                     'order_status_id'       => 1,
                 ]);

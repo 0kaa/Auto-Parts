@@ -23,6 +23,7 @@ class OrderDetailsResource extends JsonResource
             'order_ship_address'    => $this->order_ship_address,
             'order_ship_phone'      => $this->order_ship_phone,
             'payment_url'           => $this->payment_url,
+            'payment'               => new PaymentMethodsResource($this->payment),
             'order_delivered_at'    => $this->order_delivered_at,
             'total_amount'          => $this->total_amount . ' SAR',
             'shipping_amount'       => 20 . ' SAR',

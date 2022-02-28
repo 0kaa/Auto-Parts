@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
         $this->call(ActivityTypeSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(RegionSeeder::class);
-        $this->call(CitySeeder::class);
         $this->call(CompanySector::class);
         $this->call(UserSeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(PackageSeeder::class);
         $this->call(ShippingSeeder::class);
         $this->call(OrderStatusSeeder::class);
+        $this->call(PaymentMethodsSeeder::class);
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\PaymentMethodsResource;
 use App\Models\OrderStatus;
+use App\Models\PaymentMethod;
 use App\Models\TapPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -13,6 +15,12 @@ class ApiPaymentController extends Controller
 {
 
     use ApiResponseTrait;
+
+    public function payment_methods()
+    {
+        $payment_methods = PaymentMethod::all();
+        return $this->ApiResponse(PaymentMethodsResource::collection($payment_methods), null, 200);
+    }
 
     public function get_charge(Request $request)
     {
