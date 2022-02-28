@@ -94,7 +94,7 @@ class ApiCustomOrderController extends Controller
         }
 
         $order_status_pending = OrderStatus::where('slug', 'pending')->first();
-
+                
         $customOrder =  $this->customOrderRepository->create([
             'seller_id'             => $attributes['seller_id'],
             'user_id'               => $user->id,
@@ -254,6 +254,10 @@ class ApiCustomOrderController extends Controller
         foreach ($attributes['attributes'] as $key => $attribute) {
 
             $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
+
+            if ($attribute_id->sub_activity_id != $sub_activity->id) {
+                return $this->ApiResponse(null, trans('local.attribute_not_belong_to_sub_activity'), 404);
+            }
 
             if (!$attribute_id) {
 

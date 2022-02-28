@@ -233,4 +233,5 @@ return [
     "user_price_offer" => "This user has a price offer",
     "for_service" => "For service",
     "workshop" => "Workshop",
+    "attribute_not_belong_to_sub_activity" => "Attribute not belong to sub activity",
 ];

@@ -243,4 +243,5 @@ return [
     "user_price_offer" => 'قام هذا التاجر بعرض سعر قيمته',
     "for_service" => "لخدمة",
     "workshop" => "ورشة",
+    "attribute_not_belong_to_sub_activity" => "الخاصية لا تنتمي للنشاط الفرعي",
 ];

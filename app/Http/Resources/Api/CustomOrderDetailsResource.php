@@ -33,6 +33,8 @@ class CustomOrderDetailsResource extends JsonResource
             'form_image'            => $this->form_image ? url('/storage') . '/' . $this->form_image : $this->form_image,
             "car"                   => $this->car->name,
             'quantity'              => $this->quantity,
+            'payment'               => new PaymentMethodsResource($this->payment),
+            'shipping'              => new ShippingResource($this->shipping),
             'attributes'            => $this->attributes->map(function ($attribute) {
                 return [
                     'id'                => $attribute->id,

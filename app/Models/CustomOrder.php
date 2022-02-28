@@ -24,6 +24,8 @@ class CustomOrder extends Model
         'car_id',
         'order_status_id',
         'payment_url',
+        'shipping_id',
+        'payment_id',
         'user_id',
         'activity_type_id',
         'sub_activity_id',
@@ -72,6 +74,12 @@ class CustomOrder extends Model
     {
         return $this->belongsTo(OrderStatus::class, 'order_status_id', 'id');
     }
+
+    public function shipping()
+    {
+        return $this->belongsTo(Shipping::class, 'shipping_id', 'id');
+    }
+
 
     public function payment()
     {
