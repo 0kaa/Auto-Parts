@@ -142,6 +142,11 @@ class ApiCartController extends Controller
 
             $cartItem->delete();
 
+            if (!$cart->cart_items->count()) {
+                $cart->delete();
+                return $this->ApiResponse(null, trans('local.removed_from_cart'), 200);
+            }
+
             $shipping_amount = 1;
 
             $data = [
