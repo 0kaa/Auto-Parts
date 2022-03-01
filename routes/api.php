@@ -25,7 +25,7 @@ Route::namespace('Api\Auth')->middleware('lang')->group(function () {
 
 Route::namespace('Api')->group(function () {
     Route::get('charge-redirect', 'ApiPaymentController@get_charge');
-    Route::get('images', 'ApiPaymentController@images');
+    Route::post('images', 'ApiPaymentController@images');
 });
 
 
