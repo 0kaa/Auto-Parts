@@ -58,6 +58,7 @@ return [
 
     'website' => env('APP_API_WEBSITE', 'http://127.0.0.1:8000/'),
     'dashboard' => env('APP_API_DASHBOARD', 'http://127.0.0.1:8000/admin/'),
+    'payment_key' => env('APP_API_PAYMENT_KEY', 'sk_test_QCYkOjGn4l853sfmwRuyDoAB'),
 
     /*
     |--------------------------------------------------------------------------

@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\MultiCustomOrder;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\HindAlmujaghedMail;
 use App\Models\OrderStatus;
-
+use App\Models\TapPayment;
 /*
     |--------------------------------------------------------------------------
     | Detect Active Route Function
@@ -85,7 +85,7 @@ function RedirectOrderToAnotherUser($seller_id, $rejected, $customOrder)
         ->limit(5)->get();
 
     $order_status_not_found = OrderStatus::where('slug', 'not_found')->first();
-    
+
     if ($user_same->isEmpty()) {
         $customOrder->update(['order_status_id' => $order_status_not_found->id]);
         return false;
@@ -101,3 +101,60 @@ function RedirectOrderToAnotherUser($seller_id, $rejected, $customOrder)
         ]);
     }
 }
+
+
+function generate_order_payment_url($order, $user)
+{
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.tap.company/v2/charges",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS =>
+        "{
+                    \"amount\":$order->total_amount,
+                    \"currency\":\"SAR\",
+                    \"description\":\"description\",
+                    \"reference\":{\"order\":\"$order->id\"},
+                    \"customer\":{\"first_name\":\"$user->name\",\"email\":\"$user->email\",
+                    \"phone\":{\"country_code\":\"965\",\"number\":\"$user->phone\"}},
+                    \"merchant\":{\"id\":\"$user->id\"},
+                    \"source\":{\"id\":\"src_sa.mada\"},
+                    \"redirect\":{\"url\":\"http://api.ketageaher.com/api/charge-redirect\"}
+                }",
+
+        CURLOPT_HTTPHEADER => array(
+            "authorization: Bearer " . config('app.payment_key'),
+            "content-type: application/json"
+        ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+        echo "cURL Error #:" . $err;
+    } else {
+
+        $charge = json_decode($response, true);
+        TapPayment::create([
+            'charge_id' => $charge['id'],
+            'amount' => $charge['amount'],
+            'status' => $charge['status'],
+            'order_id' => $order->id,
+        ]);
+
+        $order->payment_url = $charge['transaction']['url'];
+        $order->save();
+
+        return $charge;
+    }
+}
+

@@ -28,7 +28,7 @@ class ApiPaymentController extends Controller
 
         $order = $getCharge->order;
 
-        $api_key = 'sk_test_QCYkOjGn4l853sfmwRuyDoAB';
+        $api_key = config('app.payment_key');
 
         $charge = Http::withToken($api_key)
             ->get('https://api.tap.company/v2/charges/' . $getCharge->charge_id)
