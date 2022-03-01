@@ -250,7 +250,7 @@ class ApiCustomOrderController extends Controller
             'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
         ]);
 
-        foreach ($attributes['attributes'] as $key => $attribute) {
+        foreach ($request->attributes as $key => $attribute) {
 
             $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
 
