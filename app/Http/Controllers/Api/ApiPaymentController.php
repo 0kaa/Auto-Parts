@@ -57,11 +57,4 @@ class ApiPaymentController extends Controller
             return $this->ApiResponse(null, 'تم الغاء الدفع', 200);
         }
     }
-
-    public function images(Request $request)
-    {
-        // retrive multi image        
-
-        dd($request->all());
-    }
 }
