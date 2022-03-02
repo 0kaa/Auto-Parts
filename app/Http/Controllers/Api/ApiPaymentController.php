@@ -85,11 +85,12 @@ class ApiPaymentController extends Controller
             $getCharge->save();
 
             $order->order_status_id                     = $order_status_paid->id;
+            $order->payment_url                         = null;
             $order->multiCustomOrder->order_status_id   = $order_status_paid->id;
             $order->multiCustomOrder->payment_url       = null;
-            $order->payment_url                         = null;
 
             $order->save();
+            $order->multiCustomOrder->save();
 
             return $this->ApiResponse(null, trans('local.payment_success'), 200);
         } elseif ($charge['status'] == 'CANCELLED') {
@@ -104,6 +105,7 @@ class ApiPaymentController extends Controller
             $order->multiCustomOrder->payment_url       = null;
 
             $order->save();
+            $order->multiCustomOrder->save();
 
             return $this->ApiResponse(null, trans('local.payment_failed'), 200);
         }
