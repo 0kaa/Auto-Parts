@@ -244,4 +244,7 @@ return [
     "for_service" => "لخدمة",
     "workshop" => "ورشة",
     "attribute_not_belong_to_sub_activity" => "الخاصية لا تنتمي للنشاط الفرعي",
+    "payment_success" => "تم الدفع بنجاح",
+    "payment_failed" => "تم الفشل في الدفع",
+    "charge_not_found" => "الشحنة غير موجودة",
 ];

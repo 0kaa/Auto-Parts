@@ -94,7 +94,7 @@ class ApiCustomOrderController extends Controller
         }
 
         $order_status_pending = OrderStatus::where('slug', 'pending')->first();
-                
+
         $customOrder =  $this->customOrderRepository->create([
             'seller_id'             => $attributes['seller_id'],
             'user_id'               => $user->id,
@@ -110,7 +110,7 @@ class ApiCustomOrderController extends Controller
             'activity_type_id'      => $activity->id,
             'sub_activity_id'       => $sub_activity->id,
             'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
-        ]);        
+        ]);
         foreach ($request->attributes as $key => $attribute) {
 
             $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
@@ -423,7 +423,7 @@ class ApiCustomOrderController extends Controller
     /**
      * Step 3 => in case the seller accepted order and send price offer here user can take one of two actions [accept | reject] 
      */
-    public function AcceptPriceOffer(Request $request, $id)
+    public function AcceptPriceOffer($id)
     {
         $user = auth()->user();
 
@@ -445,6 +445,8 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
         }
 
+        $charge = generate_custom_order_payment_url($customOrder, $priceOffer, $user);
+
         $priceOffer->update(['status_id' => $accepted_status->id]);
 
         $priceOffer->save();
@@ -459,7 +461,7 @@ class ApiCustomOrderController extends Controller
 
         MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $priceOffer->seller_id)->update(['order_status_id' => $accepted_status->id]);
 
-        return $this->ApiResponse(null, trans('local.order_done'), 200);
+        return $this->ApiResponse($charge['transaction']['url'], trans('local.order_done'), 200);
     }
 
     public function RejectPriceOffer(Request $request, $id)

@@ -125,7 +125,7 @@ function generate_order_payment_url($order, $user)
                     \"phone\":{\"country_code\":\"965\",\"number\":\"$user->phone\"}},
                     \"merchant\":{\"id\":\"$user->id\"},
                     \"source\":{\"id\":\"src_sa.mada\"},
-                    \"redirect\":{\"url\":\"http://api.ketageaher.com/api/charge-redirect\"}
+                    \"redirect\":{\"url\":\"http://api.ketageaher.com/api/charge-order-redirect\"}
                 }",
 
         CURLOPT_HTTPHEADER => array(
@@ -148,7 +148,8 @@ function generate_order_payment_url($order, $user)
             'charge_id' => $charge['id'],
             'amount' => $charge['amount'],
             'status' => $charge['status'],
-            'order_id' => $order->id,
+            'orderable_id' => $order->id,
+            'orderable_type' => 'App\Models\Order',
         ]);
 
         $order->payment_url = $charge['transaction']['url'];
@@ -157,4 +158,58 @@ function generate_order_payment_url($order, $user)
         return $charge;
     }
 }
+function generate_custom_order_payment_url($customOrder, $priceOffer, $user)
+{
+    $curl = curl_init();
 
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.tap.company/v2/charges",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS =>
+        "{
+                    \"amount\":$priceOffer->price,
+                    \"currency\":\"SAR\",
+                    \"description\":\"description\",
+                    \"reference\":{\"order\":\"$customOrder->id\"},
+                    \"customer\":{\"first_name\":\"$user->name\",\"email\":\"$user->email\",
+                    \"phone\":{\"country_code\":\"965\",\"number\":\"$user->phone\"}},
+                    \"merchant\":{\"id\":\"$user->id\"},
+                    \"source\":{\"id\":\"src_sa.mada\"},
+                    \"redirect\":{\"url\":\"http://api.ketageaher.com/api/charge-custom-order-redirect\"}
+                }",
+
+        CURLOPT_HTTPHEADER => array(
+            "authorization: Bearer " . config('app.payment_key'),
+            "content-type: application/json"
+        ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+        return false;
+    } else {
+
+        $charge = json_decode($response, true);
+        TapPayment::create([
+            'charge_id' => $charge['id'],
+            'amount' => $charge['amount'],
+            'status' => $charge['status'],
+            'orderable_id' => $customOrder->id,
+            'orderable_type' => 'App\Models\CustomOrder',
+        ]);
+
+        $customOrder->payment_url = $charge['transaction']['url'];
+        $customOrder->save();
+
+        return $charge;
+    }
+}

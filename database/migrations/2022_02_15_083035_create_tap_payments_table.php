@@ -19,8 +19,10 @@ class CreateTapPaymentsTable extends Migration
             $table->string('amount');
             $table->string('status');
             // order-id
-            $table->bigInteger('order_id')->unsigned();
-            $table->foreign('order_id')->references('id')->on('orders');
+            // $table->bigInteger('order_id')->unsigned();
+            // $table->foreign('order_id')->references('id')->on('orders');
+            $table->morphs('orderable');
+
             $table->timestamps();
         });
     }

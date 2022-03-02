@@ -234,4 +234,7 @@ return [
     "for_service" => "For service",
     "workshop" => "Workshop",
     "attribute_not_belong_to_sub_activity" => "Attribute not belong to sub activity",
+    "payment_success" => "Payment success",
+    "payment_failed" => "Payment failed",
+    "charge_not_found" => "Charge not found",
 ];

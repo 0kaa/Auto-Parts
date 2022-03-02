@@ -22,9 +22,13 @@ class ApiPaymentController extends Controller
         return $this->ApiResponse(PaymentMethodsResource::collection($payment_methods), null, 200);
     }
 
-    public function get_charge(Request $request)
+    public function charge_order(Request $request)
     {
         $getCharge = TapPayment::where('charge_id', $request->tap_id)->first();
+
+        if (!$getCharge) {
+            return $this->ApiResponse(null, trans('local.charge_not_found'), 404);
+        }
 
         $order = $getCharge->order;
 
@@ -44,7 +48,7 @@ class ApiPaymentController extends Controller
             $order->payment_url = null;
             $order->save();
 
-            return $this->ApiResponse(null, 'تم الدفع بنجاح', 200);
+            return $this->ApiResponse(null, trans('local.payment_success'), 200);
         } elseif ($charge['status'] == 'CANCELLED') {
             $order_status_unpaid = OrderStatus::where('slug', 'unpaid')->first();
 
@@ -54,7 +58,50 @@ class ApiPaymentController extends Controller
             $order->payment_url = null;
             $order->save();
 
-            return $this->ApiResponse(null, 'تم الغاء الدفع', 200);
+            return $this->ApiResponse(null, trans('local.payment_failed'), 200);
+        }
+    }
+
+    public function charge_custom_order(Request $request)
+    {
+        $getCharge = TapPayment::where('charge_id', $request->tap_id)->first();
+
+        if (!$getCharge) {
+            return $this->ApiResponse(null, trans('local.charge_not_found'), 404);
+        }
+
+        $api_key = config('app.payment_key');
+
+        $order = $getCharge->custom_order;
+
+        $charge = Http::withToken($api_key)
+            ->get('https://api.tap.company/v2/charges/' . $getCharge->charge_id)
+            ->json();
+
+        if ($charge['status'] == 'CAPTURED') {
+            $order_status_paid  = OrderStatus::where('slug', 'paid')->first();
+
+            $getCharge->status = 'CAPTURED';
+            $getCharge->save();
+
+            $order->order_status_id = $order_status_paid->id;
+            $order->payment_url = null;
+
+            $order->save();
+
+            return $this->ApiResponse(null, trans('local.payment_success'), 200);
+        } elseif ($charge['status'] == 'CANCELLED') {
+            $order_status_unpaid = OrderStatus::where('slug', 'unpaid')->first();
+
+            $getCharge->status = 'CANCELLED';
+            $getCharge->save();
+
+            $order->order_status_id = $order_status_unpaid->id;
+            $order->payment_url = null;
+
+            $order->save();
+
+            return $this->ApiResponse(null, trans('local.payment_failed'), 200);
         }
     }
 }
