@@ -87,8 +87,6 @@ class ApiPaymentController extends Controller
             $order->order_status_id                     = $order_status_paid->id;
             $order->payment_url                         = null;
             $order->multiCustomOrder->order_status_id   = $order_status_paid->id;
-            $order->multiCustomOrder->payment_url       = null;
-
             $order->save();
             $order->multiCustomOrder->save();
 
@@ -102,7 +100,6 @@ class ApiPaymentController extends Controller
             $order->order_status_id                     = $order_status_unpaid->id;
             $order->payment_url                         = null;
             $order->multiCustomOrder->order_status_id   = $order_status_unpaid->id;
-            $order->multiCustomOrder->payment_url       = null;
 
             $order->save();
             $order->multiCustomOrder->save();
