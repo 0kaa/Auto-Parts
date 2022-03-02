@@ -251,17 +251,18 @@ class ApiOrderController extends Controller
 
     public function myOrders()
     {
-        $isUser         = auth()->user()->hasRole('user');
-        $isOwnerStore   = auth()->user()->hasRole('owner_store');
-        $user           = auth()->user();
-        $orderStatus    = OrderStatus::where('slug', 'completed')->first();
-        $orderStatus_accepted    = OrderStatus::where('slug', 'accepted')->first();
-        $orderStatus_rejected    = OrderStatus::where('slug', 'rejected')->first();
+        $isUser                         = auth()->user()->hasRole('user');
+        $isOwnerStore                   = auth()->user()->hasRole('owner_store');
+        $user                           = auth()->user();
+        $orderStatus                    = OrderStatus::where('slug', 'completed')->first();
+        $orderStatus_unpaid             = OrderStatus::where('slug', 'unpaid')->first();
+        $orderStatus_accepted           = OrderStatus::where('slug', 'accepted')->first();
+        $orderStatus_rejected           = OrderStatus::where('slug', 'rejected')->first();
         $orderStatus_seller_rejected    = OrderStatus::where('slug', 'seller_rejected')->first();
 
         if ($isOwnerStore) {
 
-            $orders = OrderResource::collection($user->store_orders()->where('order_status_id', '<>', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
+            $orders = OrderResource::collection($user->store_orders()->where('order_status_id', '<>', $orderStatus->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->orderBy('created_at', 'ASC')->get());
 
             $custom_orders = MultiCustomOrderResource::collection($user->store_custom_orders()->where('order_status_id', '<>', $orderStatus_accepted->id)->where('order_status_id', '<>', $orderStatus_seller_rejected->id)->where('order_status_id', '<>', $orderStatus_rejected->id)->orderBy('created_at', 'ASC')->get());
 
@@ -272,7 +273,7 @@ class ApiOrderController extends Controller
             return $this->ApiResponse(compact('orders', 'custom_orders', 'previous_orders', 'previous_custom_orders'), null, 200);
         }
 
-        $orders = OrderResource::collection($user->user_orders()->where('order_status_id', '<>', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
+        $orders = OrderResource::collection($user->user_orders()->where('order_status_id', '<>', $orderStatus->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->orderBy('created_at', 'ASC')->get());
 
         $custom_orders = CustomOrderListResource::collection($user->user_custom_orders()->where('order_status_id', '<>', $orderStatus_accepted->id)->where('order_status_id', '<>', $orderStatus_seller_rejected->id)->where('order_status_id', '<>', $orderStatus_rejected->id)->orderBy('created_at', 'ASC')->get());
 
