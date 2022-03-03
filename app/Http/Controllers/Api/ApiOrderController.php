@@ -142,8 +142,12 @@ class ApiOrderController extends Controller
     public function currentOrders()
     {
         try {
-            $user       = auth()->user();
-            $orders     = $user->store_orders()->get();
+            
+            $user                           = auth()->user();
+            $orderStatus                    = OrderStatus::where('slug', 'completed')->first();
+            $orderStatus_unpaid             = OrderStatus::where('slug', 'unpaid')->first();
+            $orders                         = $user->store_orders()->where('order_status_id', '<>', $orderStatus->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->orderBy('created_at', 'ASC')->get();
+
             return $this->ApiResponse(OrderResource::collection($orders), null, 200);
         } catch (\Exception $e) {
             return $this->ApiResponse(null, $e->getMessage(), 400);
@@ -287,7 +291,15 @@ class ApiOrderController extends Controller
 
     public function orderStatus()
     {
-        $order_status = OrderStatus::all();
+        $order_status = OrderStatus::whereIn('slug', ['pending', 'processing', 'completed', 'cancelled'])->get();
+
+        return $this->ApiResponse(OrderStatusResource::collection($order_status), null, 200);
+    }
+
+
+    public function orderSellerStatus()
+    {
+        $order_status = OrderStatus::whereIn('slug', ['processing', 'completed', 'cancelled'])->get();
 
         return $this->ApiResponse(OrderStatusResource::collection($order_status), null, 200);
     }

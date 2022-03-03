@@ -66,6 +66,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::get('my-orders',                         'ApiOrderController@myOrders');
         Route::get('order/{id}',                        'ApiOrderController@getOrder');
         Route::get('order_status',                      'ApiOrderController@orderStatus');
+        Route::get('order_status/seller',               'ApiOrderController@orderSellerStatus');
         Route::get('custom-order/{id}',                 'ApiCustomOrderController@getOrder');
         Route::get('payment_methods',                   'ApiPaymentController@payment_methods');
     });
