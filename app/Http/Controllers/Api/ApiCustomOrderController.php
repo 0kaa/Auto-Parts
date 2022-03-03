@@ -111,29 +111,13 @@ class ApiCustomOrderController extends Controller
             'sub_activity_id'       => $sub_activity->id,
             'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
         ]);
-        foreach ($request->attributes as $key => $attribute) {
 
-            $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
+        if ($request->get('attributes')) {
+            foreach ($request->get('attributes') as $key => $attribute) {
 
-            if (!$attribute_id) {
+                $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
 
-                if (isset($customOrder->piece_image)) {
-                    Storage::delete($customOrder->piece_image);
-                }
-
-                if (isset($customOrder->form_image)) {
-                    Storage::delete($customOrder->form_image);
-                }
-
-                $customOrder->delete();
-
-                return $this->ApiResponse(null, trans('local.attribute_not_found'), 404);
-            }
-
-            if ($attribute_id->type == 'select') {
-                $attribute_option = $attribute_id->options->where('id', $attribute['option_id'])->first();
-
-                if (!$attribute_option) {
+                if (!$attribute_id) {
 
                     if (isset($customOrder->piece_image)) {
                         Storage::delete($customOrder->piece_image);
@@ -145,18 +129,13 @@ class ApiCustomOrderController extends Controller
 
                     $customOrder->delete();
 
-                    return $this->ApiResponse(null, trans('local.option_not_found'), 404);
+                    return $this->ApiResponse(null, trans('local.attribute_not_found'), 404);
                 }
-            } else {
-                $attribute_option = null;
 
-                if ($attribute_id->type == 'file') {
-                    if ($request->file('attributes')) {
+                if ($attribute_id->type == 'select') {
+                    $attribute_option = $attribute_id->options->where('id', $attribute['option_id'])->first();
 
-                        $file = $request->file('attributes')[$key]['image'];
-
-                        $value = $this->filesServices->uploadfile($file, $this->customOrderDirectory);
-                    } else {
+                    if (!$attribute_option) {
 
                         if (isset($customOrder->piece_image)) {
                             Storage::delete($customOrder->piece_image);
@@ -168,18 +147,43 @@ class ApiCustomOrderController extends Controller
 
                         $customOrder->delete();
 
-                        return $this->ApiResponse(null, trans('local.file_required'), 404);
+                        return $this->ApiResponse(null, trans('local.option_not_found'), 404);
+                    }
+                } else {
+                    $attribute_option = null;
+
+                    if ($attribute_id->type == 'file') {
+                        if ($request->file('attributes')) {
+
+                            $file = $request->file('attributes')[$key]['image'];
+
+                            $value = $this->filesServices->uploadfile($file, $this->customOrderDirectory);
+                        } else {
+
+                            if (isset($customOrder->piece_image)) {
+                                Storage::delete($customOrder->piece_image);
+                            }
+
+                            if (isset($customOrder->form_image)) {
+                                Storage::delete($customOrder->form_image);
+                            }
+
+                            $customOrder->delete();
+
+                            return $this->ApiResponse(null, trans('local.file_required'), 404);
+                        }
                     }
                 }
-            }
 
-            $customOrder->attributes()->create([
-                'attribute_id' => $attribute_id->id,
-                'option_id'    => $attribute_option ? $attribute_option->id : null,
-                'type'         => $attribute_id->type,
-                'value'        => $attribute_id->type == 'file' ? $value : ($attribute_id->type !== 'select' ? $attribute['value'] : null),
-            ]);
+                $customOrder->attributes()->create([
+                    'attribute_id' => $attribute_id->id,
+                    'option_id'    => $attribute_option ? $attribute_option->id : null,
+                    'type'         => $attribute_id->type,
+                    'value'        => $attribute_id->type == 'file' ? $value : ($attribute_id->type !== 'select' ? $attribute['value'] : null),
+                ]);
+            }
         }
+
 
         MultiCustomOrder::create([
             'seller_id' => $attributes['seller_id'],
@@ -250,33 +254,16 @@ class ApiCustomOrderController extends Controller
             'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
         ]);
 
-        foreach ($request->attributes as $key => $attribute) {
+        if ($request->get('attributes')) {
+            foreach ($request->get('attributes') as $key => $attribute) {
 
-            $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
+                $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
 
-            if ($attribute_id->sub_activity_id != $sub_activity->id) {
-                return $this->ApiResponse(null, trans('local.attribute_not_belong_to_sub_activity'), 404);
-            }
-
-            if (!$attribute_id) {
-
-                if (isset($customOrder->piece_image)) {
-                    Storage::delete($customOrder->piece_image);
+                if ($attribute_id->sub_activity_id != $sub_activity->id) {
+                    return $this->ApiResponse(null, trans('local.attribute_not_belong_to_sub_activity'), 404);
                 }
 
-                if (isset($customOrder->form_image)) {
-                    Storage::delete($customOrder->form_image);
-                }
-
-                $customOrder->delete();
-
-                return $this->ApiResponse(null, trans('local.attribute_not_found'), 404);
-            }
-
-            if ($attribute_id->type == 'select') {
-                $attribute_option = $attribute_id->options->where('id', $attribute['option_id'])->first();
-
-                if (!$attribute_option) {
+                if (!$attribute_id) {
 
                     if (isset($customOrder->piece_image)) {
                         Storage::delete($customOrder->piece_image);
@@ -288,18 +275,13 @@ class ApiCustomOrderController extends Controller
 
                     $customOrder->delete();
 
-                    return $this->ApiResponse(null, trans('local.option_not_found'), 404);
+                    return $this->ApiResponse(null, trans('local.attribute_not_found'), 404);
                 }
-            } else {
-                $attribute_option = null;
 
-                if ($attribute_id->type == 'file') {
-                    if ($request->file('attributes')) {
+                if ($attribute_id->type == 'select') {
+                    $attribute_option = $attribute_id->options->where('id', $attribute['option_id'])->first();
 
-                        $file = $request->file('attributes')[$key]['image'];
-
-                        $value = $this->filesServices->uploadfile($file, $this->customOrderDirectory);
-                    } else {
+                    if (!$attribute_option) {
 
                         if (isset($customOrder->piece_image)) {
                             Storage::delete($customOrder->piece_image);
@@ -311,18 +293,45 @@ class ApiCustomOrderController extends Controller
 
                         $customOrder->delete();
 
-                        return $this->ApiResponse(null, trans('local.file_required'), 404);
+                        return $this->ApiResponse(null, trans('local.option_not_found'), 404);
+                    }
+                } else {
+                    $attribute_option = null;
+
+                    if ($attribute_id->type == 'file') {
+                        if ($request->file('attributes')) {
+
+                            $file = $request->file('attributes')[$key]['image'];
+
+                            $value = $this->filesServices->uploadfile($file, $this->customOrderDirectory);
+                        } else {
+
+                            if (isset($customOrder->piece_image)) {
+                                Storage::delete($customOrder->piece_image);
+                            }
+
+                            if (isset($customOrder->form_image)) {
+                                Storage::delete($customOrder->form_image);
+                            }
+
+                            $customOrder->delete();
+
+                            return $this->ApiResponse(null, trans('local.file_required'), 404);
+                        }
                     }
                 }
-            }
 
-            $customOrder->attributes()->create([
-                'attribute_id' => $attribute_id->id,
-                'option_id'    => $attribute_option ? $attribute_option->id : null,
-                'type'         => $attribute_id->type,
-                'value'        => $attribute_id->type == 'file' ? $value : ($attribute_id->type == 'text' ? $attribute['value'] : null),
-            ]);
+                $customOrder->attributes()->create([
+                    'attribute_id' => $attribute_id->id,
+                    'option_id'    => $attribute_option ? $attribute_option->id : null,
+                    'type'         => $attribute_id->type,
+                    'value'        => $attribute_id->type == 'file' ? $value : ($attribute_id->type == 'text' ? $attribute['value'] : null),
+                ]);
+            }
         }
+
+
+
         foreach ($sellers as $seller) {
             MultiCustomOrder::create(['seller_id' => $seller->id, 'custom_order_id' => $customOrder->id, 'order_status_id' => $order_status_pending->id]);
         }
