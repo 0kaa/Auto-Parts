@@ -25,7 +25,7 @@ class OrderResource extends JsonResource
             'order_status'          => $this->order_status->name,
             "time"                  => $this->created_at->format('H:i a'),
             'date'                  => $this->created_at->format('Y-m-d'),
-            'order_delivered_at'    => $this->order_delivered_at->format('l j F Y'),
+            'order_delivered_at'    => $this->order_delivered_at ? $this->order_delivered_at->format('l j F Y') : $this->order_delivered_at,
             'order_ship_name'       => $this->order_ship_name,
             'order_ship_address'    => $this->order_ship_address,
             'order_ship_phone'      => $this->order_ship_phone,
