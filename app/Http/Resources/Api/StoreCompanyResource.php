@@ -17,7 +17,10 @@ class StoreCompanyResource extends JsonResource
         return [
             'id' => $this->id,
             'image' => $this->image ? url('/storage') . '/' . $this->image : url('/product-no-img.jpg'),
-            'activity_type' => $this->activity_name ? $this->activity_name->find($this->activity_type_id)->name : null,
+            'activity_type' =>  $this->activity_name ? [
+                'id' => $this->activity_type_id,
+                'name' =>  $this->activity_name->find($this->activity_type_id)->name,
+            ] : null,
             'name_company' => $this->name_company,
             'name_owner_company' => $this->name_owner_company,
             'national_identity' => $this->national_identity,
