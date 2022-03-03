@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
@@ -14,7 +15,6 @@ class OrderResource extends JsonResource
      */
     public function toArray($request)
     {
-
         return [
             'id'                    => $this->id,
             'order_number'          => $this->order_number,
@@ -25,7 +25,7 @@ class OrderResource extends JsonResource
             'order_status'          => $this->order_status->name,
             "time"                  => $this->created_at->format('H:i a'),
             'date'                  => $this->created_at->format('Y-m-d'),
-            'order_delivered_at'    => $this->order_delivered_at ? $this->order_delivered_at->format('l j F Y') : $this->order_delivered_at,
+            'order_delivered_at'    => $this->order_delivered_at ? Carbon::parse($this->order_delivered_at)->format('l j F Y') : $this->order_delivered_at,
             'order_ship_name'       => $this->order_ship_name,
             'order_ship_address'    => $this->order_ship_address,
             'order_ship_phone'      => $this->order_ship_phone,
