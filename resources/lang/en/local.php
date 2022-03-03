@@ -237,4 +237,5 @@ return [
     "payment_success" => "Payment success",
     "payment_failed" => "Payment failed",
     "charge_not_found" => "Charge not found",
+    "other_branches_required" => "Other branches is required",
 ];

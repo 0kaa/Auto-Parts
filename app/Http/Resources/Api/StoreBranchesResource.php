@@ -29,7 +29,7 @@ class StoreBranchesResource extends JsonResource
             'image' => $this->image ? url('/storage') . '/' . $this->image : url('/product-no-img.jpg'),
             'is_company_facility_agent' => $this->is_company_facility_agent,
             'is_company_facility_authorized_distributor' => $this->is_company_facility_authorized_distributor,
-            'other_branches' => $this->other_branches == null ? false : true,
+            'other_branches' => $this->other_branches,
             'company' => $this->company_sector->name,
             'branches' => $branches ? $branches : [],
         ];

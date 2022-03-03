@@ -29,19 +29,32 @@ class ApiBranchesController extends Controller
 
     public function update(UpdateBranchesRequest $request)
     {
-     
+
         $user = auth()->user();
-        if ($request->branches) {
-            $user->branches()->delete();
-            foreach ($request->branches as $branch) {
-                $user->branches()->create([
-                    'address'   => $branch['address'],
-                    'city_id'   => $branch['city_id'],
-                    'region_id' => $branch['region_id'],
-                    'phone'     => $branch['phone'],
-                ]);
+
+        if ($request->other_branches == 1) {
+            $user->other_branches = 'yes';
+            if ($request->branches) {
+                $user->branches()->delete();
+                foreach ($request->branches as $branch) {
+                    $user->branches()->create([
+                        'address'   => $branch['address'],
+                        'city_id'   => $branch['city_id'],
+                        'region_id' => $branch['region_id'],
+                        'phone'     => $branch['phone'],
+                    ]);
+                }
             }
+            $user->save();
+        } elseif ($request->other_branches == 0) {
+            $user->other_branches = 'no';
+            $user->branches()->delete();
+            $user->save();
+        } else {
+            return $this->ApiResponse(null, trans('local.other_branches_required'), 422);
         }
+
+
 
         return $this->ApiResponse(new StoreBranchesResource($user), trans('admin.updated_success'), 200);
     }

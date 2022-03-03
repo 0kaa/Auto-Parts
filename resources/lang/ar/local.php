@@ -247,4 +247,6 @@ return [
     "payment_success" => "تم الدفع بنجاح",
     "payment_failed" => "تم الفشل في الدفع",
     "charge_not_found" => "الشحنة غير موجودة",
+    "other_branches_required" => "يرجي اختيار الفرع الآخر",
+
 ];
