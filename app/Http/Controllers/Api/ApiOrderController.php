@@ -293,4 +293,11 @@ class ApiOrderController extends Controller
 
         return $this->ApiResponse(OrderStatusResource::collection($order_status), null, 200);
     }
+
+    public function orderStepper()
+    {
+        $order_status = OrderStatus::whereIn('slug', ['pending', 'paid', 'processing', 'completed'])->get();
+
+        return $this->ApiResponse(OrderStatusResource::collection($order_status), null, 200);
+    }
 }
