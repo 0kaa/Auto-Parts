@@ -44,7 +44,7 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
     Route::resource('cities', 'CityController');
 
     Route::resource('shippings', 'ShippingController');
-    
+
     Route::resource('company-sectors', 'CompanySectorController');
 
     Route::resource('sliders-services', 'SliderServiceController');
@@ -52,6 +52,8 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
     Route::resource('news-letter', 'NewsLetterController');
 
     Route::resource('faqs', 'FaqsController');
+
+    Route::resource('orders', 'OrderController');
 
     Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 });

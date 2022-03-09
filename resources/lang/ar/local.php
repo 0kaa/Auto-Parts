@@ -248,5 +248,16 @@ return [
     "payment_failed" => "تم الفشل في الدفع",
     "charge_not_found" => "الشحنة غير موجودة",
     "other_branches_required" => "يرجي اختيار الفرع الآخر",
+    "orders" => "الطلبات",
+    "order_number"=>"رقم الطلب",
+    "order_ship_name"=>"اسم المستلم",
+    "order_ship_phone"=>"هاتف المستلم",
+    "order_ship_address"=>"عنوان المستلم",
+    "total_amount"=>"الاجمالى",
+    "user"=>"المستخدم",
+    "seller"=>"البائع",
+    "shipping"=>"الشحن",
+    "payment"=>"طريقة الدفع",
+    "order_status"=>"حالة الطلب",
 
 ];

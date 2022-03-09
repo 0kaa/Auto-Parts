@@ -4,7 +4,7 @@
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
                 <a class="navbar-brand" href="{{route('website.home')}}">
-                <div class="logo_header"> 
+                <div class="logo_header">
                    <img src="{{asset('website/images/logo fff.png')}}">
                 </div>
                 </a></li>
@@ -185,6 +185,22 @@
                 </ul>
             </li>
             {{--end company_sector--}}
+
+
+            {{--orders--}}
+            <li class="nav-item {{areActiveRoutes(['admin.orders.index','admin.orders.edit' ])}}">
+                <a href="#">
+                    <i data-feather='circle'></i>
+                    <span class="menu-title" data-i18n="User">@lang('local.orders')</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item {{ isActiveRoute('admin.orders.index')  }}"><a href="{{route('admin.orders.index')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('local.orders')</span></a>
+                    </li>
+                </ul>
+            </li>
+            {{--end orders--}}
 
             {{--sliders-services--}}
             <li class="nav-item {{areActiveRoutes(['admin.sliders-services.index','admin.sliders-services.create','admin.sliders-services.edit' ])}}">
