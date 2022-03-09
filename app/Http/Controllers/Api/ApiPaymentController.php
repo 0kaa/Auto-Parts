@@ -46,7 +46,18 @@ class ApiPaymentController extends Controller
 
             $order->order_status_id = $order_status_paid->id;
             $order->payment_url = null;
+
             $order->save();
+
+            $notification = $this->notificationRepository->create([
+                'user_id'       => $order->seller_id,
+                'type'          => 'order',
+                'model_id'      => $order->id,
+                'message_en'    => 'You have a new order',
+                'message_ar'    => 'لديك طلب جديد',
+            ]);
+
+            Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
 
             return $this->ApiResponse(null, trans('local.payment_success'), 200);
         } elseif ($charge['status'] == 'CANCELLED') {
@@ -54,8 +65,10 @@ class ApiPaymentController extends Controller
 
             $getCharge->status = 'CANCELLED';
             $getCharge->save();
+
             $order->order_status_id = $order_status_unpaid->id;
             $order->payment_url = null;
+
             $order->save();
 
             return $this->ApiResponse(null, trans('local.payment_failed'), 200);

@@ -118,16 +118,6 @@ class ApiOrderController extends Controller
 
             $charge = generate_order_payment_url($order, $user);
 
-            $notification = $this->notificationRepository->create([
-                'user_id'       => $seller->id,
-                'type'          => 'order',
-                'model_id'      => $order->id,
-                'message_en'    => 'You have a new order',
-                'message_ar'    => 'eccc طلب جديد',
-            ]);
-
-            Notify::NotifyMob($notification->message_ar, $notification->message_en, $seller->id, null, $data = null);
-
             auth()->user()->cart()->delete();
 
             return $this->ApiResponse($charge['transaction']['url'], trans('local.order_done'), 200);
