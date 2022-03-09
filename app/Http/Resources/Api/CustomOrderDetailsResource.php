@@ -21,7 +21,7 @@ class CustomOrderDetailsResource extends JsonResource
             "user_email"            => $this->user->email,
             "user_phone"            => $this->user->phone,
             "user_address"          => $this->user->address,
-            "order_status"          => $this->order_status->name,
+            'order_status'          => new OrderStatusResource($this->order_status),
             "activity_type_id"      => $this->activityType->id,
             "activity_type_name"    => $this->activityType->name,
             "sub_activity_id"       => $this->subActivity->id,
