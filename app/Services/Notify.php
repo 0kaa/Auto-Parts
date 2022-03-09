@@ -26,11 +26,12 @@ class Notify
     // $not_type: notificfation type (created_reply_not, rent_expire_not, ...)
     public static function NotifyMob($msg_ar, $msg_en, $user_id, $device_id, $data = null)
     {
-
+        // dd($user_id);
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
         $tokenList = null;
         if ($device_id == null) {
             $tokenList = SELF::getTokens($device_id, $user_id);
+            // dd($tokenList);
         }
         
         $notification = [
@@ -74,7 +75,8 @@ class Notify
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
         $result = curl_exec($ch);
 
-        dd(json_decode($result));
+        // dd(json_decode($result));
+        return $result;
         curl_close($ch);
     }
 }
