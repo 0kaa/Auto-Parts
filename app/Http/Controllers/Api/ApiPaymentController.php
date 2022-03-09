@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\PaymentMethodsResource;
+use App\Models\Notification;
 use App\Models\OrderStatus;
 use App\Models\PaymentMethod;
 use App\Models\TapPayment;
+use App\Services\Notify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -49,7 +51,7 @@ class ApiPaymentController extends Controller
 
             $order->save();
 
-            $notification = $this->notificationRepository->create([
+            $notification = Notification::create([
                 'user_id'       => $order->seller_id,
                 'type'          => 'order',
                 'model_id'      => $order->id,
