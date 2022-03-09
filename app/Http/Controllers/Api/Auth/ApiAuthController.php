@@ -40,6 +40,10 @@ class ApiAuthController extends Controller
                     'firebase_token'    => $request->firebase_token,
                     'user_id'           => $user->id,
                 ]);
+            } else {
+                $user_device_id->update([
+                    'firebase_token'    => $request->firebase_token,
+                ]);
             }
 
             if ($user && $user->approved == 0 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
