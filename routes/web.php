@@ -55,5 +55,7 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
 
     Route::resource('orders', 'OrderController');
 
+    Route::resource('custom_orders', 'CustomOrderController');
+
     Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 });
