@@ -55,8 +55,8 @@ class ApiPaymentController extends Controller
                 'user_id'       => $order->seller_id,
                 'type'          => 'order',
                 'model_id'      => $order->id,
-                'message_en'    => 'Your order has been paid successfully',
-                'message_ar'    => 'لديك طلب جديد مدفوع',
+                'message_en'    => 'Order #' . $order->id . ' has been paid successfully by ' . $order->user->name,
+                'message_ar'    => 'تم دفع الطلب #' . $order->id . ' بنجاح بواسطة ' . $order->user->name,
             ]);
 
             Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
@@ -104,13 +104,13 @@ class ApiPaymentController extends Controller
             $order->multiCustomOrder->order_status_id   = $order_status_paid->id;
             $order->save();
             $order->multiCustomOrder->save();
-            
+
             $notification = Notification::create([
                 'user_id'       => $order->seller_id,
                 'type'          => 'custom_order',
                 'model_id'      => $order->id,
-                'message_en'    => 'Order from ' . $order->user->name . ' has been paid successfully',
-                'message_ar'    => 'الطلب من ' . $order->user->name . ' تم دفعه بنجاح',
+                'message_en'    => 'Order #' . $order->id . ' has been paid successfully by ' . $order->user->name,
+                'message_ar'    => 'تم دفع الطلب #' . $order->id . ' بنجاح بواسطة ' . $order->user->name,
             ]);
 
             Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
