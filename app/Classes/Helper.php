@@ -105,6 +105,7 @@ function RedirectOrderToAnotherUser($seller_id, $rejected, $customOrder)
 
 function generate_order_payment_url($order, $user)
 {
+    $price = $order->payment_id == 1 ? $order->total_amount - ($order->total_amount * 80 / 100) : $order->total_amount;
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -117,7 +118,7 @@ function generate_order_payment_url($order, $user)
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS =>
         "{
-                    \"amount\":$order->total_amount,
+                    \"amount\":$price,
                     \"currency\":\"SAR\",
                     \"description\":\"description\",
                     \"reference\":{\"order\":\"$order->id\"},
@@ -160,6 +161,8 @@ function generate_order_payment_url($order, $user)
 }
 function generate_custom_order_payment_url($customOrder, $priceOffer, $user)
 {
+    $price = $customOrder->payment_id == 1 ? $priceOffer->price - ($priceOffer->price * 80 / 100) : $priceOffer->price;
+
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -172,7 +175,7 @@ function generate_custom_order_payment_url($customOrder, $priceOffer, $user)
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS =>
         "{
-                    \"amount\":$priceOffer->price,
+                    \"amount\":$price,
                     \"currency\":\"SAR\",
                     \"description\":\"description\",
                     \"reference\":{\"order\":\"$customOrder->id\"},
