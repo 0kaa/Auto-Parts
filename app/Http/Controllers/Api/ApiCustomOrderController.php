@@ -403,8 +403,8 @@ class ApiCustomOrderController extends Controller
             'user_id'       => $customOrder->user_id,
             'type'          => 'price_offer',
             'model_id'      => $price_offer->id,
-            'message_en'    => 'Price offer from ' . $user->name_company . ' for order #' . $customOrder->id . ' is ' . $request->price,
-            'message_ar'    => 'عرض السعر من ' . $user->name_company . ' للطلب #' . $customOrder->id . ' هو ' . $request->price,
+            'message_en'    => 'Price offer from ' . $user->name_company . ' for order #' . $customOrder->id . ' is ' . $request->price . ' SAR',
+            'message_ar'    => 'عرض السعر من ' . $user->name_company . ' للطلب #' . $customOrder->id . ' هو ' . $request->price . ' ر.س',
         ]);
 
         Notify::NotifyMob($notification->message_ar, $notification->message_en, $customOrder->user_id, null, $data = null);
