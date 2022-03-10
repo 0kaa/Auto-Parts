@@ -390,7 +390,7 @@ class ApiCustomOrderController extends Controller
 
         $order_status_pending = OrderStatus::where('slug', 'pending')->first();
 
-        $this->priceOfferRepository->create([
+        $price_offer = $this->priceOfferRepository->create([
             'custom_order_id'   => $customOrder->id,
             'seller_id'         => $user->id,
             'price'             => $request->price,
@@ -401,8 +401,8 @@ class ApiCustomOrderController extends Controller
         // Notification to user with price offer
         $notification = Notification::create([
             'user_id'       => $customOrder->user_id,
-            'type'          => 'custom_order',
-            'model_id'      => $customOrder->id,
+            'type'          => 'price_offer',
+            'model_id'      => $price_offer->id,
             'message_en'    => 'Order from ' . $user->name . ' has been accepted',
             'message_ar'    => 'طلب من ' . $user->name . ' تم قبوله',
         ]);
