@@ -261,5 +261,16 @@ return [
     "order_status"=>"حالة الطلب",
     "edit_order"=>"تعديل الطلب",
     "payment_url"=>"رابط الدفع",
+    "custom_orders"=>"الطلبات المخصصة",
+    "piece_name"=>"اسم القطعة",
+    "piece_image"=>"صورة القطعة",
+    "piece_desc"=>"وصف القطعة",
+    "piece_price"=>"سعر القطعة",
+    "form_image"=>"صورة النموذج",
+    "note"=>"ملاحظة",
+    "quantity"=>"كمية",
+    "activity_type"=>"نوع النشاط",
+    "sub_activity"=>"النشاط الفرعي",
+    "sub_sub_activity"=>"النشاط الفرعي",
 
 ];

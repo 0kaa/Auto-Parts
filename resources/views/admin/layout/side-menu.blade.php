@@ -202,6 +202,22 @@
             </li>
             {{--end orders--}}
 
+            {{--custom orders--}}
+            <li class="nav-item {{areActiveRoutes(['admin.custom_orders.index','admin.custom_orders.edit' ])}}">
+                <a href="#">
+                    <i data-feather='circle'></i>
+                    <span class="menu-title" data-i18n="User">@lang('local.custom_orders')</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item {{ isActiveRoute('admin.custom_orders.index')  }}"><a href="{{route('admin.custom_orders.index')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('local.custom_orders')</span></a>
+                    </li>
+                </ul>
+            </li>
+            {{--end custom orders--}}
+
+
             {{--sliders-services--}}
             <li class="nav-item {{areActiveRoutes(['admin.sliders-services.index','admin.sliders-services.create','admin.sliders-services.edit' ])}}">
                 <a href="#">

@@ -60,7 +60,7 @@
                                         <th>@lang('local.quantity')</th>
                                         <th>@lang('local.activity_type')</th>
                                         <th>@lang('local.sub_activity')</th>
-                                        <th>@lang('local.sub_activity')</th>
+                                        <th>@lang('local.sub_sub_activity')</th>
                                         <th>@lang('local.user')</th>
                                         <th>@lang('local.seller')</th>
                                         <th>@lang('local.car')</th>
@@ -81,7 +81,7 @@
                                                 <img src="{{ asset('storage/'.$order->piece_image) }}" alt="">
                                             </td>
                                             <td>{{$order->piece_description ? $order->piece_description : '-'}}</td>
-                                            <td>{{$order->piece_price}}</td>
+                                            <td>{{$order->piece_price ? $order->piece_price : '-'}}</td>
                                             <td>
                                                 <img src="{{ asset('storage/'.$order->form_image) }}" alt="">
                                             </td>
@@ -99,7 +99,7 @@
                                             <td>{{$order->order_status->name}}</td>
                                             <td>
                                                 <a class="dropdown-item"
-                                                   href="{{route('admin.orders.edit',  $order->id)}}">
+                                                   href="{{route('admin.custom_orders.edit',  $order->id)}}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14"
                                                          height="14" viewBox="0 0 24 24" fill="none"
                                                          stroke="currentColor" stroke-width="2"
