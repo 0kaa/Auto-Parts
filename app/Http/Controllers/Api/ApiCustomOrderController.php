@@ -353,7 +353,7 @@ class ApiCustomOrderController extends Controller
                 'message_ar'    => 'طلب جديد من ' . $user->name,
             ]);
 
-            Notify::NotifyMob($notification->message_ar, $notification->message_en, $seller->id, null, $data = null);
+            // Notify::NotifyMob($notification->message_ar, $notification->message_en, $seller->id, null, $data = null);
         }
 
         return $this->ApiResponse(null, trans('local.order_done'), 200);
