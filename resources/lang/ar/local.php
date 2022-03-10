@@ -259,5 +259,6 @@ return [
     "shipping"=>"الشحن",
     "payment"=>"طريقة الدفع",
     "order_status"=>"حالة الطلب",
+    "edit_order"=>"تعديل الطلب",
 
 ];

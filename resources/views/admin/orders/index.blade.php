@@ -15,7 +15,7 @@
                                     <div class="content-header-left col-md-9 col-12 mb-2">
                                         <div class="row breadcrumbs-top">
                                             <div class="col-12">
-                                                <h2 class="content-header-title float-left mb-0">@lang('admin.users')</h2>
+                                                <h2 class="content-header-title float-left mb-0">@lang('local.orders')</h2>
                                                 <div class="breadcrumb-wrapper">
                                                     <ol class="breadcrumb">
                                                         <li class="breadcrumb-item"><a
@@ -78,8 +78,8 @@
                                             <td>{{$order->payment->name}}</td>
                                             <td>{{$order->order_status->name}}</td>
                                             <td>
-                                                {{-- <a class="dropdown-item"
-                                                   href="{{route('admin.users.edit',  $user->id)}}">
+                                                <a class="dropdown-item"
+                                                   href="{{route('admin.orders.edit',  $order->id)}}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14"
                                                          height="14" viewBox="0 0 24 24" fill="none"
                                                          stroke="currentColor" stroke-width="2"
@@ -89,21 +89,6 @@
                                                     </svg>
                                                     <span>@lang('local.edit')</span>
                                                 </a>
-
-                                                @if($user->type!='admin')
-                                                <a class="dropdown-item table-action-not-delete-user" data-user-id="{{$user->id}}"
-                                                   href="javascript:void(0);">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                         height="14" viewBox="0 0 24 24" fill="none"
-                                                         stroke="currentColor" stroke-width="2"
-                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                         class="feather feather-trash mr-50">
-                                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                                    </svg>
-                                                    <span>@lang('admin.delete')</span>
-                                                </a>
-                                                    @endif --}}
 
                                             </td>
                                         </tr>
