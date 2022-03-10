@@ -55,8 +55,8 @@ class ApiPaymentController extends Controller
                 'user_id'       => $order->seller_id,
                 'type'          => 'order',
                 'model_id'      => $order->id,
-                'message_en'    => 'You have a new order',
-                'message_ar'    => 'لديك طلب جديد',
+                'message_en'    => 'Your order has been paid successfully',
+                'message_ar'    => 'لديك طلب جديد مدفوع',
             ]);
 
             Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
@@ -104,6 +104,16 @@ class ApiPaymentController extends Controller
             $order->multiCustomOrder->order_status_id   = $order_status_paid->id;
             $order->save();
             $order->multiCustomOrder->save();
+            
+            $notification = Notification::create([
+                'user_id'       => $order->seller_id,
+                'type'          => 'custom_order',
+                'model_id'      => $order->id,
+                'message_en'    => 'Order from ' . $order->user->name . ' has been paid successfully',
+                'message_ar'    => 'الطلب من ' . $order->user->name . ' تم دفعه بنجاح',
+            ]);
+
+            Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
 
             return $this->ApiResponse(null, trans('local.payment_success'), 200);
         } elseif ($charge['status'] == 'CANCELLED') {

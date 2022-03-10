@@ -9,6 +9,7 @@ use App\Http\Resources\Api\CustomOrderListResource;
 use App\Http\Resources\Api\CustomOrderDetailsResource;
 use App\Http\Resources\Api\PriceOffersResource;
 use App\Models\MultiCustomOrder;
+use App\Models\Notification;
 use App\Models\OrderStatus;
 use App\Models\RejectedOrders;
 use App\Models\User;
@@ -20,6 +21,7 @@ use App\Services\UploadFilesServices;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\AttributeRepositoryInterface;
 use App\Repositories\SubActivityTypeRepositoryInterface;
+use App\Services\Notify;
 
 class ApiCustomOrderController extends Controller
 {
@@ -192,6 +194,16 @@ class ApiCustomOrderController extends Controller
         ]);
 
         // Notification to seller
+        $notification = Notification::create([
+            'user_id'       => $request->seller_id,
+            'type'          => 'custom_order',
+            'model_id'      => $customOrder->id,
+            'message_en'    => 'New order from ' . $user->name,
+            'message_ar'    => 'طلب جديد من ' . $user->name,
+        ]);
+
+        Notify::NotifyMob($notification->message_ar, $notification->message_en, $request->seller_id, null, $data = null);
+
         return $this->ApiResponse(null, trans('local.order_done'), 200);
     }
 
@@ -330,13 +342,19 @@ class ApiCustomOrderController extends Controller
             }
         }
 
-
-
         foreach ($sellers as $seller) {
             MultiCustomOrder::create(['seller_id' => $seller->id, 'custom_order_id' => $customOrder->id, 'order_status_id' => $order_status_pending->id]);
-        }
+            // Notification to seller
+            $notification = Notification::create([
+                'user_id'       => $seller->id,
+                'type'          => 'custom_order',
+                'model_id'      => $customOrder->id,
+                'message_en'    => 'New order from ' . $user->name,
+                'message_ar'    => 'طلب جديد من ' . $user->name,
+            ]);
 
-        // Notification to seller
+            Notify::NotifyMob($notification->message_ar, $notification->message_en, $seller->id, null, $data = null);
+        }
 
         return $this->ApiResponse(null, trans('local.order_done'), 200);
     }
@@ -380,7 +398,16 @@ class ApiCustomOrderController extends Controller
             'note'              => $request->note ?? null,
         ]);
 
-        // Notification
+        // Notification to user with price offer
+        $notification = Notification::create([
+            'user_id'       => $customOrder->user_id,
+            'type'          => 'custom_order',
+            'model_id'      => $customOrder->id,
+            'message_en'    => 'Order from ' . $user->name . ' has been accepted',
+            'message_ar'    => 'طلب من ' . $user->name . ' تم قبوله',
+        ]);
+
+        Notify::NotifyMob($notification->message_ar, $notification->message_en, $customOrder->user_id, null, $data = null);
 
         return $this->ApiResponse(null, trans('local.order_done'), 200);
     }
