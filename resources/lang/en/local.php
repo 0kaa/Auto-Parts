@@ -250,4 +250,5 @@ return [
     "payment"=>"Payment",
     "order_status"=>"Order Status",
     "edit_order"=>"Edit Order",
+    "payment_url"=>"Payment URL",
 ];

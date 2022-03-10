@@ -201,6 +201,31 @@
 
                             </div>
 
+                                <div class="form-group">
+
+                                    <label class="form-label" for="payment_url"> <span
+                                            class="tx-danger">*</span>
+                                        @lang('local.payment_url')</label>
+                                    <input
+                                        type="text"
+                                        id="payment_url"
+                                        class="form-control"
+                                        placeholder=" @lang('local.payment_url')"
+                                        aria-label=" @lang('local.payment_url')"
+                                        value="{{ $order->payment_url }}"
+                                        aria-describedby="basic-addon-payment_url"
+                                        required=""
+                                    >
+                                    <div class="alert alert-danger mg-t-20" role="alert">
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <i class="icon ion-ios-close alert-icon tx-32"></i>
+                                            <span></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
                             <div class="form-group">
 
                                 <label class="form-label" for="order_status"> <span class="tx-danger">*</span>

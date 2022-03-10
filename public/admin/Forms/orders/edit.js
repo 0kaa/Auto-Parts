@@ -7,6 +7,7 @@ $(document).ready(function () {
     var shipping = form.find("#shipping_id");
     var payment = form.find("#payment_id");
     var order_status = form.find("#order_status");
+    var payment_url = form.find("#payment_url");
 
     form.submit(function (e) {
         e.preventDefault();
@@ -20,6 +21,7 @@ $(document).ready(function () {
         formData.append("shipping_id", shipping.val());
         formData.append("payment_id", payment.val());
         formData.append("order_status_id", order_status.val());
+        formData.append("payment_url", payment_url.val());
 
 
         formData.append("_method", "PATCH");
@@ -53,6 +55,7 @@ $(document).ready(function () {
                     textFieldError(shipping, error.response.data.errors.shipping_id);
                     textFieldError(payment, error.response.data.errors.payment_id);
                     textFieldError(order_status, error.response.data.errors.order_status_id);
+                    textFieldError(payment_url, error.response.data.errors.payment_url);
 
                 } else if (error.response.status !== 422) {
                     onFormFailure(form);

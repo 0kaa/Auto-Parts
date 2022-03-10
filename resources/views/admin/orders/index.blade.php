@@ -54,6 +54,7 @@
                                         <th>@lang('local.order_ship_phone')</th>
                                         <th>@lang('local.order_ship_address')</th>
                                         <th>@lang('local.total_amount')</th>
+                                        <th>@lang('local.payment_url')</th>
                                         <th>@lang('local.user')</th>
                                         <th>@lang('local.seller')</th>
                                         <th>@lang('local.shipping')</th>
@@ -72,6 +73,7 @@
                                             <td>{{$order->order_ship_phone}}</td>
                                             <td>{{$order->order_ship_address}}</td>
                                             <td>{{$order->total_amount}}</td>
+                                            <td>{{$order->payment_url ? $order->payment_url : '-'}}</td>
                                             <td>{{$order->user->name}}</td>
                                             <td>{{$order->seller->name}}</td>
                                             <td>{{$order->shipping->shipping_name}}</td>
