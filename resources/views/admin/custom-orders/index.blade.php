@@ -78,15 +78,15 @@
                                             <td>{{$order->id}}</td>
                                             <td>{{$order->piece_name}}</td>
                                             <td>
-                                                <img src="{{ asset('storage/'.$order->piece_image) }}" alt="">
+                                                <img src="{{ asset('storage/'.$order->piece_image) }}" width="100" height="100" alt="">
                                             </td>
                                             <td>{{$order->piece_description ? $order->piece_description : '-'}}</td>
                                             <td>{{$order->piece_price ? $order->piece_price : '-'}}</td>
                                             <td>
-                                                <img src="{{ asset('storage/'.$order->form_image) }}" alt="">
+                                                <img src="{{ asset('storage/'.$order->form_image) }}" width="100" height="100" alt="">
                                             </td>
                                             <td>{{$order->note}}</td>
-                                            <td>{{$order->payment_url}}</td>
+                                            <td>{{$order->payment_url ? $order->payment_url : '-'}}</td>
                                             <td>{{$order->quantity}}</td>
                                             <td>{{$order->activityType->name}}</td>
                                             <td>{{$order->subActivity->name}}</td>

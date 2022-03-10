@@ -271,6 +271,6 @@ return [
     "quantity"=>"كمية",
     "activity_type"=>"نوع النشاط",
     "sub_activity"=>"النشاط الفرعي",
-    "sub_sub_activity"=>"النشاط الفرعي",
+    "sub_sub_activity"=>"النشاط الفرعي الفرعي",
 
 ];

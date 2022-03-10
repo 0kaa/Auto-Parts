@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +57,11 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
     Route::resource('orders', 'OrderController');
 
     Route::resource('custom_orders', 'CustomOrderController');
+
+    Route::get("activity", [CustomOrderController::class, 'get_activity'])->name('get_activity');
+
+    Route::get("sub_activity", [CustomOrderController::class, 'get_sub_activity'])->name('get_sub_activity');
+
 
     Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 });
