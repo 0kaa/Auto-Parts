@@ -198,11 +198,12 @@ class ApiCustomOrderController extends Controller
             'user_id'       => $request->seller_id,
             'type'          => 'custom_order',
             'model_id'      => $customOrder->id,
-            'message_en'    => 'New order from ' . $user->name,
-            'message_ar'    => 'طلب جديد من ' . $user->name,
+            'message_en'    => 'New special order from ' . $user->name,
+            'message_ar'    => 'طلب خاص جديد من ' . $user->name,
         ]);
 
         Notify::NotifyMob($notification->message_ar, $notification->message_en, $request->seller_id, null, $data = null);
+
 
         return $this->ApiResponse(null, trans('local.order_done'), 200);
     }
@@ -349,8 +350,8 @@ class ApiCustomOrderController extends Controller
                 'user_id'       => $seller->id,
                 'type'          => 'custom_order',
                 'model_id'      => $customOrder->id,
-                'message_en'    => 'New order from ' . $user->name,
-                'message_ar'    => 'طلب جديد من ' . $user->name,
+                'message_en'    => 'New special order from ' . $user->name,
+                'message_ar'    => 'طلب خاص جديد من ' . $user->name,
             ]);
 
             Notify::NotifyMob($notification->message_ar, $notification->message_en, $seller->id, null, $data = null);
