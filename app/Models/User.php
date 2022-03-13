@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasMany(BranchesCompanyUser::class);
     }
 
+    public function tokens()
+    {
+        return $this->hasMany(DeviceToken::class);
+    }
+
     public function company_sector()
     {
         return $this->belongsTo(CompanySector::class);
