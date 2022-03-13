@@ -27,11 +27,11 @@ $( "#register" ).validate({
     messages: {
         confirm_password : {
             equalTo : lang == 'ar' ? 'برجاء ادخال نفس قيمة كلمة المرور' : 'you must password equal confirm password',
-        } 
+        }
     },
 
     submitHandler:function () {
-        
+
         var form=$(this);
 
         var name             = $('#name');
@@ -56,7 +56,7 @@ $( "#register" ).validate({
             data: formData
         })
             .then(function(response) {
-                
+
                 if(response.data.data == 1)
                 {
 
@@ -67,12 +67,12 @@ $( "#register" ).validate({
                     var phoneAppend = sessionStorage.getItem("phone");
 
                     $('#profile-tab').addClass('active');
-                    $('.modal').modal({backdrop: 'static', keyboard: false}) 
+                    $('.modal').modal({backdrop: 'static', keyboard: false})
                     $('#phone_active').val(phoneAppend);
 
                     $('#user_id').val(userId);
 
-                } else 
+                } else
                 {
 
                     Swal.fire({
@@ -80,8 +80,8 @@ $( "#register" ).validate({
                         title: response.data.error,
                         showConfirmButton: false,
                         timer: 1500
-    
-                    });                    
+
+                    });
 
                 }
 
@@ -117,7 +117,7 @@ $( "#form-active-code" ).validate({
     },
 
     submitHandler:function () {
-        
+
         var form=$(this);
 
         var code         = $('#code');
@@ -146,7 +146,7 @@ $( "#form-active-code" ).validate({
                 $("#profile").tab('show').addClass('active');
                 $("#home").removeClass('active');
 
-            } else 
+            } else
             {
 
                 Swal.fire({
@@ -155,11 +155,11 @@ $( "#form-active-code" ).validate({
                     showConfirmButton: false,
                     timer: 1500
 
-                });                    
+                });
 
-            }                
+            }
 
-                
+
         })
         .catch(function(error) {
 
@@ -178,10 +178,10 @@ $( "#form-active-code" ).validate({
         });
 
     }
-}); /// end of validation  
+}); /// end of validation
 
 $( "#resend_code" ).click(function(e){
- 
+
     e.preventDefault();
 
     var phonesend =  $('#phone_active').val();
@@ -195,20 +195,20 @@ $( "#resend_code" ).click(function(e){
         },
         dataType: 'json',
         success: function(result) {
-            
+
             Swal.fire({
                 type: 'success',
                 title: result.success,
                 showConfirmButton: false,
                 timer: 1500
 
-            }); 
+            });
 
         } // end of success
 
-    }); // end of ajax 
+    }); // end of ajax
 
-}); /// end of resend code  
+}); /// end of resend code
 
 $(document).ready(function(){
 
@@ -219,18 +219,18 @@ $(document).ready(function(){
         {
 
             $('#user_id').val(userId);
-            
+
         }
-        
+
         if (phoneAppend) {
-            
+
             $('#phone_active').val(phoneAppend);
 
         }
 
 
         $("#comapny_register").validate({
-        
+
             rules: {
                 name_enterprise: {
                     required: true
@@ -272,13 +272,13 @@ $(document).ready(function(){
                     required: true
                 },
             },
-        
+
             submitHandler:function () {
-                
-                
+
+
                 var form= $("#comapny_register");
 
-             
+
                 var user_id                                     = $('#user_id');
                 var name_enterprise                             = $('#name_enterprise');
                 var user_name_enterprise                        = $('#user_name_enterprise');
@@ -293,14 +293,14 @@ $(document).ready(function(){
                 var add_other_branches                          = $('#add_other_branches');
                 var region_id                                   = $('#region_id');
                 var get_type                                   = $('#get_type');
-        
+
                 var formData = new FormData();
-                
+
                 var allArea = [];
                 $(".array_area").each(function() {
                     allArea.push($(this).val());
                 });
-                
+
                 var allCity = [];
                 $(".array_city").each(function() {
                     allCity.push($(this).val());
@@ -310,7 +310,7 @@ $(document).ready(function(){
                 $(".array_phone").each(function() {
                     allPhone.push($(this).val());
                 });
-                
+
                 var allAddress = [];
                 $(".array_address_details").each(function() {
                     allAddress.push($(this).val());
@@ -335,7 +335,7 @@ $(document).ready(function(){
                 formData.append ('city_id'                                   , city_id.val());
                 formData.append('other_branches'                             , add_other_branches.val());
                 formData.append('activity_type_id'                           , get_type.val());
-        
+
                 if(user_id.val() != 'no')
                 {
 
@@ -347,35 +347,35 @@ $(document).ready(function(){
                         data: formData
                     })
                     .then(function(response) {
-            
+
                         if(response.data.data == 1)
                         {
                             sessionStorage.removeItem("userId");
                             $('#messages-tab').addClass('active');
                             $("#messages").tab('show').addClass('active');
                             $("#profile").removeClass('active');
-                            
-                        } else 
+
+                        } else
                         {
-            
+
                             Swal.fire({
                                 type: 'error',
                                 title: response.data.error,
                                 showConfirmButton: false,
                                 timer: 1500
-            
-                            });                    
-            
-                        }                
-            
-                            
+
+                            });
+
+                        }
+
+
                     })
                     .catch(function(error) {
-            
+
                         onFormErrors(form);
-            
+
                         if (error.response.status === 422) {
-            
+
                             if(error.response.data.errors.no_active)
                             {
 
@@ -400,16 +400,16 @@ $(document).ready(function(){
                             textFieldError(add_other_branches  , error.response.data.errors.add_other_branches);
                             textFieldError(get_type  , error.response.data.errors.get_type);
 
-            
+
                         } else if (error.response.status !== 422) {
-            
+
                             onFormFailure(form);
-            
+
                         }
-            
+
                     });
-        
-                } else 
+
+                } else
                 {
 
                     Swal.fire({
@@ -417,8 +417,8 @@ $(document).ready(function(){
                         type: 'error',
                         title: 'من فضلك قم بأدخال البيانات الشخصية اولا',
                         showConfirmButton: true,
-    
-                    });   
+
+                    });
 
                 }
 

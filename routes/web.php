@@ -34,6 +34,8 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
 
     Route::resource('users', 'UserController');
 
+    Route::get('click/plus/branches', 'UserController@getBranches')->name('click.plus.branches');
+
     Route::resource('activities-types', 'ActivityTypeController');
 
     Route::resource('regions', 'RegionController');

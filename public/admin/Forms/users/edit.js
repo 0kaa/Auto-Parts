@@ -1,3 +1,96 @@
+$(document).on("change", "#add_other_branches", function () {
+
+    var id = $(this).val();
+
+    if (id == 1) {
+        $(".hidden-item").attr("hidden", false);
+    } else {
+        $('#append_branches').html('');
+        $(".hidden-item").attr("hidden", true);
+    }
+});
+
+var lang = $("#lang").attr("lang");
+
+if (lang == "ar") {
+    var city = "المدينة";
+    var area = "المنطقة";
+    var phone = "رقم الجوال";
+    var address_details = "العنوان بالتفصيل";
+    var add_branches = "اضافة فرع";
+    var delete_branch = "حذف الفرع";
+} else {
+    var delete_branch = "Delete Branche";
+    var area = "Area";
+    var add_branches = "Add Branches";
+    var address_details = "Details Address";
+    var phone = "Phone Number";
+    var city = "City";
+}
+
+
+
+var i = 1;
+$(document).on("click", ".click-plus", function () {
+    var action = $(this).data("action");
+
+    $.ajax({
+        type: "GET",
+        url: action,
+        data: {},
+        dataType: "json",
+        success: function (result) {
+            var append = `<div class="remove-this"> <div class="add-divs">
+                          <div class="click-add-res click-minus">
+                          <span>-</span>
+                          ${delete_branch}
+                          </div>
+                          <div class="shep-div">
+
+                          </div>
+                        </div><div class="sub-more-input">
+                        <div class="input-sub-regester form-group">
+                            <select class="form-select form-control array_area" name="area_${i}" aria-label="Default select example" required>
+                                <option selected value=""> ${area}</option>`;
+            result.areas.forEach((option) => {
+                append += `<option value="${option.id}">${
+                    lang == "ar" ? option.name_ar : option.name_en
+                }</option>`;
+            });
+
+            append += `</select>
+                        </div>
+
+
+                        <div class="input-sub-regester form-group">
+                        <select class="form-select form-control array_city" name="city_${i}" aria-label="Default select example" required>
+                            <option selected value=""> ${city}</option>`;
+            result.cities.forEach((option) => {
+                append += `<option value="${option.id}">${
+                    lang == "ar" ? option.name_ar : option.name_en
+                }</option>`;
+            });
+
+            append += `</select>
+                        </div>
+
+
+                        <div class="input-sub-regester form-group">
+                            <input type="tel" name="phone_${i}" class="form-control array_phone" placeholder="${phone}" required>
+                        </div>
+                        <div class="input-sub-regester form-group">
+                            <input type="text" name="address_details_${i}" class="form-control array_address_details" placeholder="${address_details}" required>
+                        </div>
+
+                    </div>
+                    </div>
+                    `;
+            i++;
+            $("#append_branches").append(append);
+        }, // end of success
+    }); // end of ajax
+});
+
 $(document).ready(function () {
     var form = $("#update-user-form");
     var name = form.find("#name");
@@ -26,10 +119,35 @@ $(document).ready(function () {
     var latitude = form.find("#lat");
     var longitude = form.find("#lng");
 
+    var add_other_branches = $("#add_other_branches");
+
+
+
     form.submit(function (e) {
         e.preventDefault();
         onFormSubmit(form);
         var formData = new FormData();
+
+        var allArea = [];
+        $(".array_area").each(function () {
+            allArea.push($(this).val());
+        });
+
+        var allCity = [];
+        $(".array_city").each(function () {
+            allCity.push($(this).val());
+        });
+
+        var allPhone = [];
+        $(".array_phone").each(function () {
+            allPhone.push($(this).val());
+        });
+
+        var allAddress = [];
+        $(".array_address_details").each(function () {
+            allAddress.push($(this).val());
+        });
+
 
         formData.append("name", name.val());
         formData.append("email", email.val());
@@ -63,6 +181,12 @@ $(document).ready(function () {
         formData.append("lng", longitude.val());
         ifFileFoundAppend("image", image[0], formData);
         ifFileFoundAppend("file", file[0], formData);
+
+        formData.append("addressarray", allAddress);
+        formData.append("phonearray", allPhone);
+        formData.append("areaarray", allArea);
+        formData.append("cityarray", allCity);
+        formData.append("other_branches", add_other_branches.val());
 
         formData.append("_method", "PATCH");
 

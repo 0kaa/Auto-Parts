@@ -462,6 +462,91 @@
 
                             </div>
 
+                            <div class="input-sub-regester">
+                                <select class="form-select form-control" id="add_other_branches" name="other_branches"
+                                    aria-label="Default select example" required>
+                                    <option selected value="">{{ __('local.other_branches') }}</option>
+                                    <option value="1" {{ $user->other_branches == 'yes' ? 'selected' : '' }}>
+                                        {{ __('local.yes') }} </option>
+                                    <option value="2" {{ $user->other_branches == 'no' ? 'selected' : '' }}>
+                                        {{ __('local.no') }} </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" id="append_branches">
+
+                                @foreach ($user->branches as $key => $branch)
+                                    <div class="remove-this">
+                                        <div class="add-divs">
+                                            <div class="click-add-res click-minus">
+                                                <span>-</span>
+                                                delete_branch
+                                            </div>
+                                            <div class="shep-div">
+
+                                            </div>
+                                        </div>
+                                        <div class="sub-more-input">
+                                            <div class="input-sub-regester form-group">
+                                                <select class="form-select form-control array_area"
+                                                    name="area_{{ $key }}" aria-label="Default select example"
+                                                    required>
+                                                    <option selected value=""> area</option>
+                                                    @foreach ($regions as $area)
+                                                        <option value="{{ $area->id }}"
+                                                            {{ $branch->area_id == $region->id ? 'selected' : '' }}>
+                                                            {{ $area->name }}</option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+
+
+                                            <div class="input-sub-regester form-group">
+                                                <select class="form-select form-control array_city"
+                                                    name="city_{{ $key }}" aria-label="Default select example"
+                                                    required>
+                                                    <option selected value=""> city</option>
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{ $city->id }}"
+                                                            {{ $branch->city_id == $city->id ? 'selected' : '' }}>
+                                                            {{ $city->name }}</option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+
+
+                                            <div class="input-sub-regester form-group">
+                                                <input type="tel" name="phone_{{ $key }}"
+                                                    class="form-control array_phone" placeholder="phone"
+                                                    value="{{ $branch->phone }}" required>
+                                            </div>
+                                            <div class="input-sub-regester form-group">
+                                                <input type="text" name="address_details_{{ $key }}"
+                                                    class="form-control array_address_details"
+                                                    value="{{ $branch->address }}" placeholder="address_details"
+                                                    required>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                @endforeach
+
+
+                            </div>
+
+                            <div class="add-divs hidden-item" {{ $user->other_branches != 'yes' ? 'hidden' : '' }}>
+                                <div class="click-add-res click-plus"
+                                    data-action="{{ route('website.click.plus.branches') }}">
+                                    <span>+</span>
+                                    {{ __('local.add_branches') }}
+                                </div>
+                                <div class="shep-div">
+
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <label>@lang('admin.select_location_on_map') </label>
