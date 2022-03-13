@@ -8,6 +8,7 @@ use App\Repositories\RegionRepositoryInterface;
 use App\Repositories\CityRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -56,5 +57,36 @@ class UserController extends Controller
         $regions = $this->regionRepository->getAll();
         $cities = $this->cityRepository->getAll();
         return view('admin.users.edit', compact('user', 'activities_type', 'regions', 'cities'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = $this->userRepository->findOne($id);
+
+        $attributes = $request->except('_method', 'type_user', 'searchInput');
+
+        if ($request->hasFile('image')) {
+            Storage::delete($user->image);
+
+            $attributes['image'] = $request->file('image')->store('user');
+        }
+
+        if ($request->hasFile('file')) {
+            Storage::delete($user->file);
+
+            $attributes['file'] = $request->file('file')->store('user');
+        }
+
+        if (!$request->password) {
+            $attributes['password'] = $user->password;
+        } else {
+            $attributes['password'] =  bcrypt($request->password);
+        }
+
+
+        $user->update($attributes);
+        // dd($user);
+        $user->syncRoles([$request->type_user]);
+        return  response()->json(['success' => trans('admin.updated_success', ['field' => __('local.users')]), 200]);
     }
 }
