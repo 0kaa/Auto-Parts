@@ -26,7 +26,7 @@ class ProductDetailResource extends JsonResource
             'seller_name' => $this->seller->name_owner_company,
             'seller_rating' => $this->seller->ratings()->avg('rating') ? $this->seller->ratings()->avg('rating') : 0,
             'seller_image' => $this->seller->image ? url('/storage') . '/' . $this->seller->image : url('/product-no-img.jpg'),
-            'seller_tokens' => $this->seller->tokens->pluck('firebase_token')->toArray(),
+            'seller_tokens' => $this->seller->firebase_tokens->pluck('firebase_token')->toArray(),
             'store_name' => $this->seller->name_company,
             'features' => $this->features ? $this->features : [],
             'details' => $this->details ? $this->details : [],
