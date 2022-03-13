@@ -67,6 +67,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::get('order/{id}',                        'ApiOrderController@getOrder');
         Route::get('order_status',                      'ApiOrderController@orderStatus');
         Route::get('order_status/seller',               'ApiOrderController@orderSellerStatus');
+        Route::get('order_status/stepper',              'ApiOrderController@orderStepper');
         Route::get('custom-order/{id}',                 'ApiCustomOrderController@getOrder');
         Route::get('payment_methods',                   'ApiPaymentController@payment_methods');
     });
@@ -91,6 +92,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('cart/create',                      'ApiCartController@addToCart');
         Route::post('cart/remove',                      'ApiCartController@removeFromCart');
         Route::post('cart/change-quantity',             'ApiCartController@changeQuantity');
+        
     });
 
     Route::group(['middleware' => ['auth:sanctum', 'role:user|workshop|owner_store']], function () {

@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\PaymentMethodsResource;
+use App\Models\Notification;
 use App\Models\OrderStatus;
 use App\Models\PaymentMethod;
 use App\Models\TapPayment;
+use App\Services\Notify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -49,12 +51,12 @@ class ApiPaymentController extends Controller
 
             $order->save();
 
-            $notification = $this->notificationRepository->create([
+            $notification = Notification::create([
                 'user_id'       => $order->seller_id,
                 'type'          => 'order',
                 'model_id'      => $order->id,
-                'message_en'    => 'You have a new order',
-                'message_ar'    => 'لديك طلب جديد',
+                'message_en'    => 'Order #' . $order->id . ' has been paid successfully by ' . $order->user->name,
+                'message_ar'    => 'تم دفع الطلب #' . $order->id . ' بنجاح بواسطة ' . $order->user->name,
             ]);
 
             Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
@@ -102,6 +104,16 @@ class ApiPaymentController extends Controller
             $order->multiCustomOrder->order_status_id   = $order_status_paid->id;
             $order->save();
             $order->multiCustomOrder->save();
+
+            $notification = Notification::create([
+                'user_id'       => $order->seller_id,
+                'type'          => 'custom_order',
+                'model_id'      => $order->id,
+                'message_en'    => 'Order #' . $order->id . ' has been paid successfully by ' . $order->user->name,
+                'message_ar'    => 'تم دفع الطلب #' . $order->id . ' بنجاح بواسطة ' . $order->user->name,
+            ]);
+
+            Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
 
             return $this->ApiResponse(null, trans('local.payment_success'), 200);
         } elseif ($charge['status'] == 'CANCELLED') {

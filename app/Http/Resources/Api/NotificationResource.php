@@ -4,6 +4,7 @@ namespace App\Http\Resources\Api;
 
 use App\Models\Order;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Carbon;
 
 class NotificationResource extends JsonResource
 {
@@ -17,7 +18,7 @@ class NotificationResource extends JsonResource
     {
         return [
             'id'        => $this->id,
-            'time'      => $this->created_at ? $this->created_at->diffForHumans() : null,
+            'time'      => $this->created_at ? Carbon::parse($this->created_at)->isoFormat('HH:mm a') : null,
             'read_at'   => $this->read_at ? $this->read_at->diffForHumans() : null,
             'readed'    => $this->read_at ? true : false,
             'message'   => $this->message,
