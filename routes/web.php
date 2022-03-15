@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,8 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
 
     Route::resource('users', 'UserController');
 
+    Route::get('click/plus/branches', 'UserController@getBranches')->name('click.plus.branches');
+
     Route::resource('activities-types', 'ActivityTypeController');
 
     Route::resource('regions', 'RegionController');
@@ -44,7 +47,7 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
     Route::resource('cities', 'CityController');
 
     Route::resource('shippings', 'ShippingController');
-    
+
     Route::resource('company-sectors', 'CompanySectorController');
 
     Route::resource('sliders-services', 'SliderServiceController');
@@ -52,6 +55,15 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
     Route::resource('news-letter', 'NewsLetterController');
 
     Route::resource('faqs', 'FaqsController');
+
+    Route::resource('orders', 'OrderController');
+
+    Route::resource('custom_orders', 'CustomOrderController');
+
+    Route::get("activity", [CustomOrderController::class, 'get_activity'])->name('get_activity');
+
+    Route::get("sub_activity", [CustomOrderController::class, 'get_sub_activity'])->name('get_sub_activity');
+
 
     Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 });

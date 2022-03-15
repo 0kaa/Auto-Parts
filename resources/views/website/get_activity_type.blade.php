@@ -20,12 +20,12 @@
 
             <div class="input-fille">
                 <input type="file" class="image" name="image_commerical" id="image_commerical">
-                <label for="image_commerical"  class="form-control"> 
+                <label for="image_commerical"  class="form-control">
                     <span>{{ __('local.image_commerical') }} </span>
                     <i class="bi bi-upload"></i>
                 </label>
 
-                <p class="prev"> 
+                <p class="prev">
                     <img src="" class="preview-image_commerical" alt="">
                 </p>
             </div>
@@ -45,7 +45,7 @@
 
                     @endforeach
 
-                </select> 
+                </select>
             </div>
 
             <div class="input-sub-regester">
@@ -58,7 +58,7 @@
 
                     @endforeach
 
-                </select> 
+                </select>
             </div>
 
             {{-- <div class="input-sub-regester">
@@ -66,14 +66,14 @@
             </div> --}}
 
 
-        
+
 
             <div class="input-sub-regester">
                 <select class="form-select form-control" name="is_company_facility_agent" id="is_company_facility_agent" aria-label="Default select example" required>
                     <option selected value="">{{ __('local.is_company_facility_agent') }} </option>
                     <option value="1">{{ __('local.yes') }}  </option>
                     <option value="2">{{ __('local.no') }}  </option>
-                </select> 
+                </select>
             </div>
 
             <div class="input-sub-regester">
@@ -81,7 +81,7 @@
                     <option selected value="">{{ __('local.is_company_facility_authorized_distributor') }} </option>
                     <option value="1">{{ __('local.yes') }}  </option>
                     <option value="2">{{ __('local.no') }}  </option>
-                </select> 
+                </select>
             </div>
 
 
@@ -92,10 +92,10 @@
                     @foreach($comapnies as $comapny)
 
                         <option value="{{ $comapny->id }}"> {{ $comapny->name }} </option>
-                        
+
                     @endforeach
 
-                </select> 
+                </select>
             </div>
 
             <div class="input-sub-regester">
@@ -103,7 +103,7 @@
                     <option selected value="">{{ __('local.other_branches') }}</option>
                     <option value="1">{{ __('local.yes') }}  </option>
                     <option value="2">{{ __('local.no') }}  </option>
-                </select> 
+                </select>
             </div>
 
             <div id="append_branches">
@@ -118,7 +118,7 @@
                                     <option value="{{ $area->id }}">{{ $area->name }}</option>
 
                                 @endforeach
-                      </select> 
+                      </select>
                   </div>
 
                   <div class="input-sub-regester">
@@ -130,9 +130,9 @@
                                     <option value="{{ $city->id }}">{{ $city->name }}</option>
 
                                 @endforeach
-                      </select> 
+                      </select>
                   </div>
-                  
+
 
                   <div class="input-sub-regester">
                       <input type="tel" name="phone_0" class="form-control array_phone" placeholder="{{ __('local.phone') }}" required>
@@ -141,10 +141,10 @@
                       <input type="text" name="address_details_0" class="form-control array_address_details" placeholder="{{ __('local.address_details') }}" required>
                   </div>
 
-                </div>             
-              </div>  
+                </div>
+              </div>
             </div>
-   
+
             <div class="add-divs hidden-item" hidden>
                 <div class="click-add-res click-plus" data-action="{{ route('website.click.plus.branches') }}">
                 <span>+</span>
@@ -153,8 +153,8 @@
                 <div class="shep-div">
 
                 </div>
-            </div>              
-    @else 
+            </div>
+    @else
 
             <div class="input-sub-regester">
                 <input type="text" class="form-control" name="name_enterprise" placeholder="{{ __('local.name_enterprise') }}">
@@ -176,12 +176,12 @@
 
             <div class="input-fille">
                 <input type="file" class="image" name="image_commerical" id="image_commerical">
-                <label for="image_commerical"  class="form-control"> 
+                <label for="image_commerical"  class="form-control">
                     <span>{{ __('local.image_commerical') }} </span>
                     <i class="bi bi-upload"></i>
                 </label>
 
-                <p class="prev"> 
+                <p class="prev">
                     <img src="" class="preview-image_commerical" alt="">
                 </p>
             </div>
@@ -201,7 +201,7 @@
 
                     @endforeach
 
-                </select> 
+                </select>
             </div>
 
            <div class="input-sub-regester">
@@ -214,18 +214,18 @@
 
                     @endforeach
 
-                </select> 
+                </select>
             </div>
 
 
-        
+
 
             <div class="input-sub-regester">
                 <select class="form-select form-control" name="is_company_facility_agent" aria-label="Default select example" required>
                     <option selected value="">{{ __('local.is_company_facility_agent') }} </option>
                     <option value="1">{{ __('local.yes') }}  </option>
                     <option value="2">{{ __('local.no') }}  </option>
-                </select> 
+                </select>
             </div>
 
             <div class="input-sub-regester">
@@ -233,7 +233,7 @@
                     <option selected value="">{{ __('local.is_company_facility_authorized_distributor') }} </option>
                     <option value="1">{{ __('local.yes') }}  </option>
                     <option value="2">{{ __('local.no') }}  </option>
-                </select> 
+                </select>
             </div>
 
             <div class="input-sub-regester">
@@ -241,7 +241,7 @@
                     <option selected value="">{{ __('local.other_branches') }}</option>
                     <option value="1">{{ __('local.yes') }}  </option>
                     <option value="2">{{ __('local.no') }}  </option>
-                </select> 
+                </select>
             </div>
 
             <div id="append_branches">
@@ -255,9 +255,9 @@
                                     <option value="{{ $area->id }}">{{ $area->name }}</option>
 
                                 @endforeach
-                      </select> 
+                      </select>
                   </div>
-                  
+
                   <div class="input-sub-regester">
                     <select class="form-select form-control" name="city_0" aria-label="Default select example" required>
                         <option selected value=""> {{ __('local.city') }}</option>
@@ -267,10 +267,10 @@
                                   <option value="{{ $city->id }}">{{ $city->name }}</option>
 
                               @endforeach
-                    </select> 
+                    </select>
                 </div>
-                  
-       
+
+
 
 
                   <div class="input-sub-regester">
@@ -280,10 +280,10 @@
                       <input type="text" name="address_details_0" class="form-control" placeholder="{{ __('local.address_details') }}" required>
                   </div>
 
-              </div>             
-              </div>  
+              </div>
+              </div>
             </div>
-   
+
             <div class="add-divs hidden-item" hidden>
                 <div class="click-add-res click-plus" data-action="{{ route('website.click.plus.branches') }}">
                 <span>+</span>

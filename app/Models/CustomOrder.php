@@ -37,7 +37,7 @@ class CustomOrder extends Model
 
     public function seller()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'seller_id');
     }
 
     public function user()
