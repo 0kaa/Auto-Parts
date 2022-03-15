@@ -136,7 +136,7 @@ class ApiOrderController extends Controller
             $user                           = auth()->user();
             $orderStatus                    = OrderStatus::where('slug', 'completed')->first();
             $orderStatus_unpaid             = OrderStatus::where('slug', 'unpaid')->first();
-            $orders                         = $user->store_orders()->where('order_status_id', '<>', $orderStatus->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->orderBy('created_at', 'ASC')->get();
+            $orders                         = $user->store_orders()->where('order_status_id', '<>', $orderStatus->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->orderBy('created_at', 'DESC')->get();
 
             return $this->ApiResponse(OrderResource::collection($orders), null, 200);
         } catch (\Exception $e) {
@@ -257,24 +257,24 @@ class ApiOrderController extends Controller
 
         if ($isOwnerStore) {
 
-            $orders = OrderResource::collection($user->store_orders()->where('order_status_id', '<>', $orderStatus->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->orderBy('created_at', 'ASC')->get());
+            $orders = OrderResource::collection($user->store_orders()->where('order_status_id', '<>', $orderStatus->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->orderBy('created_at', 'DESC')->get());
 
-            $custom_orders = MultiCustomOrderResource::collection($user->store_custom_orders()->where('order_status_id', '<>', $orderStatus_paid->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->where('order_status_id', '<>', $orderStatus_seller_rejected->id)->where('order_status_id', '<>', $orderStatus_rejected->id)->orderBy('created_at', 'ASC')->get());
+            $custom_orders = MultiCustomOrderResource::collection($user->store_custom_orders()->where('order_status_id', '<>', $orderStatus_paid->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->where('order_status_id', '<>', $orderStatus_seller_rejected->id)->where('order_status_id', '<>', $orderStatus_rejected->id)->orderBy('created_at', 'DESC')->get());
 
-            $previous_orders = OrderResource::collection($user->store_orders()->where('order_status_id', '=', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
+            $previous_orders = OrderResource::collection($user->store_orders()->where('order_status_id', '=', $orderStatus->id)->orderBy('created_at', 'DESC')->get());
 
-            $previous_custom_orders = MultiCustomOrderResource::collection($user->store_custom_orders()->where('order_status_id', '=', $orderStatus_paid->id)->orderBy('created_at', 'ASC')->get());
+            $previous_custom_orders = MultiCustomOrderResource::collection($user->store_custom_orders()->where('order_status_id', '=', $orderStatus_paid->id)->orderBy('created_at', 'DESC')->get());
 
             return $this->ApiResponse(compact('orders', 'custom_orders', 'previous_orders', 'previous_custom_orders'), null, 200);
         }
 
-        $orders = OrderResource::collection($user->user_orders()->where('order_status_id', '<>', $orderStatus->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->orderBy('created_at', 'ASC')->get());
+        $orders = OrderResource::collection($user->user_orders()->where('order_status_id', '<>', $orderStatus->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->orderBy('created_at', 'DESC')->get());
 
-        $custom_orders = CustomOrderListResource::collection($user->user_custom_orders()->where('order_status_id', '<>', $orderStatus_paid->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->where('order_status_id', '<>', $orderStatus_seller_rejected->id)->where('order_status_id', '<>', $orderStatus_rejected->id)->orderBy('created_at', 'ASC')->get());
+        $custom_orders = CustomOrderListResource::collection($user->user_custom_orders()->where('order_status_id', '<>', $orderStatus_paid->id)->where('order_status_id', '<>', $orderStatus_unpaid->id)->where('order_status_id', '<>', $orderStatus_seller_rejected->id)->where('order_status_id', '<>', $orderStatus_rejected->id)->orderBy('created_at', 'DESC')->get());
 
-        $previous_orders = OrderResource::collection($user->user_orders()->where('order_status_id', '=', $orderStatus->id)->orderBy('created_at', 'ASC')->get());
+        $previous_orders = OrderResource::collection($user->user_orders()->where('order_status_id', '=', $orderStatus->id)->orderBy('created_at', 'DESC')->get());
 
-        $previous_custom_orders = CustomOrderListResource::collection($user->user_custom_orders()->where('order_status_id', '=', $orderStatus_paid->id)->orderBy('created_at', 'ASC')->get());
+        $previous_custom_orders = CustomOrderListResource::collection($user->user_custom_orders()->where('order_status_id', '=', $orderStatus_paid->id)->orderBy('created_at', 'DESC')->get());
 
         return $this->ApiResponse(compact('orders', 'custom_orders', 'previous_orders', 'previous_custom_orders'), null, 200);
     }

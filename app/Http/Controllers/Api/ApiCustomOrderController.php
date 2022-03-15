@@ -403,7 +403,7 @@ class ApiCustomOrderController extends Controller
         $notification = Notification::create([
             'user_id'       => $customOrder->user_id,
             'type'          => 'price_offer',
-            'model_id'      => $price_offer->id,
+            'model_id'      => $customOrder->id,
             'message_en'    => 'Price offer from ' . $user->name_company . ' for order #' . $customOrder->id . ' is ' . $request->price . ' SAR',
             'message_ar'    => 'عرض السعر من ' . $user->name_company . ' للطلب #' . $customOrder->id . ' هو ' . $request->price . ' ر.س',
         ]);
