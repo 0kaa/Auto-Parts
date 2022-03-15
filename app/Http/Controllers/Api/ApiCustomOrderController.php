@@ -554,7 +554,7 @@ class ApiCustomOrderController extends Controller
     public function PriceOffers($id)
     {
 
-        $priceOffers = $this->priceOfferRepository->getWhere([['custom_order_id', $id]]);
+        $priceOffers = $this->priceOfferRepository->getWhere([['custom_order_id', $id]])->orderBy('created_at', 'DESC');
 
         return $this->ApiResponse(PriceOffersResource::collection($priceOffers), null, 200);
     }
