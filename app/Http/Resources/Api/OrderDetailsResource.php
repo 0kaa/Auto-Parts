@@ -35,6 +35,7 @@ class OrderDetailsResource extends JsonResource
             'seller_city'           => $this->seller->city_name->name,
             'seller_commercial_register_id' => $this->seller->commercial_register_id,
             'seller_tokens'         => $this->seller->firebase_tokens->pluck('firebase_token')->toArray(),
+            'user_tokens'           => auth()->user()->firebase_tokens->pluck('firebase_token')->toArray(),
             'products'              => OrderItemResource::collection($this->order_items),
 
         ];
