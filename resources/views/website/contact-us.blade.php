@@ -103,5 +103,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/localization/messages_ar.min.js">
         </script>
     @endif
+    <script>
+        window.apiWebsiteURL = `{{ config('app.website') }}`;
+        window.apiDashboardURL = `{{ config('app.dashboard') }}`;
+    </script>
     <script src="{{asset('website/forms/contact-us.js')}}"></script>
     @endsection
