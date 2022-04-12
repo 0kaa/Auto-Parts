@@ -235,7 +235,7 @@ $(document).ready(function(){
                 name_enterprise: {
                     required: true
                 },
-                address: {
+                user_address: {
                     required: true
                 },
                 user_name_enterprise: {
@@ -284,7 +284,7 @@ $(document).ready(function(){
 
                 var user_id                                     = $('#user_id');
                 var name_enterprise                             = $('#name_enterprise');
-                var address                                     = $('#address');
+                var user_address                                = $('#user_address');
                 var user_name_enterprise                        = $('#user_name_enterprise');
                 var user_identity_enterprise                    = $('#user_identity_enterprise');
                 var birth_day_enterprise                        = $('#birth_day_enterprise');
@@ -326,7 +326,7 @@ $(document).ready(function(){
                 formData.append('cityarray'                                  , allCity);
                 formData.append('user_id'                                    , user_id.val());
                 formData.append('name_company'                               , name_enterprise.val());
-                formData.append('address'                                    , address.val());
+                formData.append('address'                                    , user_address.val());
                 formData.append('name_owner_company'                         , user_name_enterprise.val());
                 formData.append('national_identity'                          , user_identity_enterprise.val());
                 formData.append('date'                                       , birth_day_enterprise.val());
@@ -393,7 +393,7 @@ $(document).ready(function(){
                             textFieldError(user_id  , error.response.data.errors.user_id);
                             textFieldError(name_enterprise  , error.response.data.errors.name_enterprise);
                             textFieldError(user_name_enterprise  , error.response.data.errors.user_name_enterprise);
-                            textFieldError(address  , error.response.data.errors.address);
+                            textFieldError(user_address  , error.response.data.errors.user_address);
                             textFieldError(user_identity_enterprise  , error.response.data.errors.user_identity_enterprise);
                             textFieldError(birth_day_enterprise  , error.response.data.errors.birth_day_enterprise);
                             textFieldError(image_commerical  , error.response.data.errors.image_commerical);
