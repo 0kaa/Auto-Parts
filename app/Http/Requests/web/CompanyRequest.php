@@ -37,6 +37,7 @@ class CompanyRequest extends FormRequest
                 'user_id'                                    => 'required',
                 'name_company'                               => 'required',
                 'name_owner_company'                         => 'required',
+                'address'                                    => 'required',
                 'national_identity'                          => 'required',
                 'date'                                       => 'required',
                 'file'                                       => 'required|mimes:jpg,png,jpeg,gif',
