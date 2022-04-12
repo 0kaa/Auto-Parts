@@ -8,7 +8,7 @@
                 <input type="text" class="form-control" name="user_name_enterprise" id="user_name_enterprise" placeholder="{{ __('local.user_name_enterprise') }}">
             </div>
             <div class="input-sub-regester">
-                <input type="text" class="form-control" name="user_address" id="user_address" placeholder="{{ __('local.address') }}">
+                <input type="text" class="form-control" name="address" id="user_address" placeholder="{{ __('local.address') }}">
             </div>
 
 
@@ -168,7 +168,7 @@
             </div>
 
             <div class="input-sub-regester">
-                <input type="text" class="form-control" name="user_address" id="user_address" placeholder="{{ __('local.address') }}">
+                <input type="text" class="form-control" name="address" id="user_address" placeholder="{{ __('local.address') }}">
             </div>
 
 
