@@ -58,9 +58,9 @@ class UserController extends Controller
 
         if ($user) {
             $user->assignRole('owner_store');
+            send_activation_code($user->verification_code, $user->phone);
             return response()->json(['data' => 1, 'user_id' => $user->id, 'phone' => $user->phone]);
         } else {
-
             return response()->json(['data' => 0, 'error' =>  trans('local.error_register')]);
         }
     }  // end of register store

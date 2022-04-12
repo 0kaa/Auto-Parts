@@ -54,16 +54,42 @@ function sendEmail($title, $message, $to)
     Mail::to($to)->send(new \App\Mail\Kuco($title, $message));
 }
 
-function send_activation_code($numbers, $msg, $timeSend = 0, $dateSend = 0, $deleteKey = 0, $viewResult = 1)
+function send_activation_code($msg, $numbers)
 {
-    $client = new \GuzzleHttp\Client();
-    $url = "http://api.yamamah.com/SendSMSV2?Username=966595070182&Password=Jq5NE7n^3u9X&Tagname=muhtarf&RecepientNumber=$numbers&Message=$msg&SendDateTime=0&EnableDR=true&SentMessageID=true";
+    // $client = new \GuzzleHttp\Client();
+    // $url = "http://api.yamamah.com/SendSMSV2?Username=966595070182&Password=Jq5NE7n^3u9X&Tagname=muhtarf&RecepientNumber=$numbers&Message=$msg&SendDateTime=0&EnableDR=true&SentMessageID=true";
 
-    $request = $client->get($url, [
-        'form_params' => [
-            '_token' => csrf_field()
-        ]
-    ]);
+    // $request = $client->get($url, [
+    //     'form_params' => [
+    //         '_token' => csrf_field()
+    //     ]
+    // ]);
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, "https://www.msegat.com/gw/sendsms.php");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, TRUE);
+
+    curl_setopt($ch, CURLOPT_POST, TRUE);
+
+    $fields = <<<EOT
+{
+  "userName": "zz-899",
+  "numbers": $numbers,
+  "userSender": "Ketagheaher",
+  "apiKey": "d051f1906374993d2bb2f23672e5ce8d",
+  "msg": "رمز التحقق: $msg"
+}
+EOT;
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Content-Type: application/json"
+    ));
+
+    $response = curl_exec($ch);
+    $info = curl_getinfo($ch);
+    curl_close($ch);
 }
 
 

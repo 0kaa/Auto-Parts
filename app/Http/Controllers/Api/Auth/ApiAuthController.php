@@ -91,13 +91,13 @@ class ApiAuthController extends Controller
             $token = $user->createToken('tokens')->plainTextToken;
 
             if ($user->approved == 1) {
-                return $this->ApiResponse(['token' => $token, 'code' => $user->verification_code, 'user' => new UserResource($user)], null, 200);
+                return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], null, 200);
             } else {
-                return $this->ApiResponse(['code' => $user->verification_code, 'phone' => $user->phone, 'approved' => $user->approved], null, 200);
+                send_activation_code($user->verification_code, $user->phone);
+                return $this->ApiResponse(['phone' => $user->phone, 'approved' => $user->approved], null, 200);
             }
         } else {
-
-            return $this->ApiResponse(null, trans('local.successfully.registered'), 404);
+            return $this->ApiResponse(null, trans('local.failedRegister'), 404);
         }
     }
 
@@ -105,30 +105,30 @@ class ApiAuthController extends Controller
     {
 
         try {
-            $code = $this->usersRepository->getWhere([['verification_code', $request->code], ['phone', $request->phone]])->first();
+            $user = $this->usersRepository->getWhere([['verification_code', $request->code], ['phone', $request->phone]])->first();
 
-            if (!$code) {
+            if (!$user) {
                 return $this->ApiResponse(null, trans('local.verify_code_error'), 404);
             }
 
-            $user_device_id = $code->devices->where('device_id', $request->device_id)->where('platform_type', $request->platform_type)->first();
+            $user_device_id = $user->devices->where('device_id', $request->device_id)->where('platform_type', $request->platform_type)->first();
 
-            if ($code) {
+            if ($user) {
 
                 if (!$user_device_id) {
-                    $code->devices()->create([
+                    $user->devices()->create([
                         'device_id'         => $request->device_id,
                         'platform_type'     => $request->platform_type,
                         'firebase_token'    => $request->firebase_token,
-                        'user_id'           => $code->id,
+                        'user_id'           => $user->id,
                     ]);
                 }
 
-                $code->update(['approved' => 1, 'verification_code' => null]);
+                $user->update(['approved' => 1, 'verification_code' => null]);
 
-                $token = $code->createToken('tokens')->plainTextToken;
+                $token = $user->createToken('tokens')->plainTextToken;
 
-                return $this->ApiResponse(['token' => $token, 'code' => $code->verification_code, 'user' => new UserResource($code)], trans('local.verify_code_success'), 200);
+                return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], trans('local.verify_code_success'), 200);
             } else {
                 return $this->ApiResponse(null, trans('local.verify_code_error'), 404);
             }
@@ -140,7 +140,7 @@ class ApiAuthController extends Controller
     public function get_user()
     {
         $user = auth()->user();
-        return $this->ApiResponse(['user' => new UserResource($user)], 'test message', 200);
+        return $this->ApiResponse(['user' => new UserResource($user)], '', 200);
     }
 
     public function resetPassword(Request $request)
@@ -153,6 +153,7 @@ class ApiAuthController extends Controller
         if ($user && $user->approved == 1) {
             $code = rand(1111, 9999);
             $user->update(['verification_code' => $code]);
+            send_activation_code($code, $phone);
             // $this->sendSms($phone, $code);
             return $this->ApiResponse($code, trans('admin.code_sent'), 200);
         }

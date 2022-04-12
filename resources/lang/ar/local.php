@@ -112,6 +112,7 @@ return [
     'Your company data' => ' بيانات الشركة الخاصة بك ',
     'Activity type' => ' نوع النشاط',
     'successfully registered' => 'تم التسجيل بنجاح',
+    'failedRegister' => 'فشل التسجيل',
     'Back to main' => 'العودة إلى الرئيسية',
     'Personal data' => 'البيانات الشخصية',
     'Company Data' => 'بيانات الشركة',
