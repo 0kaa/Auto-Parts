@@ -26,6 +26,23 @@ Route::namespace('Api\Auth')->middleware('lang')->group(function () {
 Route::namespace('Api')->group(function () {
     Route::get('charge-order-redirect',                 'ApiPaymentController@charge_order');
     Route::get('charge-custom-order-redirect',          'ApiPaymentController@charge_custom_order');
+    Route::get('activities',                            'ApiActivitiesController@index');
+    // sub activities
+    Route::get('activity/{id}',                         'ApiActivitiesController@show');
+    Route::get('activity/{id}/sub',                     'ApiActivitiesController@getSubActivities');
+    Route::get('sub/activity/{id}/sub',                 'ApiActivitiesController@getSubSubActivities');
+    Route::get('stores',                                'ApiStoreController@getStoresList');
+    Route::get('store/{id}',                            'ApiStoreController@getStore');
+    Route::get('product/{id}',                          'ApiProductController@show');
+    Route::get('products/store/{id}',                   'ApiProductController@getStoreProducts');
+
+
+    Route::get('cars',                                  'ApiCarController@index');
+    Route::get('companies-sector',                      'ApiAccountController@companiesSector');
+    Route::get('cities',                                'ApiCityController@index');
+    Route::get('regions',                               'ApiRegionController@index');
+    Route::post('contactus',                            'ApiContactUsController@create');
+    Route::get('shippings',                             'ApiShippingController@index');
 });
 
 
@@ -38,24 +55,6 @@ Route::namespace('Api')->middleware('lang')->group(function () {
 
     // All users | authenticated required
     Route::group(['middleware' => ['auth:sanctum']], function () {
-
-        Route::get('activities',            'ApiActivitiesController@index');
-        // sub activities
-        Route::get('activity/{id}',         'ApiActivitiesController@show');
-        Route::get('activity/{id}/sub',     'ApiActivitiesController@getSubActivities');
-        Route::get('sub/activity/{id}/sub', 'ApiActivitiesController@getSubSubActivities');
-        Route::get('stores',                'ApiStoreController@getStoresList');
-        Route::get('store/{id}',            'ApiStoreController@getStore');
-        Route::get('product/{id}',          'ApiProductController@show');
-        Route::get('products/store/{id}',   'ApiProductController@getStoreProducts');
-
-
-        Route::get('cars',                  'ApiCarController@index');
-        Route::get('companies-sector',      'ApiAccountController@companiesSector');
-        Route::get('cities',                'ApiCityController@index');
-        Route::get('regions',               'ApiRegionController@index');
-        Route::post('contactus',            'ApiContactUsController@create');
-        Route::get('shippings',             'ApiShippingController@index');
 
 
         Route::post('change-password',                  'ApiAccountController@change_password');
@@ -92,7 +91,6 @@ Route::namespace('Api')->middleware('lang')->group(function () {
         Route::post('cart/create',                      'ApiCartController@addToCart');
         Route::post('cart/remove',                      'ApiCartController@removeFromCart');
         Route::post('cart/change-quantity',             'ApiCartController@changeQuantity');
-        
     });
 
     Route::group(['middleware' => ['auth:sanctum', 'role:user|workshop|owner_store']], function () {
