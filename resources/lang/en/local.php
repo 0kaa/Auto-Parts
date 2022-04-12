@@ -93,7 +93,7 @@ return [
     'other_branches' => 'Do you have other branches?',
     'is_company_facility_agent' => 'Is the facility an agent for a company?',
     'is_company_facility_authorized_distributor' => 'Is the facility an authorized distributor?',
-    'number_eban' => 'IBAN number (bank account) is not mandatory*',
+    'number_eban' => 'IBAN number (bank account)*',
     'text_active_code' => 'Please enter the verification code to verify the mobile number',
     'code_verify' => 'Verification code',
     'verify_code' => 'Validation code',

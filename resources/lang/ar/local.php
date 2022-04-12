@@ -97,7 +97,7 @@ return [
     'other_branches' => 'هل يوجد لديك فروع أخرى',
     'is_company_facility_agent' => 'هل المنشأة وكيل لأحد الشركات ؟',
     'is_company_facility_authorized_distributor' => 'هل المنشأة موزع معتمد ؟',
-    'number_eban' => 'رقم الإيبان ( الحساب البنكي ) غير إجباري*',
+    'number_eban' => 'رقم الإيبان ( الحساب البنكي )*',
     'text_active_code' => 'برجاء إدخال رمز التحقق للتأكد من رقم الجوال',
     'code_verify' => 'رمز التحقق',
     'verify_code' => 'كود التحقق',
