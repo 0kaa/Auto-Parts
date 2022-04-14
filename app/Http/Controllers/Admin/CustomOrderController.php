@@ -86,7 +86,7 @@ class CustomOrderController extends Controller
 
         $cars = Car::get();
 
-        $order_status = OrderStatus::whereIn('slug', ['processing', 'completed', 'cancelled'])->get();
+        $order_status = OrderStatus::whereIn('slug', ['processing', 'completed', 'paid', 'cancelled'])->get();
 
         $activities = ActivityType::get();
 
