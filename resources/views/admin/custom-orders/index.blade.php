@@ -91,7 +91,7 @@
                                             <td>{{$order->activityType->name}}</td>
                                             <td>{{$order->subActivity->name}}</td>
                                             <td>{{$order->sub_sub_activity_id ? $order->subActivity->name : '-'}}</td>
-                                            <td>{{$order->user->name}}</td>
+                                            <td>{{$order->user ? $order->user->name : ''}}</td>
                                             <td>{{$order->seller_id ? $order->seller->name : '-'}}</td>
                                             <td>{{$order->car->name}}</td>
                                             <td>{{$order->shipping->shipping_name}}</td>
