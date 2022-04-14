@@ -34,6 +34,7 @@ class CustomOrderController extends Controller
     public function index()
     {
         $custom_orders = $this->customOrderRepository->getAll();
+        dd($custom_orders);
 
         return view('admin.custom-orders.index', compact('custom_orders'));
     }
