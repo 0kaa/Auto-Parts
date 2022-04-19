@@ -40,13 +40,13 @@ class UserSeeder extends Seeder
             'city_id'                   => 1,
             'region_id'                 => 1,
             'activity_type_id'          => 1,
-            'company_sector_id'         => 1,
             'commercial_register_id'    => "123123",
             'email_verified_at'         => now()
-
         ));
+        
 
         $owner_store->assignRole('owner_store');
+        $owner_store->wallet()->create(['balance' => 0]);
 
         $owner_store2 = User::create(array(
             'first_name'                => 'owner1',
@@ -60,13 +60,12 @@ class UserSeeder extends Seeder
             'city_id'                   => 1,
             'region_id'                 => 1,
             'activity_type_id'          => 1,
-            'company_sector_id'         => 1,
             'commercial_register_id'    => "123123",
             'email_verified_at'         => now()
-
         ));
 
         $owner_store2->assignRole('owner_store');
+        $owner_store2->wallet()->create(['balance' => 0]);
 
         $owner_store3 = User::create(array(
             'first_name'                => 'owner2',
@@ -80,14 +79,13 @@ class UserSeeder extends Seeder
             'city_id'                   => 1,
             'region_id'                 => 1,
             'activity_type_id'          => 1,
-            'company_sector_id'         => 1,
             'commercial_register_id'    => "123123",
             'email_verified_at'         => now()
 
         ));
 
         $owner_store3->assignRole('owner_store');
-
+        $owner_store3->wallet()->create(['balance' => 0]);
 
         $user = User::create(array(
             'first_name' => 'user',

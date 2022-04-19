@@ -58,6 +58,10 @@ class UserController extends Controller
 
         if ($user) {
             $user->assignRole('owner_store');
+            $user->wallet()->create([
+                'balance' => 0,
+                'currency' => 'SAR',
+            ]);
             send_activation_code($user->verification_code, $user->phone);
             return response()->json(['data' => 1, 'user_id' => $user->id, 'phone' => $user->phone]);
         } else {
@@ -67,10 +71,7 @@ class UserController extends Controller
 
     public function companyStore(CompanyRequest $request)
     {
-
-        // dd($request->all());
-
-        $attribute = $request->except('file', 'addressarray', 'phonearray', 'areaarray', 'cityarray');
+        $attribute = $request->except('file', 'addressarray', 'phonearray', 'areaarray', 'cityarray', 'company_sector_id');
 
         $user = $this->userrepository->findOne($request->user_id);
 
@@ -96,6 +97,14 @@ class UserController extends Controller
                 }
             }
 
+            if ($request->company_sector_id) {
+                foreach (explode(',', $request->company_sector_id) as $key => $company) {
+                    $user->companies()->create([
+                        'user_id' => $user->id,
+                        'company_id' => $company,
+                    ]);
+                }
+            }
             return response()->json(['data' => 1]);
         } else {
 
@@ -103,23 +112,22 @@ class UserController extends Controller
         }
     }  // end of company store
 
-    public function activeStore(ActiveCodeRequest $request)
+    public function activeStore(Request $request)
     {
 
-        $code = $this->userrepository->getWhere([['verification_code', $request->code], ['phone', $request->phone_active]])->first();
+        if ($request->code && $request->phone_active) {
+            $code = $this->userrepository->getWhere([['verification_code', $request->code], ['phone', $request->phone_active]])->first();
 
-        if ($code) {
+            if ($code) {
 
-            $code->update([
+                $code->update(['approved' => 1, 'verification_code' => null,]);
 
-                'approved' => 1,
-                'verification_code' => null,
+                return response()->json(['data' => 1]);
+            } else {
 
-            ]);
-
-            return response()->json(['data' => 1]);
+                return response()->json(['data' => 0, 'error' => trans('local.error_code')]);
+            }
         } else {
-
             return response()->json(['data' => 0, 'error' => trans('local.error_code')]);
         }
     }  // end of active store

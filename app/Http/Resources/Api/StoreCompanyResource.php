@@ -21,6 +21,7 @@ class StoreCompanyResource extends JsonResource
                 'id' => $this->activity_type_id,
                 'name' =>  $this->activity_name->find($this->activity_type_id)->name,
             ] : null,
+            'companies'     => CompanySectorResource::collection($this->companies),
             'name_company' => $this->name_company,
             'name_owner_company' => $this->name_owner_company,
             'national_identity' => $this->national_identity,

@@ -13,19 +13,12 @@ class CreateCompanySectorTable extends Migration
      */
     public function up()
     {
-//        قطاع الشركه
         Schema::create('company_sector', function (Blueprint $table) {
             $table->id();
             $table->string('name_ar');
             $table->string('name_en');
+            $table->string('image')->nullable();
             $table->timestamps();
-        });
-
-
-        Schema::table('users', function(Blueprint $table) {
-            $table->unsignedBigInteger('company_sector_id')->nullable();
-            $table->foreign('company_sector_id')->references('id')->on('company_sector')
-                ->onDelete('cascade');
         });
     }
 

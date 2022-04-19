@@ -11,7 +11,7 @@ class CompanySector extends Model
 
     protected $table='company_sector';
 
-    protected $fillable = ['name_ar','name_en'];
+    protected $fillable = ['name_ar','name_en','image'];
 
     public function getNameAttribute()
     {

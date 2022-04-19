@@ -8,7 +8,8 @@ if(lang == 'ar')
     var phone = 'رقم الجوال';
     var address_details = 'العنوان بالتفصيل';
     var add_branches = 'اضافة فرع';
-    
+    var special = 'متخصص بقطع شركة ';
+
 } else 
 {
     
@@ -16,6 +17,7 @@ if(lang == 'ar')
     var address_details = 'Details Address';
     var phone = 'Phone Number';
     var city = 'City';
+    var special = 'company cutting specialist';
 
 
 }
@@ -35,6 +37,9 @@ $('#get_type').change(function(){
         success: function(result) {
 
             $('#get-all-input').html(result);
+            $(".multipleChosen").chosen({
+                placeholder_text_multiple: special //placeholder
+            });
 
         } // end of success
 

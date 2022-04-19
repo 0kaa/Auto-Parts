@@ -5,7 +5,13 @@ var lang = $('#lang').attr('lang');
 $( "#register" ).validate({
 
     rules: {
-        name: {
+        username: {
+            required: true
+        },
+        first_name: {
+            required: true
+        },
+        last_name: {
             required: true
         },
         password: {
@@ -34,7 +40,9 @@ $( "#register" ).validate({
 
         var form=$(this);
 
-        var name             = $('#name');
+        var username         = $('#username');
+        var first_name       = $('#first_name');
+        var last_name        = $('#last_name');
         var email            = $('#email');
         var password         = $('#password');
         var confirm_password = $('#confirm_password');
@@ -42,7 +50,9 @@ $( "#register" ).validate({
 
         var formData = new FormData();
 
-        formData.append('name'             , name.val());
+        formData.append('username'         , username.val());
+        formData.append('first_name'       , first_name.val());
+        formData.append('last_name'        , last_name.val());
         formData.append('email'            , email.val());
         formData.append('password'         , password.val());
         formData.append('confirm_password' , confirm_password.val());
@@ -92,7 +102,9 @@ $( "#register" ).validate({
 
                 if (error.response.status === 422) {
 
-                    textFieldError(name             , error.response.data.errors.name);
+                    textFieldError(username             , error.response.data.errors.username);
+                    textFieldError(first_name             , error.response.data.errors.first_name);
+                    textFieldError(last_name              , error.response.data.errors.last_name );
                     textFieldError(email            , error.response.data.errors.email);
                     textFieldError(password         , error.response.data.errors.password);
                     textFieldError(confirm_password , error.response.data.errors.confirm_password);

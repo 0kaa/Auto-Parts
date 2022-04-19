@@ -88,7 +88,7 @@
             </div>
 
 
-            <div class="input-sub-regester">
+            {{-- <div class="input-sub-regester">
                 <select class="form-select form-control" name="company_sector_id" id="company_sector_id" aria-label="Default select example" required>
                     <option selected value="">{{ __('local.company_sector_id') }} </option>
 
@@ -99,6 +99,18 @@
                     @endforeach
 
                 </select>
+            </div> --}}
+
+            <div class="input-sub-regester">
+                <select class="form-control multipleChosen" name="company_sector_id[]" id="company_sector_id" required aria-label="Default select example" multiple="true" >
+
+                    @foreach($comapnies as $comapny)
+
+                        <option value="{{ $comapny->id }}"> {{ $comapny->name }} </option>
+                        
+                    @endforeach
+
+                </select> 
             </div>
 
             <div class="input-sub-regester">

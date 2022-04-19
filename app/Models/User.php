@@ -24,7 +24,7 @@ class User extends Authenticatable
         'last_name',
         'username',
         'email', 'phone', 'image', 'lat', 'lng', 'address', 'verification_code', 'approved', 'email_verified_at', 'name_company', 'name_owner_company', 'national_identity', 'date', 'file', 'ibn',
-        'city_id', 'is_company_facility_agent', 'is_company_facility_authorized_distributor', 'other_branches', 'activity_type_id', 'commercial_register_id', 'region_id', 'company_sector_id',
+        'city_id', 'is_company_facility_agent', 'is_company_facility_authorized_distributor', 'other_branches', 'activity_type_id', 'commercial_register_id', 'region_id',
         'password',
     ];
 
@@ -47,7 +47,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function name() {
+    public function getNameAttribute()
+    {
         return $this->first_name . ' ' . $this->last_name;
     }
 
@@ -61,9 +62,9 @@ class User extends Authenticatable
         return $this->hasMany(DeviceToken::class, 'user_id');
     }
 
-    public function company_sector()
+    public function companies()
     {
-        return $this->belongsTo(CompanySector::class);
+        return $this->hasMany(UserCompanies::class);
     }
 
     public function cart()
@@ -153,5 +154,9 @@ class User extends Authenticatable
     public function isFav()
     {
         return $this->favourite()->where('user_id', auth()->id())->exists();
+    }
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
     }
 }

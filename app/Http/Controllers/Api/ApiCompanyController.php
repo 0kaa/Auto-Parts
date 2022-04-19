@@ -44,6 +44,12 @@ class ApiCompanyController extends Controller
             'file' => ($request->has('file') ? $request->file('file')->store('company') : $user->file),
         ]);
 
+        if ($request->companies) {
+            $user->companies()->delete();
+            foreach ($request->companies as $branch) {
+                $user->companies()->create(['user_id' => auth()->user()->id, 'company_id' => $branch['id']]);
+            }
+        }
         return $this->ApiResponse(new StoreCompanyResource($user), trans('admin.updated_success'), 200);
     }
 }
