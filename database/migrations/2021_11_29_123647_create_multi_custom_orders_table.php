@@ -17,7 +17,7 @@ class CreateMultiCustomOrdersTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('custom_order_id')->nullable();
-            $table->foreign('custom_order_id')->references('id')->on('custom_orders');
+            $table->foreign('custom_order_id')->references('id')->on('custom_orders')->onDelete('cascade');;
 
             $table->unsignedBigInteger('seller_id')->nullable();
             $table->foreign('seller_id')->references('id')->on('users');

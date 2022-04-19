@@ -41,7 +41,10 @@ class ApiAccountController extends Controller
         $user = auth()->user();
 
         $user->update([
-            'name' => $request->name ? $request->name : $user->name,
+            'first_name' => $request->first_name ? $request->first_name : $user->first_name,
+            'last_name' => $request->last_name ? $request->last_name : $user->last_name,
+            'username' => $request->username ? $request->username : $user->username,
+            'commercial_register_id' => $request->commercial_register_id ? $request->commercial_register_id : $user->commercial_register_id,
             'email' => $request->email ? $request->email : $user->email,
             'phone' => $request->phone ? $request->phone : $user->phone,
             'address' => $request->address ? $request->address : $user->address,

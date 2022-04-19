@@ -20,7 +20,9 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'username',
         'email', 'phone', 'image', 'lat', 'lng', 'address', 'verification_code', 'approved', 'email_verified_at', 'name_company', 'name_owner_company', 'national_identity', 'date', 'file', 'ibn',
         'city_id', 'is_company_facility_agent', 'is_company_facility_authorized_distributor', 'other_branches', 'activity_type_id', 'commercial_register_id', 'region_id', 'company_sector_id',
         'password',
@@ -44,6 +46,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function name() {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 
     public function branches()
     {

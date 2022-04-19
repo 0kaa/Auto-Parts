@@ -117,7 +117,6 @@ Route::namespace('Api')->middleware('lang')->group(function () {
 
         // current orders
         Route::get('my-orders/current',                 'ApiOrderController@currentOrders');
-        Route::get('seller-custom-orders',              'ApiCustomOrderController@getSellerOrders');
         Route::post('seller-custom-order/{id}/accept',  'ApiCustomOrderController@sellerAcceptedOrder');
         Route::post('seller-custom-order/{id}/reject',  'ApiCustomOrderController@sellerRejectedOrder');
         Route::post('price-offer/create',               'ApiPriceOfferController@create');

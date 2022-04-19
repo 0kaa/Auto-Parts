@@ -1,9 +1,12 @@
 <?php
 
 use App\Models\MultiCustomOrder;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Mail;
 use App\Models\OrderStatus;
 use App\Models\TapPayment;
+use App\Services\Notify;
+
 /*
     |--------------------------------------------------------------------------
     | Detect Active Route Function
@@ -113,7 +116,16 @@ function RedirectOrderToAnotherUser($seller_id, $rejected, $customOrder)
     $order_status_not_found = OrderStatus::where('slug', 'not_found')->first();
 
     if ($user_same->isEmpty()) {
-        $customOrder->update(['order_status_id' => $order_status_not_found->id]);
+        $customOrder->update(['order_status_id' => $order_status_not_found->id, 'seller_id' => null]);
+        $notification = Notification::create([
+            'user_id'       => $customOrder->user_id,
+            'type'          => 'custom_order',
+            'model_id'      => $customOrder->id,
+            'message_en'    => 'Your order has been rejected from all sellers',
+            'message_ar'    => 'تم رفض طلبك من كل البائعين',
+        ]);
+
+        Notify::NotifyMob($notification->message_ar, $notification->message_en, $customOrder->user_id, null, $data = null);
         return false;
     }
 
@@ -185,9 +197,9 @@ function generate_order_payment_url($order, $user)
         return $charge;
     }
 }
-function generate_custom_order_payment_url($customOrder, $priceOffer, $user)
+function generate_custom_order_payment_url($customOrder, $user)
 {
-    $price = $customOrder->payment_id == 1 ? $priceOffer->price - ($priceOffer->price * 80 / 100) : $priceOffer->price;
+    $price = $customOrder->payment_id == 1 ? $customOrder->price - ($customOrder->price * 80 / 100) : $customOrder->price;
 
     $curl = curl_init();
 

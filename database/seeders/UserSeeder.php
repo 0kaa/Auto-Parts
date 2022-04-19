@@ -16,7 +16,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         $admin = User::create(array(
-            'name' => 'Admin',
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'username'  => 'admin',
             'email' => "info@jaadara.com",
             'address' => "Egypt, Elmansoura",
             'password' => bcrypt("password"),
@@ -27,7 +29,9 @@ class UserSeeder extends Seeder
         $admin->assignRole('admin');
 
         $owner_store = User::create(array(
-            'name'                      => 'Owner',
+            'first_name'                => 'owner',
+            'last_name'                 => 'owner',
+            'username'                  => 'owner',
             'email'                     => "owner@gmail.com",
             'password'                  => bcrypt("password"),
             'phone'                     => '123123',
@@ -45,7 +49,9 @@ class UserSeeder extends Seeder
         $owner_store->assignRole('owner_store');
 
         $owner_store2 = User::create(array(
-            'name'                      => 'Owner',
+            'first_name'                => 'owner1',
+            'last_name'                 => 'owner1',
+            'username'                  => 'owner1',
             'email'                     => "owner1@gmail.com",
             'password'                  => bcrypt("password"),
             'phone'                     => '1231233',
@@ -63,7 +69,9 @@ class UserSeeder extends Seeder
         $owner_store2->assignRole('owner_store');
 
         $owner_store3 = User::create(array(
-            'name'                      => 'Owner',
+            'first_name'                => 'owner2',
+            'last_name'                 => 'owner2',
+            'username'                  => 'owner2',
             'email'                     => "owner2@gmail.com",
             'password'                  => bcrypt("password"),
             'phone'                     => '12312333',
@@ -82,7 +90,9 @@ class UserSeeder extends Seeder
 
 
         $user = User::create(array(
-            'name' => 'User',
+            'first_name' => 'user',
+            'last_name' => 'user',
+            'username' => 'user',
             'email' => "user@gmail.com",
             'password' => bcrypt("password"),
             'phone' => '1231234',
@@ -95,7 +105,9 @@ class UserSeeder extends Seeder
         $user->assignRole('user');
 
         $workshop = User::create(array(
-            'name' => 'Workshop',
+            'first_name' => 'work',
+            'last_name' => 'shop',
+            'username' => 'workshop',
             'email' => "workshop@gmail.com",
             'password' => bcrypt("password"),
             'phone' => '123321',

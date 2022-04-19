@@ -30,7 +30,23 @@ class ApiAuthController extends Controller
     {
 
         try {
-            $user = $this->usersRepository->getWhere([['email', $request->email]])->first();
+            if ($request->email) {
+                $user = $this->usersRepository->getWhere([['email', $request->email]])->first();
+            } elseif ($request->username) {
+                $user = $this->usersRepository->getWhere([['username', $request->username]])->first();
+            }
+
+            if ($user && $user->approved == 0 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
+                return $this->ApiResponse(['phone' => $user->phone, 'approved' => $user->approved, 'code' => $user->verification_code], null, 200);
+            }
+
+
+            if ($user && $user->approved == 1 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
+                $token = $user->createToken('tokens')->plainTextToken;
+            } else {
+                return $this->ApiResponse(null, trans('admin.login_error'), 404);
+            }
+
             $user_device_id = $user->devices->where('device_id', $request->device_id)->where('platform_type', $request->platform_type)->first();
 
             if (!$user_device_id) {
@@ -44,17 +60,6 @@ class ApiAuthController extends Controller
                 $user_device_id->update([
                     'firebase_token'    => $request->firebase_token,
                 ]);
-            }
-
-            if ($user && $user->approved == 0 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
-                return $this->ApiResponse(['phone' => $user->phone, 'approved' => $user->approved, 'code' => $user->verification_code], null, 200);
-            }
-
-
-            if ($user && $user->approved == 1 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
-                $token = $user->createToken('tokens')->plainTextToken;
-            } else {
-                return $this->ApiResponse(null, trans('admin.login_error'), 404);
             }
 
             return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], trans('admin.login_success'), 200);
@@ -103,7 +108,6 @@ class ApiAuthController extends Controller
 
     public function verifyCode(ActiveCodeRequest $request)
     {
-
         try {
             $user = $this->usersRepository->getWhere([['verification_code', $request->code], ['phone', $request->phone]])->first();
 
@@ -124,7 +128,11 @@ class ApiAuthController extends Controller
                     ]);
                 }
 
-                $user->update(['approved' => 1, 'verification_code' => null]);
+                if ($user->hasRole('user')) {
+                    $user->update(['approved' => 1, 'verification_code' => null]);
+                } else {
+                    $user->update(['approved' => 0, 'verification_code' => null]);
+                }
 
                 $token = $user->createToken('tokens')->plainTextToken;
 
@@ -154,7 +162,6 @@ class ApiAuthController extends Controller
             $code = rand(1111, 9999);
             $user->update(['verification_code' => $code]);
             send_activation_code($code, $phone);
-            // $this->sendSms($phone, $code);
             return $this->ApiResponse($code, trans('admin.code_sent'), 200);
         }
 

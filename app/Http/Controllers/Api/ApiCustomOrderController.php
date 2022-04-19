@@ -59,136 +59,144 @@ class ApiCustomOrderController extends Controller
     public function CreateCustomOrder(Request $request)
     {
         $user           = auth()->user();
-        $attributes     = $request->all();
-        $piece_image    = '';
-        $form_image     = '';
-
-        $activity       = $this->activityTypeRepository->findOne($attributes['activity_type_id']);
-
-        if (!$activity) {
-            return $this->ApiResponse(null, trans('local.activity_id_not_found'), 404);
-        }
-
-        $sub_activity       = $activity->sub_activity()->where('id', $attributes['sub_activity_id'])->first();
-        $sub_sub_activity   = null;
-
-        if (!$sub_activity) {
-            return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
-        }
-
-        if ($activity->id == 6) {
-            if ($request->sub_sub_activity_id) {
-                $sub_sub_activity = $activity->sub_activity()->where('id', $request->sub_sub_activity_id)->where('parent_id', $sub_activity->id)->first();
-                if (!$sub_sub_activity) return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
-            } else {
-                return $this->ApiResponse(null, trans('local.sub_sub_activity_required'), 404);
-            }
-        }
-
-        if ($request->hasFile('piece_image')) {
-            $img = $request->file('piece_image');
-            $piece_image = $this->filesServices->uploadfile($img, $this->customOrderDirectory);
-        }
-
-        if ($request->hasFile('form_image')) {
-            $form_img = $request->file('form_image');
-            $form_image = $this->filesServices->uploadfile($form_img, $this->customOrderDirectory);
-        }
+        // $attributes     = $request->all();
+        $orderItems     = $request->order_items;
 
         $order_status_pending = OrderStatus::where('slug', 'pending')->first();
 
         $customOrder =  $this->customOrderRepository->create([
-            'seller_id'             => $attributes['seller_id'],
+            'seller_id'             => $request->seller_id,
             'user_id'               => $user->id,
-            "piece_name"            => $attributes['piece_name'],
-            "piece_image"           => $piece_image,
-            'note'                  => $attributes['note'],
-            'form_image'            => $form_image,
-            "car_id"                => $attributes['car_id'],
-            'shipping_id'           => $attributes['shipping_id'],
-            'payment_id'            => $attributes['payment_id'],
+            'shipping_id'           => $request->shipping_id,
+            'payment_id'            => $request->payment_id,
             'order_status_id'       => $order_status_pending->id,
-            'quantity'              => $request->quantity ? $request->quantity : 1,
-            'activity_type_id'      => $activity->id,
-            'sub_activity_id'       => $sub_activity->id,
-            'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
         ]);
 
-        if ($request->get('attributes')) {
-            foreach ($request->get('attributes') as $key => $attribute) {
+        foreach ($orderItems as $key => $orderItem) {
 
-                $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
+            $piece_image    = '';
+            $form_image     = '';
 
-                if (!$attribute_id) {
+            $activity       = $this->activityTypeRepository->findOne($orderItem['activity_type_id']);
 
-                    if (isset($customOrder->piece_image)) {
-                        Storage::delete($customOrder->piece_image);
-                    }
+            if (!$activity) {
+                return $this->ApiResponse(null, trans('local.activity_id_not_found'), 404);
+            }
 
-                    if (isset($customOrder->form_image)) {
-                        Storage::delete($customOrder->form_image);
-                    }
+            $sub_activity       = $activity->sub_activity()->where('id', $orderItem['sub_activity_id'])->first();
+            $sub_sub_activity   = null;
 
-                    $customOrder->delete();
+            if (!$sub_activity) {
+                return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
+            }
 
-                    return $this->ApiResponse(null, trans('local.attribute_not_found'), 404);
-                }
-
-                if ($attribute_id->type == 'select') {
-                    $attribute_option = $attribute_id->options->where('id', $attribute['option_id'])->first();
-
-                    if (!$attribute_option) {
-
-                        if (isset($customOrder->piece_image)) {
-                            Storage::delete($customOrder->piece_image);
-                        }
-
-                        if (isset($customOrder->form_image)) {
-                            Storage::delete($customOrder->form_image);
-                        }
-
-                        $customOrder->delete();
-
-                        return $this->ApiResponse(null, trans('local.option_not_found'), 404);
-                    }
+            if ($activity->id == 6) {
+                if (array_key_exists('sub_sub_activity_id', $orderItem)) {
+                    $sub_sub_activity = $activity->sub_activity()->where('id', $orderItem['sub_sub_activity_id'])->where('parent_id', $sub_activity->id)->first();
+                    if (!$sub_sub_activity) return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
                 } else {
-                    $attribute_option = null;
+                    return $this->ApiResponse(null, trans('local.sub_sub_activity_required'), 404);
+                }
+            }
 
-                    if ($attribute_id->type == 'file') {
-                        if ($request->file('attributes')) {
+            if ($request->file('order_items')) {
+                $img = $request->file('order_items')[$key]['piece_image'];
+                $piece_image = $this->filesServices->uploadfile($img, $this->customOrderDirectory);
+            }
 
-                            $file = $request->file('attributes')[$key]['image'];
+            if ($request->file('order_items')) {
+                $form_img = $request->file('order_items')[$key]['form_image'];
+                $form_image = $this->filesServices->uploadfile($form_img, $this->customOrderDirectory);
+            }
 
-                            $value = $this->filesServices->uploadfile($file, $this->customOrderDirectory);
-                        } else {
+            $custom_order_item =  $customOrder->custom_order_items()->create([
+                "piece_name"            => $orderItem['piece_name'],
+                "piece_image"           => $piece_image,
+                'note'                  => $orderItem['note'],
+                'form_image'            => $form_image,
+                "car_id"                => $orderItem['car_id'],
+                'quantity'              => array_key_exists('quantity', $orderItem) ? $orderItem['quantity'] : 1,
+                'activity_type_id'      => $activity->id,
+                'sub_activity_id'       => $sub_activity->id,
+                'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
+            ]);
 
-                            if (isset($customOrder->piece_image)) {
-                                Storage::delete($customOrder->piece_image);
+
+            if (array_key_exists('attributes', $orderItem)) {
+                foreach ($orderItem['attributes'] as $key => $attribute) {
+
+                    $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
+
+                    if (!$attribute_id) {
+
+                        if (isset($custom_order_item->piece_image)) {
+                            Storage::delete($custom_order_item->piece_image);
+                        }
+
+                        if (isset($custom_order_item->form_image)) {
+                            Storage::delete($custom_order_item->form_image);
+                        }
+
+                        $custom_order_item->delete();
+
+                        return $this->ApiResponse(null, trans('local.attribute_not_found'), 404);
+                    }
+
+                    if ($attribute_id->type == 'select') {
+                        $attribute_option = $attribute_id->options->where('id', $attribute['option_id'])->first();
+
+                        if (!$attribute_option) {
+
+                            if (isset($custom_order_item->piece_image)) {
+                                Storage::delete($custom_order_item->piece_image);
                             }
 
-                            if (isset($customOrder->form_image)) {
-                                Storage::delete($customOrder->form_image);
+                            if (isset($custom_order_item->form_image)) {
+                                Storage::delete($custom_order_item->form_image);
                             }
 
-                            $customOrder->delete();
+                            $custom_order_item->delete();
 
-                            return $this->ApiResponse(null, trans('local.file_required'), 404);
+                            return $this->ApiResponse(null, trans('local.option_not_found'), 404);
+                        }
+                    } else {
+                        $attribute_option = null;
+
+                        if ($attribute_id->type == 'file') {
+                            if ($request->file('attributes')) {
+
+                                $file = $request->file('attributes')[$key]['image'];
+
+                                $value = $this->filesServices->uploadfile($file, $this->customOrderDirectory);
+                            } else {
+
+                                if (isset($custom_order_item->piece_image)) {
+                                    Storage::delete($custom_order_item->piece_image);
+                                }
+
+                                if (isset($custom_order_item->form_image)) {
+                                    Storage::delete($custom_order_item->form_image);
+                                }
+
+                                $custom_order_item->delete();
+
+                                return $this->ApiResponse(null, trans('local.file_required'), 404);
+                            }
                         }
                     }
-                }
 
-                $customOrder->attributes()->create([
-                    'attribute_id' => $attribute_id->id,
-                    'option_id'    => $attribute_option ? $attribute_option->id : null,
-                    'type'         => $attribute_id->type,
-                    'value'        => $attribute_id->type == 'file' ? $value : ($attribute_id->type !== 'select' ? $attribute['value'] : null),
-                ]);
+                    $custom_order_item->attributes()->create([
+                        'attribute_id' => $attribute_id->id,
+                        'option_id'    => $attribute_option ? $attribute_option->id : null,
+                        'type'         => $attribute_id->type,
+                        'value'        => $attribute_id->type == 'file' ? $value : ($attribute_id->type !== 'select' ? $attribute['value'] : null),
+                    ]);
+                }
             }
         }
 
-
         MultiCustomOrder::create([
-            'seller_id' => $attributes['seller_id'],
+            'seller_id' => $request->seller_id,
             'custom_order_id' => $customOrder->id,
             'order_status_id' => $order_status_pending->id
         ]);
@@ -204,142 +212,144 @@ class ApiCustomOrderController extends Controller
 
         Notify::NotifyMob($notification->message_ar, $notification->message_en, $request->seller_id, null, $data = null);
 
-
         return $this->ApiResponse(null, trans('local.order_done'), 200);
     }
 
     public function CreateMultiCustomOrder(Request $request)
     {
         $user           = auth()->user();
-        $attributes     = $request->all();
-        $piece_image    = '';
-        $form_image     = '';
-
-        $activity       = $this->activityTypeRepository->findOne($attributes['activity_type_id']);
-
-        if (!$activity) {
-            return $this->ApiResponse(null, trans('local.activity_id_not_found'), 404);
-        }
-
-        $sub_activity       = $activity->sub_activity()->where('id', $attributes['sub_activity_id'])->first();
-        $sub_sub_activity   = null;
-
-        if (!$sub_activity) return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
-
-        if ($activity->id == 6) {
-            if ($request->sub_sub_activity_id) {
-                $sub_sub_activity = $activity->sub_activity()->where('id', $request->sub_sub_activity_id)->where('parent_id', $sub_activity->id)->first();
-                if (!$sub_sub_activity) return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
-            } else {
-                return $this->ApiResponse(null, trans('local.sub_sub_activity_required'), 404);
-            }
-        }
-
-        $sellers = User::whereRelation('roles', 'name', 'owner_store')->where('activity_type_id', $request->activity_type_id)->limit(5)->get();
-
-        if ($sellers->count() == 0) return $this->ApiResponse(null, trans('local.sellers_not_founded_in_this_activity'), 404);
-
-        if ($request->hasFile('piece_image')) {
-            $img = $request->file('piece_image');
-            $piece_image = $this->filesServices->uploadfile($img, $this->customOrderDirectory);
-        }
-
-        if ($request->hasFile('form_image')) {
-            $form_img = $request->file('form_image');
-            $form_image = $this->filesServices->uploadfile($form_img, $this->customOrderDirectory);
-        }
+        // $attributes     = $request->all();
+        $orderItems     = $request->order_items;
 
         $order_status_pending = OrderStatus::where('slug', 'pending')->first();
 
         $customOrder =  $this->customOrderRepository->create([
             'user_id'               => $user->id,
-            "piece_name"            => $attributes['piece_name'],
-            "piece_image"           => $piece_image,
-            'note'                  => $attributes['note'],
-            'form_image'            => $form_image,
-            "car_id"                => $attributes['car_id'],
+            'shipping_id'           => $request->shipping_id,
+            'payment_id'            => $request->payment_id,
             'order_status_id'       => $order_status_pending->id,
-            'shipping_id'           => $attributes['shipping_id'],
-            'payment_id'            => $attributes['payment_id'],
-            'quantity'              => $request->quantity ? $request->quantity : 1,
-            'activity_type_id'      => $activity->id,
-            'sub_activity_id'       => $sub_activity->id,
-            'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
         ]);
 
-        if ($request->get('attributes')) {
-            foreach ($request->get('attributes') as $key => $attribute) {
+        foreach ($orderItems as $key => $orderItem) {
 
-                $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
+            $piece_image    = '';
+            $form_image     = '';
 
-                if ($attribute_id->sub_activity_id != $sub_activity->id) {
-                    return $this->ApiResponse(null, trans('local.attribute_not_belong_to_sub_activity'), 404);
-                }
+            $activity       = $this->activityTypeRepository->findOne($orderItem['activity_type_id']);
 
-                if (!$attribute_id) {
+            if (!$activity) {
+                return $this->ApiResponse(null, trans('local.activity_id_not_found'), 404);
+            }
 
-                    if (isset($customOrder->piece_image)) {
-                        Storage::delete($customOrder->piece_image);
-                    }
+            $sub_activity       = $activity->sub_activity()->where('id', $orderItem['sub_activity_id'])->first();
+            $sub_sub_activity   = null;
 
-                    if (isset($customOrder->form_image)) {
-                        Storage::delete($customOrder->form_image);
-                    }
+            if (!$sub_activity) return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
 
-                    $customOrder->delete();
-
-                    return $this->ApiResponse(null, trans('local.attribute_not_found'), 404);
-                }
-
-                if ($attribute_id->type == 'select') {
-                    $attribute_option = $attribute_id->options->where('id', $attribute['option_id'])->first();
-
-                    if (!$attribute_option) {
-
-                        if (isset($customOrder->piece_image)) {
-                            Storage::delete($customOrder->piece_image);
-                        }
-
-                        if (isset($customOrder->form_image)) {
-                            Storage::delete($customOrder->form_image);
-                        }
-
-                        $customOrder->delete();
-
-                        return $this->ApiResponse(null, trans('local.option_not_found'), 404);
-                    }
+            if ($activity->id == 6) {
+                if (array_key_exists('sub_sub_activity_id', $orderItem)) {
+                    $sub_sub_activity = $activity->sub_activity()->where('id', $orderItem['sub_sub_activity_id'])->where('parent_id', $sub_activity->id)->first();
+                    if (!$sub_sub_activity) return $this->ApiResponse(null, trans('local.sub_activity_notfound'), 404);
                 } else {
-                    $attribute_option = null;
+                    return $this->ApiResponse(null, trans('local.sub_sub_activity_required'), 404);
+                }
+            }
 
-                    if ($attribute_id->type == 'file') {
-                        if ($request->file('attributes')) {
+            $sellers = User::whereRelation('roles', 'name', 'owner_store')->where('activity_type_id', $orderItem['activity_type_id'])->limit(5)->get();
 
-                            $file = $request->file('attributes')[$key]['image'];
+            if ($sellers->count() == 0) return $this->ApiResponse(null, trans('local.sellers_not_founded_in_this_activity'), 404);
 
-                            $value = $this->filesServices->uploadfile($file, $this->customOrderDirectory);
-                        } else {
+            if ($request->file('order_items')) {
+                $img = $request->file('order_items')[$key]['piece_image'];
+                $piece_image = $this->filesServices->uploadfile($img, $this->customOrderDirectory);
+            }
+            if ($request->file('order_items')) {
+                $form_img = $request->file('order_items')[$key]['form_image'];
+                $form_image = $this->filesServices->uploadfile($form_img, $this->customOrderDirectory);
+            }
 
-                            if (isset($customOrder->piece_image)) {
-                                Storage::delete($customOrder->piece_image);
+            $custom_order_item =  $customOrder->custom_order_items()->create([
+                "piece_name"            => $orderItem['piece_name'],
+                "piece_image"           => $piece_image,
+                'note'                  => $orderItem['note'],
+                'form_image'            => $form_image,
+                "car_id"                => $orderItem['car_id'],
+                'quantity'              => array_key_exists('quantity', $orderItem) ? $orderItem['quantity'] : 1,
+                'activity_type_id'      => $activity->id,
+                'sub_activity_id'       => $sub_activity->id,
+                'sub_sub_activity_id'   => $sub_sub_activity ? $sub_sub_activity->id : null,
+            ]);
+
+            if (array_key_exists('attributes', $orderItem)) {
+                foreach ($orderItem['attributes'] as $key => $attribute) {
+
+                    $attribute_id   = $this->attributeRepository->findOne($attribute['attribute_id']);
+
+                    if (!$attribute_id) {
+
+                        if (isset($custom_order_item->piece_image)) {
+                            Storage::delete($custom_order_item->piece_image);
+                        }
+
+                        if (isset($custom_order_item->form_image)) {
+                            Storage::delete($custom_order_item->form_image);
+                        }
+
+                        $custom_order_item->delete();
+
+                        return $this->ApiResponse(null, trans('local.attribute_not_found'), 404);
+                    }
+
+                    if ($attribute_id->type == 'select') {
+                        $attribute_option = $attribute_id->options->where('id', $attribute['option_id'])->first();
+
+                        if (!$attribute_option) {
+
+                            if (isset($custom_order_item->piece_image)) {
+                                Storage::delete($custom_order_item->piece_image);
                             }
 
-                            if (isset($customOrder->form_image)) {
-                                Storage::delete($customOrder->form_image);
+                            if (isset($custom_order_item->form_image)) {
+                                Storage::delete($custom_order_item->form_image);
                             }
 
-                            $customOrder->delete();
+                            $custom_order_item->delete();
 
-                            return $this->ApiResponse(null, trans('local.file_required'), 404);
+                            return $this->ApiResponse(null, trans('local.option_not_found'), 404);
+                        }
+                    } else {
+                        $attribute_option = null;
+
+                        if ($attribute_id->type == 'file') {
+                            if ($request->file('attributes')) {
+
+                                $file = $request->file('attributes')[$key]['image'];
+
+                                $value = $this->filesServices->uploadfile($file, $this->customOrderDirectory);
+                            } else {
+
+                                if (isset($custom_order_item->piece_image)) {
+                                    Storage::delete($custom_order_item->piece_image);
+                                }
+
+                                if (isset($custom_order_item->form_image)) {
+                                    Storage::delete($custom_order_item->form_image);
+                                }
+
+                                $custom_order_item->delete();
+
+                                return $this->ApiResponse(null, trans('local.file_required'), 404);
+                            }
                         }
                     }
-                }
 
-                $customOrder->attributes()->create([
-                    'attribute_id' => $attribute_id->id,
-                    'option_id'    => $attribute_option ? $attribute_option->id : null,
-                    'type'         => $attribute_id->type,
-                    'value'        => $attribute_id->type == 'file' ? $value : ($attribute_id->type == 'text' ? $attribute['value'] : null),
-                ]);
+                    $custom_order_item->attributes()->create([
+                        'attribute_id' => $attribute_id->id,
+                        'option_id'    => $attribute_option ? $attribute_option->id : null,
+                        'type'         => $attribute_id->type,
+                        'value'        => $attribute_id->type == 'file' ? $value : ($attribute_id->type !== 'select' ? $attribute['value'] : null),
+                    ]);
+                }
             }
         }
 
@@ -373,39 +383,46 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_found'), 404);
         }
 
-        $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_id', $customOrder->id], ['seller_id', $user->id]]);
-        if ($priceOffer->isNotEmpty() || $customOrder->order_status->slug !==  'pending') {
-            return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
+        $customOrderItems = $customOrder->custom_order_items;
+
+        $offers = $request->offers;
+
+        if (count($offers) != count($customOrderItems)) {
+            return $this->ApiResponse(null, trans('local.please_send_all_offer'), 400);
         }
-
-        if (!isset($request->price)) {
-            return $this->ApiResponse(null, trans('local.price_required'), 400);
-        }
-
-        $order_status_accepted = OrderStatus::where('slug', 'seller_accepted')->first();
-
-        $customOrder->order_status_id = $order_status_accepted->id;
-        $customOrder->save();
-
-        MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $user->id)->update(['order_status_id' => $order_status_accepted->id]);
 
         $order_status_pending = OrderStatus::where('slug', 'pending')->first();
 
-        $price_offer = $this->priceOfferRepository->create([
-            'custom_order_id'   => $customOrder->id,
-            'seller_id'         => $user->id,
-            'price'             => $request->price,
-            'status_id'         => $order_status_pending->id,
-            'note'              => $request->note ?? null,
-        ]);
+        $totalPriceOffer = 0;
+
+        foreach ($offers as $key => $offer) {
+            $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_item_id', $offer['id']], ['seller_id', $user->id]]);
+
+            if ($priceOffer->isNotEmpty() || $customOrder->order_status->slug !==  'pending') {
+                return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
+            }
+
+            if (!isset($offer['price'])) {
+                return $this->ApiResponse(null, trans('local.price_required'), 400);
+            }
+
+            $this->priceOfferRepository->create([
+                'custom_order_item_id'  => $offer['id'],
+                'seller_id'             => $user->id,
+                'price'                 => $offer['price'],
+                'status_id'             => $order_status_pending->id,
+                'note'                  => $offer['note'] ?? null,
+            ]);
+            $totalPriceOffer += $offer['price'];
+        }
 
         // Notification to user with price offer
         $notification = Notification::create([
             'user_id'       => $customOrder->user_id,
             'type'          => 'price_offer',
             'model_id'      => $customOrder->id,
-            'message_en'    => 'Price offer from ' . $user->name_company . ' for order #' . $customOrder->id . ' is ' . $request->price . ' SAR',
-            'message_ar'    => 'عرض السعر من ' . $user->name_company . ' للطلب #' . $customOrder->id . ' هو ' . $request->price . ' ر.س',
+            'message_en'    => 'Price offer from ' . $user->name_company . ' for order #' . $customOrder->id . ' is ' . $totalPriceOffer . ' SAR',
+            'message_ar'    => 'عرض السعر من ' . $user->name_company . ' للطلب #' . $customOrder->id . ' هو ' . $totalPriceOffer . ' ر.س',
         ]);
 
         Notify::NotifyMob($notification->message_ar, $notification->message_en, $customOrder->user_id, null, $data = null);
@@ -432,10 +449,13 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
         }
 
-        $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_id', $customOrder->id], ['seller_id', $user->id]]);
+        $customOrderItems = $customOrder->custom_order_items;
 
-        if ($priceOffer->isNotEmpty()) {
-            return $this->ApiResponse(null, trans('local.order_not_found'), 403);
+        foreach ($customOrderItems as $orderItem) {
+            $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_item_id', $orderItem->id], ['seller_id', $user->id]]);
+            if ($priceOffer->isNotEmpty()) {
+                return $this->ApiResponse(null, trans('local.order_not_found'), 403);
+            }
         }
 
         $rejected_status = OrderStatus::where('slug', 'seller_rejected')->first();
@@ -464,39 +484,47 @@ class ApiCustomOrderController extends Controller
     {
         $user = auth()->user();
 
-        $priceOffer = $this->priceOfferRepository->findOne($id);
+        $customOrder = $this->customOrderRepository->findOne($id);
 
-        $customOrder = $this->customOrderRepository->findOne($priceOffer->custom_order_id);
-
+        $totalPriceOffer = 0;
+        $seller_id = null;
         $accepted_status = OrderStatus::where('slug', 'accepted')->first();
 
         if (!$customOrder) {
             return $this->ApiResponse(null, trans('local.order_not_found'), 404);
         }
 
+        $customOrderItems = $customOrder->custom_order_items;
+
+        foreach ($customOrderItems as $orderItem) {
+            $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_item_id', $orderItem->id]]);
+            foreach ($priceOffer as $offer) {
+
+                if ($offer->status_id == $accepted_status->id) {
+                    return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
+                }
+
+                $orderItem->update(['price_offer' => $offer->price]);
+                $totalPriceOffer += $offer->price;
+                $seller_id = $offer->seller_id;
+
+                $offer->update(['status_id' => $accepted_status->id]);
+            }
+        }
+
         if ($customOrder->user_id != $user->id) {
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
         }
 
-        if ($priceOffer->status_id == $accepted_status->id) {
-            return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
-        }
-
-        $charge = generate_custom_order_payment_url($customOrder, $priceOffer, $user);
-
-        $priceOffer->update(['status_id' => $accepted_status->id]);
-
-        $priceOffer->save();
-
         $customOrder->update([
             'order_status_id'   => $accepted_status->id,
-            'piece_price'       => $priceOffer->price,
-            'seller_id'         => $priceOffer->seller_id
+            'price'             => $totalPriceOffer,
+            'seller_id'         => $seller_id,
         ]);
 
-        $customOrder->save();
+        $charge = generate_custom_order_payment_url($customOrder, $user);
 
-        MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $priceOffer->seller_id)->update(['order_status_id' => $accepted_status->id]);
+        MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $customOrder->seller_id)->update(['order_status_id' => $accepted_status->id]);
 
         return $this->ApiResponse($charge['transaction']['url'], trans('local.order_done'), 200);
     }
@@ -505,16 +533,15 @@ class ApiCustomOrderController extends Controller
     {
         $user = auth()->user();
 
-        $priceOffer = $this->priceOfferRepository->findOne($id);
+        $customOrder = $this->customOrderRepository->findOne($id);
 
-        $customOrder = $this->customOrderRepository->findOne($priceOffer->custom_order_id);
-
-        $seller_ids = MultiCustomOrder::where('custom_order_id', $priceOffer->custom_order_id)->pluck('seller_id')->toArray();
+        $seller_ids = MultiCustomOrder::where('custom_order_id', $customOrder->id)->pluck('seller_id')->toArray();
 
         $accepted_status = OrderStatus::where('slug', 'accepted')->first();
 
         $rejected_status = OrderStatus::where('slug', 'rejected')->first();
 
+        $notfound_status = OrderStatus::where('slug', 'not_found')->first();
         if (!$customOrder) {
             return $this->ApiResponse(null, trans('local.order_not_found'), 404);
         }
@@ -523,28 +550,39 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
         }
 
-        if ($priceOffer->status_id == $accepted_status->id) {
+        if ($customOrder->order_status_id == $accepted_status->id) {
             return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
         }
-
-        if ($priceOffer->status_id == $rejected_status->id) {
+        if ($customOrder->order_status_id == $rejected_status->id) {
             return $this->ApiResponse(null, trans('local.order_already_rejected'), 403);
         }
+        if ($customOrder->order_status_id == $notfound_status->id) {
+            return $this->ApiResponse(null, trans('local.order_not_found'), 403);
+        }
+        
 
-        $attributes = $request->all();
+        $customOrderItems = $customOrder->custom_order_items;
 
-        MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $priceOffer->seller_id)->update(['order_status_id' => $rejected_status->id]);
+        foreach ($customOrderItems as $orderItem) {
+            $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_item_id', $orderItem->id]]);
+            foreach ($priceOffer as $offer) {    
+                $seller_id = $offer->seller_id;
+                $offer->update(['status_id' => $rejected_status->id]);
+            }
+        }
+
+        MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $seller_id)->update(['order_status_id' => $rejected_status->id]);
 
         $rejectedOrder = RejectedOrders::where('order_id', $customOrder->id)->pluck('seller_id');
 
-        if (in_array($priceOffer->seller_id, $rejectedOrder->toArray()) == false) {
-            RejectedOrders::create(['order_id' => $customOrder->id, 'seller_id' => $priceOffer->seller_id]);
+        if (in_array($seller_id, $rejectedOrder->toArray()) == false) {
+            RejectedOrders::create(['order_id' => $customOrder->id, 'seller_id' => $seller_id]);
         }
 
         $rejectedOrder = RejectedOrders::where('order_id', $customOrder->id)->pluck('seller_id');
 
         if (count($seller_ids) == count($rejectedOrder)) {
-            RedirectOrderToAnotherUser($priceOffer->seller_id, $rejectedOrder, $customOrder);
+            RedirectOrderToAnotherUser($seller_id, $rejectedOrder, $customOrder);
         }
 
         return $this->ApiResponse(null, trans('local.order_status_updated'), 200);
@@ -568,14 +606,6 @@ class ApiCustomOrderController extends Controller
         return $this->ApiResponse(CustomOrderListResource::collection($customOrders), null, 200);
     }
 
-    public function getSellerOrders()
-    {
-        $user = auth()->user();
-
-        $customOrders = $this->customOrderRepository->whereHas('multiCustomOrder', ['seller_id' => $user->id], []);
-
-        return $this->ApiResponse(CustomOrderDetailsResource::collection($customOrders), null, 200);
-    }
 
     public function getOrder($id)
     {

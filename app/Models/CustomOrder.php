@@ -16,22 +16,12 @@ class CustomOrder extends Model
      */
     protected $fillable = [
         'seller_id',
-        'piece_name',
-        'piece_image',
-        'piece_price',
-        'piece_description',
-        'form_image',
-        'car_id',
         'order_status_id',
         'payment_url',
         'shipping_id',
         'payment_id',
         'user_id',
-        'activity_type_id',
-        'sub_activity_id',
-        'sub_sub_activity_id',
-        'note',
-        'quantity',
+        'price'
     ];
 
 
@@ -45,29 +35,9 @@ class CustomOrder extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function activityType()
-    {
-        return $this->belongsTo(ActivityType::class);
-    }
-
-    public function subActivity()
-    {
-        return $this->belongsTo(SubActivity::class);
-    }
-
-    public function car()
-    {
-        return $this->belongsTo(Car::class);
-    }
-
     public function multiCustomOrder()
     {
         return $this->belongsTo(MultiCustomOrder::class, 'id', 'custom_order_id');
-    }
-
-    public function attributes()
-    {
-        return $this->hasMany(CustomOrderAttribute::class);
     }
 
     public function order_status()
@@ -80,9 +50,13 @@ class CustomOrder extends Model
         return $this->belongsTo(Shipping::class, 'shipping_id', 'id');
     }
 
-
     public function payment()
     {
         return $this->belongsTo(PaymentMethod::class, 'payment_id', 'id');
+    }
+
+    public function custom_order_items()
+    {
+        return $this->hasMany(CustomOrderItem::class, 'custom_order_id', 'id');
     }
 }

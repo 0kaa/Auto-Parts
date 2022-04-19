@@ -263,4 +263,5 @@ return [
     "activity_type" => "Activity Type",
     "sub_activity" => "Sub Activity",
     "sub_sub_activity" => "Sub Sub Activity",
+    "please_send_all_offer" => "Please send all offer",
 ];

@@ -16,7 +16,7 @@ class PriceOffer extends Model
      */
 
     protected $fillable = [
-        'custom_order_id',
+        'custom_order_item_id',
         'seller_id',
         'price',
         'status_id',
@@ -25,9 +25,9 @@ class PriceOffer extends Model
         'updated_at',
     ];
 
-    public function customOrder()
+    public function customOrderItem()
     {
-        return $this->belongsTo(CustomOrder::class);
+        return $this->belongsTo(CustomOrderItem::class);
     }
 
     public function seller()
