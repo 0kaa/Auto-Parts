@@ -22,28 +22,7 @@ class CustomOrderDetailsResource extends JsonResource
             "user_phone"            => $this->user->phone,
             "user_address"          => $this->user->address,
             'order_status'          => new OrderStatusResource($this->order_status),
-            "activity_type_id"      => $this->activityType->id,
-            "activity_type_name"    => $this->activityType->name,
-            "sub_activity_id"       => $this->subActivity->id,
-            "sub_activity_name"     => $this->subActivity->name,
-            "piece_name"            => $this->piece_name,
-            "piece_image"           => $this->piece_image ? url('/storage') . '/' . $this->piece_image : url('/product-no-img.jpg'),
-            "piece_description"     => $this->piece_description,
-            'piece_price'           => $this->piece_price ? $this->piece_price . ' SAR' : null,
-            'form_image'            => $this->form_image ? url('/storage') . '/' . $this->form_image : $this->form_image,
-            "car"                   => $this->car->name,
-            'quantity'              => $this->quantity,
-            'payment_url'           => $this->payment_url,
-            'payment'               => new PaymentMethodsResource($this->payment),
-            'shipping'              => new ShippingResource($this->shipping),
-            'attributes'            => $this->attributes->map(function ($attribute) {
-                return [
-                    'id'                => $attribute->id,
-                    'attribute_name'    => $attribute->attribute->name,
-                    'attribute_type'    => $attribute->attribute->type,
-                    'value'             => $attribute->attribute->type == 'select' ?  $attribute->option->name : ($attribute->attribute->type == 'file' ? url('/storage') . '/' . $attribute->value : $attribute->value),
-                ];
-            }),
+            'order_items'           => CustomOrderItemResource::collection($this->custom_order_items),
         ];
     }
 }

@@ -28,6 +28,7 @@ class UserResource extends JsonResource
             "created_at"    => $this->created_at->format('Y-m-d'),
             'type'          => $this->roles->pluck('name')->first(),
             'approved'      => $this->approved,
+            'wallet'        => new WalletResource($this->wallet),
         ];
     }
 }

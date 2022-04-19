@@ -38,8 +38,6 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     Route::get('store/{id}',                            'ApiStoreController@getStore');
     Route::get('product/{id}',                          'ApiProductController@show');
     Route::get('products/store/{id}',                   'ApiProductController@getStoreProducts');
-
-
     Route::get('cars',                                  'ApiCarController@index');
     Route::get('companies-sector',                      'ApiAccountController@companiesSector');
     Route::get('cities',                                'ApiCityController@index');

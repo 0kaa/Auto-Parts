@@ -16,16 +16,13 @@ class CustomOrderListResource extends JsonResource
     {
         return [
             'id'                    => $this->id,
-            'order_number'          => strval($this->id),
-            'piece_name'            => $this->piece_name,
-            'piece_image'           => $this->piece_image ? url('storage/' . $this->piece_image) : url('/product-no-img.jpg'),
+            'order_number'          => '#' . strval($this->id),
             'order_status'          => $this->order_status->name,
-            'car_name'              => $this->car->name,
-            'car_image'             => $this->car->image ? url('storage/' . $this->car->image) : url('/product-no-img.jpg'),
-            'piece_description'     => $this->piece_description,
-            'quantity'              => $this->quantity,
             "time"                  => $this->created_at->format('H:i a'),
             'date'                  => $this->created_at->format('Y-m-d'),
+            // 'order_items'           => CustomOrderItemResource::collection($this->custom_order_items),
+            'piece_name'            => $this->custom_order_items->first() ? $this->custom_order_items->first()->piece_name : null,
+            'quantity'              => count($this->custom_order_items),
         ];
     }
 }
