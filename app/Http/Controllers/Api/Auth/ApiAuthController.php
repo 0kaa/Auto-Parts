@@ -29,10 +29,12 @@ class ApiAuthController extends Controller
     public function login(LoginRequest $request)
     {
         try {
-            if ($request->email) {
-                $user = $this->usersRepository->getWhere([['email', $request->email]])->first();
-            } elseif ($request->username) {
+            if ($request->username) {
                 $user = $this->usersRepository->getWhere([['username', $request->username]])->first();
+
+                if (!$user) {
+                    $user = $this->usersRepository->getWhere([['email', $request->username]])->first();
+                }
             }
 
             if ($user && $user->approved == 0 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
