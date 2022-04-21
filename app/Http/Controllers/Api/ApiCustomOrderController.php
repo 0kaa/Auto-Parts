@@ -99,12 +99,12 @@ class ApiCustomOrderController extends Controller
                 }
             }
 
-            if ($request->file('order_items')) {
+            if ($request->file('order_items') && array_key_exists('piece_image', $orderItem)) {
                 $img = $request->file('order_items')[$key]['piece_image'];
                 $piece_image = $this->filesServices->uploadfile($img, $this->customOrderDirectory);
             }
 
-            if ($request->file('order_items')) {
+            if ($request->file('order_items')  && array_key_exists('form_image', $orderItem)) {
                 $form_img = $request->file('order_items')[$key]['form_image'];
                 $form_image = $this->filesServices->uploadfile($form_img, $this->customOrderDirectory);
             }
@@ -258,12 +258,11 @@ class ApiCustomOrderController extends Controller
             $sellers = User::whereRelation('roles', 'name', 'owner_store')->where('activity_type_id', $orderItem['activity_type_id'])->limit(5)->get();
 
             if ($sellers->count() == 0) return $this->ApiResponse(null, trans('local.sellers_not_founded_in_this_activity'), 404);
-
-            if ($request->file('order_items')) {
+            if ($request->file('order_items') && array_key_exists('piece_image', $orderItem)) {
                 $img = $request->file('order_items')[$key]['piece_image'];
                 $piece_image = $this->filesServices->uploadfile($img, $this->customOrderDirectory);
             }
-            if ($request->file('order_items')) {
+            if ($request->file('order_items') && array_key_exists('form_image', $orderItem)) {
                 $form_img = $request->file('order_items')[$key]['form_image'];
                 $form_image = $this->filesServices->uploadfile($form_img, $this->customOrderDirectory);
             }
@@ -559,13 +558,13 @@ class ApiCustomOrderController extends Controller
         if ($customOrder->order_status_id == $notfound_status->id) {
             return $this->ApiResponse(null, trans('local.order_not_found'), 403);
         }
-        
+
 
         $customOrderItems = $customOrder->custom_order_items;
 
         foreach ($customOrderItems as $orderItem) {
             $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_item_id', $orderItem->id]]);
-            foreach ($priceOffer as $offer) {    
+            foreach ($priceOffer as $offer) {
                 $seller_id = $offer->seller_id;
                 $offer->update(['status_id' => $rejected_status->id]);
             }

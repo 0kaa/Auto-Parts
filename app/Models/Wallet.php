@@ -13,5 +13,6 @@ class Wallet extends Model
         'id',
         'balance',
         'currency',
+        'user_id'
     ];
 }
