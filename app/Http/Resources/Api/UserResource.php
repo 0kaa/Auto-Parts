@@ -29,6 +29,7 @@ class UserResource extends JsonResource
             'type'          => $this->roles->pluck('name')->first(),
             'approved'      => $this->approved,
             'wallet'        => new WalletResource($this->wallet),
+            'rating'        => $this->ratings()->avg('rating') ? $this->ratings()->avg('rating') : 0,
         ];
     }
 }
