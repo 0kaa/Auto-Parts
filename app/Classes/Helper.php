@@ -118,6 +118,8 @@ function RedirectOrderToAnotherUser($seller_id, $rejected, $customOrder)
         return false;
     }
 
+    $customOrder->update(['seller_id' => null]);
+
     $order_status_pending = OrderStatus::where('slug', 'pending')->first();
 
     foreach ($user_same as $user) {
