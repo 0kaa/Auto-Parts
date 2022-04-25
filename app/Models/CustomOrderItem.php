@@ -18,11 +18,12 @@ class CustomOrderItem extends Model
         'note',
         'quantity',
         'car_id',
+        'car_model_id',
         'custom_order_id',
         'activity_type_id',
         'sub_activity_id',
         'sub_sub_activity_id',
-      
+
     ];
 
     public function activityType()
@@ -36,6 +37,10 @@ class CustomOrderItem extends Model
     public function car()
     {
         return $this->belongsTo(Car::class);
+    }
+    public function carModel()
+    {
+        return $this->belongsTo(CompanyModel::class, 'car_model_id');
     }
     public function attributes()
     {

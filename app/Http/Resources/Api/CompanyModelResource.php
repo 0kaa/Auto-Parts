@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CompanySectorResource extends JsonResource
+class CompanyModelResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,8 @@ class CompanySectorResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'image' => $this->image ? url('/storage') . '/' . $this->image : url('/product-no-img.jpg'),
-            'models'    => CompanyModelResource::collection($this->models),
+            'id'    => $this->id,
+            'name'  => $this->name,
         ];
     }
 }

@@ -49,6 +49,7 @@ return [
     'no' => 'no',
     'is_company_facility_authorized_distributor' => 'Is the facility an authorized distributor?',
     'company-sectors' => 'company sector',
+    'company-models' => 'company model',
     'our_services' => 'our services',
     'auto_parts' => 'auto parts',
     'soon' => 'soon',

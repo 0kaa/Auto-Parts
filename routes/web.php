@@ -40,7 +40,7 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
 
     Route::resource('regions', 'RegionController');
 
-    Route::resource('cars', 'CarController');
+    // Route::resource('cars', 'CarController');
 
     Route::resource('packages', 'PackageController');
 
@@ -49,6 +49,8 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
     Route::resource('shippings', 'ShippingController');
 
     Route::resource('company-sectors', 'CompanySectorController');
+
+    Route::resource('company-models', 'CompanyModelController');
 
     Route::resource('sliders-services', 'SliderServiceController');
 

@@ -113,7 +113,7 @@
             </li>
             {{--end cities--}}
             {{--cars--}}
-            <li class="nav-item {{areActiveRoutes(['admin.cars.index','admin.cars.create','admin.cars.edit' ])}}">
+            {{-- <li class="nav-item {{areActiveRoutes(['admin.cars.index','admin.cars.create','admin.cars.edit' ])}}">
                 <a href="#">
                     <i data-feather='circle'></i>
                     <span class="menu-title" data-i18n="User">@lang('local.cars')</span>
@@ -128,7 +128,7 @@
                             <span class="menu-title" data-i18n="User">@lang('admin.add_new', ['field' => __('local.car')])</span></a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             {{--end cars--}}
             {{--Packages--}}
             <li class="nav-item {{areActiveRoutes(['admin.packages.index','admin.packages.create','admin.packages.edit' ])}}">
@@ -181,6 +181,25 @@
                     <li class="nav-item {{ isActiveRoute('admin.company-sectors.create')  }}"><a href="{{route('admin.company-sectors.create')}}">
                             <i data-feather='minus'></i>
                             <span class="menu-title" data-i18n="User">@lang('admin.add_new', ['field' => __('local.company-sectors')])</span></a>
+                    </li>
+                </ul>
+            </li>
+            {{--end company_sector--}}
+
+            {{--company_sector_models--}}
+            <li class="nav-item {{areActiveRoutes(['admin.company-models.index','admin.company-models.create','admin.company-models.edit' ])}}">
+                <a href="#">
+                    <i data-feather='circle'></i>
+                    <span class="menu-title" data-i18n="User">@lang('local.company-models')</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item {{ isActiveRoute('admin.company-models.index')  }}"><a href="{{route('admin.company-models.index')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('local.company-models')</span></a>
+                    </li>
+                    <li class="nav-item {{ isActiveRoute('admin.company-models.create')  }}"><a href="{{route('admin.company-models.create')}}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('admin.add_new', ['field' => __('local.company-models')])</span></a>
                     </li>
                 </ul>
             </li>

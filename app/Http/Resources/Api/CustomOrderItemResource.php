@@ -21,6 +21,7 @@ class CustomOrderItemResource extends JsonResource
             'piece_image'           => $this->piece_image ? url('storage/' . $this->piece_image) : url('/product-no-img.jpg'),
             'car_name'              => $this->car->name,
             'car_image'             => $this->car->image ? url('storage/' . $this->car->image) : url('/product-no-img.jpg'),
+            'car_model_name'        => $this->carModel->name,
             'piece_description'     => $this->piece_description,
             'quantity'              => $this->quantity,
             "activity_type_id"      => $this->activityType->id,

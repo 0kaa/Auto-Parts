@@ -20,7 +20,6 @@ class CustomOrderListResource extends JsonResource
             'order_status'          => $this->order_status->name,
             "time"                  => $this->created_at->format('H:i a'),
             'date'                  => $this->created_at->format('Y-m-d'),
-            // 'order_items'           => CustomOrderItemResource::collection($this->custom_order_items),
             'piece_name'            => $this->custom_order_items->first() ? $this->custom_order_items->first()->piece_name : null,
             'quantity'              => count($this->custom_order_items),
         ];

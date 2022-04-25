@@ -54,6 +54,7 @@ return [
     'no' => 'لا',
     'is_company_facility_authorized_distributor' => ' هل المنشأة موزع معتمد ؟',
     'company-sectors' => 'قطاع الشركة',
+    'company-models' => 'موديلات الشركة',
     'our_services' => 'خــدمـــاتـنـــا',
     'auto_parts' => 'قطع غيار',
     'soon' => 'قريباً',

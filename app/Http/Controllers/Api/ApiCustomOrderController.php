@@ -115,6 +115,7 @@ class ApiCustomOrderController extends Controller
                 'note'                  => $orderItem['note'],
                 'form_image'            => $form_image,
                 "car_id"                => $orderItem['car_id'],
+                "car_model_id"          => $orderItem['car_model_id'],
                 'quantity'              => array_key_exists('quantity', $orderItem) ? $orderItem['quantity'] : 1,
                 'activity_type_id'      => $activity->id,
                 'sub_activity_id'       => $sub_activity->id,
@@ -273,6 +274,7 @@ class ApiCustomOrderController extends Controller
                 'note'                  => $orderItem['note'],
                 'form_image'            => $form_image,
                 "car_id"                => $orderItem['car_id'],
+                "car_model_id"          => $orderItem['car_model_id'],
                 'quantity'              => array_key_exists('quantity', $orderItem) ? $orderItem['quantity'] : 1,
                 'activity_type_id'      => $activity->id,
                 'sub_activity_id'       => $sub_activity->id,
@@ -458,7 +460,7 @@ class ApiCustomOrderController extends Controller
 
         if (!$customOrder) {
             return $this->ApiResponse(null, trans('local.order_not_found'), 404);
-        }        
+        }
 
         if (in_array($user->id, $seller_ids) == false) {
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
