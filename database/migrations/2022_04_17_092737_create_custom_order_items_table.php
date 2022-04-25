@@ -42,11 +42,7 @@ class CreateCustomOrderItemsTable extends Migration
         Schema::table('custom_order_attributes', function (Blueprint $table) {
             $table->unsignedBigInteger('custom_order_item_id')->nullable();
             $table->foreign('custom_order_item_id')->references('id')->on('custom_order_items')->onDelete('cascade');
-        });
-        Schema::table('price_offers', function (Blueprint $table) {
-            $table->unsignedBigInteger('custom_order_item_id')->nullable();
-            $table->foreign('custom_order_item_id')->references('id')->on('custom_order_items')->onDelete('cascade');
-        });
+        });   
         
     }
 

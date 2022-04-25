@@ -59,15 +59,15 @@ function sendEmail($title, $message, $to)
 
 function send_activation_code($msg, $numbers)
 {
-        $ch = curl_init();
+    $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://www.msegat.com/gw/sendsms.php");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, TRUE);
+    curl_setopt($ch, CURLOPT_URL, "https://www.msegat.com/gw/sendsms.php");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, TRUE);
 
-        curl_setopt($ch, CURLOPT_POST, TRUE);
+    curl_setopt($ch, CURLOPT_POST, TRUE);
 
-        $fields = <<<EOT
+    $fields = <<<EOT
     {
       "userName": "zz-899",
       "numbers": $numbers,
@@ -76,15 +76,15 @@ function send_activation_code($msg, $numbers)
       "msg": "رمز التحقق: $msg"
     }
     EOT;
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json"
-        ));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Content-Type: application/json"
+    ));
 
-        $response = curl_exec($ch);
-        $info = curl_getinfo($ch);
-        curl_close($ch);
+    $response = curl_exec($ch);
+    $info = curl_getinfo($ch);
+    curl_close($ch);
 }
 
 

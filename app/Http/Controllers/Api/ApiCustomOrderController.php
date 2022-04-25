@@ -394,10 +394,22 @@ class ApiCustomOrderController extends Controller
 
         $totalPriceOffer = 0;
 
-        foreach ($offers as $key => $offer) {
-            $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_item_id', $offer['id']], ['seller_id', $user->id]]);
+        $findPriceOfferExist = $this->priceOfferRepository->findWhere(['custom_order_id' => $customOrder->id, 'seller_id' => $user->id]);
 
-            if ($priceOffer->isNotEmpty() || $customOrder->order_status->slug !==  'pending') {
+        if ($findPriceOfferExist) {
+            return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
+        }
+
+        $newPriceOffer = $this->priceOfferRepository->create([
+            'custom_order_id'       => $customOrder->id,
+            'seller_id'             => $user->id,
+            'price'                 => 0,
+            'status_id'             => $order_status_pending->id,
+        ]);
+
+        foreach ($offers as $key => $offer) {
+
+            if ($customOrder->order_status->slug !==  'pending') {
                 return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
             }
 
@@ -405,14 +417,18 @@ class ApiCustomOrderController extends Controller
                 return $this->ApiResponse(null, trans('local.price_required'), 400);
             }
 
-            $this->priceOfferRepository->create([
+            $newPriceOffer->priceOfferItems()->create([
+                'price_offer_id'        => $newPriceOffer->id,
                 'custom_order_item_id'  => $offer['id'],
-                'seller_id'             => $user->id,
                 'price'                 => $offer['price'],
-                'status_id'             => $order_status_pending->id,
-                'note'                  => $offer['note'] ?? null,
+                'quantity'              => $offer['quantity'] ?? 1,
             ]);
+
+
             $totalPriceOffer += $offer['price'];
+
+            $newPriceOffer->price = $totalPriceOffer;
+            $newPriceOffer->save();
         }
 
         // Notification to user with price offer
@@ -432,7 +448,7 @@ class ApiCustomOrderController extends Controller
     /**
      * Step 2 if seller reject the order in this case the order will redirect automatic to another seller with same data in this seller
      */
-    public function sellerRejectedOrder(Request $request, $id)
+    public function sellerRejectedOrder($id)
     {
         $user = auth()->user();
 
@@ -448,13 +464,12 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
         }
 
-        $customOrderItems = $customOrder->custom_order_items;
+        // $customOrderItems = $customOrder->custom_order_items;
 
-        foreach ($customOrderItems as $orderItem) {
-            $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_item_id', $orderItem->id], ['seller_id', $user->id]]);
-            if ($priceOffer->isNotEmpty()) {
-                return $this->ApiResponse(null, trans('local.order_not_found'), 403);
-            }
+        $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_id', $customOrder->id], ['seller_id', $user->id]]);
+
+        if ($priceOffer->isNotEmpty()) {
+            return $this->ApiResponse(null, trans('local.order_not_found'), 403);
         }
 
         $rejected_status = OrderStatus::where('slug', 'seller_rejected')->first();
@@ -473,7 +488,7 @@ class ApiCustomOrderController extends Controller
             RedirectOrderToAnotherUser($user->id, $rejectedOrder, $customOrder);
         }
 
-        return $this->ApiResponse(null, trans('local.order_already_rejected'), 200);
+        return $this->ApiResponse(null, trans('local.order_status_updated'), 200);
     }
 
     /**
@@ -483,33 +498,21 @@ class ApiCustomOrderController extends Controller
     {
         $user = auth()->user();
 
-        $customOrder = $this->customOrderRepository->findOne($id);
+        $priceOffer = $this->priceOfferRepository->findOne($id);
 
-        $totalPriceOffer = 0;
-        $seller_id = null;
+        $customOrder = $priceOffer->customOrder;
+
         $accepted_status = OrderStatus::where('slug', 'accepted')->first();
 
         if (!$customOrder) {
             return $this->ApiResponse(null, trans('local.order_not_found'), 404);
         }
 
-        $customOrderItems = $customOrder->custom_order_items;
-
-        foreach ($customOrderItems as $orderItem) {
-            $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_item_id', $orderItem->id]]);
-            foreach ($priceOffer as $offer) {
-
-                if ($offer->status_id == $accepted_status->id) {
-                    return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
-                }
-
-                $orderItem->update(['price_offer' => $offer->price]);
-                $totalPriceOffer += $offer->price;
-                $seller_id = $offer->seller_id;
-
-                $offer->update(['status_id' => $accepted_status->id]);
-            }
+        if ($priceOffer->status_id == $accepted_status->id || $customOrder->order_status_id == $accepted_status->id) {
+            return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
         }
+
+        $priceOffer->update(['status_id' => $accepted_status->id]);
 
         if ($customOrder->user_id != $user->id) {
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
@@ -517,8 +520,8 @@ class ApiCustomOrderController extends Controller
 
         $customOrder->update([
             'order_status_id'   => $accepted_status->id,
-            'price'             => $totalPriceOffer,
-            'seller_id'         => $seller_id,
+            'price'             => $priceOffer->price,
+            'seller_id'         => $priceOffer->seller_id,
         ]);
 
         $charge = generate_custom_order_payment_url($customOrder, $user);
@@ -528,11 +531,21 @@ class ApiCustomOrderController extends Controller
         return $this->ApiResponse($charge['transaction']['url'], trans('local.order_done'), 200);
     }
 
-    public function RejectPriceOffer(Request $request, $id)
+    public function RejectPriceOffer($id)
     {
         $user = auth()->user();
 
-        $customOrder = $this->customOrderRepository->findOne($id);
+        $priceOffer = $this->priceOfferRepository->findOne($id);
+
+        if (!$priceOffer) {
+            return $this->ApiResponse(null, trans('local.order_not_found'), 404);
+        }
+
+        $customOrder = $priceOffer->customOrder;
+
+        if (!$customOrder) {
+            return $this->ApiResponse(null, trans('local.order_not_found'), 404);
+        }
 
         $seller_ids = MultiCustomOrder::where('custom_order_id', $customOrder->id)->pluck('seller_id')->toArray();
 
@@ -541,9 +554,6 @@ class ApiCustomOrderController extends Controller
         $rejected_status = OrderStatus::where('slug', 'rejected')->first();
 
         $notfound_status = OrderStatus::where('slug', 'not_found')->first();
-        if (!$customOrder) {
-            return $this->ApiResponse(null, trans('local.order_not_found'), 404);
-        }
 
         if ($customOrder->user_id != $user->id) {
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
@@ -559,16 +569,9 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_found'), 403);
         }
 
+        $seller_id = $priceOffer->seller_id;
 
-        $customOrderItems = $customOrder->custom_order_items;
-
-        foreach ($customOrderItems as $orderItem) {
-            $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_item_id', $orderItem->id]]);
-            foreach ($priceOffer as $offer) {
-                $seller_id = $offer->seller_id;
-                $offer->update(['status_id' => $rejected_status->id]);
-            }
-        }
+        $priceOffer->update(['status_id' => $rejected_status->id]);
 
         MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $seller_id)->update(['order_status_id' => $rejected_status->id]);
 
@@ -590,10 +593,13 @@ class ApiCustomOrderController extends Controller
 
     public function PriceOffers($id)
     {
-
         $priceOffers = $this->priceOfferRepository->getWhere([['custom_order_id', $id]], ['column' => 'created_at', 'dir' => 'DESC']);
 
-        return $this->ApiResponse(PriceOffersResource::collection($priceOffers), null, 200);
+        if ($priceOffers->isNotEmpty()) {
+            return $this->ApiResponse(PriceOffersResource::collection($priceOffers), null, 200);
+        } else {
+            return $this->ApiResponse(null, trans('local.order_not_found'), 404);
+        }
     }
 
     public function userOrders()

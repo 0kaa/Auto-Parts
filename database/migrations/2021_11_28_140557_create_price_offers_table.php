@@ -15,11 +15,11 @@ class CreatePriceOffersTable extends Migration
     {
         Schema::create('price_offers', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('custom_order_id');
+            $table->unsignedBigInteger('custom_order_id');
             $table->unsignedBigInteger('seller_id');
             $table->unsignedBigInteger('price');
             $table->string('note')->nullable();
-            // $table->foreign('custom_order_id')->references('id')->on('custom_orders')->onDelete('cascade');
+            $table->foreign('custom_order_id')->references('id')->on('custom_orders')->onDelete('cascade');
             $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
