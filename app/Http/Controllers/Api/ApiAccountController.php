@@ -6,8 +6,10 @@ use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ChangePasswordRequest;
 use App\Http\Requests\Api\ToggleNotificationsRequest;
+use App\Http\Resources\Api\CompanyModelResource;
 use App\Http\Resources\Api\CompanySectorResource;
 use App\Http\Resources\Api\UserResource;
+use App\Models\CompanyModel;
 use App\Models\CompanySector;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
@@ -75,6 +77,13 @@ class ApiAccountController extends Controller
         $compaines = CompanySector::all();
 
         return $this->ApiResponse(CompanySectorResource::collection($compaines), trans('admin.updated_success'), 200);
+    }
+
+    public function getModelCar($id)
+    {
+        $compaines = CompanyModel::where('company_sector_id', $id)->get();
+
+        return $this->ApiResponse(CompanyModelResource::collection($compaines), trans('admin.updated_success'), 200);
     }
 
     public function toggleNotifications(ToggleNotificationsRequest $request)
