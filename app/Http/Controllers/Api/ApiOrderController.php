@@ -296,8 +296,18 @@ class ApiOrderController extends Controller
 
     public function orderStepper()
     {
-        $order_status = OrderStatus::whereIn('slug', ['pending', 'paid', 'processing', 'completed'])->get();
+        $order_status_pending = OrderStatus::whereIn('slug', ['pending'])->first();
+        $order_status_paid = OrderStatus::whereIn('slug', ['paid'])->first();
+        $order_status_processing = OrderStatus::whereIn('slug', ['processing'])->first();
+        $order_status_completed = OrderStatus::whereIn('slug', ['completed'])->first();
 
-        return $this->ApiResponse(OrderStatusResource::collection($order_status), null, 200);
+        $status = [
+            $order_status_pending,
+            $order_status_paid,
+            $order_status_processing,
+            $order_status_completed,
+        ];
+
+        return $this->ApiResponse(OrderStatusResource::collection($status), null, 200);
     }
 }

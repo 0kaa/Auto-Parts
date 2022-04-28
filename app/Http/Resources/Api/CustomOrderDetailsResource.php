@@ -21,6 +21,7 @@ class CustomOrderDetailsResource extends JsonResource
             "user_email"            => $this->user->email,
             "user_phone"            => $this->user->phone,
             "user_address"          => $this->user->address,
+            'payment_url'           => $this->payment_url,
             'order_status'          => new OrderStatusResource($this->order_status),
             'order_items'           => CustomOrderItemResource::collection($this->custom_order_items),
         ];
