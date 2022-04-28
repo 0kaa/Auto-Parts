@@ -53,7 +53,7 @@ class CompanySectorController extends Controller
         return view('admin.company-sectors.create', compact('company_sector'));
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request, $id)
     {
         $this->companySectorRepository->update($request->except('_method'), $id);
 
