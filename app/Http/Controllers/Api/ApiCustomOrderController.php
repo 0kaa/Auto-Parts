@@ -523,6 +523,7 @@ class ApiCustomOrderController extends Controller
             'price'             => $priceOffer->price,
             'seller_id'         => $priceOffer->seller_id,
         ]);
+        dd($customOrder);
 
         $charge = generate_custom_order_payment_url($customOrder, $user);
 
