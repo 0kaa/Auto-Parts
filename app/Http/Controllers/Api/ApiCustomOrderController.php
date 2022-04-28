@@ -595,11 +595,7 @@ class ApiCustomOrderController extends Controller
     {
         $priceOffers = $this->priceOfferRepository->getWhere([['custom_order_id', $id]], ['column' => 'created_at', 'dir' => 'DESC']);
 
-        if ($priceOffers->isNotEmpty()) {
-            return $this->ApiResponse(PriceOffersResource::collection($priceOffers), null, 200);
-        } else {
-            return $this->ApiResponse(null, trans('local.order_not_found'), 404);
-        }
+        return $this->ApiResponse(PriceOffersResource::collection($priceOffers), null, 200);
     }
 
     public function userOrders()
