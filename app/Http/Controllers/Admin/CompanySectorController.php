@@ -35,7 +35,7 @@ class CompanySectorController extends Controller
     }
 
 
-    public function store(CompanySectorRequest $request)
+    public function store(Request $request)
     {
         $image = '';
         if ($request->hasFile('image')) {
@@ -53,15 +53,18 @@ class CompanySectorController extends Controller
         return view('admin.company-sectors.create', compact('company_sector'));
     }
 
-    public function update($id, CompanySectorRequest $request)
+    public function update($id, Request $request)
     {
         $this->companySectorRepository->update($request->except('_method'), $id);
+
         $companySector = $this->companySectorRepository->findOne($id);
 
         $image = $companySector->image;
 
         if ($request->hasFile('image')) {
-            Storage::delete($companySector->image);
+            if (isset($companySector->image)) {
+                Storage::delete($companySector->image);
+            }
             $img = $request->file('image');
             $image = $this->filesServices->uploadfile($img, $this->companyDirectory);
         }
