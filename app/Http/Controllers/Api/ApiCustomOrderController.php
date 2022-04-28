@@ -512,24 +512,28 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
         }
 
-        $priceOffer->update(['status_id' => $accepted_status->id]);
-
         if ($customOrder->user_id != $user->id) {
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
         }
 
-        $customOrder->update([
-            'order_status_id'   => $accepted_status->id,
-            'price'             => $priceOffer->price,
-            'seller_id'         => $priceOffer->seller_id,
-        ]);
-        dd($customOrder);
-
         $charge = generate_custom_order_payment_url($customOrder, $user);
 
-        MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $customOrder->seller_id)->update(['order_status_id' => $accepted_status->id]);
+        if ($charge) {
 
-        return $this->ApiResponse($charge['transaction']['url'], trans('local.order_done'), 200);
+            $priceOffer->update(['status_id' => $accepted_status->id]);
+
+            $customOrder->update([
+                'order_status_id'   => $accepted_status->id,
+                'price'             => $priceOffer->price,
+                'seller_id'         => $priceOffer->seller_id,
+            ]);
+
+            MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $customOrder->seller_id)->update(['order_status_id' => $accepted_status->id]);
+
+            return $this->ApiResponse($charge['transaction']['url'], trans('local.order_done'), 200);
+        } else {
+            return $this->ApiResponse('', 'Payment failed', 403);
+        }
     }
 
     public function RejectPriceOffer($id)

@@ -154,7 +154,7 @@ function generate_order_payment_url($order, $user)
                     \"customer\":{\"first_name\":\"$user->name\",\"email\":\"$user->email\",
                     \"phone\":{\"country_code\":\"965\",\"number\":\"$user->phone\"}},
                     \"merchant\":{\"id\":\"$user->id\"},
-                    \"source\":{\"id\":\"src_sa.mada\"},
+                    \"source\":{\"id\":\"src_all\"},
                     \"redirect\":{\"url\":\"http://api.ketageaher.com/api/charge-order-redirect\"}
                 }",
 
@@ -211,7 +211,7 @@ function generate_custom_order_payment_url($customOrder, $user)
                     \"customer\":{\"first_name\":\"$user->name\",\"email\":\"$user->email\",
                     \"phone\":{\"country_code\":\"965\",\"number\":\"$user->phone\"}},
                     \"merchant\":{\"id\":\"$user->id\"},
-                    \"source\":{\"id\":\"src_sa.mada\"},
+                    \"source\":{\"id\":\"src_all\"},
                     \"redirect\":{\"url\":\"http://api.ketageaher.com/api/charge-custom-order-redirect\"}
                 }",
 
@@ -231,17 +231,20 @@ function generate_custom_order_payment_url($customOrder, $user)
     } else {
 
         $charge = json_decode($response, true);
-        TapPayment::create([
-            'charge_id' => $charge['id'],
-            'amount' => $charge['amount'],
-            'status' => $charge['status'],
-            'orderable_id' => $customOrder->id,
-            'orderable_type' => 'App\Models\CustomOrder',
-        ]);
+        if ($charge) {
+            TapPayment::create([
+                'charge_id' => $charge['id'],
+                'amount' => $charge['amount'],
+                'status' => $charge['status'],
+                'orderable_id' => $customOrder->id,
+                'orderable_type' => 'App\Models\CustomOrder',
+            ]);
 
-        $customOrder->payment_url = $charge['transaction']['url'];
-        $customOrder->save();
-
-        return $charge;
+            $customOrder->payment_url = $charge['transaction']['url'];
+            $customOrder->save();
+            return $charge;
+        } else {
+            return false;
+        }
     }
 }
