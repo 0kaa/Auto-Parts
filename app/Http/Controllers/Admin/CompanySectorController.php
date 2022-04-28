@@ -14,7 +14,7 @@ class CompanySectorController extends Controller
     protected $companySectorRepository;
     protected $filesServices;
 
-    private $companyDirectory = 'companies';
+    private $companyDirectory = 'cars';
 
     public function __construct(CompanySectorRepositoryInterface $companySectorRepository, UploadFilesServices $filesServices)
     {
