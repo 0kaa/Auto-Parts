@@ -57,7 +57,7 @@ class ApiAuthController extends Controller
                     'user_id'           => $user->id,
                 ]);
             } else {
-                $user_device_id->devices()->delete();
+                $user_device_id->delete();
                 $user->devices()->create([
                     'device_id'         => $request->device_id,
                     'platform_type'     => $request->platform_type,
