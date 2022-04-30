@@ -57,8 +57,7 @@ class ApiAuthController extends Controller
                     'user_id'           => $user->id,
                 ]);
             } else {
-                $user_device_id->delete();
-                $user->devices()->create([
+                $user_device_id->update([
                     'device_id'         => $request->device_id,
                     'platform_type'     => $request->platform_type,
                     'firebase_token'    => $request->firebase_token,
