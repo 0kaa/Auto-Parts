@@ -47,7 +47,7 @@ class ApiAuthController extends Controller
                 return $this->ApiResponse(null, trans('admin.login_error'), 404);
             }
 
-            $user_device_id = $user->devices->where('device_id', $request->device_id)->where('platform_type', $request->platform_type)->first();
+            $user_device_id = $user->devices->where('device_id', $request->device_id)->where('platform_type', $request->platform_type)->where('firebase_token', $request->firebase_token)->first();
 
             if (!$user_device_id) {
                 $user->devices()->create([
