@@ -188,9 +188,9 @@ function generate_order_payment_url($order, $user)
         return $charge;
     }
 }
-function generate_custom_order_payment_url($customOrder, $user)
+function generate_custom_order_payment_url($customOrder, $user, $priceOffer)
 {
-    $price = $customOrder->payment_id == 1 ? $customOrder->price - ($customOrder->price * 80 / 100) : $customOrder->price;
+    $price = $customOrder->payment_id == 1 ? $priceOffer->price - ($priceOffer->price * 80 / 100) : $priceOffer->price;
 
     $curl = curl_init();
 
