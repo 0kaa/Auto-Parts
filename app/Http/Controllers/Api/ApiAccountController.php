@@ -51,6 +51,8 @@ class ApiAccountController extends Controller
             'phone' => $request->phone ? $request->phone : $user->phone,
             'address' => $request->address ? $request->address : $user->address,
             'image' => $request->hasFile('image') ? $this->filesServices->uploadfile($request->file('image'), $this->userDirectory) : $user->image,
+            'lat' => $request->lat ? $request->lat : $user->lat,
+            'lng' => $request->lng ? $request->lng : $user->lng,
         ]);
 
         return $this->ApiResponse(new UserResource($user), trans('admin.updated_success'), 200);

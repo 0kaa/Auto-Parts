@@ -505,7 +505,6 @@ class ApiCustomOrderController extends Controller
         $user = auth()->user();
 
         $priceOffer = $this->priceOfferRepository->findOne($id);
-
         $customOrder = $priceOffer->customOrder;
 
         $accepted_status = OrderStatus::where('slug', 'accepted')->first();
@@ -522,7 +521,7 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
         }
 
-        $charge = generate_custom_order_payment_url($customOrder, $user);
+        $charge = generate_custom_order_payment_url($customOrder, $user, $priceOffer);
 
         if ($charge) {
 
