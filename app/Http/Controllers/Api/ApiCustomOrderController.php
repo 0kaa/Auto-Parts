@@ -399,7 +399,7 @@ class ApiCustomOrderController extends Controller
         $findPriceOfferExist = $this->priceOfferRepository->findWhere(['custom_order_id' => $customOrder->id, 'seller_id' => $user->id]);
 
         if ($findPriceOfferExist) {
-            return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
+            return $this->ApiResponse(null, trans('local.order_already_accepted'), 200);
         }
 
         $newPriceOffer = $this->priceOfferRepository->create([
@@ -412,7 +412,7 @@ class ApiCustomOrderController extends Controller
         foreach ($offers as $key => $offer) {
 
             if ($customOrder->order_status->slug !==  'pending') {
-                return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
+                return $this->ApiResponse(null, trans('local.order_already_accepted'), 200);
             }
 
             if (!isset($offer['price'])) {
@@ -470,6 +470,12 @@ class ApiCustomOrderController extends Controller
 
         if ($priceOffer->isNotEmpty()) {
             return $this->ApiResponse(null, trans('local.order_not_found'), 403);
+        }
+
+        $accepted_status = OrderStatus::where('slug', 'accepted')->first();
+
+        if ($priceOffer->status_id == $accepted_status->id || $customOrder->order_status_id == $accepted_status->id) {
+            return $this->ApiResponse(null, trans('local.order_already_accepted'), 200);
         }
 
         $rejected_status = OrderStatus::where('slug', 'seller_rejected')->first();
