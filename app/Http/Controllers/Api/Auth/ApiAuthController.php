@@ -164,7 +164,7 @@ class ApiAuthController extends Controller
         $user = $this->usersRepository->findWhere([
             ['phone', $phone],
         ]);
-        if ($user && $user->approved == 1) {
+        if ($user) {
             $code = rand(1111, 9999);
             $user->update(['verification_code' => $code]);
             send_activation_code($code, $phone);
