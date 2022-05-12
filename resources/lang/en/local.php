@@ -265,4 +265,5 @@ return [
     "sub_activity" => "Sub Activity",
     "sub_sub_activity" => "Sub Sub Activity",
     "please_send_all_offer" => "Please send all offer",
+    "we_will_look" => "We will look at your order and will reply you as soon as possible"
 ];

@@ -120,29 +120,29 @@ class ApiAuthController extends Controller
 
             $user_device_id = $user->devices->where('device_id', $request->device_id)->where('platform_type', $request->platform_type)->first();
 
-            if ($user) {
-
-                if (!$user_device_id) {
-                    $user->devices()->create([
-                        'device_id'         => $request->device_id,
-                        'platform_type'     => $request->platform_type,
-                        'firebase_token'    => $request->firebase_token,
-                        'user_id'           => $user->id,
-                    ]);
-                }
-
-                if ($user->hasRole('user')) {
-                    $user->update(['approved' => 1, 'verification_code' => null]);
-                } else {
-                    $user->update(['approved' => 0, 'verification_code' => null]);
-                }
-
-                $token = $user->createToken('tokens')->plainTextToken;
-
-                return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], trans('local.verify_code_success'), 200);
-            } else {
+            if (!$user) {
                 return $this->ApiResponse(null, trans('local.verify_code_error'), 404);
             }
+
+            if (!$user_device_id) {
+                $user->devices()->create([
+                    'device_id'         => $request->device_id,
+                    'platform_type'     => $request->platform_type,
+                    'firebase_token'    => $request->firebase_token,
+                    'user_id'           => $user->id,
+                ]);
+            }
+
+            if ($user->hasRole('user')) {
+                $user->update(['approved' => 1, 'verification_code' => null]);
+            } else {
+                $user->update(['approved' => 0, 'verification_code' => null]);
+                return $this->ApiResponse(null, trans('local.we_will_look'), 200);
+            }
+
+            $token = $user->createToken('tokens')->plainTextToken;
+
+            return $this->ApiResponse(['token' => $token, 'user' => new UserResource($user)], trans('local.verify_code_success'), 200);
         } catch (\Exception $e) {
             return $this->ApiResponse(null, $e, 404);
         }
