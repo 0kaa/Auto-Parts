@@ -62,6 +62,12 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
 
     Route::resource('custom_orders', 'CustomOrderController');
 
+    Route::get('custom_orders_item/{id}/edit', [CustomOrderController::class, 'edit_custom_order_item'])->name('custom_order_items.edit');
+
+    Route::put('custom_orders_item/{id}/update', [CustomOrderController::class, 'update_custom_order_item'])->name('custom_order_items.update');
+
+    Route::get("car_model", [CustomOrderController::class, 'get_car_model'])->name('get_car_model');
+
     Route::get("activity", [CustomOrderController::class, 'get_activity'])->name('get_activity');
 
     Route::get("sub_activity", [CustomOrderController::class, 'get_sub_activity'])->name('get_sub_activity');

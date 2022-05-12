@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CustomOrderItemRequest;
 use App\Models\ActivityType;
 use App\Models\Car;
+use App\Models\CompanyModel;
+use App\Models\CompanySector;
+use App\Models\CustomOrderItem;
 use App\Models\OrderStatus;
 use App\Models\PaymentMethod;
 use App\Models\Shipping;
@@ -84,7 +88,7 @@ class CustomOrderController extends Controller
 
         $payments = PaymentMethod::get();
 
-        $cars = Car::get();
+        $cars = CompanySector::get();
 
         $order_status = OrderStatus::whereIn('slug', ['processing', 'completed', 'paid', 'cancelled'])->get();
 
@@ -94,7 +98,10 @@ class CustomOrderController extends Controller
 
         $sub_sub_activities = SubActivity::where('activity_type_id', 6)->where('parent_id', $order->sub_activity_id)->get();
 
-        return view('admin.custom-orders.edit', \compact('order', 'shippings', 'payments', 'order_status', 'activities', 'sub_activities', 'sub_sub_activities', 'cars'));
+
+        $custom_order_items = CustomOrderItem::where('custom_order_id', $order->id)->get();
+
+        return view('admin.custom-orders.edit', \compact('order', 'shippings', 'payments', 'order_status', 'activities', 'sub_activities', 'sub_sub_activities', 'cars', 'custom_order_items'));
     }
 
     /**
@@ -108,25 +115,7 @@ class CustomOrderController extends Controller
     {
         $custom_order = $this->customOrderRepository->findOne($id);
 
-        $piece_image = $custom_order->piece_image;
-
-        if ($request->hasFile('piece_image')) {
-            Storage::delete($custom_order->piece_image);
-
-            $img = $request->file('piece_image');
-            $piece_image = $this->filesServices->uploadfile($img, 'custom_order');
-        }
-
-        $form_image = $custom_order->form_image;
-
-        if ($request->hasFile('form_image')) {
-            Storage::delete($custom_order->form_image);
-
-            $img = $request->file('form_image');
-            $form_image = $this->filesServices->uploadfile($img, 'custom_order');
-        }
-
-        $this->customOrderRepository->update(array_merge($request->except('_method', 'image'), ['piece_image' => $piece_image, 'form_image' => $form_image]), $id);
+        $this->customOrderRepository->update(array_merge($request->except('_method')), $id);
         return  response()->json(['success' => trans('admin.updated_success', ['field' => __('local.custom_orders')]), 200]);
     }
 
@@ -153,5 +142,65 @@ class CustomOrderController extends Controller
         $sub_sub_activities = SubActivity::where('parent_id', $request->id)->get();
 
         return view('admin.custom-orders.sub_sub_activity', compact('sub_sub_activities'))->render();
+    }
+
+    // edit custom order item
+    public function edit_custom_order_item(Request $request)
+    {
+        $order = CustomOrderItem::find($request->id);
+
+        $cars = CompanySector::get();
+
+        $order_status = OrderStatus::whereIn('slug', ['processing', 'completed', 'paid', 'cancelled'])->get();
+
+        $activities = ActivityType::get();
+
+        $sub_activities = SubActivity::where('activity_type_id', $order->activity_type_id)->where('parent_id', null)->get();
+
+        $sub_sub_activities = SubActivity::where('activity_type_id', 6)->where('parent_id', $order->sub_activity_id)->get();
+
+        $car_models = CompanyModel::where('company_sector_id', $order->car_model_id)->get();
+
+        return view('admin.custom-order-items.edit', compact('order' ,'cars', 'order_status', 'activities', 'sub_activities', 'sub_sub_activities', 'car_models'));
+    }
+
+    // update custom order item
+    public function update_custom_order_item(CustomOrderItemRequest $request, $id)
+    {
+        // dd($request->all());
+
+        $custom_order_item = CustomOrderItem::find($id);;
+
+        $data = $request->except('_method', '_token', 'piece_image', 'form_image');
+
+        if ($request->hasFile('piece_image')) {
+            Storage::delete($custom_order_item->piece_image);
+
+            $data['piece_image'] = $request->file('piece_image')->store('custom_order');
+
+        } else {
+            $data['piece_image'] = $custom_order_item->piece_image;
+        }
+
+        if ($request->hasFile('form_image')) {
+            Storage::delete($custom_order_item->form_image);
+
+            $data['form_image'] = $request->file('form_image')->store('custom_order');
+
+        } else {
+            $data['form_image'] = $custom_order_item->form_image;
+        }
+
+        $custom_order_item->update($data);
+
+        return \redirect()->back()->with('success', __('admin.updated_success'));
+    }
+
+    // get car model
+    public function get_car_model(Request $request)
+    {
+        $car_models = CompanyModel::where('company_sector_id', $request->id)->get();
+
+        return view('admin.custom-order-items.car_model', compact('car_models'))->render();
     }
 }

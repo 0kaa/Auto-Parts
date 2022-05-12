@@ -50,20 +50,10 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>@lang('local.piece_name')</th>
-                                        <th>@lang('local.piece_image')</th>
-                                        <th>@lang('local.piece_desc')</th>
-                                        <th>@lang('local.piece_price')</th>
-                                        <th>@lang('local.form_image')</th>
-                                        <th>@lang('local.note')</th>
+                                        <th>@lang('local.price')</th>
                                         <th>@lang('local.payment_url')</th>
-                                        <th>@lang('local.quantity')</th>
-                                        <th>@lang('local.activity_type')</th>
-                                        <th>@lang('local.sub_activity')</th>
-                                        <th>@lang('local.sub_sub_activity')</th>
                                         <th>@lang('local.user')</th>
                                         <th>@lang('local.seller')</th>
-                                        <th>@lang('local.car')</th>
                                         <th>@lang('local.shipping')</th>
                                         <th>@lang('local.payment')</th>
                                         <th>@lang('local.order_status')</th>
@@ -76,24 +66,12 @@
 
                                         <tr data-id="{{ $order->id }}" class="row-with-img">
                                             <td>{{$order->id}}</td>
-                                            <td>{{$order->piece_name}}</td>
-                                            <td>
-                                                <img src="{{ asset('storage/'.$order->piece_image) }}" width="100" height="100" alt="">
-                                            </td>
-                                            <td>{{$order->piece_description ? $order->piece_description : '-'}}</td>
-                                            <td>{{$order->piece_price ? $order->piece_price : '-'}}</td>
-                                            <td>
-                                                <img src="{{ asset('storage/'.$order->form_image) }}" width="100" height="100" alt="">
-                                            </td>
-                                            <td>{{$order->note}}</td>
+
+                                            <td>{{$order->price ? $order->price : '-'}}</td>
+
                                             <td>{{$order->payment_url ? $order->payment_url : '-'}}</td>
-                                            <td>{{$order->quantity}}</td>
-                                            <td>{{$order->activityType->name}}</td>
-                                            <td>{{$order->subActivity->name}}</td>
-                                            <td>{{$order->sub_sub_activity_id ? $order->subActivity->name : '-'}}</td>
                                             <td>{{$order->user ? $order->user->name : ''}}</td>
                                             <td>{{$order->seller_id ? $order->seller->name : '-'}}</td>
-                                            <td>{{$order->car->name}}</td>
                                             <td>{{$order->shipping->shipping_name}}</td>
                                             <td>{{$order->payment->name}}</td>
                                             <td>{{$order->order_status->name}}</td>
