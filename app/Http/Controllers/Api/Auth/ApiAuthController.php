@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\Web\ActiveCodeRequest;
 use Illuminate\Validation\Validator;
-use App\Http\Requests\web\RegisterRequest;
+use App\Http\Requests\Web\RegisterRequest;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
