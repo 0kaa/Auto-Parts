@@ -474,11 +474,15 @@ class ApiCustomOrderController extends Controller
 
         $accepted_status = OrderStatus::where('slug', 'accepted')->first();
 
+        $rejected_status = OrderStatus::where('slug', 'rejected')->first();
+
         if ($priceOffer->status_id == $accepted_status->id || $customOrder->order_status_id == $accepted_status->id) {
             return $this->ApiResponse(null, trans('local.order_already_accepted'), 200);
         }
 
-        $rejected_status = OrderStatus::where('slug', 'seller_rejected')->first();
+        if ($priceOffer->status_id == $rejected_status->id || $customOrder->order_status_id == $rejected_status->id) {
+            return $this->ApiResponse(null, trans('local.order_already_rejected'), 200);
+        }
 
         MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $user->id)->update(['order_status_id' => $rejected_status->id]);
 
@@ -505,21 +509,29 @@ class ApiCustomOrderController extends Controller
         $user = auth()->user();
 
         $priceOffer = $this->priceOfferRepository->findOne($id);
-        $customOrder = $priceOffer->customOrder;
 
-        $accepted_status = OrderStatus::where('slug', 'accepted')->first();
+        $customOrder = $priceOffer->customOrder;
 
         if (!$customOrder) {
             return $this->ApiResponse(null, trans('local.order_not_found'), 404);
         }
 
+        if ($customOrder->user_id != $user->id) {
+            return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
+        }
+
+        $accepted_status = OrderStatus::where('slug', 'accepted')->first();
+        $rejected_status = OrderStatus::where('slug', 'rejected')->first();
+
         if ($priceOffer->status_id == $accepted_status->id || $customOrder->order_status_id == $accepted_status->id) {
             return $this->ApiResponse(null, trans('local.order_already_accepted'), 403);
         }
 
-        if ($customOrder->user_id != $user->id) {
-            return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
+        if ($priceOffer->status_id == $rejected_status->id || $customOrder->order_status_id == $rejected_status->id) {
+            return $this->ApiResponse(null, trans('local.order_already_rejected'), 403);
         }
+
+
 
         $charge = generate_custom_order_payment_url($customOrder, $user, $priceOffer);
 
