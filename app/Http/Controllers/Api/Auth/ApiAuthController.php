@@ -38,6 +38,9 @@ class ApiAuthController extends Controller
             }
 
             if ($user && $user->approved == 0 && Hash::check($request->password, $user->password) && $request->type && $user->hasRole($request->type)) {
+                if ($user->hasRole('workshop')) {
+                    return $this->ApiResponse(null, trans('local.you_are_not_approved'), 404);
+                }
                 return $this->ApiResponse(['phone' => $user->phone, 'approved' => $user->approved, 'code' => $user->verification_code], null, 200);
             }
 
