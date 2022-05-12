@@ -36,13 +36,13 @@ class Order extends Model
 
     //     $format = $locale === 'ar' ? 'M' : 'M';
     //     // Use `translatedFormat()` to get a translated date string
-    //     return $dateFromat->translatedFormat($format);        
+    //     return $dateFromat->translatedFormat($format);
 
     // }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id')->select('id', 'name', 'image');
+        return $this->belongsTo(User::class, 'user_id', 'id')->select('id', 'username', 'image');
     }
 
     public function seller()
