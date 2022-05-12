@@ -19,7 +19,7 @@ class RatingResource extends JsonResource
             'rating'        => $this->rating,
             'comment'       => $this->comment,
             'user_id'       => $this->user->id,
-            'user_name'     => $this->user->name,
+            'user_name'     => $this->user->username,
             'user_image'    => $this->user->image ? url('/storage') . '/' . $this->user->image : url('/product-no-img.jpg'),
             "created_at"    => $this->updated_at->diffForHumans(),
         ];
