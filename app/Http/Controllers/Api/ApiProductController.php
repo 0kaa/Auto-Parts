@@ -83,7 +83,7 @@ class ApiProductController extends Controller
             'name'          => $request->name ? $request->name : $product->name,
             'price'         => $request->price ? $request->price : $product->price,
             'description'   => $request->description ? $request->description : $product->description,
-            'features'      => $request->features ? $request->features : $product->features,
+            'features'      => $request->features == [] || $request->features == null ? [] : ($request->features ? $request->features : $product->features),
             'details'       => $request->details ? $request->details : $product->details,
         ]);
 
