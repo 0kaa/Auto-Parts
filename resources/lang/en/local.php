@@ -269,4 +269,5 @@ return [
     'car_model' => 'car model',
     'price' => 'price',
     'statistics' => 'Statistics',
+    'commercial_register_id' => 'Commercial register id',
 ];

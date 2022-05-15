@@ -282,4 +282,5 @@ return [
     'car_model' => 'نوع السيارة',
     'price' => 'السعر',
     'statistics' => 'الاحصائيات',
+    "commercial_register_id" => 'رقم السجل التجاري',
 ];
