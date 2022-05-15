@@ -289,7 +289,7 @@ class ApiOrderController extends Controller
 
     public function orderSellerStatus()
     {
-        $order_status = OrderStatus::whereIn('slug', ['processing', 'completed', 'cancelled'])->get();
+        $order_status = OrderStatus::whereIn('slug', ['processing', 'completed'])->get();
 
         return $this->ApiResponse(OrderStatusResource::collection($order_status), null, 200);
     }
