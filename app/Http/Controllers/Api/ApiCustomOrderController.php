@@ -609,7 +609,7 @@ class ApiCustomOrderController extends Controller
             RedirectOrderToAnotherUser($seller_id, $rejectedOrder, $customOrder);
         }
 
-        return $this->ApiResponse(null, trans('local.order_status_updated'), 200);
+        return $this->ApiResponse(null, trans('local.order_already_rejected'), 200);
     }
 
 
