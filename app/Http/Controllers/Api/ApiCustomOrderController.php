@@ -466,7 +466,7 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
         }
 
-        $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_id', $customOrder->id], ['seller_id', $user->id]]);
+        $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_id', $customOrder->id], ['seller_id', $user->id]])->first();
 
         if ($priceOffer->isNotEmpty()) {
             return $this->ApiResponse(null, trans('local.order_not_found'), 403);
