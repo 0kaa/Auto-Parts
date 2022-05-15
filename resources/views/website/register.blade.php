@@ -147,6 +147,33 @@
                                             </div>
                                         </div>
 
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label>@lang('admin.select_location_on_map') </label>
+
+                                                <br>
+                                                <div class="col-lg-12">
+                                                    <input id="address" class=" form-control"
+                                                        placeholder="@lang('admin.search_map')" name="other">
+
+
+
+
+                                                    <div id="map"></div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="hidden" id="lat" name="lat" readonly="" class="form-control"
+                                                        required>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="hidden" id="lng" name="lng" readonly="" class="form-control"
+                                                        required>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
 
 
                                         <div class="btn-tab">
@@ -272,10 +299,10 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ url('website') }}/js/map.js"></script>
+    <script src="{{ asset('website/js/gmaps.js') }}"></script>
 
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdarVlRZOccFIGWJiJ2cFY8-Sr26ibiyY&libraries=places&callback=initAutocomplete&language=<?php echo e('ar'); ?>"
-             defer></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMwMUFGqXmhqw2wJuCD4_qmkHBkGCMVV4&libraries=places&callback=initAutocomplete&language=<?php echo e('ar'); ?>"
+             defer></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"> </script>
