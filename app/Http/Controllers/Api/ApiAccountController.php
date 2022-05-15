@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ChangePasswordRequest;
 use App\Http\Requests\Api\ToggleNotificationsRequest;
+use App\Http\Resources\Api\CarResource;
 use App\Http\Resources\Api\CompanyModelResource;
 use App\Http\Resources\Api\CompanySectorResource;
 use App\Http\Resources\Api\UserResource;
@@ -78,7 +79,7 @@ class ApiAccountController extends Controller
     {
         $compaines = CompanySector::all();
 
-        return $this->ApiResponse(CompanySectorResource::collection($compaines), trans('admin.updated_success'), 200);
+        return $this->ApiResponse(CarResource::collection($compaines), trans('admin.updated_success'), 200);
     }
 
     public function getModelCar($id)
