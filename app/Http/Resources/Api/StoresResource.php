@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class StoresResource extends JsonResource
 {
@@ -14,6 +16,14 @@ class StoresResource extends JsonResource
      */
     public function toArray($request)
     {
+        $authorization_token = $request->headers->get('authorization');
+        if ($authorization_token) {
+            [$id, $token] = explode('|', $authorization_token, 2);
+            $token_data = DB::table('personal_access_tokens')->where('token', hash('sha256', $token))->first();
+            $user_id = $token_data->tokenable_id;
+            $user = User::find($user_id);
+            $isFav =  $this->favourite()->where('user_id', $user->id)->exists();
+        }
         return [
             'id'            => $this->id,
             'image'         => $this->image ? url('/storage') . '/' . $this->image : url('/product-no-img.jpg'),
@@ -22,7 +32,7 @@ class StoresResource extends JsonResource
             'badge'         => $this->package ? url('/storage') . '/' . $this->package->badge : null,
             'rating'        => $this->ratings()->avg('rating') ? $this->ratings()->avg('rating') : 0,
             'address'       => $this->address,
-            'is_fav'        => $this->isFav($this->id),
+            'is_fav'        => $isFav,
             "lat"           => $this->lat,
             "lng"           => $this->lng,
             'activity_type' => $this->activity_name ? $this->activity_name->find($this->activity_type_id)->name : null,

@@ -42,6 +42,7 @@ class CompanyRequest extends FormRequest
                 'date'                                       => 'required',
                 'file'                                       => 'required|mimes:jpg,png,jpeg,gif',
                 'ibn'                                        => 'required',
+                'commercial_register_id'                     => 'required',
                 'is_company_facility_agent'                  => 'required',
                 'is_company_facility_authorized_distributor' => 'required',
                 'company_sector_id'                          => 'required',

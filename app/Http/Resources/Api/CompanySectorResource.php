@@ -16,9 +16,9 @@ class CompanySectorResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'image' => $this->image ? url('/storage') . '/' . $this->image : url('/product-no-img.jpg'),
-            'models'    => CompanyModelResource::collection($this->models),
+            'name' => $this->company->name,
+            'image' => $this->company->image ? url('/storage') . '/' . $this->company->image : url('/product-no-img.jpg'),
+            'models'    => $this->company->models ? CompanyModelResource::collection($this->company->models) : [],
         ];
     }
 }

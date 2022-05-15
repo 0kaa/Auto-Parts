@@ -272,4 +272,5 @@ return [
     'user_activation' => 'User Activation',
     'approved'  => 'Approved',
     'non_approved'  => 'Non Approved',
+    'commercial_register_id' => 'Commercial register id',
 ];

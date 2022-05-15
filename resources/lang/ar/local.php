@@ -139,8 +139,8 @@ return [
     'no_product_found' => 'ID لم يتم العثور على منتج بهذا',
     'product_updated' => 'تم تعديل المنتج بنجاح',
     'product_deleted' => 'تم حذف المنتج بنجاح',
-    'favourite_added' => 'تم الاضافة الي المحفوظات',
-    'favourite_removed' => 'تم الحذف من المحفوظات',
+    'favourite_added' => 'تم الاضافة الي المفضلة',
+    'favourite_removed' => 'تم الحذف من المفضلة',
     'activity_id_not_found' => 'ID لم يتم العثور على نشاط بهذا',
     'order_done' => 'تم تقديم الطلب بنجاح',
     'order_not_done' => 'لم يتم تقديم الطلب',
@@ -285,4 +285,5 @@ return [
     'user_activation' => 'تفعيل المستخدم',
     'approved' => 'مفعل',
     'non_approved' => 'غير مفعل',
+    "commercial_register_id" => 'رقم السجل التجاري',
 ];

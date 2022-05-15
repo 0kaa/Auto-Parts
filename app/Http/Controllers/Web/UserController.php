@@ -83,6 +83,9 @@ class UserController extends Controller
         } // end of has image   
 
         $userUpdate = $user->update($attribute);
+        $user->activities()->create([
+            'activity_type_id' => $request->activity_type_id,
+        ]);
 
         if ($userUpdate) {
             if ($request->addressarray) {

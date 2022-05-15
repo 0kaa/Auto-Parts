@@ -302,6 +302,7 @@ $(document).ready(function(){
                 var birth_day_enterprise                        = $('#birth_day_enterprise');
                 var image_commerical                            = $('#image_commerical')[0].files;
                 var number_eban                                 = $('#number_eban');
+                var commercial_register_id                      = $('#commercial_register_id');
                 var city_id                                     = $('#city_id');
                 var is_company_facility_agent                   = $('#is_company_facility_agent');
                 var is_company_facility_authorized_distributor  = $('#is_company_facility_authorized_distributor');
@@ -344,6 +345,7 @@ $(document).ready(function(){
                 formData.append('date'                                       , birth_day_enterprise.val());
                 formData.append('file'                                       , image_commerical[0]);
                 formData.append('ibn'                                        , number_eban.val());
+                formData.append('commercial_register_id'                     , commercial_register_id.val());
                 // formData.append('city'                                       , city_id.val());
                 formData.append('is_company_facility_agent'                  , is_company_facility_agent.val());
                 formData.append('is_company_facility_authorized_distributor' , is_company_facility_authorized_distributor.val());
@@ -410,6 +412,7 @@ $(document).ready(function(){
                             textFieldError(birth_day_enterprise  , error.response.data.errors.birth_day_enterprise);
                             textFieldError(image_commerical  , error.response.data.errors.image_commerical);
                             textFieldError(number_eban  , error.response.data.errors.number_eban);
+                            textFieldError(commercial_register_id  , error.response.data.errors.commercial_register_id);
                             textFieldError(city_id  , error.response.data.errors.city_id);
                             textFieldError(is_company_facility_agent  , error.response.data.errors.is_company_facility_agent);
                             textFieldError(is_company_facility_authorized_distributor  , error.response.data.errors.is_company_facility_authorized_distributor);

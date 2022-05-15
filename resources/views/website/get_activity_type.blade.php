@@ -39,6 +39,10 @@
             </div>
 
             <div class="input-sub-regester">
+                <input type="number" class="form-control" name="commercial_register_id" id="commercial_register_id" placeholder="{{ __('local.commercial_register_id') }}">
+            </div>
+
+            <div class="input-sub-regester">
                 <select class="form-select form-control" name="area" id="region_id" aria-label="Default select example" required>
                     <option selected value="">{{ __('local.area') }} </option>
 
@@ -208,6 +212,9 @@
 
             <div class="input-sub-regester">
                 <input type="number" class="form-control" name="number_eban" placeholder="{{ __('local.number_eban') }}">
+            </div>
+            <div class="input-sub-regester">
+                <input type="number" class="form-control" name="commercial_register_id" id="commercial_register_id" placeholder="{{ __('local.commercial_register_id') }}">
             </div>
 
             <div class="input-sub-regester">
