@@ -20,7 +20,7 @@ class AdminMiddleware
         // if (Auth::guard($guard)->guest()) {
         //     return redirect()->back()->with('error', 'يجب ان تقوم بتسجيل الدخول أولا  .');
 
-        // } 
+        // }
         if (auth()->user() && auth()->user()->hasRole('admin')) {
 
             return $next($request);

@@ -31,7 +31,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = $this->userRepository->getAll();
+        $users = $this->userRepository->getWhere([['id', '!=', 1]]);
+
         return view('admin.users.index', compact('users'));
     }
 
