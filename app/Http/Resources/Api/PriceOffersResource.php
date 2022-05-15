@@ -17,6 +17,7 @@ class PriceOffersResource extends JsonResource
         return [
             'id'            => $this->id,
             'price'         => $this->price . ' SAR',
+            'order_status'  => new OrderStatusResource($this->customOrder->order_status),
             'created_at'    => $this->created_at->diffForHumans(),
             'message'       => __('local.user_price_offer') . ' ' . $this->price . ' SAR',
             'offers'        => PriceOfferItemsResource::collection($this->priceOfferItems),

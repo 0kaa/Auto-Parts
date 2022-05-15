@@ -15,9 +15,10 @@ class CarResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'    => $this->id,
-            'name'  => $this->name,
+            'id' => $this->id,
+            'name' => $this->name,
             'image' => $this->image ? url('/storage') . '/' . $this->image : url('/product-no-img.jpg'),
+            'models'    => $this->models ? CompanyModelResource::collection($this->models) : [],
         ];
     }
 }
