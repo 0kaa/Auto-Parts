@@ -84,7 +84,7 @@ class ApiProductController extends Controller
             'price'         => $request->price ? $request->price : $product->price,
             'description'   => $request->description ? $request->description : $product->description,
             'features'      => $request->features == [] || $request->features == null ? [] : ($request->features ? $request->features : $product->features),
-            'details'       => $request->details ? $request->details : $product->details,
+            'details'       => $request->details == [] || $request->details == null ? [] : ($request->details ? $request->details : $product->details),
         ]);
 
         $product->save();
