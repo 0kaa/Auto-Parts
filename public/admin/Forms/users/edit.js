@@ -118,6 +118,7 @@ $(document).ready(function () {
     var address = form.find("#address");
     var latitude = form.find("#lat");
     var longitude = form.find("#lng");
+    var approved = form.find("#approved");
 
     var add_other_branches = $("#add_other_branches");
 
@@ -153,6 +154,7 @@ $(document).ready(function () {
         formData.append("email", email.val());
         formData.append("phone", phone.val());
         formData.append("password", password.val());
+        formData.append("approved", approved.val());
         // formData.append("confirm_password", confirm_password.val());
         formData.append("type_user", type_user.val());
         formData.append("activity_type_id", activity_type_id.val());

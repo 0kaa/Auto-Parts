@@ -166,6 +166,29 @@
 
                             </div>
 
+                            <div class="form-group">
+
+                                <label class="form-label" for="type"> <span class="tx-danger">*</span>
+                                    @lang('local.user_activation')</label>
+                                <select id="approved" class="form-control select2-show-search"
+                                    placeholder=" @lang('local.approved')" aria-label=" @lang('local.approved')"
+                                    aria-describedby="basic-addon-name" required="">
+                                    <option value="" readonly="" selected>@lang('admin.select')</option>
+                                    <option value="1" {{ $user->approved == 1 ? 'selected' : '' }}>{{ __('local.approved') }}</option>
+                                    <option value="0" {{ $user->approved == 0 ? 'selected' : '' }}>{{ __('local.non_approved') }}</option>
+
+
+                                </select>
+
+                                <div class="alert alert-danger mg-t-20" role="alert">
+                                    <div class="d-flex align-items-center justify-content-start">
+                                        <i class="icon ion-ios-close alert-icon tx-32"></i>
+                                        <span></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
 
                             <div class="form-group">
 

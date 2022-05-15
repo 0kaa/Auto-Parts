@@ -282,4 +282,7 @@ return [
     'car_model' => 'نوع السيارة',
     'price' => 'السعر',
     'statistics' => 'الاحصائيات',
+    'user_activation' => 'تفعيل المستخدم',
+    'approved' => 'مفعل',
+    'non_approved' => 'غير مفعل',
 ];

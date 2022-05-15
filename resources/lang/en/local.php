@@ -269,4 +269,7 @@ return [
     'car_model' => 'car model',
     'price' => 'price',
     'statistics' => 'Statistics',
+    'user_activation' => 'User Activation',
+    'approved'  => 'Approved',
+    'non_approved'  => 'Non Approved',
 ];
