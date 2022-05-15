@@ -47,6 +47,9 @@ $( "#register" ).validate({
         var password         = $('#password');
         var confirm_password = $('#confirm_password');
         var phone            = $('#phone');
+        var lat              = $('#lat');
+        var lng              = $('#lng');
+        var address          = $('#address');
 
         var formData = new FormData();
 
@@ -57,6 +60,9 @@ $( "#register" ).validate({
         formData.append('password'         , password.val());
         formData.append('confirm_password' , confirm_password.val());
         formData.append('phone'            , phone.val());
+        formData.append('lat'              , lat.val());
+        formData.append('lng'              , lng.val());
+        formData.append('address'          , address.val());
 
         axios({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

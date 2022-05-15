@@ -111,10 +111,10 @@
                     @foreach($comapnies as $comapny)
 
                         <option value="{{ $comapny->id }}"> {{ $comapny->name }} </option>
-                        
+
                     @endforeach
 
-                </select> 
+                </select>
             </div>
 
             <div class="input-sub-regester">
@@ -173,6 +173,7 @@
 
                 </div>
             </div>
+
     @else
 
             <div class="input-sub-regester">
@@ -319,5 +320,7 @@
 
                 </div>
             </div>
+
+
     @endif
 
