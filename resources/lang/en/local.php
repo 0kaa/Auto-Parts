@@ -268,4 +268,5 @@ return [
     "we_will_look" => "We will look at your order and will reply you as soon as possible",
     'car_model' => 'car model',
     'price' => 'price',
+    'statistics' => 'Statistics',
 ];
