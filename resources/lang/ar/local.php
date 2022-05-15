@@ -161,6 +161,7 @@ return [
     'order_status_required' => 'يجب تحديد حالة الطلب',
     'order_not_accepted' => 'لم يتم قبول الطلب',
     'order_not_rejected' => 'لم يتم رفض الطلب',
+    'order_rejected' => 'تم رفض الطلب',
     'description_ar' => 'وصف بالعربية',
     'description_en' => 'وصف بالانجليزية',
     'discount' => 'الخصم',

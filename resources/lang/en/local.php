@@ -148,7 +148,7 @@ return [
     'order_status_required' => 'The order status is required',
     'order_not_accepted' => 'The order has not been accepted yet',
     'order_not_rejected' => 'The order has not been rejected yet',
-
+    'order_rejected' => 'The order has been rejected',
     'description_ar' => 'Description arabic',
     'description_en' => 'Description english',
     'discount' => 'Discount',
