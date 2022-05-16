@@ -72,6 +72,8 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
 
     Route::get("sub_activity", [CustomOrderController::class, 'get_sub_activity'])->name('get_sub_activity');
 
+    Route::resource('wallet-requests', 'WalletRequestController');
+
 
     Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 });

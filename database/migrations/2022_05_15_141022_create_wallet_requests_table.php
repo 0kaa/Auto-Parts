@@ -18,7 +18,7 @@ class CreateWalletRequestsTable extends Migration
             $table->string('amount');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->boolean('is_approved')->default(false);
+            $table->boolean('is_approved')->default(0);
             $table->timestamps();
         });
     }

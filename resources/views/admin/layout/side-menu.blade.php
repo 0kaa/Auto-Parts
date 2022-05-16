@@ -309,6 +309,24 @@
 
             {{-- end --}}
 
+            {{-- wallet requests --}}
+            <li class="nav-item {{ areActiveRoutes(['admin.wallet-requests.index', 'admin.wallet-requests.edit']) }}">
+                <a href="#">
+                    <i data-feather='circle'></i>
+                    <span class="menu-title" data-i18n="User">@lang('local.wallet_requests')</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item {{ isActiveRoute('admin.wallet-requests.index') }}"><a
+                            href="{{ route('admin.wallet-requests.index') }}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('local.wallet_requests')</span></a>
+                    </li>
+                </ul>
+
+            </li>
+            {{-- end wallet requests --}}
+
+
 
             {{-- settings --}}
             <li class="nav-item {{ isActiveRoute('admin.static-pages.index') }}"><a

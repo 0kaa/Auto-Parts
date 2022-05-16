@@ -286,4 +286,8 @@ return [
     'approved' => 'مفعل',
     'non_approved' => 'غير مفعل',
     "commercial_register_id" => 'رقم السجل التجاري',
+    'user_name' => 'اسم المستخدم',
+    'amount' => 'المبلغ',
+    'is_approved' => 'موافق عليه',
+    'wallet_requests' => 'طلبات المحفظة',
 ];
