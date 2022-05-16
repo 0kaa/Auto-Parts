@@ -10,6 +10,7 @@ use App\Http\Resources\Api\CarResource;
 use App\Http\Resources\Api\CompanyModelResource;
 use App\Http\Resources\Api\CompanySectorResource;
 use App\Http\Resources\Api\UserResource;
+use App\Http\Resources\Api\WalletResource;
 use App\Models\CompanyModel;
 use App\Models\CompanySector;
 use App\Repositories\UserRepositoryInterface;
@@ -109,5 +110,11 @@ class ApiAccountController extends Controller
         } catch (\Exception $e) {
             return $this->ApiResponse(null, $e->getMessage(), 400);
         }
+    }
+    public function myWallet()
+    {
+        $user = auth()->user();
+
+        return $this->ApiResponse(new WalletResource($user->wallet), null, 200);
     }
 }
