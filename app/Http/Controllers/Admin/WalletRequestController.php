@@ -97,6 +97,7 @@ class WalletRequestController extends Controller
             $wallet_request->update(['is_approved' => 1]);
 
             $wallet_request->user->wallet->balance = 0;
+            $wallet_request->user->wallet->save();
 
             // // Notification to user with wallet
             $notification = Notification::create([
