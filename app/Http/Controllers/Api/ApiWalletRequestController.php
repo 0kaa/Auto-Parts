@@ -21,14 +21,16 @@ class ApiWalletRequestController extends Controller
             return $this->ApiResponse(null, 'You need to have at least 100SAR in your wallet to request for money.', 404);
         }
 
-        if ($user->wallet->balance > 100) {
-            WalletRequest::create([
-                'amount' => $user->wallet->balance,
-                'user_id' => $user->id,
-                'is_approved' => 0
-            ]);
-
-            return $this->ApiResponse(null, trans('local.wallet_request_successfuly'), 200);
+        if (WalletRequest::where('user_id', $user->id)->where('is_approved', 0)->exists()) {
+            return $this->ApiResponse(null, trans('local.already_requested_money'), 404);
         }
+
+        WalletRequest::create([
+            'amount' => $user->wallet->balance,
+            'user_id' => $user->id,
+            'is_approved' => 0
+        ]);
+
+        return $this->ApiResponse(null, trans('local.wallet_request_successfuly'), 200);
     }
 }

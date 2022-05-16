@@ -274,4 +274,5 @@ return [
     'non_approved'  => 'Non Approved',
     'commercial_register_id' => 'Commercial register id',
     'wallet_request_successfuly' => 'Wallet request successfuly',
+    'already_requested_money' => 'You have already requested for money.'
 ];

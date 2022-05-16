@@ -292,4 +292,5 @@ return [
     'is_approved' => 'موافق عليه',
     'wallet_requests' => 'طلبات المحفظة',
     'wallet_request_successfuly' => 'تم طلب سحب النقود من المحفظة بنجاح',
+    'already_requested_money' => 'لقد طلبت من قبل سحب النقود من المحفظة',
 ];
