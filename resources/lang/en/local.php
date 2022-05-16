@@ -274,5 +274,16 @@ return [
     'non_approved'  => 'Non Approved',
     'commercial_register_id' => 'Commercial register id',
     'wallet_request_successfuly' => 'Wallet request successfuly',
-    'already_requested_money' => 'You have already requested for money.'
+    'user_name' => 'User name',
+    'user_phone' => 'User phone',
+    'user_email' => 'User email',
+    'user_address' => 'User address',
+    'amount' => 'Amount',
+    'is_approved' => 'Is approved',
+    'wallet_requests' => 'Wallet requests',
+    'already_requested_money' => 'You have already requested for money.',
+    'approve' => 'Approve',
+    'show' => 'Show',
+    'wallet_request_approved' => 'Wallet request approved',
+
 ];

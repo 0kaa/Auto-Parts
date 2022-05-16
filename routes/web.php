@@ -74,6 +74,7 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
 
     Route::resource('wallet-requests', 'WalletRequestController');
 
+    Route::get('wallet-requests/{id}/approve', 'WalletRequestController@approve')->name('wallet-requests.approve');
 
     Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 });

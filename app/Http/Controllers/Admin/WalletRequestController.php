@@ -47,7 +47,9 @@ class WalletRequestController extends Controller
      */
     public function show($id)
     {
-        //
+        $wallet_request = WalletRequest::find($id);
+
+        return view('admin.wallet-requests.show', compact('wallet_request'));
     }
 
     /**
@@ -82,5 +84,17 @@ class WalletRequestController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function approve($id)
+    {
+        $wallet_request = WalletRequest::find($id);
+
+        if ($wallet_request && $wallet_request->is_approved != 1) {
+
+            $wallet_request->update(['is_approved' => 1]);
+
+            return redirect()->back()->with('success', __('local.wallet_request_approved'));
+        }
     }
 }
