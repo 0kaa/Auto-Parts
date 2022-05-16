@@ -301,6 +301,8 @@
 @section('scripts')
     <script src="{{ asset('website/js/gmaps.js') }}"></script>
 
+    <script src="{{ asset('website/js/map.js') }}"></script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMwMUFGqXmhqw2wJuCD4_qmkHBkGCMVV4&libraries=places&callback=initAutocomplete&language=<?php echo e('ar'); ?>"
              defer></script>
 
