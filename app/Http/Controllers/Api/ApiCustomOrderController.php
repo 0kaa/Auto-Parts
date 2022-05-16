@@ -537,8 +537,6 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_already_rejected'), 403);
         }
 
-
-
         $charge = generate_custom_order_payment_url($customOrder, $user, $priceOffer);
 
         if ($charge) {

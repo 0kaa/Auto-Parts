@@ -119,12 +119,12 @@ class ApiPaymentController extends Controller
                 'message_ar'    => 'تم دفع الطلب #' . $order->id . ' بنجاح بواسطة ' . $order->user->name,
             ]);
 
+            Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
+
             $seller = User::find($order->seller_id);
 
             $seller->wallet->balance += $order->price;
             $seller->wallet->save();
-
-            Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
 
             return $this->ApiResponse(null, trans('local.payment_success'), 200);
         } elseif ($charge['status'] == 'CANCELLED') {
