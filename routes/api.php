@@ -26,6 +26,7 @@ Route::namespace('Api\Auth')->middleware('lang')->group(function () {
 Route::namespace('Api')->group(function () {
     Route::get('charge-order-redirect',                 'ApiPaymentController@charge_order');
     Route::get('charge-custom-order-redirect',          'ApiPaymentController@charge_custom_order');
+    Route::get('settings',                              'ApiAccountController@globalSettings');
 });
 
 Route::namespace('Api')->middleware('lang')->group(function () {

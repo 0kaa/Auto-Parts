@@ -13,6 +13,7 @@ use App\Http\Resources\Api\UserResource;
 use App\Http\Resources\Api\WalletResource;
 use App\Models\CompanyModel;
 use App\Models\CompanySector;
+use App\Models\Setting;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -111,10 +112,20 @@ class ApiAccountController extends Controller
             return $this->ApiResponse(null, $e->getMessage(), 400);
         }
     }
+
     public function myWallet()
     {
         $user = auth()->user();
 
         return $this->ApiResponse(new WalletResource($user->wallet), null, 200);
+    }
+
+    public function globalSettings()
+    {
+        return $this->ApiResponse([
+            'phone' => Setting::where('key', 'phone')->first()['value'],
+            'email' => Setting::where('key', 'email')->first()['value'],
+            'website' => Setting::where('key', 'website')->first()['value'],
+        ], null, 200);
     }
 }
