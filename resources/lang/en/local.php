@@ -285,5 +285,6 @@ return [
     'approve' => 'Approve',
     'show' => 'Show',
     'wallet_request_approved' => 'Wallet request approved',
+    'at_least_100_sar' => 'You need to have at least 100SAR in your wallet to request for money.'
 
 ];

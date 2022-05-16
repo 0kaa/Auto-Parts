@@ -17,7 +17,7 @@ class ApiWalletRequestController extends Controller
         $user = auth()->user();
 
         if ($user->wallet->balance < 100) {
-            return $this->ApiResponse(null, 'You need to have at least 100SAR in your wallet to request for money.', 404);
+            return $this->ApiResponse(null, trans('local.at_least_100_sar'), 404);
         }
 
         if (WalletRequest::where('user_id', $user->id)->where('is_approved', 0)->exists()) {
