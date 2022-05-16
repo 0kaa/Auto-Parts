@@ -94,6 +94,19 @@ class WalletRequestController extends Controller
 
             $wallet_request->update(['is_approved' => 1]);
 
+            $wallet_request->user->wallet->balance = 0;
+
+            // // Notification to user with wallet
+            $notification = Notification::create([
+                'user_id'       => $wallet_request->user_id,
+                'type'          => 'wallet_request',
+                'model_id'      => $wallet_request->id,
+                'message_en'    => 'Your wallet has been approved by admin',
+                'message_ar'    => 'تمت الموافقة على طلب رصيدك بواسطة المشرف',
+            ]);
+
+            Notify::NotifyMob($notification->message_ar, $notification->message_en, $wallet_request->user_id, null, $data = null);
+
             return redirect()->back()->with('success', __('local.wallet_request_approved'));
         }
     }
