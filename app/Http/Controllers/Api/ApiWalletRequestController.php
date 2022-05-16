@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Models\WalletRequest;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\TryCatch;
 
 class ApiWalletRequestController extends Controller
 {

@@ -9,6 +9,7 @@ use App\Models\Notification;
 use App\Models\OrderStatus;
 use App\Models\PaymentMethod;
 use App\Models\TapPayment;
+use App\Models\User;
 use App\Services\Notify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -58,6 +59,11 @@ class ApiPaymentController extends Controller
                 'message_en'    => 'Order #' . $order->id . ' has been paid successfully by ' . $order->user->name,
                 'message_ar'    => 'تم دفع الطلب #' . $order->id . ' بنجاح بواسطة ' . $order->user->name,
             ]);
+
+            $seller = User::find($order->seller_id);
+
+            $seller->wallet->balance += $order->total_amount;
+            $seller->wallet->save();
 
             Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
 
@@ -112,6 +118,11 @@ class ApiPaymentController extends Controller
                 'message_en'    => 'Order #' . $order->id . ' has been paid successfully by ' . $order->user->name,
                 'message_ar'    => 'تم دفع الطلب #' . $order->id . ' بنجاح بواسطة ' . $order->user->name,
             ]);
+
+            $seller = User::find($order->seller_id);
+
+            $seller->wallet->balance += $order->total_amount;
+            $seller->wallet->save();
 
             Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
 
