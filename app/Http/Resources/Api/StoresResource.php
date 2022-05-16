@@ -23,6 +23,8 @@ class StoresResource extends JsonResource
             $user_id = $token_data->tokenable_id;
             $user = User::find($user_id);
             $isFav =  $this->favourite()->where('user_id', $user->id)->exists();
+        } else {
+            $isFav = false;
         }
         return [
             'id'            => $this->id,
