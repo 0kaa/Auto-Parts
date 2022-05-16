@@ -11,7 +11,7 @@ class Notify
         $deviceTokenRepository = \App::make('App\Repositories\DeviceTokenRepositoryInterface');
 
         if ($user_id != null) {
-            $tokens = $deviceTokenRepository->whereHas('user', ['is_notify' => 1], [['user_id', $user_id]])->pluck('firebase_token');
+            $tokens = $deviceTokenRepository->whereHas('user', ['is_notify' => 1], [['user_id', $user_id], ['is_loggedin', 1]])->pluck('firebase_token');
         }
         return $tokens;
     }
@@ -33,14 +33,14 @@ class Notify
             $tokenList = SELF::getTokens($device_id, $user_id);
             // dd($tokenList);
         }
-        
+
         $notification = [
             'body' => \App::getLocale() == 'ar' ? $msg_ar : $msg_en,
             'data' => $data,
             'user_id' => $user_id,
             'image' => asset('admin/logo2.png'),
             'sound' => true,
-        ];        
+        ];
         $extraNotificationData = [
             'data' => $data,
             'user_id' => $user_id,

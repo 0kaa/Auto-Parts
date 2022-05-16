@@ -20,6 +20,8 @@ class CreateDeviceTokensTable extends Migration
             $table->string('platform_type');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // is loggedin or no
+            $table->boolean('is_loggedin')->default(false);
             $table->timestamps();
         });
     }

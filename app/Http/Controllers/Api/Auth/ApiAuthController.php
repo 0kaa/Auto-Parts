@@ -58,6 +58,7 @@ class ApiAuthController extends Controller
                     'platform_type'     => $request->platform_type,
                     'firebase_token'    => $request->firebase_token,
                     'user_id'           => $user->id,
+                    'is_loggedin'       => 1,
                 ]);
             } else {
                 $user_device_id->update([
@@ -65,6 +66,7 @@ class ApiAuthController extends Controller
                     'platform_type'     => $request->platform_type,
                     'firebase_token'    => $request->firebase_token,
                     'user_id'           => $user->id,
+                    'is_loggedin'       => 1,
                 ]);
             }
 
@@ -97,6 +99,7 @@ class ApiAuthController extends Controller
                 'platform_type'     => $request->platform_type,
                 'firebase_token'    => $request->firebase_token,
                 'user_id'           => $user->id,
+                'is_loggedin'       => 1,
             ]);
 
             $token = $user->createToken('tokens')->plainTextToken;
@@ -133,6 +136,7 @@ class ApiAuthController extends Controller
                     'platform_type'     => $request->platform_type,
                     'firebase_token'    => $request->firebase_token,
                     'user_id'           => $user->id,
+                    'is_loggedin'       => 1,
                 ]);
             }
 
@@ -210,5 +214,24 @@ class ApiAuthController extends Controller
 
             return $this->ApiResponse(null, $e, 404);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $user = auth()->user();
+
+        if (!$request->device_id && !$request->firebase_token) {
+            return $this->ApiResponse(null, 'Firebase token and device id is required', 404);
+        }
+
+        foreach ($user->devices as $device) {
+            if ($device->device_id == $request->device_id && $device->firebase_token == $request->firebase_token) {
+                $device->update(['is_loggedin' => 0]);
+            }
+        }
+
+        $user->currentAccessToken()->delete();
+
+        return $this->ApiResponse(null, trans('admin.logout_success'), 200);
     }
 }

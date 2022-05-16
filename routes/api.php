@@ -59,7 +59,7 @@ Route::namespace('Api')->middleware('lang')->group(function () {
     // All users | authenticated required
     Route::group(['middleware' => ['auth:sanctum']], function () {
 
-
+        Route::post('logout',                           'Auth\ApiAuthController@logout');
         Route::post('change-password',                  'ApiAccountController@change_password');
         Route::get('notifications',                     'ApiNotificationsController@index');
         Route::get('my-account',                        'ApiAccountController@index');

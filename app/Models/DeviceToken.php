@@ -14,6 +14,7 @@ class DeviceToken extends Model
         'firebase_token',
         'device_id',
         'platform_type',
+        'is_loggedin',
     ];
 
     public function user()
