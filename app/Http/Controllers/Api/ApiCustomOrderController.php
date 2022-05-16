@@ -384,6 +384,12 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_found'), 404);
         }
 
+        $multiOrderExist = MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $user->id)->first();
+
+        if ($multiOrderExist->order_status->slug == 'rejected') {
+            return $this->ApiResponse(null, trans('local.order_already_rejected'), 200);
+        }
+
         $customOrderItems = $customOrder->custom_order_items;
 
         $offers = $request->offers;
@@ -397,7 +403,6 @@ class ApiCustomOrderController extends Controller
         $totalPriceOffer = 0;
 
         $findPriceOfferExist = $this->priceOfferRepository->findWhere(['custom_order_id' => $customOrder->id, 'seller_id' => $user->id]);
-
         if ($findPriceOfferExist) {
             return $this->ApiResponse(null, trans('local.order_already_accepted'), 200);
         }
