@@ -121,7 +121,7 @@ class ApiPaymentController extends Controller
 
             $seller = User::find($order->seller_id);
 
-            $seller->wallet->balance += $order->total_amount;
+            $seller->wallet->balance += $order->price;
             $seller->wallet->save();
 
             Notify::NotifyMob($notification->message_ar, $notification->message_en, $order->seller_id, null, $data = null);
