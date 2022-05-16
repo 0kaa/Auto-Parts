@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RegionSeeder::class);
         $this->call(CompanySector::class);
         $this->call(UserSeeder::class);
-        $this->call(ProductSeeder::class);
+        // $this->call(ProductSeeder::class);
         $this->call(PackageSeeder::class);
         $this->call(ShippingSeeder::class);
         $this->call(OrderStatusSeeder::class);

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CompanyModel;
 use App\Models\CompanySector as AppCompanySector;
 
 use Illuminate\Database\Seeder;
@@ -47,6 +48,32 @@ class CompanySector extends Seeder
                 'image'     => 'cars/chevrolet-logo.svg',
             ],
 
+        ]);
+        CompanyModel::insert([
+            [
+                'name'                  => '2010',
+                'company_sector_id'     => 1,
+            ],
+            [
+                'name'                  => '2011',
+                'company_sector_id'     => 2,
+            ],
+            [
+                'name'                  => '2012',
+                'company_sector_id'     => 3,
+            ],
+            [
+                'name'                  => '2013',
+                'company_sector_id'     => 4,
+            ],
+            [
+                'name'                  => '2014',
+                'company_sector_id'     => 5,
+            ],
+            [
+                'name'                  => '2015',
+                'company_sector_id'     => 6,
+            ],
         ]);
     }
 }
