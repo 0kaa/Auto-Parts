@@ -273,4 +273,5 @@ return [
     'approved'  => 'Approved',
     'non_approved'  => 'Non Approved',
     'commercial_register_id' => 'Commercial register id',
+    'wallet_request_successfuly' => 'Wallet request successfuly',
 ];

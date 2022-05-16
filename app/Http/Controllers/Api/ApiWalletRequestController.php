@@ -2,24 +2,33 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\SendWalletRequest;
 use App\Models\WalletRequest;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 
 class ApiWalletRequestController extends Controller
 {
     use ApiResponseTrait;
 
     // create wallet request
-    public function createWalletRequest(SendWalletRequest $request)
+    public function createWalletRequest()
     {
-        $data = $request->all;
+        $user = auth()->user();
 
-        $data['user_id'] = auth()->user()->id;
+        if ($user->wallet->balance < 100) {
+            return $this->ApiResponse(null, 'You need to have at least 100SAR in your wallet to request for money.', 404);
+        }
 
-        $walletRequest = WalletRequest::create($data);
+        if ($user->wallet->balance > 100) {
+            WalletRequest::create([
+                'amount' => $user->wallet->balance,
+                'user_id' => $user->id,
+                'is_approved' => 0
+            ]);
 
-        return $this->ApiResponse(new ActivityResource($walletRequest), null, 200);
+            return $this->ApiResponse(null, trans('local.wallet_request_successfuly'), 200);
+        }
     }
 }

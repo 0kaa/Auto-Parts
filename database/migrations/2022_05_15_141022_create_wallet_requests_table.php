@@ -15,7 +15,7 @@ class CreateWalletRequestsTable extends Migration
     {
         Schema::create('wallet_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('amount');
+            $table->double('amount')->default(0);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('is_approved')->default(0);
