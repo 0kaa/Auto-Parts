@@ -466,39 +466,40 @@ class ApiCustomOrderController extends Controller
             return $this->ApiResponse(null, trans('local.order_not_allowed_update'), 403);
         }
 
-        $priceOffer = $this->priceOfferRepository->getWhere([['custom_order_id', $customOrder->id], ['seller_id', $user->id]])->first();
-
-        if ($priceOffer->isNotEmpty()) {
-            return $this->ApiResponse(null, trans('local.order_not_found'), 403);
-        }
+        $priceOffer = $this->priceOfferRepository->findWhere(['custom_order_id' => $customOrder->id, 'seller_id' => $user->id]);
 
         $accepted_status = OrderStatus::where('slug', 'accepted')->first();
 
         $rejected_status = OrderStatus::where('slug', 'rejected')->first();
 
-        if ($priceOffer->status_id == $accepted_status->id || $customOrder->order_status_id == $accepted_status->id) {
-            return $this->ApiResponse(null, trans('local.order_already_accepted'), 200);
+        if ($priceOffer) {
+            if ($priceOffer->status_id == $accepted_status->id || $customOrder->order_status_id == $accepted_status->id) {
+                return $this->ApiResponse(null, trans('local.order_already_accepted'), 200);
+            }
+
+            if ($priceOffer->status_id == $rejected_status->id || $customOrder->order_status_id == $rejected_status->id) {
+                return $this->ApiResponse(null, trans('local.order_already_rejected'), 200);
+            }
+
+            return $this->ApiResponse(null, trans('local.order_not_found'), 200);
+        } else {
+
+            MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $user->id)->update(['order_status_id' => $rejected_status->id]);
+
+            $rejectedOrder = RejectedOrders::where('order_id', $customOrder->id)->pluck('seller_id');
+
+            if (in_array($user->id, $rejectedOrder->toArray()) == false) {
+                RejectedOrders::create(['order_id' => $customOrder->id, 'seller_id' => $user->id]);
+            }
+
+            $rejectedOrder = RejectedOrders::where('order_id', $customOrder->id)->pluck('seller_id');
+
+            if (count($seller_ids) == count($rejectedOrder)) {
+                RedirectOrderToAnotherUser($user->id, $rejectedOrder, $customOrder);
+            }
+
+            return $this->ApiResponse(null, trans('local.order_rejected'), 200);
         }
-
-        if ($priceOffer->status_id == $rejected_status->id || $customOrder->order_status_id == $rejected_status->id) {
-            return $this->ApiResponse(null, trans('local.order_already_rejected'), 200);
-        }
-
-        MultiCustomOrder::where('custom_order_id', $customOrder->id)->where('seller_id', $user->id)->update(['order_status_id' => $rejected_status->id]);
-
-        $rejectedOrder = RejectedOrders::where('order_id', $customOrder->id)->pluck('seller_id');
-
-        if (in_array($user->id, $rejectedOrder->toArray()) == false) {
-            RejectedOrders::create(['order_id' => $customOrder->id, 'seller_id' => $user->id]);
-        }
-
-        $rejectedOrder = RejectedOrders::where('order_id', $customOrder->id)->pluck('seller_id');
-
-        if (count($seller_ids) == count($rejectedOrder)) {
-            RedirectOrderToAnotherUser($user->id, $rejectedOrder, $customOrder);
-        }
-
-        return $this->ApiResponse(null, trans('local.order_status_updated'), 200);
     }
 
     /**
