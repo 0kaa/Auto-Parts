@@ -24,6 +24,9 @@ class ProductDetailResource extends JsonResource
             $token_data = DB::table('personal_access_tokens')->where('token', hash('sha256', $token))->first();
             $user_id = $token_data->tokenable_id;
             $user = User::find($user_id);
+            $isFav =  $this->favourite()->where('user_id', $user->id)->exists();
+        } else {
+            $isFav = false;
         }
         return [
             'id' => $this->id,
@@ -42,7 +45,7 @@ class ProductDetailResource extends JsonResource
             'store_name' => $this->seller->name_company,
             'features' => $this->features ? $this->features : [],
             'details' => $this->details ? $this->details : [],
-            'is_fav' => $this->isFav($this->id),
+            'is_fav' => $isFav,
             'ratings' => RatingResource::collection($this->ratings),
         ];
     }
