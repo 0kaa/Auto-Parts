@@ -100,7 +100,7 @@ window.colors = {
       });
     }
 
-    // Add Features 
+    // Add Features
 
 
     var lang = $('#append_features').data('lang');
@@ -136,8 +136,8 @@ window.colors = {
               <input type="text" name="feature_${i}" class="form-control array_features" placeholder="${feature}" required>
           </div>
 
-      </div>             
-      </div>              
+      </div>
+      </div>
       `;
       i++;
       $('#append_features').append(append);
@@ -154,6 +154,55 @@ window.colors = {
 
 
     // end Features
+
+    // Add Details
+
+    var lang = $('#append_details').data('lang');
+
+    if (lang == 'ar') {
+
+        var delete_detail = 'حذف التفاصيل';
+        var detail = 'تفاصيل';
+
+    } else {
+
+        var delete_detail = 'Delete Detail';
+        var detail = 'Detail';
+
+
+
+    }
+
+    var i = 0;
+    $(document).on('click', '.click-plus-two', function () {
+        var append = `<div class="remove-this"> <div class="add-divs">
+        <div class="click-add-res click-minus">
+        <span>-</span>
+        ${delete_detail}
+        </div>
+        <div class="detail-div">
+
+            </div>
+                </div><div class="sub-more-input">
+
+                <div class="input-sub-regester">
+                    <input type="text" name="detail_${i}" class="form-control array_details" placeholder="${detail}" required>
+                </div>
+
+            </div>
+        </div>
+        `;
+        i++;
+      $('#append_details').append(append);
+
+    });
+
+
+    $(document).on('click', '.click-minus-two', function () {
+        $(this).closest('.remove-this').remove();
+    });
+
+    // end Details
 
     // Do not close cart or notification dropdown on click of the items
     $('.dropdown-notification .dropdown-menu, .dropdown-cart .dropdown-menu').on('click', function (e) {

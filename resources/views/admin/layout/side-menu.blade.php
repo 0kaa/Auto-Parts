@@ -326,6 +326,28 @@
             </li>
             {{-- end wallet requests --}}
 
+            {{-- wallet requests --}}
+            <li class="nav-item {{ areActiveRoutes(['admin.products_index', 'admin.products_create']) }}">
+                <a href="#">
+                    <i data-feather='circle'></i>
+                    <span class="menu-title" data-i18n="User">@lang('local.products')</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="nav-item {{ isActiveRoute('admin.products_index') }}"><a
+                            href="{{ route('admin.products_index') }}">
+                            <i data-feather='minus'></i>
+                            <span class="menu-title" data-i18n="User">@lang('local.products')</span></a>
+                    </li>
+                    <li class="nav-item {{ isActiveRoute('admin.products_create') }}"><a
+                        href="{{ route('admin.products_create') }}">
+                        <i data-feather='minus'></i>
+                        <span class="menu-title" data-i18n="User">@lang('admin.add_new', ['field' => __('local.products')])</span></a>
+                </li>
+                </ul>
+
+            </li>
+            {{-- end wallet requests --}}
+
 
 
             {{-- settings --}}

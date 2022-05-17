@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-    var table = $('#package-table');
-    var delete_form = $('#delete-package-form');
+    var table = $('#product-table');
+    var delete_form = $('#delete-product-form');
     var delete_msg = delete_form.find('.delete-msg');
 
     let currentRow = null,
@@ -13,10 +13,10 @@ $(document).ready(function() {
         delete_btn.on('click', function() {
             currentRow = $(this).closest('tr');
             rowData = (table.DataTable().row(currentRow).data());
-            title = rowData[1];
+            title = rowData[0];
             delete_msg.html(title);
             setTimeout(function() {
-                $('#delete-package').modal('toggle');
+                $('#delete-product').modal('toggle');
             }, 200);
         });
     }
@@ -60,14 +60,14 @@ $(document).ready(function() {
         axios({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             method: 'DELETE',
-            url: apiDashboardURL + 'packages/' + id,
+            url: apiDashboardURL + 'products/delete/' + id,
             responseType: 'json'
         })
 
             .then(function(response) {
                 removeRow(table, currentRow);
                 onFormDeletionSuccess(delete_form);
-                $('#delete-package').modal('toggle');
+                $('#delete-product').modal('toggle');
                 currentRow = null;
             })
             .catch(function(error) {

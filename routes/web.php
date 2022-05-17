@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CustomOrderController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -75,6 +76,14 @@ Route::middleware(['admin', 'Localization'])->name('admin.')->group(function () 
     Route::resource('wallet-requests', 'WalletRequestController');
 
     Route::get('wallet-requests/{id}/approve', 'WalletRequestController@approve')->name('wallet-requests.approve');
+
+    // product routes
+    Route::get('products/index', [ProductController::class, 'index'])->name('products_index');
+    Route::get('products/create', [ProductController::class, 'create'])->name('products_create');
+    Route::post('products/store', [ProductController::class, 'store'])->name('products_store');
+    Route::get('products/edit/{id}', [ProductController::class, 'edit'])->name('products_edit');
+    Route::patch('products/update/{id}', [ProductController::class, 'update'])->name('products_update');
+    Route::delete('products/delete/{id}', [ProductController::class, 'destroy'])->name('products_delete');
 
     Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 });
