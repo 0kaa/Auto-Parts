@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-
+use Illuminate\Support\Facades\DB;
 
 class ProductResource extends JsonResource
 {
